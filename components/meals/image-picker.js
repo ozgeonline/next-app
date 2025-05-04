@@ -1,28 +1,33 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { UploadButton } from "@/utils/uploadthing";
 import styles from "./image-picker.module.css";
 import Image from "next/image";
+
+
 export default function ImagePicker({label,name}) {
-  const [pickedImg, setPickedImg] = useState();
+  const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
+  const [error, setError] = useState(null);
   const imgInput = useRef();
 
   function handlePickClick() {
     imgInput.current.click();
+    setError(null); 
   }
 
-  function handleImgChange(e) {
-    const file = e.target.files[0];
+  function handleClientUpload(res) {
+    const file =res[0].ufsUrl;
+    setUploadedImageUrl(file);
     if (!file) {
-      setPickedImg(null);
+      setError(null); 
       return;
     }
+  }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      setPickedImg(reader.result);
-    };
-    reader.readAsDataURL(file);
+  function handleUploadError(error) {
+    console.log(`ERROR! ${error.message}`);
+    setError(error.message.split(": ")[1]);
   }
   
   return (
@@ -30,27 +35,54 @@ export default function ImagePicker({label,name}) {
       <label htmlFor={name}>{label}</label>
       <div className={styles.controls}>
         <div className={styles.preview}>
-          {!pickedImg && (<p>No image chosen</p>)}
-          {pickedImg && (
-            <Image src={pickedImg} alt="Picked image" fill />
+          {!uploadedImageUrl && <p>No image chosen</p>}
+          {uploadedImageUrl && (
+            <Image src={uploadedImageUrl} alt="Picked image" fill type="image/webp" />
           )}
         </div>
-        <input
-          ref={imgInput}
-          onChange={handleImgChange}
-          id={name}
-          name={name}
-          type="file"
-          accept="image/png, image/jpeg"
-          className={styles.input}
-          required
-        />
-        <button className={styles.button} type="button" onClick={handlePickClick}>
-          Upload Image
-        </button>
 
+         {uploadedImageUrl && (
+          <input 
+            ref={imgInput}
+            type="hidden"
+            name={name}
+            id={name}
+            value={uploadedImageUrl}
+          />
+        )}
+
+        <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+          <UploadButton
+            ref={imgInput}
+            onClick={handlePickClick}
+            endpoint="recipeImageUploader"
+            onClientUploadComplete={ handleClientUpload}
+            onChange={handleClientUpload}
+            onUploadError={handleUploadError}
+            appearance={{
+              button({ ready, isUploading }) {
+                return {
+                  fontSize: "0.8em",
+                  color: "black",
+                  ...(ready && { color: "#ecfdf5" }),
+                  ...(isUploading && { color: "#d1d5db" }),
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                };
+              },
+              
+              container: {
+                marginTop: "1rem",
+              },
+              allowedContent: {
+                color: "#a1a1aa",
+              },
+            }}
+          />
+          {error && <p style={{fontSize:"0.8em"}}>{error}</p>}
+        </div>
       </div>
-
     </div>
   )
 }

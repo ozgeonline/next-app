@@ -1,14 +1,14 @@
-import styles from "./page.module.css";
-import Image from "next/image";
 import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({params}) {
-  const meal = await getMeal(params.mealSlug);
+import styles from "./page.module.css";
+import Image from "next/image";
 
-  if(!meal) {
-    notFound();
-  }
+export async function generateMetadata({params}) {
+  const { mealSlug } = await params;
+  const meal = await getMeal(mealSlug);
+
+  if(!meal) notFound();
   
   return {
     title: meal.title,
@@ -16,14 +16,14 @@ export async function generateMetadata({params}) {
   }
 }
 
-export default function MealDetailsPage({params}) {
-  const meal = getMeal(params.mealSlug);
+export default async function MealDetailsPage({params}) {
+  const { mealSlug } = await params;
+  const meal = await getMeal(mealSlug);
 
-  if(!meal) {
-    notFound();
-  }
+  if(!meal) notFound();
   
   meal.instructions = meal.instructions.replace(/\n/g, '<br>');
+  
   return (
     <>
       <header className={styles.header}>

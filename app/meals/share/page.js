@@ -3,16 +3,17 @@
 import { useActionState } from 'react';
 import ImagePicker from '@/components/meals/image-picker';
 import shareMeal from '@/lib/actions';
-import styles from './page.module.css';
 import MealsFormSubmit from '@/components/meals/meals-form-submit';
+import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic'; 
 
 export default function ShareMealPage() {
-
+ 
+  
   const [state, formAction] = useActionState(shareMeal,{message:null} );
   console.log("state:", state);
-
+  
   return (
     <>
       <header className={styles.header}>
