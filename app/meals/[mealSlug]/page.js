@@ -1,29 +1,29 @@
-import { getMeal } from "@/lib/meals";
+import connect from "@/lib/db";
 import { notFound } from "next/navigation";
-
-import styles from "./page.module.css";
+import Meal from "../models/Meal";
 import Image from "next/image";
+import styles from "./page.module.css";
 
+await connect();
 export async function generateMetadata({params}) {
-  const { mealSlug } = await params;
-  const meal = await getMeal(mealSlug);
+  const { mealSlug } = params;
+  const meal = await Meal.findOne({ slug: mealSlug }).lean();
 
-  if(!meal) notFound();
-  
+  if (!meal) return notFound();
+
   return {
     title: meal.title,
-    description: meal.summary
-  }
+    description: meal.summary,
+  };
 }
 
 export default async function MealDetailsPage({params}) {
-  const { mealSlug } = await params;
-  const meal = await getMeal(mealSlug);
+  const { mealSlug } = params;
+  const meal = await Meal.findOne({ slug: mealSlug }).lean();
 
-  if(!meal) notFound();
-  
-  meal.instructions = meal.instructions.replace(/\n/g, '<br>');
-  
+  if (!meal) return notFound();
+
+  const formattedInstructions = meal.instructions.replace(/\n/g, "<br>");
   return (
     <>
       <header className={styles.header}>
@@ -44,7 +44,7 @@ export default async function MealDetailsPage({params}) {
         <p 
           className={styles.instructions}
           dangerouslySetInnerHTML={{
-            __html: meal.instructions
+            __html: formattedInstructions
           }}
         ></p>
       </main>

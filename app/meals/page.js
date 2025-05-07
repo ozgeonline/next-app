@@ -1,15 +1,19 @@
 import { Suspense } from "react";
 import Link from "next/link";
-
-import { getMeals } from "@/lib/meals";
 import MealsGrid from "@/components/meals/meals-grid";
 import styles from "./page.module.css";
+import { notFound } from "next/navigation";
 
-async function Meals() {
-  const meals = await getMeals();
-  return  <MealsGrid meals={meals} />
+async function getData() {
+  const res = await fetch('http://localhost:3000/api/meals', { cache: 'no-cache' });
+  if (!res.ok) return notFound();
+  return res.json();
 }
+
 export default async function MealsPage() {
+  const meals = await getData();
+  // meals.map(meal => console.log(meal));
+
   return (
     <>
       <header className={styles.header}>
@@ -29,7 +33,7 @@ export default async function MealsPage() {
             <p className={styles.loading}>loading meals...</p>
           }
         >
-          <Meals />
+           <MealsGrid meals={meals}/>
         </Suspense>
       </main>
     </>

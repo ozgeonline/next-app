@@ -6,13 +6,10 @@ import shareMeal from '@/lib/actions';
 import MealsFormSubmit from '@/components/meals/meals-form-submit';
 import styles from './page.module.css';
 
-export const dynamic = 'force-dynamic'; 
-
 export default function ShareMealPage() {
- 
   
   const [state, formAction] = useActionState(shareMeal,{message:null} );
-  console.log("state:", state);
+  //console.log("state:", state);
   
   return (
     <>
@@ -52,7 +49,7 @@ export default function ShareMealPage() {
             ></textarea>
           </p>
           <ImagePicker label="Your Meal Image" name="image"/>
-          {state.message && <p>{state.message}</p>}
+          {state?.message && <p>{state.message}</p>}
           <p className={styles.actions}>
             <MealsFormSubmit  />
           </p>
@@ -61,3 +58,5 @@ export default function ShareMealPage() {
     </>
   );
 }
+
+export const dynamic = 'force-dynamic'; 

@@ -1,7 +1,7 @@
-const sql = require('better-sqlite3');
-const db = sql('meals.db');
+import mongoose from 'mongoose';
+import Meal from './app/meals/models/Meal.js';
 
-const dummyMeals = [
+export const dummyMeals = [
   {
     title: 'Juicy Cheese Burger',
     slug: 'juicy-cheese-burger',
@@ -163,38 +163,39 @@ const dummyMeals = [
     creator_email: 'sophiagreen@example.com',
   },
 ];
+// async function seedDatabase() {
+//    const MONGODB_URI = process.env.DB_URI;
+//    try {
+//      await mongoose.connect(MONGODB_URI);
+//      await Meal.deleteMany({});
+//      await Meal.insertMany(dummyMeals);
+//      console.log('Meals seeded successfully!');
+//    } catch (err) {
+//      console.error('Seeding failed:', err);
+//    } finally {
+//      mongoose.connection.close();
+//    }
+//  }
+ 
+ seedDatabase();
 
-db.prepare(`
-   CREATE TABLE IF NOT EXISTS meals (
-       id INTEGER PRIMARY KEY AUTOINCREMENT,
-       slug TEXT NOT NULL UNIQUE,
-       title TEXT NOT NULL,
-       image TEXT NOT NULL,
-       summary TEXT NOT NULL,
-       instructions TEXT NOT NULL,
-       creator TEXT NOT NULL,
-       creator_email TEXT NOT NULL
-    )
-`).run();
-
-async function initData() {
-   // prepare npm paketi sayesinde 
-  const stmt = db.prepare(`
-      INSERT INTO meals VALUES (
-         null,
-         @slug,
-         @title,
-         @image,
-         @summary,
-         @instructions,
-         @creator,
-         @creator_email
-      )
-   `);
-
-  for (const meal of dummyMeals) {
-    stmt.run(meal);
-  }
-}
-
-initData();
+ async function seedDatabase() {
+   const MONGODB_URI = process.env.DB_URI;
+   try {
+     await mongoose.connect(MONGODB_URI);
+     const mealCount = await Meal.countDocuments();
+ 
+     if (mealCount === 0) {
+       await Meal.insertMany(dummyMeals);
+       console.log("Meals seeded successfully!");
+     } else {
+       console.log("Meals already exist, skipping seeding.");
+     }
+   } catch (err) {
+     console.error("Seeding failed:", err);
+   } finally {
+     mongoose.connection.close();
+   }
+ }
+ 
+ seedDatabase();
