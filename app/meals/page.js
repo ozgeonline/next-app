@@ -6,7 +6,10 @@ import { notFound } from "next/navigation";
 
 async function getData() {
   const res = await fetch(`${process.env.BASE_URL}/api/meals`, { cache: 'no-cache' });
-  if (!res.ok) return notFound();
+  if (!res.ok) {
+    throw new Error('Failed to fetch data', { status: res.statusText });
+    // return notFound();
+  }
   return res.json();
 }
 
