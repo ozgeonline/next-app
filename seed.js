@@ -185,10 +185,7 @@ export const dummyMeals = [
     throw new Error('DB_URI environment variable is not set');
   }
    try {
-    await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(MONGODB_URI);
      const mealCount = await Meal.countDocuments();
  
      if (mealCount === 0) {
