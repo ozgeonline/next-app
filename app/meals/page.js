@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 import { notFound } from "next/navigation";
 
 async function getData() {
-  const res = await fetch('http://localhost:3000/api/meals', { cache: 'no-cache' });
+  const res = await fetch(`${process.env.BASE_URL}/api/meals`, { cache: 'no-cache' });
   if (!res.ok) return notFound();
   return res.json();
 }
