@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 
 await connect();
 export async function generateMetadata({params}) {
-  const { mealSlug } = params;
+  const { mealSlug } = await params;
   const meal = await Meal.findOne({ slug: mealSlug }).lean();
 
   if (!meal) return notFound();
@@ -18,7 +18,7 @@ export async function generateMetadata({params}) {
 }
 
 export default async function MealDetailsPage({params}) {
-  const { mealSlug } = params;
+  const { mealSlug } = await params;
   const meal = await Meal.findOne({ slug: mealSlug }).lean();
 
   if (!meal) return notFound();
