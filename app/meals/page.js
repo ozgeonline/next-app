@@ -4,20 +4,26 @@ import MealsGrid from "@/components/meals/meals-grid";
 import styles from "./page.module.css";
 import { notFound } from "next/navigation";
 
-async function getData() {
-  const res = await fetch(`${process.env.BASE_URL}/api/meals`, 
-    { cache: 'no-cache' }
-  );
-  // if (!res.ok) {
-  //   //throw new Error('Failed to fetch data', { status: res.statusText });
-  //   return notFound();
-  // }
-  return res.json();
+ async function getData() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meals`, {
+      cache: 'no-cache',
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error('Error fetching meals:', error);
+    return []; 
+  }
 }
 
 export default async function MealsPage() {
   const meals = await getData();
-  // meals.map(meal => console.log(meal));
+  //meals.map(meal => console.log(meal));
 
   return (
     <>
@@ -38,7 +44,11 @@ export default async function MealsPage() {
             <p className={styles.loading}>loading meals...</p>
           }
         >
-           <MealsGrid meals={meals}/>
+            {meals.length === 0 ? (
+            <p className={styles.error}>No meals available. Please try again later.</p>
+          ) : (
+            <MealsGrid meals={meals} />
+          )}
         </Suspense>
       </main>
     </>

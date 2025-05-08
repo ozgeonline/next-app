@@ -7,7 +7,7 @@ export default async function MealsGrid() {
 
   await connect();
   const meals = await Meal.find({}).lean();
-  //console.log(meals.map(meal => console.log({...meal})));
+  //console.log(meals.map(meal => console.log("meal----", meal)));
 
   const transformedMeals = meals.map((meal) => ({
     id: meal._id.toString(),

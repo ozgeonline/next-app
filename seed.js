@@ -177,12 +177,18 @@ export const dummyMeals = [
 //    }
 //  }
  
- seedDatabase();
+//  seedDatabase();
 
- async function seedDatabase() {
+ export async function seedDatabase() {
    const MONGODB_URI = process.env.DB_URI;
+   if (!MONGODB_URI) {
+    throw new Error('DB_URI environment variable is not set');
+  }
    try {
-     await mongoose.connect(MONGODB_URI);
+    await mongoose.connect(MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
      const mealCount = await Meal.countDocuments();
  
      if (mealCount === 0) {
@@ -194,8 +200,8 @@ export const dummyMeals = [
    } catch (err) {
      console.error("Seeding failed:", err);
    } finally {
-     mongoose.connection.close();
+     //mongoose.connection.close();
    }
  }
  
- seedDatabase();
+//  seedDatabase();
