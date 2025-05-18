@@ -1,0 +1,33 @@
+/*Scrolling animation*/
+.navbarScroll {
+  background-color: var(--background);
+  color: var(--text);
+  z-index: 10000000000000;
+}
+
+[data-theme="light"] .container:not(.navbarScroll) .nav a {
+  color: white;
+}
+
+[data-theme="light"] .container:not(.navbarScroll) .container{
+  color: white;
+  background: var(--background);
+}
+
+[data-theme="light"] .container.navbarScroll .nav a {
+  color: var(--text);
+  background: var(--background);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 4rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease-in-out
+}

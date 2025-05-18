@@ -163,21 +163,6 @@ export const dummyMeals = [
     creator_email: 'sophiagreen@example.com',
   },
 ];
-// async function seedDatabase() {
-//    const MONGODB_URI = process.env.DB_URI;
-//    try {
-//      await mongoose.connect(MONGODB_URI);
-//      await Meal.deleteMany({});
-//      await Meal.insertMany(dummyMeals);
-//      console.log('Meals seeded successfully!');
-//    } catch (err) {
-//      console.error('Seeding failed:', err);
-//    } finally {
-//      mongoose.connection.close();
-//    }
-//  }
- 
-//  seedDatabase();
 
  export async function seedDatabase() {
    const MONGODB_URI = process.env.DB_URI;
@@ -200,5 +185,3 @@ export const dummyMeals = [
      //mongoose.connection.close();
    }
  }
- 
-//  seedDatabase();

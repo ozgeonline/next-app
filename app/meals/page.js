@@ -23,6 +23,7 @@ import { notFound } from "next/navigation";
 
 export default async function MealsPage() {
   const meals = await getData();
+  if(!meals) return notFound();
   //meals.map(meal => console.log(meal));
 
   return (

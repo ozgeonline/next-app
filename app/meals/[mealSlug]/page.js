@@ -1,6 +1,6 @@
 import connect from "@/lib/db";
 import { notFound } from "next/navigation";
-import Meal from "../models/Meal";
+import Meal from "@/app/meals/models/Meal";
 import Image from "next/image";
 import styles from "./page.module.css";
 
@@ -24,6 +24,7 @@ export default async function MealDetailsPage({params}) {
   if (!meal) return notFound();
 
   const formattedInstructions = meal.instructions.replace(/\n/g, "<br>");
+  
   return (
     <>
       <header className={styles.header}>

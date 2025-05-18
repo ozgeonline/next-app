@@ -1,7 +1,135 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Montserrat:wght@400;700&display=swap');
 
+:root {
+    /* Shark Palette */
+  --shark-50: #f4f6f7;
+  --shark-100: #e3e7ea;
+  --shark-200: #cbd3d6;
+  --shark-300: #a6b4ba;
+  --shark-400: #7a8c96;
+  --shark-500: #5f717b;
+  --shark-600: #515f69;
+  --shark-700: #465058;
+  --shark-800: #3e454c;
+  --shark-900: #373d42;
+  --shark-950: #212529;
+
+    /* Science Blue Palette */
+  --science-blue-50: #ecfbff;
+  --science-blue-100: #d5f4ff;
+  --science-blue-200: #b4eeff;
+  --science-blue-300: #80e6ff;
+  --science-blue-400: #44d4ff;
+  --science-blue-500: #19b7ff;
+  --science-blue-600: #0299ff;
+  --science-blue-700: #0080fa;
+  --science-blue-800: #0466c8;
+  --science-blue-900: #0b589d;
+  --science-blue-950: #0c355f;
+
+    /* International Orange Palette */
+  --international-orange-50: #fff7ec;
+  --international-orange-100: #ffecd3;
+  --international-orange-200: #ffd5a7;
+  --international-orange-300: #ffb76f;
+  --international-orange-400: #ff8d35;
+  --international-orange-500: #ff6e0e;
+  --international-orange-600: #fb5607;
+  --international-orange-700: #c93a05;
+  --international-orange-800: #9f2f0d;
+  --international-orange-900: #80290e;
+  --international-orange-950: #451205;
+
+  --primary: #2c3e50;
+  --primary-dark: #03045e;
+  --primary-light: #001d3d;
+
+  --secondary: #ff6700;
+  --secondary-dark: #e70e02;
+  --secondary-light: #fca311;
+  --secondary-xlight: #ffcc00;
+
+  --accent: #F4A261;
+  --accent-dark: #E68A44;
+  --accent-light: #F7B384;
+
+  /* Neutral Colors */
+  --background: #eef1f6;
+  --text: #1A1A1A;
+  --border: #D3D3D3;
+
+  /* Feedback Colors */
+  --success: #28A745;
+  --error: #DC3545;
+
+}
+
+[data-theme="dark"] {
+  /* Shark Palette (reversed for dark mode) */
+  --shark-50: #212529;
+  --shark-100: #373d42;
+  --shark-200: #3e454c;
+  --shark-300: #465058;
+  --shark-400: #515f69;
+  --shark-500: #5f717b;
+  --shark-600: #7a8c96;
+  --shark-700: #a6b4ba;
+  --shark-800: #cbd3d6;
+  --shark-900: #e3e7ea;
+  --shark-950: #f4f6f7;
+
+  /* International Orange Palette (reversed for dark mode) */
+  --international-orange-50: #451205;
+  --international-orange-100: #80290e;
+  --international-orange-200: #9f2f0d;
+  --international-orange-300: #c93a05;
+  --international-orange-400: #fb5607;
+  --international-orange-500: #ff6e0e;
+  --international-orange-600: #ff8d35;
+  --international-orange-700: #ffb76f;
+  --international-orange-800: #ffd5a7;
+  --international-orange-900: #ffecd3;
+  --international-orange-950: #fff7ec;
+
+  /* Science Blue Palette (reversed for dark mode) */
+  --science-blue-50: #0c355f;
+  --science-blue-100: #0b589d;
+  --science-blue-200: #0466c8;
+  --science-blue-300: #0080fa;
+  --science-blue-400: #0299ff;
+  --science-blue-500: #19b7ff;
+  --science-blue-600: #44d4ff;
+  --science-blue-700: #80e6ff;
+  --science-blue-800: #b4eeff;
+  --science-blue-900: #d5f4ff;
+  --science-blue-950: #ecfbff;
+
+  /* Core Colors (adjusted for dark mode) */
+  --primary: var(--international-orange-500); /* #ff6e0e */
+  --primary-dark: var(--international-orange-300); /* #ffb76f */
+  --primary-light: var(--international-orange-700); /* #c93a05 */
+  --accent: var(--science-blue-500); /* #19b7ff */
+  --accent-dark: var(--science-blue-300); /* #0080fa */
+  --accent-light: var(--science-blue-700); /* #80e6ff */
+  --background: #1A1A1A;
+  --text: #E5E5E5;
+  --border: #4B4B4B;
+  --success: #34C759;
+  --error: #FF4C4C;
+  --white: #1A1A1A;
+  --black: #E5E5E5;
+}
+
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 * {
   box-sizing: border-box;
+  color: var(--text);
 }
 
 html {
@@ -10,12 +138,17 @@ html {
 
 body {
   margin: 0;
-  background: radial-gradient(#282c34, #282c34);
+  /* background: radial-gradient(circle at center , var(--shark-500), var(--shark-950)); */
+  background: var(--background);
 }
 
 .not-found,
 .error {
-  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   text-align: center;
 }
 
@@ -24,7 +157,6 @@ body {
   font-size: 5rem;
   margin: 0px;
   font-weight: 900;
-  color: #262626;
   text-transform: uppercase;
   background: linear-gradient(90deg, #f9572a, #ffc905);
   -webkit-background-clip: text;
@@ -38,5 +170,5 @@ body {
 .error p {
   font-size: 1.5rem;
   font-weight: 500;
-  color: #ddd8d8;
+  color:var(--text);
 }

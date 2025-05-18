@@ -5,7 +5,7 @@ export default function NotFound() {
     <main className="not-found">
       <h1>Not Found</h1>
       <p>Could not find requested resource.</p>
-      <Link href="/" className="not-found">
+      <Link href="/" className="">
         Return Home
       </Link>
     </main>

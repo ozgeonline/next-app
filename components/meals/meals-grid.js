@@ -4,7 +4,6 @@ import styles from "./meals-grid.module.css";
 import Meal from "@/app/meals/models/Meal";
 
 export default async function MealsGrid() {
-
   await connect();
   const meals = await Meal.find({}).lean();
   //console.log(meals.map(meal => console.log("meal----", meal)));

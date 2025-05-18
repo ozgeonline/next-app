@@ -1,19 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+}
 .header {
   display: flex;
-  gap: 3rem;
-  margin: 3rem auto;
-  width: 90%;
-  max-width: 75rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  gap: 1rem;
+}
+
+.containerLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainBackground {
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  object-fit: cover;
+  margin-top: -4rem;
+  filter: brightness(0.5);
+}
+
+.blur {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .slideshow {
-  width: 40rem;
-  height: 25rem;
+  width: 15rem;
+  height: 15rem;
 }
 
 .hero {
   color: #ddd6cb;
   font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero h1 {
@@ -35,7 +71,7 @@
 }
 
 .cta a {
-  display: inline-block;
+  /* display: inline-block; */
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
@@ -66,7 +102,6 @@
 .section {
   display: flex;
   flex-direction: column;
-  color: #ddd6cb;
   font-size: 1.5rem;
   max-width: 50rem;
   width: 90%;
