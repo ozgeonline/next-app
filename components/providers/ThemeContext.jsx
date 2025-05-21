@@ -26,6 +26,7 @@ export function ThemeProvider({ children }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    //console.log("theme", theme);
     const initialTheme = getInitialTheme();
     setTheme(initialTheme);
     document.documentElement.setAttribute("data-theme", initialTheme);

@@ -7,10 +7,26 @@
   z-index: 1000;
   width: 100vw;
   height: 4rem;
-  padding: 0.5rem 1rem;
-  transition: all 0.3s ease-in-out
+  opacity: .95;
+  transition: all 0.3s ease-in-out;
 }
 
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.5rem 1.5rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 3rem;
+}
+
+/*? according to scroll status */
 .navbarScroll {
   background-color: var(--background);
   opacity: 0.9;
@@ -18,62 +34,91 @@
   z-index: 10000000000000;
 }
 
-html:not([data-theme]) .container:not(.navbarScroll) .nav a{
-  color: #E5E5E5;
-}
-
-html:not([data-theme]) .container.navbarScroll .nav a{
-  color: #1A1A1A;
-}
-
-[data-theme="light"] .container:not(.navbarScroll) .nav a {
-  color: #E5E5E5;
-}
-
-[data-theme="light"] .container.navbarScroll .nav a {
-  color: var(--text);
-}
-/*end*/
-
-.header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.nav ul {
+.desktopNav ul,
+.mobileNav ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 0.5rem;
-  font-size: 1.1rem;
 }
 
-.nav a {
+.desktopNav a,
+.mobileNav a {
   text-decoration: none;
   font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
 }
 
-.nav a:hover {
- background: linear-gradient(90deg, var(--international-orange-600), var(--international-orange-500));
- filter: brightness(1.2);
-  background-clip: text;
+.desktopNav a:hover,
+.mobileNav a:hover {
+  background: linear-gradient(90deg, var(--international-orange-600), var(--international-orange-500)) !important;
+  filter: brightness(1.2);
+  background-clip: text !important;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: all 0.3s ease-in-out;
 }
 
-@media (min-width: 768px) {
+/*? mobile screen (default, <1024px) */
+.desktopNav {
+  display: none;
+}
+
+.mobileNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+}
+
+.mobileNav ul {
+  flex-direction: column;
+}
+
+.mobileNav ul li {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1.2rem;
+}
+
+/*? Desktop screen (≥1024px) */
+@media (min-width: 1024px) {
+  .mobileNav {
+    display: none;
+  }
+
+  .nav {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .desktopNav {
+    display: flex;
+  }
+
+  .desktopNav {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .desktopNav ul {
+    font-size: 1rem;
+  }
+
+  .desktopNav a {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/*? x-large desktop (≥1280px) */
+@media (min-width: 1280px) {
+  .desktopNav ul {
+    gap: 0.7rem;
+    font-size: 1rem;
+  }
+
+  .header {
+    padding: 0.5rem 2rem;
+  }
 }

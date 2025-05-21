@@ -1,0 +1,49 @@
+.dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 4rem;
+  left: 50%;
+  transform: translateX(-50%) ;
+  width: 100%;
+  min-height: 55vw;
+}
+
+.menuIcon {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 2rem;
+  height: 0.1rem;
+  padding-bottom: 0.1rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.iconOpen {
+  margin: 0.2rem 0;
+}
+
+.iconClose {
+  margin: 0;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.iconClose:nth-child(1) {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.iconClose:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}

@@ -1,11 +1,11 @@
 /*Scrolling animation*/
 .navbarScroll {
   background-color: var(--background);
-  color: var(--text);
   z-index: 10000000000000;
+  /* color: var(--text); */
 }
 
-[data-theme="light"] .container:not(.navbarScroll) .nav a {
+/* [data-theme="light"] .container:not(.navbarScroll) .nav a {
   color: white;
 }
 
@@ -17,7 +17,7 @@
 [data-theme="light"] .container.navbarScroll .nav a {
   color: var(--text);
   background: var(--background);
-}
+} */
 
 .container {
   display: flex;

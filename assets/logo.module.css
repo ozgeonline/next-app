@@ -4,3 +4,9 @@
   object-fit: contain;
   opacity: 0.8;
 }
+
+@media (max-width: 1024px) {
+  .logo {
+    width: 6rem;
+  }
+}
