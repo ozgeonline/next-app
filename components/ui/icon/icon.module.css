@@ -1,0 +1,70 @@
+/* ---------------------------- MENU ICON ---------------------------- */
+.menuIcon {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000000000;
+  cursor: pointer;
+}
+
+.icon {
+  width: 2rem;
+  height: 0.1rem;
+  padding-bottom: 0.1rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.iconOpen { margin: 0.2rem 0; }
+
+.iconClose {
+  margin: 0;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.iconClose:nth-child(1) {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.iconClose:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* ---------------------------- FOOD ICONs ---------------------------- */
+.image {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.image svg {
+  margin-right: 0.7em;
+  filter: opacity(0.5);
+  transition: opacity 0.3s ease-in-out;
+  border: 1px solid;
+  border-radius:29% 71% 36% 64% / 28% 40% 60% 72%  ;
+  width: 2rem;
+  height: 2rem;
+  padding-inline: .5rem;
+  z-index: 10;
+  font-size: 0.5rem;
+  /* stroke: var(--text); */
+}
+
+@media screen and (max-width: 1024px) {
+
+  
+}
+
+.image svg:hover {
+  filter: opacity(0.8);
+  cursor: pointer;
+}

@@ -1,0 +1,35 @@
+.socialMedia {
+  /* position: absolute;
+  bottom: 2rem;
+  left:2rem; */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.socialMedia div {
+  cursor: pointer;
+  width: 1.7rem;
+  height: 1.7rem
+}
+
+@media (min-width: 1024px) {
+  .socialMedia {
+    gap: 1rem;
+  }
+  .socialMedia div {
+    width: 2rem;
+    height: 2rem
+  }
+}
+
+.highlight {
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #f9572a, #ffc905);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

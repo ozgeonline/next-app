@@ -7,8 +7,7 @@
   z-index: 1000;
   width: 100vw;
   height: 4rem;
-  opacity: .95;
-  transition: all 0.3s ease-in-out;
+  opacity: 1;
 }
 
 .header {
@@ -17,9 +16,11 @@
   align-items: center;
   justify-content: space-around;
   padding: 0.5rem 1.5rem;
+  backdrop-filter: blur(5px);
 }
 
 .nav {
+  position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -28,10 +29,29 @@
 
 /*? according to scroll status */
 .navbarScroll {
-  background-color: var(--background);
-  opacity: 0.9;
+  opacity: 1;
   color: var(--text);
   z-index: 10000000000000;
+  background: var(--background);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease-in-out;
+}
+
+.container.navbarScroll::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 1px;
+  animation: moveRightToLeft 5s linear infinite;
+  z-index: 1;
+  backdrop-filter: blur(5px);
+}
+
+@keyframes moveRightToLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .desktopNav ul,
@@ -40,6 +60,8 @@
   margin: 0;
   padding: 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .desktopNav a,
@@ -59,19 +81,20 @@
 }
 
 /*? mobile screen (default, <1024px) */
-.desktopNav {
-  display: none;
-}
+.desktopNav { display: none; }
 
 .mobileNav {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30%;
+  width: 100%;
+  height: 100%;
 }
 
-.mobileNav ul {
+.mobileNav ul li a{
+  display: flex;
   flex-direction: column;
+  padding-bottom: 1.5em;
 }
 
 .mobileNav ul li {
@@ -80,45 +103,52 @@
   font-size: 1.2rem;
 }
 
+.mobileNav a { color: var(--text); }
+
 /*? Desktop screen (≥1024px) */
 @media (min-width: 1024px) {
-  .mobileNav {
-    display: none;
-  }
+  .mobileNav { display: none; }
 
   .nav {
     align-items: center;
     justify-content: center;
   }
 
-  .desktopNav {
+  /* .container:not(.navbarScroll) .container .header {
     display: flex;
+    background: var(--background-opacity);
+    backdrop-filter: opacity(0.2) blur(5px);
+    -webkit-backdrop-filter: opacity(0.2) blur(5px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 100%;
   }
 
+  .container.navbarScroll .container .header .nav .desktopNav {
+    display: flex;
+    background:transparent;
+  } */
+
+
   .desktopNav {
-    width: 70%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .desktopNav ul {
-    font-size: 1rem;
-  }
-
-  .desktopNav a {
-    padding: 0.5rem 1rem;
-  }
+  .desktopNav ul { font-size: 1rem; } 
+  .desktopNav a { padding: 0.5rem 1rem; }
 }
 
-/*? x-large desktop (≥1280px) */
+/*? x-large desktop */
 @media (min-width: 1280px) {
   .desktopNav ul {
     gap: 0.7rem;
     font-size: 1rem;
   }
 
-  .header {
-    padding: 0.5rem 2rem;
-  }
+  .header { padding: 0.5rem 2rem; }
 }

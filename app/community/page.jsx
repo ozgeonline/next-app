@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
-import mealIcon from '@/public/cafe/coffee.webp';
-import communityIcon from '@/public/cafe/a.webp';
+// import mealIcon from '@/public/cafe/coffee.webp';
+// import communityIcon from '@/public/cafe/a.webp';
 import eventsIcon from '@/public/cafe/c.webp';
 import styles from './page.module.css';
 import Link from 'next/link';
@@ -22,11 +22,11 @@ export default function CommunityPage() {
 
         <ul className={styles.perks}>
           <li>
-            <Image src={mealIcon} alt="A delicious meal" />
+            {/* <Image src={mealIcon} alt="A delicious meal" /> */}
             <p>Share & discover recipes</p>
           </li>
           <li>
-            <Image src={communityIcon} alt="A crowd of people, cooking" />
+            {/* <Image src={communityIcon} alt="A crowd of people, cooking" /> */}
             <p>Find new friends & like-minded people</p>
           </li>
           <li>

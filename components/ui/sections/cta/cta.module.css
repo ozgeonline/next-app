@@ -1,0 +1,144 @@
+.animateInBottom { animation: animateInBottom 1s ease-out forwards; }
+@keyframes animateInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.communityInvite {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 90%;
+  min-height: 20vh;
+  margin-top: 1rem;
+  padding-bottom: 0.5rem;
+  transition: all 0.5s ease-out;
+  background: var(--background-high);
+  color: var(--text);
+  border-radius: 1rem;
+  opacity: 0;
+}
+
+ [data-theme="dark"] .communityInvite {
+  border: 1px solid #19b7ff50;
+}
+
+.communityInvite .inviteText {
+  padding: 0.5rem 0;
+  opacity: 0.8;
+  font-size: medium;
+  width: 90%;
+  color: var(--shark-950);
+}
+
+.communityInvite .actionButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  position: relative;
+  overflow: hidden;
+}
+
+.communityInvite .actionButtons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 100%;
+  height: 5.5vh;
+  border-radius: 0.5rem;
+  margin-inline: 1.3rem;
+  font-size: 1.2rem;
+  transition: all 0.3s ease-out;
+}
+
+.communityInvite .actionButtons a:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--science-blue-700), var(--science-blue-400));
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: .5s;
+  z-index: -1;
+}
+
+.communityInvite .actionButtons a:nth-child(1) {
+  background: transparent;
+  color: var(--science-blue-600);
+  border: 1px solid #19b7ff50;
+  margin-bottom: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.5s ease, color 0.3s ease, filter 0.3s ease;
+  z-index: 1;
+}
+
+.communityInvite .actionButtons a:nth-child(1):hover::before {
+  right: 0;
+}
+
+.communityInvite .actionButtons a:nth-child(1):hover {
+  color: #f4f4f9;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.communityInvite .actionButtons a:nth-child(2) {
+  background: linear-gradient(90deg, var(--science-blue-700), var(--science-blue-400));
+  color: #f4f4f9;
+}
+
+.communityInvite .actionButtons a:nth-child(2):hover {
+  filter: brightness(1.1);
+}
+
+.communityInvite .actionButtons a:active {
+  color: var(--text);
+}
+
+@media screen and (min-width: 640px) {
+ .communityInvite .actionButtons {
+    flex-direction: row;
+    margin-top: 0.7rem;
+  }
+
+  .communityInvite .actionButtons a {
+    padding: 0.4rem 5rem;
+    font-size: 1.4rem;
+    width: 25%;
+  }
+
+  .communityInvite .actionButtons a:nth-child(1) {
+    margin-bottom: 0px;
+  }
+
+  .communityInvite .inviteText {
+    font-size: larger;
+  }
+}
+
+@media screen and (min-width: 768px) {
+ 
+}
+
+@media screen and (min-width: 1024px) {
+  .communityInvite {
+    width: 50%;
+     margin-top: 3rem;
+  }
+}

@@ -1,56 +1,74 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTheme } from "@/components/providers/ThemeContext";
-import { useScroll } from "@/components/providers/ScrollingContext";
+import { useScroll } from "@/components/providers/navbar/ScrollingContext";
+import { useNavigation } from "@/components/providers/navbar/NavigationContext";
+import MenuIcon from "@/components/ui/icon/MenuIcon";
+import FoodsIcon from "@/components/ui/icon/FoodsIcon";
 import styles from "./dropdown.module.css";
-import MenuIcon from "./MenuIcon";
 
 export default function DropdownNavbarMenu({children}) {
   const dropdownRef = useRef(null);
-  const [open, setOpen] = useState(false);
   const { theme } = useTheme();
   const { scrolling } = useScroll();
+  const {isOpen, setIsOpen} = useNavigation();
 
-   const handleClickOutside = (event) => {
+  const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setOpen(false);
+      setIsOpen(false);
     }
   };
+
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
-  
-  const background = {
-    background:
-      theme === "light" && !scrolling
-        ? "#1A1A1A"
-        :  "var(--background)",
-  };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (open) {
-        setOpen(false);
-      }
+      if (isOpen) setIsOpen(false);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [open]);
+  }, [isOpen]);
+
+  const background = {
+    background:
+      theme === "light" && !scrolling
+        ? "#1A1A1A"
+        :  "var(--background)"
+  };
+
+  const border = {
+    border: 
+      theme === "light" && scrolling ? "1px solid #1A1A1A"
+        : theme === "light" && !scrolling ? "1px solid #f4f4f9" : 
+        "1px solid #f4f4f9"
+
+  };
+
+  const strokeColor = 
+    theme === "light" && scrolling ? "#1A1A1A"
+      : theme === "light" && !scrolling ? "#f4f4f9" : 
+      "#f4f4f9"
+    
 
   return (
     <div ref={dropdownRef}>
-      <MenuIcon onClick={() => setOpen(!open)} open={open} />
-        {open && 
+      <MenuIcon onClick={() => setIsOpen(!isOpen)} open={isOpen} className={styles.menuIcon}/>
+        {isOpen && 
           <div
             className={styles.dropdown}
             style={background}
           >
             {children}
+            <div className={styles.iconWrapper}>
+              <FoodsIcon stroke={strokeColor} style={border}/>
+            </div>
           </div>
         }
     </div>

@@ -1,0 +1,215 @@
+.definitionImage.animateinView .imageFirst {
+  animation: animateFirst 0.75s ease-out forwards;
+}
+
+.definitionImage.animateinView .imageSecond {
+  animation: animateSecond 0.75s ease-out forwards;
+}
+
+@keyframes animateFirst {
+  from {
+    top: -35%;
+    left: -35%;
+    scale: 0.5;
+  }
+  to {
+    top: 15%;
+    left: 15%;
+    scale: 1;
+  }
+}
+
+@keyframes animateSecond {
+  from {
+    top: 35%;
+    left: 35%;
+    scale: 0.5;
+  }
+  to {
+    top: -15%;
+    left: -15%;
+    scale: 1;
+  }
+}
+
+@keyframes colorsBackground {
+  from { scale: 0.5;}
+  to { scale: 1; }
+}
+
+.containerWrapper {
+  z-index: 100;
+  display: flex;
+  min-height: 40vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  transition: all 0.5s ease-out;
+}
+
+.heroDefault {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 90%;
+  height: 1rem;
+  margin-top: 1.2rem;
+}
+
+.heroDefault h2,
+.heroDefault h1 {
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  padding: 0.7rem;
+  text-align: center;
+}
+
+.heroDefault h1,
+.heroDefault h2 {
+  background: linear-gradient(90deg, var(--cumin-400), var(--cumin-600), var(--cumin-900));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+@media screen and (min-width: 768px) {
+  .heroDefault h1 { font-size: 1.5rem; }
+  .heroDefault h2 { font-size: 1.3rem; }
+}
+
+.definitionDefault {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0.5rem;
+}
+
+.definitionDefault p {
+  color: var(--text);
+  text-align: center;
+  transition: opacity 1s ease-out;
+  text-align: justify;
+  display: flex;
+  width: 90%;
+  opacity: .7;
+  margin-top: 2rem;
+  font-size: .9rem;
+}
+
+.definitionImage::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 0;
+  transition: all 0.75s ease-out;
+}
+
+.definitionImage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:35vw;
+  height: 15vh;
+  box-sizing: border-box;
+  border-radius: 2rem;
+  margin-top: 2rem;
+}
+
+.imageFirst,
+.imageSecond,
+.colorsBackground {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
+  transform-origin: top left;
+  transition: top 0.75s ease-out, left 0.75s ease-out;
+}
+
+.imageFirst {
+  z-index: 3;
+}
+
+.imageSecond {
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.colorsBackground {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: linear-gradient(45deg, var(--background), var(--text-opacity));
+  opacity: 0.9;
+  box-sizing: border-box;
+  animation: colorsBackground 0.75s ease-out forwards;
+}
+
+@media screen and (max-width: 768px) {
+  .definitionDefault p {
+    text-align: justify;
+  }
+
+  .definitionDefault {
+    flex-direction: column;
+  }
+
+  .definitionDefault.reverseDefinition {
+    flex-direction: column-reverse;
+  }
+  .definitionDefault.reverseRowDefinition {
+    flex-direction: inherit;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .definitionDefault.reverseRowDefinition {
+    flex-direction: row-reverse;
+  }
+  .definitionDefault p {
+    padding: 0 3rem;
+    width: 70%;
+  }
+
+  .definitionDefault {
+    align-items: start;
+  }
+  .definitionImage {
+    width:20vw;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .definitionHero p,
+  .definitionDefault p {
+    padding: 0 5rem;
+    width: 50%;
+    font-size: medium;
+  }
+
+  .definitionImage {
+    width:17vw;
+    height: 20vh;
+  }
+}
+
+.imageHidden {
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.imageVisible {  opacity: 1;} 

@@ -14,6 +14,20 @@
   --shark-900: #373d42;
   --shark-950: #212529;
 
+    /* Mondok Palette */
+  --mondo-50: #f7f6ef;
+  --mondo-100: #ebead6;
+  --mondo-200: #d9d5af;
+  --mondo-300: #c3ba81;
+  --mondo-400: #b1a25e;
+  --mondo-500: #4b4737;
+  --mondo-600: #8b7643;
+  --mondo-700: #705a38;
+  --mondo-800: #5f4c34;
+  --mondo-900: #48392a;
+  --mondo-950: #2f2419;
+
+
     /* Science Blue Palette */
   --science-blue-50: #ecfbff;
   --science-blue-100: #d5f4ff;
@@ -40,32 +54,80 @@
   --international-orange-900: #80290e;
   --international-orange-950: #451205;
 
-  --primary: #2c3e50;
-  --primary-dark: #03045e;
-  --primary-light: #001d3d;
+  /* Cumin Palette */
+  --cumin-950: #1a0d06;
+  --cumin-900: #231006;
+  --cumin-800: #3a1a0b;
+  --cumin-700: #53240d;
+  --cumin-600: #972d07;
+  --cumin-500: #9a400f;
+  --cumin-400: #bc5616;
+  --cumin-300: #db721c;
+  --cumin-200: #f7911f;
+  --cumin-100: #ffb347;
+  --cumin-50: #ffe3c2;
 
-  --secondary: #ff6700;
-  --secondary-dark: #e70e02;
-  --secondary-light: #fca311;
-  --secondary-xlight: #ffcc00;
+
+  /* Broom Palette */
+  --broom-50: #fcffe7;
+  --broom-100: #f5ffc1;
+  --broom-200: #f0ff86;
+  --broom-300: #f0ff41;
+  --broom-400: #fffd0d;
+  --broom-500: #ffef00;
+  --broom-550: #ffcc00;
+  --broom-600: #d1bb00;
+  --broom-700: #a68802;
+  --broom-800: #89690a;
+  --broom-900: #74560f;
+  --broom-950: #442e04;
+
+  /* Fuego Palette */
+  --fuego-50:  #fcfde8;
+  --fuego-100: #f6facd;
+  --fuego-200: #edf6a0;
+  --fuego-300: #ddee68;
+  --fuego-400: #cae13a;
+  --fuego-500: #c1df1f;
+  --fuego-600: #869e12;
+  --fuego-700: #667912;
+  --fuego-800: #516014;
+  --fuego-900: #445116;
+  --fuego-950: #232d06;
 
   --accent: #F4A261;
   --accent-dark: #E68A44;
   --accent-light: #F7B384;
 
-  /* Neutral Colors */
-  --background: #eef1f6;
-  --text: #1A1A1A;
+  /* Main Colors */
+  /* --background: #edf6f9; */
+  --background: #dee2e6;
+  --background-high: #edf6f970;
+  --background-opacity: #edf6f950;
+  --background-low-opacity: #edf6f910;
+
+  --text: #1a1a1a;
+  --text-opacity: #1a1a1a90;
+  --text-low-opacity: #1a1a1a10;
+
   --border: #D3D3D3;
 
   /* Feedback Colors */
   --success: #28A745;
   --error: #DC3545;
 
+  /* Transition Color*/
+  --fuego-to-dark: #333333;
+  --fuego-to-dark-50: #33333350;
+
+   --background-focus: #2f241950;
+
+  overflow-x: hidden;
+
 }
 
 [data-theme="dark"] {
-  /* Shark Palette (reversed for dark mode) */
+  /* Shark Palette */
   --shark-50: #212529;
   --shark-100: #373d42;
   --shark-200: #3e454c;
@@ -78,20 +140,21 @@
   --shark-900: #e3e7ea;
   --shark-950: #f4f6f7;
 
-  /* International Orange Palette (reversed for dark mode) */
-  --international-orange-50: #451205;
-  --international-orange-100: #80290e;
-  --international-orange-200: #9f2f0d;
-  --international-orange-300: #c93a05;
-  --international-orange-400: #fb5607;
-  --international-orange-500: #ff6e0e;
-  --international-orange-600: #ff8d35;
-  --international-orange-700: #ffb76f;
-  --international-orange-800: #ffd5a7;
-  --international-orange-900: #ffecd3;
-  --international-orange-950: #fff7ec;
+  /* Mondo Palette */
+  --mondo-50: #2f2419;
+  --mondo-100: #48392a;
+  --mondo-200: #5f4c34;
+  --mondo-300: #705a38;
+  --mondo-400: #8b7643;
+  --mondo-500: #7f5539;
+  --mondo-600: #b1a25e;
+  --mondo-700: #c3ba81;
+  --mondo-800: #d9d5af;
+  --mondo-900: #ebead6;
+  --mondo-950: #f7f6ef;
 
-  /* Science Blue Palette (reversed for dark mode) */
+  
+  /* Science Blue Palette */
   --science-blue-50: #0c355f;
   --science-blue-100: #0b589d;
   --science-blue-200: #0466c8;
@@ -104,20 +167,85 @@
   --science-blue-900: #d5f4ff;
   --science-blue-950: #ecfbff;
 
-  /* Core Colors (adjusted for dark mode) */
-  --primary: var(--international-orange-500); /* #ff6e0e */
-  --primary-dark: var(--international-orange-300); /* #ffb76f */
-  --primary-light: var(--international-orange-700); /* #c93a05 */
+  /* International Orange Palette */
+  --international-orange-50: #451205;
+  --international-orange-100: #80290e;
+  --international-orange-200: #9f2f0d;
+  --international-orange-300: #c93a05;
+  --international-orange-400: #fb5607;
+  --international-orange-500: #ff6e0e;
+  --international-orange-600: #ff8d35;
+  --international-orange-700: #ffb76f;
+  --international-orange-800: #ffd5a7;
+  --international-orange-900: #ffecd3;
+  --international-orange-950: #fff7ec;
+
+  /* Cumin Palette */
+  --cumin-50: #1a0d06;
+  --cumin-100: #231006;
+  --cumin-200: #3a1a0b;
+  --cumin-300: #53240d;
+  --cumin-400: #972d07;
+  --cumin-500: #9a400f;
+  --cumin-600: #bc5616;
+  --cumin-700: #db721c;
+  --cumin-800: #f7911f;
+  --cumin-900: #ffb347;
+  --cumin-950: #ffe3c2;
+
+   /* Broom Palette */
+  --broom-950: #fcffe7;
+  --broom-900: #f5ffc1;
+  --broom-800: #f0ff86;
+  --broom-700: #f0ff41;
+  --broom-600: #f7ff0d;
+  --broom-500: #f5f000;
+  --broom-550: #ffcc00;
+  --broom-400: #d1bb00;
+  --broom-300: #a68802;
+  --broom-200: #89690a;
+  --broom-100: #74560f;
+  --broom-50: #442e04;
+
+  /* Fuego Palette */
+  --fuego-50:  #232d06;
+  --fuego-100: #445116;
+  --fuego-200: #516014;
+  --fuego-300: #667912;
+  --fuego-400: #869e12;
+  --fuego-500: #c1df1f;
+  --fuego-600: #cae13a;
+  --fuego-700: #ddee68;
+  --fuego-800: #edf6a0;
+  --fuego-900: #f6facd;
+  --fuego-950: #fcfde8;
+
   --accent: var(--science-blue-500); /* #19b7ff */
   --accent-dark: var(--science-blue-300); /* #0080fa */
   --accent-light: var(--science-blue-700); /* #80e6ff */
+
+
+  /* Main Colors*/
   --background: #1A1A1A;
-  --text: #E5E5E5;
+  --background-high: #1A1A1A70;
+  --background-opacity: #1A1A1A50;
+  --background-low-opacity: #1A1A1A10;
+
+  --text: #f4f4f9;
+  --text-opacity: #f4f4f950;
+  --text-low-opacity: #f4f4f910;
+  
   --border: #4B4B4B;
   --success: #34C759;
   --error: #FF4C4C;
   --white: #1A1A1A;
   --black: #E5E5E5;
+
+   /* Transition Color*/
+  --fuego-to-dark: #c1df1f;
+  --fuego-to-dark-50: #c1df1f;
+
+     --background-focus: #2f241950;
 }
 
 /* Reset default styles */
@@ -125,21 +253,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
-* {
-  box-sizing: border-box;
-  color: var(--text);
-}
 
 html {
   font-family: 'Quicksand', sans-serif;
+  background: var(--background);
 }
 
 body {
   margin: 0;
   /* background: radial-gradient(circle at center , var(--shark-500), var(--shark-950)); */
   background: var(--background);
+  overflow-x: hidden;
 }
 
 .not-found,

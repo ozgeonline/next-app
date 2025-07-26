@@ -1,0 +1,88 @@
+.animateInRight { animation: animateInRight 1s ease-out forwards; }
+@keyframes animateInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.containerWrapper {
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  transition: all 0.5s ease-out;
+}
+
+.definitionHero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0.5rem;
+}
+
+.definitionHero p {
+  color:#f4f6f7;
+  font-size: 1rem;
+  text-align: center;
+  transition: opacity 0.5s ease-out;
+}
+
+@media screen and (max-width: 768px) {
+  .definitionHero p {
+    text-align: justify;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .definitionHero p {
+    padding: 0 3rem;
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .definitionHero p {
+    padding: 0 5rem;
+    width: 50%;
+    font-size: medium;
+  }
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 90%;
+  height: 1rem;
+  margin-top: 1.2rem;
+}
+
+.hero h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  padding: 0.7rem;
+  text-align: center;
+}
+
+.hero h2 {
+  background: linear-gradient(90deg, var(--international-orange-600), var(--broom-500));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .hero h2 { font-size: 1.3rem; }
+}

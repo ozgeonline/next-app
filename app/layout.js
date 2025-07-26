@@ -3,21 +3,21 @@ import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import {ThemeProvider} from "@/components/providers/ThemeContext";
-import {ScrollProvider} from "@/components/providers/ScrollingContext";
 import './globals.css';
+import { NavigationProvider } from "@/components/providers/navbar/NavigationContext";
 
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>
-          <ScrollProvider>
+        <NavigationProvider>
+          <ThemeProvider>
             <Navbar />
-          </ScrollProvider>
-        </ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </NavigationProvider>
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-          {children}
       </body>
     </html>
   );

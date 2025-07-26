@@ -1,6 +1,6 @@
 .active {
-  background: linear-gradient(90deg, var(--international-orange-600), var(--international-orange-500)) !important;
-  background-clip: text !important;
+  background: #ff6e0e;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bolder;

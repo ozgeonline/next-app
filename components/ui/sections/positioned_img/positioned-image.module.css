@@ -1,0 +1,173 @@
+.animateInRight { animation: animateInRight 1s ease-out forwards; }
+@keyframes animateInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.imgWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: max-content;
+  overflow: hidden;
+  margin-top: -10vh;
+}
+
+@media screen and (min-width: 1024px) {
+  .imgWrapper { flex-direction: row; }
+}
+
+.defaultImage {
+  will-change: position;
+  backface-visibility: hidden;
+}
+
+.defaultImage img { object-fit: cover; }
+
+.fixedImage, .relativeImage {
+  z-index: 1;
+  transition: all 0.5s ease-in-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.fixedImage { 
+  display: flex;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  will-change: position;
+  backface-visibility: hidden;
+}
+
+.relativeImage {
+  width: 100%;
+  height: 60vh;
+  animation: animateInLeft 1s ease-out forwards;
+}
+
+@keyframes animateInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fixedImage img { filter: brightness(0.5);}
+
+@media screen and (min-width: 1024px) {
+  .relativeImage {
+    width: 40%;
+    height: 40vh;
+  }
+  .relativeImage img { border-radius: 0 2rem 2rem 0; }
+}
+
+@media screen and (max-width: 1024px) {
+  .imageShadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 100px 100vh var(--background-low-opacity);
+    backdrop-filter: brightness(0.5);
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .relativeImage .imageShadow {
+    display: none;
+    transition: all 0.5s ease-out;
+  }
+}
+
+.imageContent {
+  opacity: 0;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60vh;
+  z-index: 1;
+  text-align: center;
+  color: #f4f6f7;
+  transition: all 0.5s ease-out;
+}
+
+.imageContent h1 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--science-blue-700), var(--science-blue-400));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.imageContent h2 {
+  font-size: 1.3rem;
+  text-shadow: 0 1px 0 var(--text-low-opacity);
+  color: #f4f6f7;
+}
+
+.imageContent p {
+  text-align: justify;
+  font-style: italic;
+  text-shadow: 0 0 0.5rem var(--text);
+  color: #f4f6f7;
+  transition: all 1s ease-out;
+  width: 80%;
+}
+
+.imageContent h1,
+.imageContent h2,
+.imageContent p {
+  padding: 1rem 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .imageContent h1 { font-size: 1.4rem; }
+  .imageContent h2 { font-size: 1.3rem; }
+  .imageContent p { font-size: 1.2rem; }
+}
+
+@media screen and (min-width: 1024px) {
+  .imageContent {
+    position: relative;
+    right: 0;
+    width: 60%;
+    height: 40vh;
+  }
+
+  .imageContent h2,
+  .imageContent p {
+    text-shadow: none;
+  }
+
+  [data-theme="light"] .imageContent h2,
+  [data-theme="light"] .imageContent p {
+    color: #21252990;
+  }
+}

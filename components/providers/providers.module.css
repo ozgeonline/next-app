@@ -31,3 +31,47 @@
   padding: 0.5rem 1rem;
   transition: all 0.3s ease-in-out
 }
+
+/* ------------------------------- Loading Overlay ------------------------------- */
+.overlay {
+  background: rgba(26, 26, 26, 0.8);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.icon {
+  opacity: 0;
+  animation: fadeInOut 2s infinite;
+  filter: brightness(1.7);
+}
+
+.overlay :nth-child(1) { animation-delay: 0s; }
+.overlay :nth-child(2) { animation-delay: 0.1s; }
+.overlay :nth-child(3) { animation-delay: 0.2s; }
+.overlay :nth-child(4) { animation-delay: 0.3s; }
+.overlay :nth-child(5) { animation-delay: 0.4s; }
+.overlay :nth-child(6) { animation-delay: 0.5s; }
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  10%, 30% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50%, 100% {
+    opacity: 0;
+    transform: translateX(100%);
+  
+  }
+}
