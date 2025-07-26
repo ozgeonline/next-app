@@ -1,9 +1,9 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import  FoodsIcon from "@/components/ui/icon/FoodsIcon";
 import styles from "../providers.module.css";
+import dynamic from "next/dynamic";
 
 interface ContextType {
   isOpen: boolean;
@@ -18,6 +18,15 @@ const NavigationContext = createContext<ContextType | undefined>(undefined);
 export function NavigationProvider({ children: children }: { children: React.ReactNode }) {
   const [ isOpen, setIsOpen ] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  const FoodsIcon = dynamic(() => import("@/components/ui/icon/FoodsIcon"), {
+    ssr: false
+  });
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
    const triggerNavigation = (callback: () => void) => {
       setIsOpen(false);
@@ -27,15 +36,14 @@ export function NavigationProvider({ children: children }: { children: React.Rea
       }, 500);
   };
 
-   const animationPortal =
-   isLoading && (
-      createPortal(
-        <div className={`${styles.overlay}`}>
-          <FoodsIcon stroke="white" className={styles.icon} style="" />
-        </div>,
-        document.body
-      )
-    );
+  const animationPortal = isLoading && isMounted && typeof document !== "undefined" ? (
+    createPortal(
+      <div className={`${styles.overlay}`}>
+        <FoodsIcon stroke="white" className={styles.icon} style="" />
+      </div>,
+      document.body
+    )
+  ) : null;
     
   return (
     <NavigationContext.Provider value={{
