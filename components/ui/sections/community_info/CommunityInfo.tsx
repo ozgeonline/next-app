@@ -29,7 +29,7 @@ export default function CommunityInfo({ setIsCommunityInfoVisible }: CommunityIn
         <p>
           This is more than just a place to eat — it&#39;s an experience. 
           From handcrafted drinks to freshly made desserts, everything is prepared with care. 
-          We're here to delight your taste buds and offer you a cozy, flavorful atmosphere.
+          We&#39;re here to delight your taste buds and offer you a cozy, flavorful atmosphere.
         </p>
       </div>
     </AnimatedOnScroll>
