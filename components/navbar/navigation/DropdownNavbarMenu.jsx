@@ -20,11 +20,11 @@ export default function DropdownNavbarMenu({children}) {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
+   useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.addEventListener("click", handleClickOutside);
+      return () => document.removeEventListener("click", handleClickOutside);
+    }
   }, []);
 
   useEffect(() => {
@@ -32,8 +32,10 @@ export default function DropdownNavbarMenu({children}) {
       if (isOpen) setIsOpen(false);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, [isOpen]);
 
   const background = {
