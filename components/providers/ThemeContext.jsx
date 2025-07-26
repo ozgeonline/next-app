@@ -27,30 +27,34 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     //console.log("theme", theme);
-    const initialTheme = getInitialTheme();
-    setTheme(initialTheme);
-    document.documentElement.setAttribute("data-theme", initialTheme);
-    setIsMounted(true);
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = () => {
-      if (!localStorage.getItem("theme")) {
-        const newTheme = mediaQuery.matches ? "dark" : "light";
-        setTheme(newTheme);
-        document.documentElement.setAttribute("data-theme", newTheme);
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+     if (typeof window !== "undefined" | typeof document !== "undefined") {
+       const initialTheme = getInitialTheme();
+       setTheme(initialTheme);
+       document.documentElement.setAttribute("data-theme", initialTheme);
+       setIsMounted(true);
+   
+       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+       const handleChange = () => {
+         if (!localStorage.getItem("theme")) {
+           const newTheme = mediaQuery.matches ? "dark" : "light";
+           setTheme(newTheme);
+           document.documentElement.setAttribute("data-theme", newTheme);
+         }
+       };
+   
+       mediaQuery.addEventListener("change", handleChange);
+       return () => mediaQuery.removeEventListener("change", handleChange);
+     }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
+    if (typeof document !== "undefined") {
+      const newTheme = theme === "light" ? "dark" : "light";
+      setTheme(newTheme);
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+    };
+  }
 
   // if (!isMounted ) {
   //   document.documentElement.setAttribute("data-theme", theme);
