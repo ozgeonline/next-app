@@ -22,29 +22,39 @@ export function ThemeProvider({ children }) {
     return "light";//for server side
   };
 
-  const [theme, setTheme] = useState(getInitialTheme);
+  const [theme, setTheme] = useState("light");
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    //console.log("theme", theme);
-     if (typeof window !== "undefined" | typeof document !== "undefined") {
-       const initialTheme = getInitialTheme();
-       setTheme(initialTheme);
-       document.documentElement.setAttribute("data-theme", initialTheme);
-       setIsMounted(true);
-   
-       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-       const handleChange = () => {
-         if (!localStorage.getItem("theme")) {
-           const newTheme = mediaQuery.matches ? "dark" : "light";
-           setTheme(newTheme);
-           document.documentElement.setAttribute("data-theme", newTheme);
-         }
-       };
-   
-       mediaQuery.addEventListener("change", handleChange);
-       return () => mediaQuery.removeEventListener("change", handleChange);
-     }
+    useEffect(() => {
+    const getInitialTheme = () => {
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+          return savedTheme;
+        }
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        return prefersDark ? "dark" : "light";
+      } catch (e) {
+        return "light";
+      }
+    };
+
+    const initialTheme = getInitialTheme();
+    setTheme(initialTheme);
+    document.documentElement.setAttribute("data-theme", initialTheme);
+    setIsMounted(true);
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
+      if (!localStorage.getItem("theme")) {
+        const newTheme = mediaQuery.matches ? "dark" : "light";
+        setTheme(newTheme);
+        document.documentElement.setAttribute("data-theme", newTheme);
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   const toggleTheme = () => {

@@ -16,19 +16,6 @@ export default function ScrollToSection({ children, isVisible, setIsVisible, cla
     const observer = new IntersectionObserver(
       ([entry]) => {
         const { isIntersecting, boundingClientRect: rect, rootBounds } = entry;
-        //const scrollY = window.scrollY;
-        //const elementTopRelativeToDocument = scrollY + rect.top;
-
-        // **debugging
-        // console.log('IntersectionObserver:', {
-        //   scrollY,
-        //   elementTop: rect.top,
-        //   elementBottom: rect.bottom,
-        //   elementHeight: rect.height,
-        //   elementTopRelativeToDocument,
-        //   scrollingDown:  scrollingDown.current
-        //   rootBoundsHeight: rootBounds.height,
-        // });
 
         if (
           !isIntersecting && 
