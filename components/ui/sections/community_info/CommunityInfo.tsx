@@ -17,7 +17,7 @@ export default function CommunityInfo({ setIsCommunityInfoVisible }: CommunityIn
       </div>
       <div className={styles.definitionHero}>
         <p>
-          Tired of the usual menus? Here, you're free to be creative! 
+          Tired of the usual menus? Here, you&#39;re free to be creative! 
           Build your own dish or choose the ingredients and let our chef do the magic. 
           From breakfast and snacks to drinks and desserts — every flavor is shaped by your imagination.
         </p>
@@ -27,7 +27,7 @@ export default function CommunityInfo({ setIsCommunityInfoVisible }: CommunityIn
       </div>
       <div className={styles.definitionHero}>
         <p>
-          This is more than just a place to eat — it's an experience. 
+          This is more than just a place to eat — it&#39;s an experience. 
           From handcrafted drinks to freshly made desserts, everything is prepared with care. 
           We're here to delight your taste buds and offer you a cozy, flavorful atmosphere.
         </p>
