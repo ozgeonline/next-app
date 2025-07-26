@@ -5,16 +5,30 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("light");
+  //default local theme
+  const getInitialTheme = () => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+          return savedTheme;
+        }
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        return prefersDark ? "dark" : "light";
+      } catch (e) {
+        return "light"; //for local
+      }
+    }
+    return "light";//for server side
+  };
+
+  const [theme, setTheme] = useState(getInitialTheme);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
-
+    //console.log("theme", theme);
+    if (typeof window !== "undefined" || typeof document !== "undefined") return;
+    const initialTheme = getInitialTheme();
     setTheme(initialTheme);
     document.documentElement.setAttribute("data-theme", initialTheme);
     setIsMounted(true);
@@ -33,13 +47,16 @@ export function ThemeProvider({ children }) {
   }, []);
 
   const toggleTheme = () => {
+    if (typeof document !== "undefined") return;
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-theme", newTheme);
-      localStorage.setItem("theme", newTheme);
-    }
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
   };
+
+  // if (!isMounted ) {
+  //   document.documentElement.setAttribute("data-theme", theme);
+  // }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, isMounted }}>
