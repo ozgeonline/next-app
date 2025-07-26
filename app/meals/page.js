@@ -4,6 +4,7 @@ import MealsGrid from "@/components/meals/meals-grid";
 import styles from "./page.module.css";
 import { notFound } from "next/navigation";
 
+export const dynamic = 'force-dynamic';
  async function getData() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meals`, {
