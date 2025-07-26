@@ -5,41 +5,16 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  //default local theme
-  const getInitialTheme = () => {
-    if (typeof window !== "undefined") {
-      try {
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) {
-          return savedTheme;
-        }
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        return prefersDark ? "dark" : "light";
-      } catch (e) {
-        return "light"; //for local
-      }
-    }
-    return "light";//for server side
-  };
-
   const [theme, setTheme] = useState("light");
   const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(() => {
-    const getInitialTheme = () => {
-      try {
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) {
-          return savedTheme;
-        }
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        return prefersDark ? "dark" : "light";
-      } catch (e) {
-        return "light";
-      }
-    };
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-    const initialTheme = getInitialTheme();
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+
     setTheme(initialTheme);
     document.documentElement.setAttribute("data-theme", initialTheme);
     setIsMounted(true);
@@ -58,17 +33,13 @@ export function ThemeProvider({ children }) {
   }, []);
 
   const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
     if (typeof document !== "undefined") {
-      const newTheme = theme === "light" ? "dark" : "light";
-      setTheme(newTheme);
       document.documentElement.setAttribute("data-theme", newTheme);
       localStorage.setItem("theme", newTheme);
-    };
-  }
-
-  // if (!isMounted ) {
-  //   document.documentElement.setAttribute("data-theme", theme);
-  // }
+    }
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, isMounted }}>
