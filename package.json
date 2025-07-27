@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@hugeicons/react": "^1.0.5",
-    "@lottiefiles/dotlottie-react": "^0.14.1",
     "@uploadthing/react": "^7.3.0",
     "better-sqlite3": "^11.9.1",
     "bodymovin": "^4.13.0",
