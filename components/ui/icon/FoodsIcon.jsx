@@ -8,15 +8,15 @@ import {
 } from "lucide-react";
 import styles from "./icon.module.css"
 
-export default function FoodsIcon({stroke, className, style}) {
+export default function FoodsIcon({stroke, className, width}) {
   return (
-    <div className={styles.image}>
-      <ChefHat stroke={stroke} className={className} style={{style}}/>
-      <Croissant stroke={stroke} className={className}  style={{style}} />
-      <Hamburger stroke={stroke} className={className}  style={{style}} />
-      <IceCreamCone stroke={stroke} className={className}  style={{style}} />
-      <Martini stroke={stroke} className={className}  style={{style}} />
-      <Vegan stroke={stroke} className={className}  style={{style}} />
+    <div className={styles.image} style={{width: width}}>
+      <ChefHat stroke={stroke} className={className}/>
+      <Croissant stroke={stroke} className={className}  />
+      <Hamburger stroke={stroke} className={className}  />
+      <IceCreamCone stroke={stroke} className={className}  />
+      <Martini stroke={stroke} className={className}  />
+      <Vegan stroke={stroke} className={className}  />
     </div>
   );
 }

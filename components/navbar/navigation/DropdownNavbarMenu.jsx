@@ -69,7 +69,7 @@ export default function DropdownNavbarMenu({children}) {
           >
             {children}
             <div className={styles.iconWrapper}>
-              <FoodsIcon stroke={strokeColor} style={border}/>
+              <FoodsIcon stroke={strokeColor} width="100%"/>
             </div>
           </div>
         }

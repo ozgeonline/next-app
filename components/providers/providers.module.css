@@ -34,7 +34,7 @@
 
 /* ------------------------------- Loading Overlay ------------------------------- */
 .overlay {
-  background: rgba(26, 26, 26, 0.8);
+  background: #23100695;
   position: fixed;
   top: 50%;
   left: 50%;

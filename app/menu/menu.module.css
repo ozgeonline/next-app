@@ -1,9 +1,115 @@
-.menu {
+.container {
   display: flex;
+  flex-direction: column;
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* .menu {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   background: var(--background);
   color: var(--text);
-  text-align: center;
+  text-align: center; 
+} */
+
+.menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  flex: 1;
+  z-index: 100;
+  background: var(--background);
+  padding-bottom: 5rem;
+}
+.footerWrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100vh; 
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+}
+
+.footer {
+  color: var(--text);
+  border-radius: 0;
+  width: 100%;
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+[data-theme="light"] .footer {
+   background-image: 
+    linear-gradient(90deg, rgb(52, 52, 52),rgb(168, 168, 168)),
+    linear-gradient(45deg, 
+      var(--shark-400) 0%, 
+      var(--shark-400) 45%,
+      var(--shark-500) 45%, 
+      var(--shark-500) 62%,
+      var(--shark-600) 62%, 
+      var(--shark-600) 68%,
+      var(--shark-700) 68%, 
+      var(--shark-700) 77%,
+      var(--shark-800) 77%, 
+      var(--shark-800) 92%,
+      var(--shark-900) 92%, 
+      var(--shark-900) 100%),
+    linear-gradient(135deg, 
+      var(--science-blue-600) 0%, 
+      var(--science-blue-600) 45%,
+      var(--science-blue-500) 45%, 
+      var(--science-blue-500) 62%,
+      var(--science-blue-400) 62%, 
+      var(--science-blue-400) 68%,
+      var(--science-blue-300) 68%, 
+      var(--science-blue-300) 77%, 
+      var(--science-blue-200) 77%,  
+      var(--science-blue-200) 92%,
+      var(--science-blue-100) 92%, 
+      var(--science-blue-100) 100%); 
+    background-blend-mode:overlay,overlay,normal;
+}
+
+[data-theme="dark"] .footer {
+   background-image: 
+    linear-gradient(90deg, rgb(52, 52, 52),rgb(168, 168, 168)),
+    linear-gradient(45deg, 
+      var(--shark-500) 0%, 
+      var(--shark-500) 45%,
+      var(--shark-400) 45%, 
+      var(--shark-400) 62%,
+      var(--shark-300) 62%, 
+      var(--shark-300) 68%,
+      var(--shark-200) 68%, 
+      var(--shark-200) 77%,
+      var(--shark-100) 77%, 
+      var(--shark-100) 92%,
+      var(--shark-50) 92%, 
+      var(--shark-50) 100%),
+    linear-gradient(135deg, 
+      var(--mondo-50) 0%, 
+      var(--mondo-50) 45%,
+      var(--mondo-100) 45%, 
+      var(--mondo-100) 62%,
+      var(--mondo-200) 62%, 
+      var(--mondo-200) 68%,
+      var(--mondo-300) 68%, 
+      var(--mondo-300) 77%, 
+      var(--mondo-400) 77%,  
+      var(--mondo-400) 92%,
+      var(--mondo-500) 92%, 
+      var(--mondo-500) 100%); 
+    background-blend-mode:overlay,overlay,normal;
 }

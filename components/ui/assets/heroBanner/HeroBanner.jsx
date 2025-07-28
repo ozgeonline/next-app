@@ -1,3 +1,4 @@
+"use client";
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -7,7 +8,12 @@ import SocialMedia from '../../social/SocialMedia';
 import { IoLocationSharp } from "react-icons/io5";
 import styles from './heroBanner.module.css';
 
-export default function HeroBanner({srcImage}) {
+export default function HeroBanner({
+  srcImage,
+  introductionTitle,
+  introduction,
+  reservationLink
+}) {
   const [loaded, setLoaded] = useState(false);
   const [scale, setScale] = useState(1);
   const [brightness, setBrightness] = useState(0.7);
@@ -48,17 +54,20 @@ export default function HeroBanner({srcImage}) {
           height={0}
           onLoad={()=>setLoaded(true)}
         />
+        {/* <div className={styles.imgBrightness} /> */}
       </div>
      
       <AnimatedOnScroll animationClass={styles.animateInRight} className={styles.introduction}>
-        <h1>A Delicious Experience Awaits</h1>
-        <p> Discover the flavors of the world, one cup at a time</p>
+        <h1>{introductionTitle} </h1>
+        <p> {introduction}</p>
 
-        <div className={styles.reservation}>
+       {reservationLink ? (
+         <div className={styles.reservation}>
           <Link href="/reservation">
             Make Reservation 
           </Link>
         </div>
+       ) : null}
       </AnimatedOnScroll>
 
       <div className={styles.bottomSection}>

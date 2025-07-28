@@ -35,16 +35,16 @@
 }
 
 .formGroup ::placeholder {
-  color: #a6b4ba;
+  color: var(--text-opacity);
 }
 
 .formGroup input,
 .formGroup textarea {
   padding: 0.75rem;
   border-radius: 4px;
-  border-width: 0.05rem;
-  background: var(--background-focus);
-  color: var(--shark-900);
+  border-width: 0.1rem;
+  background: var(--background-opacity);
+  color: var(--shark-800);
   font-size: 1rem;
   outline: none;
   transition: background 0.3s ease, border-color 0.3s ease; 
@@ -53,7 +53,7 @@
 .formGroup input:focus,
 .formGroup textarea:focus {
   outline: none;
-  background: var(--background-focus);
+  background: var(--background-opacity);
 }
 
 .formGroup input:autofill {
@@ -62,8 +62,8 @@
 
 .formGroup input:autofill,
 .formGroup input:-webkit-autofill {
-  color: var(--shark-900) !important;
-  -webkit-text-fill-color: var(--shark-900) !important;
+  color: var(--shark-800) !important;
+  -webkit-text-fill-color: var(--shark-800) !important;
 }
 
 .formGroup textarea {
@@ -71,11 +71,11 @@
 }
 
 .formGroup input::selection{
-  color: var(--science-blue-400) !important;
+  color: var(--cumin-400) !important;
 }
 
 .formGroup input:focus::details-content{
-  color: var(--science-blue-400) !important;
+  color: var(--cumin-400) !important;
 }
 
 

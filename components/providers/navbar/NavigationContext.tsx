@@ -16,13 +16,11 @@ interface ContextType {
 const NavigationContext = createContext<ContextType | undefined>(undefined);
 
 export function NavigationProvider({ children: children }: { children: React.ReactNode }) {
-  const [ isOpen, setIsOpen ] = useState(false);
+  const [isOpen, setIsOpen ] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  const FoodsIcon = dynamic(() => import("@/components/ui/icon/FoodsIcon"), {
-    ssr: false
-  });
+  const FoodsIcon = dynamic(() => import("@/components/ui/icon/FoodsIcon"), {ssr: false});
 
   useEffect(() => {
     setIsMounted(true);
@@ -39,7 +37,7 @@ export function NavigationProvider({ children: children }: { children: React.Rea
   const animationPortal = isLoading && isMounted && typeof document !== "undefined" ? (
     createPortal(
       <div className={`${styles.overlay}`}>
-        <FoodsIcon stroke="white" className={styles.icon} style="" />
+        <FoodsIcon stroke="white" className={styles.icon} width="50%" />
       </div>,
       document.body
     )

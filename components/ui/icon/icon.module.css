@@ -49,7 +49,7 @@
   margin-right: 0.7em;
   filter: opacity(0.5);
   transition: opacity 0.3s ease-in-out;
-  border: 1px solid;
+  border: 1px solid var(--shark-500);
   border-radius:29% 71% 36% 64% / 28% 40% 60% 72%  ;
   width: 2rem;
   height: 2rem;
