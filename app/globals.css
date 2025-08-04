@@ -226,7 +226,7 @@
 
 
   /* Main Colors*/
-  --background: #1A1A1A;
+  --background: #1a1a1a;
   --background-high: #1A1A1A70;
   --background-opacity: #1A1A1A50;
   --background-low-opacity: #1A1A1A10;
@@ -247,6 +247,11 @@
 
      --background-focus: #2f241950;
 }
+
+:root {
+  --background-gradient: linear-gradient(90deg, #f9572a, #ffc905);
+}
+
 
 /* Reset default styles */
 * {
@@ -286,6 +291,7 @@ body {
   font-weight: 900;
   text-transform: uppercase;
   background: linear-gradient(90deg, #f9572a, #ffc905);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: cover;

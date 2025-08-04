@@ -63,7 +63,7 @@
 .address h3 {
   font-size: 1rem;
   margin-bottom: 1rem;
-  color: var(--shark-900);
+  color: #f4f6f7;
   border-bottom: 1px solid var(--text-low-opacity);
 }
 
@@ -77,7 +77,7 @@
 }
 
 .links a {
-  color: var(--shark-950);
+  color: #f4f6f7;
   text-decoration: none;
   transition: color 0.3s ease-out;
   font-size: small;
@@ -91,12 +91,12 @@
 .address p {
   margin: 0.5rem 0;
   font-size: small;
-  color: var(--shark-950);
+  color: #f4f6f7;
   transition: color 0.3s ease-out;
 }
 
 .address a {
-  color: var(--shark-700);
+  color: #cbd3d6;
   text-decoration: none;
   transition: color 0.3s ease-out;
 }
@@ -117,9 +117,9 @@
 .copyright {
   text-align: center;
   padding: .75rem 0;
-  border-top: 1px solid var(--shark-900);
+  border-top: 1px solid #f4f6f7;
   margin-top: 1rem;
-  color: var(--shark-900);
+  color: #f4f6f7;
   font-size: small;
 }
 

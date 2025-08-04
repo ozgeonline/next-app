@@ -14,7 +14,7 @@
 .formWrapper h3 {
   font-size: 1.4rem;
   margin-bottom: 1rem;
-  color: var(--shark-900);
+  color: #f4f6f7;
 }
 
 .contactForm {
@@ -31,7 +31,7 @@
 .formGroup label {
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: var(--shark-800);
+  color: #f4f6f7;
 }
 
 .formGroup ::placeholder {

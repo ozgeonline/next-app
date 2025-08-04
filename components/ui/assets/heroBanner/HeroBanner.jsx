@@ -12,7 +12,8 @@ export default function HeroBanner({
   srcImage,
   introductionTitle,
   introduction,
-  reservationLink
+  reservationLink,
+  socialLocation
 }) {
   const [loaded, setLoaded] = useState(false);
   const [scale, setScale] = useState(1);
@@ -26,7 +27,7 @@ export default function HeroBanner({
       const maxScale = 2;
       const minScale = 1;
       const maxBrightness = 0.7;
-      const minBrightness = 0.3;
+      const minBrightness = 0.1;
 
       const newScale = minScale + (maxScale - minScale) * Math.min(scrollY / maxScroll, 1);
       const newBrightness = maxBrightness - (maxBrightness - minBrightness) * Math.min(scrollY / maxScroll, 1);
@@ -54,7 +55,6 @@ export default function HeroBanner({
           height={0}
           onLoad={()=>setLoaded(true)}
         />
-        {/* <div className={styles.imgBrightness} /> */}
       </div>
      
       <AnimatedOnScroll animationClass={styles.animateInRight} className={styles.introduction}>
@@ -70,7 +70,8 @@ export default function HeroBanner({
        ) : null}
       </AnimatedOnScroll>
 
-      <div className={styles.bottomSection}>
+     {socialLocation ? (
+       <div className={styles.bottomSection}>
         <div className={styles.content + " " + styles["tracking-in-expand-fwd-top"]}>
           <SocialMedia />
           <div className={styles.location}>
@@ -79,6 +80,7 @@ export default function HeroBanner({
           </div>
         </div>
       </div>
+     ):null}
       
     </div>
   )

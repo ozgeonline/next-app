@@ -4,7 +4,26 @@ import Image from "next/image";
 import { ChevronsRight, MousePointerClick, Sun } from "lucide-react";
 import styles from "./cards.module.css";
 
-export default function CardsSection() {
+interface CardsSectionProps {
+  infoTitle?:string
+  infoDes?:string
+  infoBtn?:boolean
+  imgSrc?:string
+  imgAlt?:string
+  imgTitle?:string
+  imgDes?:string
+  imgBtn?:string
+}
+export default function CardsSection({
+  infoTitle,
+  infoDes,
+  infoBtn,
+  imgSrc,
+  imgAlt,
+  imgTitle,
+  imgDes,
+  imgBtn
+}:CardsSectionProps) {
   return (
     <AnimatedOnScroll
       className={styles.cardsWrapper}
@@ -13,16 +32,18 @@ export default function CardsSection() {
       <div className={styles.cards}>
         <div className={styles.card}>
           <div className={styles.cardTextLeft}>
-            <h2> Healthy Drinks </h2>
-            <p>Delicious, nutritious drinks that nourish your body and mind.</p>
-            <div className={styles.learnMoreLeft} >
-              <Link href="/drinks" title="Learn More">
-                Learn More
-                <span className={styles.arrow}>
-                  <ChevronsRight size={20}/>
-                </span>
-              </Link>
-            </div>
+            <h2>{infoTitle}</h2>
+            <p>{infoDes}</p>
+            {infoBtn && (
+              <div className={styles.learnMoreLeft} >
+                <Link href="/drinks" title="Learn More">
+                  Learn More
+                  <span className={styles.arrow}>
+                    <ChevronsRight size={20}/>
+                  </span>
+                </Link>
+              </div>
+            )}
           </div>
           <div className={styles.sunWrapper}>
             <Sun className={styles.sun}/>
@@ -30,8 +51,8 @@ export default function CardsSection() {
         </div>
         <div className={styles.card}>
           <Image 
-            src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDDBYASjOqFG6PTzpu5yKOaUdhWesmxHnSvY0i"
-            alt="Cafe Background"
+            src={imgSrc}
+            alt={imgAlt}
             fill
             sizes='100%'
             width={0}
@@ -42,11 +63,13 @@ export default function CardsSection() {
             <MousePointerClick />
           </span>
           <div className={styles.cardText}>
-            <h2>Healthy Meals</h2>
-            <p>Delicious, nutritious meals that nourish your body and mind.</p>
-            <Link href="/meals" className={styles.learnMore}>
-              Learn More
-            </Link>
+            <h2>{imgTitle}</h2>
+            <p>{imgDes}</p>
+            {imgBtn && (
+              <Link href="/meals" className={styles.learnMore}>
+                Learn More
+              </Link>
+            )}
           </div>
         </div>
       </div>

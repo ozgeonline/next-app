@@ -11,13 +11,15 @@ interface SectionProps {
     alt: string;
   };
   reverse?: boolean;
+  coloredArea?: boolean;
 }
 
 export default function AnimatedSections({
   title,
   description,
   images,
-  reverse
+  reverse,
+  coloredArea
 }: SectionProps) {
   return (
      <div className={styles.containerWrapper}>
@@ -56,7 +58,8 @@ export default function AnimatedSections({
               width={50} 
               height={150}
             />
-            <span className={styles.colorsBackground} />
+
+            {coloredArea && <div className={styles.colorsBackground} />}
           </AnimatedOnScroll>
           <p>{description}</p>
         </div>

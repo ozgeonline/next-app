@@ -46,6 +46,7 @@
   justify-content: center;
   will-change: transform, opacity;
   transition: all 0.5s ease-out;
+  padding-bottom: 5rem;
 }
 
 .heroDefault {

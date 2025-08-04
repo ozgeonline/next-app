@@ -18,6 +18,7 @@
   height: 60vh;
   margin-bottom: 5vh;
   margin-top: 8vh;
+  opacity: 0;
 }
 
 .cards {
@@ -52,11 +53,24 @@
 }
 
 .cardTextLeft p {
-  max-width: 80%;
+  max-width: 90%;
+  font-size: .85rem;
+}
+
+.cardTextLeft h2 {
+  font-size: 1.3rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .cardTextLeft p { font-size: medium;}
+  .cardTextLeft h2 { 
+    font-size: 1.5rem; 
+    margin-bottom: .5rem;
+  }
 }
 
 .card:nth-child(1):hover {
-  filter: brightness(0.9);
+  filter: hue-rotate(-90deg);
   cursor: pointer;
 }
 
@@ -104,11 +118,7 @@
 }
 
 .sunWrapper {
-  position: absolute;
-  height: 70%;
-  width: 100%;
-  bottom: 0;
-  right: 0;
+  display: none;
 }
 
 .sun {
@@ -162,7 +172,7 @@
 }
 
 .card:hover img{
-  filter: brightness(0.5);
+  filter: brightness(0.3);
   cursor: pointer;
 }
 
@@ -172,22 +182,43 @@
   top: 0;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
-  padding: 2rem;
+  padding: 1rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .card .cardText { 
+    padding: 2rem; 
+    top: 10%;
+  }
 }
 
 .card:hover .cardText {
   opacity: 1;
   z-index: 10;
   animation: animateInBottom .5s ease-out forwards;
+  cursor: pointer;
 }
 
 .cardText h2 {
   padding-bottom: 1vh;
   font-size: medium;
+  font-size: 1.3rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .cardText h2 { 
+    font-size: 1.5rem; 
+    margin-bottom: .5rem;
+  }
 }
 
 .cardText p {
-  font-size: 1rem;
+  font-size: .85rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .cardText p { font-size: medium;}
+  
 }
 
 .cardText .learnMore {
@@ -237,12 +268,16 @@
   }
 
   .sunWrapper {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
     height: 50%;
     width: 100%;
   }
   .card:hover .sun{
-    bottom: 20%;
-    right: 10%;
+    bottom: 15%;
+    right: 5%;
   }
 
   .cardClick {

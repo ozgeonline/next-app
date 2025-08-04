@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import {items} from '@/components/ui/sections/animated_sections/sections-items';
+import {homePageitems} from "@/components/ui/sections/cards/card-items";
 import styles from './page.module.css';
 
 const HeroBanner = dynamic(() => import('@/components/ui/assets/heroBanner/HeroBanner'));
-const SlideSection = dynamic(() => import('@/components/ui/sections/slide/SlideSection'));
+const SlideSection = dynamic(() => import('@/components/ui/sections/slideSection/SlideSection'));
 const PositionedImage = dynamic(() => import('@/components/ui/sections/positioned_img/PositionedImage'));
 const CTA = dynamic(() => import('@/components/ui/sections/cta/CTA'));
 const CommunityInfo = dynamic(() => import('@/components/ui/sections/community_info/CommunityInfo'));
@@ -28,6 +29,7 @@ export default function Home() {
         introductionTitle="A Delicious Experience Awaits"
         introduction="Discover the flavors of the world, one cup at a time"
         reservationLink={true}
+        socialLocation={true}
       />
 
       <>
@@ -49,7 +51,16 @@ export default function Home() {
         />
 
         {/* Hover Cards Section */}
-        <CardsSection />
+        <CardsSection
+          infoTitle={homePageitems.infoCard.title}
+          infoDes={homePageitems.infoCard.description}
+          infoBtn={true}
+          imgBtn={true}
+          imgSrc={homePageitems.imgCard.images.src}
+          imgAlt={homePageitems.imgCard.images.alt}
+          imgTitle={homePageitems.imgCard.title}
+          imgDes={homePageitems.imgCard.description}
+        />
        
         {/***********  Animated Sections ***********/}
         <div style={{position: 'relative', width: '100%'}}>
@@ -63,6 +74,7 @@ export default function Home() {
                 description={sectionData.description}
                 images={sectionData.images}
                 reverse={sectionData.reverse}
+                coloredArea={true}
               />
             );
           })}

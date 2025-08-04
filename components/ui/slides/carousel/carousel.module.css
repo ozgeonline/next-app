@@ -1,0 +1,109 @@
+.textDot {
+  cursor: pointer;
+  margin: 0 8px;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.3s;
+}
+
+.activeText {
+  color: var(--text);
+  font-weight: 700;
+  border-bottom: 3px solid #fb5607;
+}
+
+.slider {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.itemWrapper {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.textWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .textWrapper {
+    padding: 2rem;
+  }
+  
+}
+
+.blurOverlay {
+  position: absolute;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+  height: 8rem;
+  background: linear-gradient(to top, var(--background) 50%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.viewAlllink {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.viewAllButton {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(90deg, #f9572a, #ffc905);
+  color: #fcfde8;
+  border: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: medium;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s;
+}
+
+@media screen and (min-width: 1024px) {
+  .viewAllButton {
+    margin-top: 5rem;
+    width: 30%;
+  }
+  
+}
+
+.viewAllButton:hover {
+  filter: brightness(1.2);
+}
+
+.dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  background: #fb5607;
+  cursor: pointer;
+}
+
+.opacity50 {
+  opacity: 0.5;
+}
+
+.opacity100 {
+  opacity: 1;
+}
+
+
+
