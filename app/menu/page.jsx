@@ -3,9 +3,6 @@ import Link from "next/link";
 import Carousel from "@/components/ui/slides/carousel/Carousel";
 import {menuSlides, menuLinks} from "./menu-items";
 import { menuPageitems } from "@/components/ui/sections/cards/card-items";
-import orderHand from "@/public/order-hand.png";
-import coffee from "@/public/cafe/coffee-noBG.png";
-import coffeeBox from "@/public/cafe/coffeebox-nobgtext.png";
 import styles from "./menu.module.css";
 import Image from "next/image";
 
@@ -82,8 +79,8 @@ export default function MenuPage() {
           <div className={styles.containerBadge}>
             <div className={styles.rightImageWrapper}>
               <Image
-                src={orderHand}
-                alt="image"
+                src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDMEbEBCnlPGFDafBuW154icVrsNKdbwvp82nJ"
+                alt="Order Hand"
                 width={0}
                 height={0}
                 sizes="100%"
@@ -91,7 +88,7 @@ export default function MenuPage() {
             </div>
              <div className={styles.leftImageWrapper}>
               <Image
-                src={coffeeBox}
+                src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDBs9bBdxNmQAqG8cge0hkoTSVZRJ3fPUHijlp"
                 alt="image"
                 width={0}
                 height={0}

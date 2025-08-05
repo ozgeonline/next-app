@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useTheme } from "@/components/providers/ThemeContext";
 import { useScroll } from "@/components/providers/navbar/ScrollingContext";
-import darkModeLogo from "@/public/logoDarkMode.svg";
-import lightModeLogo from "@/public/logoLightMode.svg";
 import styles from "./logo.module.css"
 export default function Logo() {
   const { theme } = useTheme();
@@ -15,10 +13,10 @@ export default function Logo() {
     <Image
       src={
         theme === "light" && !scrolling
-        ? "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFD5qlLs5SzaoETPuK7Vs6q0GQmrLHRbUWgyIld"
+        ? "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDBYWgDZxNmQAqG8cge0hkoTSVZRJ3fPUHijlp"
         : theme === "light" && scrolling 
-        ? "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDGn4ntKssNQ7uRj0YmrFpIa8zBM3JwK9SECbq" 
-        : "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFD5qlLs5SzaoETPuK7Vs6q0GQmrLHRbUWgyIld"
+        ? "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFD0ScouWaQFyYUIlefwhZsOdp3tLqKazo6cmbV"
+        : "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDBYWgDZxNmQAqG8cge0hkoTSVZRJ3fPUHijlp"
       }
       alt="cafe logo"
       className={styles.logo}
