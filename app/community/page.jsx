@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 // import mealIcon from '@/public/cafe/coffee.webp';
 // import communityIcon from '@/public/cafe/a.webp';
-import eventsIcon from '@/public/cafe/c.webp';
+// import eventsIcon from '@/public/cafe/c.webp';
 import styles from './page.module.css';
 import Link from 'next/link';
 
@@ -30,10 +30,10 @@ export default function CommunityPage() {
             <p>Find new friends & like-minded people</p>
           </li>
           <li>
-            <Image
+            {/* <Image
               src={eventsIcon}
               alt="A crowd of people at a cooking event"
-            />
+            /> */}
             <p>Participate in exclusive events</p>
           </li>
         </ul>
