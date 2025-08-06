@@ -41,6 +41,7 @@
   cursor: pointer;
   border-radius: 4px;
   object-fit: cover;
+  background: linear-gradient(90deg, #f9572a, #ffc905);
 }
 
 .imgWrapper:hover img {

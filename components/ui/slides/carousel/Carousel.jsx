@@ -91,7 +91,7 @@ function Carousel({
                 if (itemsData.title !== label) return null;
 
                 return (
-                  <Link key={itemsData.href} href={itemsData.href} className={styles.viewAlllink}>
+                  <Link key={itemsData.href} href={`menu/${itemsData.href}`} className={styles.viewAlllink}>
                     <button className={styles.viewAllButton}>
                       View All {itemsData.title}
                     </button>

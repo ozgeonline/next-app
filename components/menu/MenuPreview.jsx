@@ -1,7 +1,8 @@
 "use client";
 
-import styles from "./menu-review.module.css";
+import { useState } from "react";
 import Image from "next/image";
+import styles from "./menu-review.module.css";
 
 export default function MenuPreview({
   src,
@@ -10,16 +11,21 @@ export default function MenuPreview({
   price,
   isNew
 }) {
+  const [imgSrc, setImgSrc] = useState(src);
+
   return (
     <div className={styles.previewWrapper}>
       <div className={styles.imgWrapper}>
         <Image
-          src={src}
+          src={imgSrc}
           alt={`${title} - Menu Items `}
           sizes="100%"
           fill
           width={0}
           height={0}
+          placeholder="blur"
+          blurDataURL="/logo.png"
+          onError={() => setImgSrc("/logo.png")}
         />    
       </div>
       <div className={styles.info}>

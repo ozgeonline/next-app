@@ -1,0 +1,106 @@
+.rightImageWrapper,
+.leftImageWrapper {
+  position: absolute;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.rightImageWrapper {
+  right: -2rem;
+  top: -1rem;
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 1024px) {
+  .rightImageWrapper { top: 0; }
+}
+
+.rightImageWrapper img {
+  transform: rotate(-60deg);
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+@media screen and (min-width: 1024px) {
+  .rightImageWrapper img {  width: 40%; }
+}
+
+.leftImageWrapper {
+  left: -2rem;
+  bottom: 0;
+}
+
+.leftImageWrapper img {
+  transform: rotate(-30deg);
+  height: 100%;
+  width: 80%;
+  object-fit: contain;
+}
+
+@media screen and (min-width: 1024px) {
+  .leftImageWrapper img {  
+    width: 30%;
+    transform: rotate(-60deg);
+  }
+}
+
+.reservation {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-30%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6rem;
+  border: 1px solid rgb(255, 213, 167);
+  width: max-content;
+  background: rgba(255, 213, 167, 0.1);
+  transition: backdrop-filter 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+@media screen and (min-width: 1024px) {
+  .reservation {
+    margin-top: 4rem;
+  }
+  
+}
+
+.reservation a {
+  text-decoration: none;
+  color: #f4f6f7;
+  width: 100%;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.reservation:hover {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 213, 167, 0.2);
+}
+
+.blurOverlayTop,
+.blurOverlayBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  z-index: 10;
+  pointer-events: none;
+  mask-image: linear-gradient(to top, transparent,#dee2e6 );
+  -webkit-mask-image: linear-gradient(to top,transparent, #dee2e6);
+}
+
+.blurOverlayTop {
+  top: -2.9rem;
+  rotate: 180deg;
+  background: linear-gradient(90deg, #ffc905, #f9572a);
+}
+
+.blurOverlayBottom {
+  bottom: -2.9rem;
+  background: linear-gradient(90deg, #f9572a, #ffc905);
+}

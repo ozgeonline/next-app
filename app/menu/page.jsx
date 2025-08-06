@@ -1,15 +1,13 @@
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import Carousel from "@/components/ui/slides/carousel/Carousel";
 import {menuSlides, menuLinks} from "./menu-items";
 import { menuPageitems } from "@/components/ui/sections/cards/card-items";
 import styles from "./menu.module.css";
-import Image from "next/image";
 
 const HeroBanner = dynamic(() => import('@/components/ui/assets/heroBanner/HeroBanner'));
 const CardsSection = dynamic(() => import('@/components/ui/sections/cards/CardsSection'));
 const MenuPreview = dynamic(() => import('@/components/menu/MenuPreview'));
-const Footer = dynamic(() => import('@/components/ui/sections/footer/Footer'));
+const ReservationBanner = dynamic(() => import('@/components/ui/assets/reservationBanner/ReservationBanner'));
 
 export default function MenuPage() {
   return (
@@ -77,44 +75,10 @@ export default function MenuPage() {
 
         <div className={styles.contactBadgeWrapper}>
           <div className={styles.containerBadge}>
-            <div className={styles.rightImageWrapper}>
-              <Image
-                src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDMEbEBCnlPGFDafBuW154icVrsNKdbwvp82nJ"
-                alt="Order Hand"
-                width={0}
-                height={0}
-                sizes="100%"
-              />
-            </div>
-             <div className={styles.leftImageWrapper}>
-              <Image
-                src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDBs9bBdxNmQAqG8cge0hkoTSVZRJ3fPUHijlp"
-                alt="image"
-                width={0}
-                height={0}
-                sizes="100%"
-              />
-            </div>
-            <h2>for a Wonderful Experience</h2>
-            <div className={styles.reservation}>
-              <Link href="/reservation">
-                Make Reservation 
-              </Link>
-            </div>
-            <div className={styles.blurOverlayTop}/>
-            <div className={styles.blurOverlayBottom}/>
+            <ReservationBanner />
           </div>
         </div>
       </main>
-
-      {/* for fixed footer */}
-      <div style={{height: '100vh', zIndex: '-500'}} />
-    </div>
-      
-    <div className={styles.footerWrapper}>
-      <div className={styles.footer}>
-        <Footer />
-      </div>
     </div>
     </>
   )

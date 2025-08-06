@@ -14,7 +14,6 @@ const CommunityInfo = dynamic(() => import('@/components/ui/sections/community_i
 const LoopSlideSection = dynamic(() => import('@/components/ui/sections/scroll_trigger_loop_slides/LoopSlideSection'));
 const CardsSection = dynamic(() => import('@/components/ui/sections/cards/CardsSection'));
 const AnimatedSections = dynamic(() => import('@/components/ui/sections/animated_sections/AnimatedSections'));
-const Footer = dynamic(() => import('@/components/ui/sections/footer/Footer'));
 
 export default function Home() {
   const [isLoopSlideVisible, setIsLoopSlideVisible] = useState(false);
@@ -81,13 +80,6 @@ export default function Home() {
         </div>
       </main>
       </>
-      {/* for fixed footer */}
-      <div style={{height: '100vh', zIndex: '-500'}} />
-    </div>
-    <div className={styles.footerWrapper}>
-      <div className={styles.footer}>
-        <Footer />
-      </div>
     </div>
     </>
   );

@@ -32,7 +32,7 @@ export const menuSlides = [
 export const menuLinks = [
   { 
     desserts: {
-      href: 'menu/desserts',
+      href: 'desserts',
       title : "Desserts",
        menuItems: [
         {
@@ -110,7 +110,7 @@ export const menuLinks = [
   },
   { 
     drinks: {
-      href: 'menu/drinks',
+      href: 'drinks',
       title: "Drinks",
       menuItems: [
         {
@@ -188,7 +188,7 @@ export const menuLinks = [
   },
   { 
     meals: {
-      href: 'menu/meals',
+      href: 'meals',
       title: "Meals",
       menuItems: [
         {
@@ -266,7 +266,7 @@ export const menuLinks = [
   },
   { 
     salads: {
-      href: 'menu/salads',
+      href: 'salads',
       title: "Salads",
       menuItems: [
         {
