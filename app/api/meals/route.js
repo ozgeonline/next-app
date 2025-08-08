@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import connect from "@/lib/db";
-import Meal from "@/app/meals/models/Meal";
+import Meal from "@/app/models/Meal";
 import { seedDatabase } from "@/seed";
 
 

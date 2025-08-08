@@ -11,7 +11,7 @@ export default function ShareMealPage() {
   //console.log("state:", state);
   
   return (
-    <>
+    <div className={styles.container}>
       <header className={styles.header}>
         <h1>
           Share your <span className={styles.highlight}>favorite meal</span>
@@ -54,7 +54,7 @@ export default function ShareMealPage() {
           </p>
         </form>
       </main>
-    </>
+    </div>
   );
 }
 

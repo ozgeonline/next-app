@@ -1,0 +1,18 @@
+.containerWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  opacity: 1;
+  z-index: 100;
+  background: var(--background);
+  position: relative;
+}
+
+.containerTopNavbar {
+  background: linear-gradient(90deg, var(--international-orange-500), var(--science-blue-500));
+  height: 4rem;
+}
+
+[data-theme="dark"] .containerTopNavbar {
+  background: linear-gradient(90deg, var(--international-orange-500), var( --shark-50));
+}

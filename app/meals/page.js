@@ -28,7 +28,7 @@ export default async function MealsPage() {
   //meals.map(meal => console.log(meal));
 
   return (
-    <>
+    <div className={styles.container}>
       <header className={styles.header}>
         <h1>Delicious meals, created 
           <span className={styles.highlight}> by you</span>
@@ -53,6 +53,6 @@ export default async function MealsPage() {
           )}
         </Suspense>
       </main>
-    </>
+    </div>
   )
 }

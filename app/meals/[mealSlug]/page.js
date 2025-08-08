@@ -1,6 +1,6 @@
 import connect from "@/lib/db";
 import { notFound } from "next/navigation";
-import Meal from "@/app/meals/models/Meal";
+import Meal from "@/app/models/Meal";
 import Image from "next/image";
 import styles from "./page.module.css";
 

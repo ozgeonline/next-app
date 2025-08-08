@@ -17,7 +17,7 @@
     "incremental": true,
     "module": "esnext",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -31,8 +31,15 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "app/api/uploadthing/core.ts"  ],
+    "**/*.tsx",
+    "app/api/uploadthing/core.ts", 
+    "lib/db.js", 
+    "app/api/auth/signup/route.ts", 
+    "app/api/auth/login/route.ts", 
+    "app/models/User.js",
+    "env.d.ts",
+    "env.local.d.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

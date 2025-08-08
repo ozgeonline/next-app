@@ -8,12 +8,12 @@
   position: relative;
 }
 
-.containerTop {
+.containerTopNavbar {
   background: linear-gradient(90deg, var(--international-orange-500), var(--science-blue-500));
   height: 4rem;
 }
 
-[data-theme="dark"] .containerTop {
+[data-theme="dark"] .containerTopNavbar {
   background: linear-gradient(90deg, var(--international-orange-500), var( --shark-50));
 }
 

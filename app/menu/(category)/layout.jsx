@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
   return (
     <>
     <div ref={scrollRef} className={styles.categoryWrapper}>
-      <div className={styles.containerTop} />
+      <div className={styles.containerTopNavbar} />
         <div className={styles.linkWrapper}>
           {menuLinks.map((item, index) => {
           const itemsData = item.desserts || item.drinks  || item.meals || item.salads;

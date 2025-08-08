@@ -1,7 +1,7 @@
 import connect from "@/lib/db";
 import MealItem from "./meal-item";
 import styles from "./meals-grid.module.css";
-import Meal from "@/app/meals/models/Meal";
+import Meal from "@/app/models/Meal";
 
 export default async function MealsGrid() {
   await connect();
