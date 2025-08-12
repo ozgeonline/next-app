@@ -1,0 +1,141 @@
+'use client';
+
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import styles from "./auth-form.module.css";
+import Link from 'next/link';
+
+interface FormData {
+  formType: string;
+  fetchApiPath: string;
+  nonTokenPath?: string;
+  referencePath: string;
+}
+export default function AuthForm({
+  formType,
+  fetchApiPath,
+  nonTokenPath,
+  referencePath,
+}: FormData) {
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  // const [isLoading, setIsLoading] = useState(true);
+  const [isTouched, setIsTouched] = useState<boolean>(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      router.push(nonTokenPath);
+    }
+  }, []);
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const res = await fetch(`/api/auth/${fetchApiPath}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  });
+
+  const data = await res.json();
+
+  //console.log("API res:", data);
+
+  if (res.ok) {
+    if (data.token) {
+      //console.log("localStorage token:", data.token);
+      localStorage.setItem("token", data.token);
+      router.push(nonTokenPath);
+    } else {
+      console.error("No token received from API");
+      alert("Login failed: No token received");
+    }
+  } else {
+    alert(data.error || "Login failed");
+  }
+
+  setIsTouched(false);
+};
+
+  const validateEmail = useCallback((email: string): boolean => {
+    const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }, []);
+  
+  const emailIsValid = useMemo(() => validateEmail(formData.email), [formData.email, validateEmail]);
+  // if (isLoading) return null; 
+
+  return (
+    <div className={styles.formWrapper}>
+      {/* <div className={styles.containerTopNavbar} /> */}
+      <h2>{formType}</h2>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.formGroup}>
+          <label htmlFor="name">Name</label>
+          <input
+            name="name"
+            type="text"
+            placeholder="Name"
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            onBlur={() => setIsTouched(true)}
+            required
+            className={`
+              ${formData.name ? `${styles.validValueColor}` 
+                : !formData.name && isTouched ? `${styles.invalidValueColor}` 
+                : `${styles.defaultValueColor}`
+              }
+            `}
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="name">Email</label>
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onBlur={() => setIsTouched(true)}
+            required
+            className={`
+              ${(formData.name && emailIsValid) ? `${styles.validValueColor}` 
+                : (!formData.name || !emailIsValid) && isTouched ? `${styles.invalidValueColor}` 
+                : `${styles.defaultValueColor}`
+              }
+            `}
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="name">Password</label>
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            required
+            className={`
+              ${formData.name ? `${styles.validValueColor}` 
+                : !formData.name && isTouched ? `${styles.invalidValueColor}` 
+                : `${styles.defaultValueColor}`
+              }
+            `}
+          />
+        </div>
+        <button
+          type="submit"
+          className={styles.submitButton}
+        >
+          {formType}
+        </button>
+        <h3>Already have an account?</h3>
+        <Link
+          href={referencePath}
+          type="submit"
+          className={styles.referencePath}
+        >
+          {referencePath}
+        </Link>
+      </form>
+    </div>
+  );
+}

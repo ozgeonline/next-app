@@ -1,10 +1,14 @@
 .containerWrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  min-height: 100vh;
   opacity: 1;
   z-index: 100;
   background: var(--background);
+  color: var(--text);
   position: relative;
 }
 
