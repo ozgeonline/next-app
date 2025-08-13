@@ -4,8 +4,7 @@ export default function LoginPage() {
   return (
     <AuthForm 
       formType="login" 
-      fetchApiPath="login" 
-      nonTokenPath="/signup" 
+      fetchApiPath="login"
       referencePath='signup'
     />
   );

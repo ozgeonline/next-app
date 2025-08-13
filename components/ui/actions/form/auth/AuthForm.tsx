@@ -23,11 +23,21 @@ export default function AuthForm({
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      router.push(nonTokenPath);
-    }
-  }, []);
+      async function checkAuth() {
+        try {
+          const res = await fetch("/api/auth/user", { credentials: "include" });
+          if (res.ok) {
+            const data = await res.json();
+            if (data?.user && nonTokenPath) {
+              router.push(nonTokenPath);
+            }
+          }
+        } catch (err) {
+          console.error("Auth check error:", err);
+        }
+      }
+      checkAuth();
+    }, [nonTokenPath, router]);
 
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -35,6 +45,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   const res = await fetch(`/api/auth/${fetchApiPath}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify(formData),
   });
 
@@ -43,18 +54,13 @@ const handleSubmit = async (e: React.FormEvent) => {
   //console.log("API res:", data);
 
   if (res.ok) {
-    if (data.token) {
-      //console.log("localStorage token:", data.token);
-      localStorage.setItem("token", data.token);
-      router.push(nonTokenPath);
+      router.push(nonTokenPath || "/reservation");
     } else {
-      console.error("No token received from API");
-      alert("Login failed: No token received");
-    }
+  if (formType === "signup" && data.error?.toLowerCase().includes("already in use")) {
+    router.push("/login");
   } else {
     alert(data.error || "Login failed");
-  }
-
+  }}
   setIsTouched(false);
 };
 
