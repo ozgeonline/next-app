@@ -11,12 +11,12 @@ export async function POST(req: Request) {
 
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+      return NextResponse.json({ error: "Invalid credentials-login user" }, { status: 401 });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+      return NextResponse.json({ error: "Invalid credentials-login password" }, { status: 401 });
     }
 
     const token = jwt.sign(

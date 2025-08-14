@@ -18,7 +18,7 @@ export async function GET(req: Request) {
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string; name: string; email: string };
     } catch (error) {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+      return NextResponse.json({ error: "Invalid token-user middleware" }, { status: 401 });
     }
 
     const user = await User.findById(decoded.userId).select("name email");

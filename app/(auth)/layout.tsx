@@ -1,41 +1,16 @@
 "use client";
 
 import { useAuth } from "@/hooks/useAuth";
+import Link from "next/link";
 import styles from "./auth.module.css";
 
 export default function AuthLayout({ children }) {
   const { user, isAuthenticated, loading } = useAuth();
-  //const [name, setName] = useState("");
-  //const [hasToken, setHasToken] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const res = await fetch("/api/auth/user", {
-  //         credentials: "include",
-  //       });
-  //       const data = await res.json();
-  //       if (res.ok) {
-  //         setName(data.user.name || "Guest");
-  //         setHasToken(true);
-  //       } else {
-  //         console.log("No valid user data:", data.error);
-  //         setName("Guest");
-  //         setHasToken(false);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //       setName("Guest");
-  //       setHasToken(false);
-  //     }
-  //   };
-  //   fetchUserData();
-  // }, []);
-
-    if (loading) {
+  if (loading) {
     return (
-      <div className={styles.containerWrapper}>
-        <div>Loading...</div>
+      <div className={styles.containerWrapper + " " + styles.darkGradient + " " + styles.lightGradient}>
+        <h3 className={styles.loading}>Loading...</h3>
       </div>
     );
   }
@@ -58,24 +33,43 @@ export default function AuthLayout({ children }) {
   };
 
   return (
-    <div className={styles.containerWrapper}>
+    <div className={styles.containerWrapper + " " + styles.darkGradient + " " + styles.lightGradient}>
       <div className={styles.card}>
-        <div className={styles.userCard}>
+        <div className={styles.userCard + " " + styles.darkGradient + " " + styles.lightGradient}>
           <div className={styles.top}>
             <div className={styles.name}>
               Hello, {user?.name || "Guest"}
             </div>
           </div>
-          <div className={styles.bottom}>
-            <button type="button" className={styles.button} onClick={handleSignout}>
-              sign out
-            </button>
-          </div>
+
+          {isAuthenticated ? (
+            <div className={styles.bottom}>
+              <button
+                type="button"
+                className={styles.button + " " + styles.darkGradient + " " + styles.lightGradient}
+                onClick={handleSignout}
+              >
+                logout
+              </button>
+              <Link
+                href="/reservation"
+                className={styles.button + " " + styles.darkGradient + " " + styles.lightGradient}
+              >
+                my reservations
+              </Link>
+            </div>
+          ) : (
+            <div className={styles.bottom}>
+              <span className={styles.forReservation}>Log in to make a reservation</span>
+            </div>
+          )}
         </div>
-        <div className={styles.avatar}>
+        
+        <div className={styles.avatar + "  " + styles.darkGradient + " " + styles.lightGradient}>
           {user?.name.slice(0, 2)}
         </div>
       </div>
+
       {!isAuthenticated && (
         <div className={styles.card}>
           {children}

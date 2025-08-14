@@ -4,31 +4,31 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {   
-      await connect();
-      const { email, password, name } = await req.json();
-    
-      const existingUser = await User.findOne({ email: email.toLowerCase() });
-      if (existingUser) {
-        return NextResponse.json({ error: "email already in use" }, { status: 400 });
+    await connect();
+    const { email, password, name } = await req.json();
+  
+    const existingUser = await User.findOne({ email: email.toLowerCase() });
+    if (existingUser) {
+      return NextResponse.json({ error: "email already in use" }, { status: 400 });
+    }
+  
+    const newUser = await User.create({
+      email: email.toLowerCase(),
+      password,
+      name,
+    });
+  
+    return NextResponse.json({
+      message: "User registered successfully",
+      user: { 
+        id: newUser._id, 
+        email: newUser.email, 
+        name: newUser.name
       }
-    
-      const newUser = await User.create({
-        email: email.toLowerCase(),
-        password,
-        name,
-      });
-    
-      return NextResponse.json({
-        message: "User registered successfully",
-        user: { 
-          id: newUser._id, 
-          email: newUser.email, 
-          name: newUser.name
-        }
-      },
-      { status: 201 });
+    },
+    { status: 201 });
   } catch (error) {
       //console.error('Login error:', error);
-      return NextResponse.json({ error: 'Internal server error' }, { status: 500 }); 
+      return NextResponse.json({ error: 'Internal server error-signup' }, { status: 500 }); 
   }
 }
