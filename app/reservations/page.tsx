@@ -141,7 +141,7 @@ export default function ReservationPage() {
 
       const url = editReservationId
         ? `/api/auth/reservations/${editReservationId}`
-        : "/api/auth/reservation";
+        : "/api/auth/reservations";
       const method = editReservationId ? "PUT" : "POST";
 
       const res = await fetch(url, {
