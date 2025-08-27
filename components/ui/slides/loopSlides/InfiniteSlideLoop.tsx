@@ -6,15 +6,15 @@ import styles from "./slider.module.css";
 import Image from "next/image";
 
 interface InfiniteSlideLoopProps {
-  images: any[];
+  images: Array<{ image: React.ReactNode | string; alt?: string; title?: string }>;
   className?: string;
   slideTitleStyles?: string;
 }
 export default function InfiniteSlideLoop({images, className, slideTitleStyles}: InfiniteSlideLoopProps) {
-  const sliderRef = useRef(null);
-  const sliderContainerRef = useRef(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const sliderContainerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
   const { sliderWidth, itemsPerView } = BreakpointSettings(sliderRef);
-  const animationRef = useRef(null);
   const [movedItems, setMovedItems] = useState(0);
 
   // useEffect(() => {
@@ -36,12 +36,17 @@ export default function InfiniteSlideLoop({images, className, slideTitleStyles}:
 
     const container = sliderContainerRef.current;
     const itemWidth = sliderWidth / itemsPerView;
-    const currentTransform = parseFloat(
-      getComputedStyle(container).transform.replace(/[^0-9-,.]/g, "").split(",")[4] || "0"
-    );
-    //console.log("currentTransform:", currentTransform);
 
-    let newTransform = currentTransform - speed;
+    const computed = getComputedStyle(container).transform;
+    const parsed =
+      computed === "none"
+        ? 0
+        : parseFloat(
+            (computed.match(/matrix.*\((.+)\)/)?.[1]?.split(",")[4] ?? "0").trim()
+          );
+    //console.log("parsed:", parsed);
+
+    let newTransform = parsed - speed;
     container.style.transform = `translateX(${newTransform}px)`;
 
     if (Math.abs(newTransform) >= itemWidth) {
@@ -52,7 +57,7 @@ export default function InfiniteSlideLoop({images, className, slideTitleStyles}:
           newTransform = 0;
           setMovedItems(0);
         } else {
-          newTransform = currentTransform + itemWidth - speed;
+              newTransform = newTransform + itemWidth;
           setMovedItems((prev) => prev + 1);
         }
         container.style.transform = `translateX(${newTransform}px)`;
@@ -98,8 +103,8 @@ export default function InfiniteSlideLoop({images, className, slideTitleStyles}:
                     item.image
                   ) : (
                     <Image
-                      src={item.image}
-                      alt={item.alt}
+                      src={item.image as string}
+                      alt={item.alt ?? ""}
                       width={0}
                       height={0}
                       sizes="100%"

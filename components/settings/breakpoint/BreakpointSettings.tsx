@@ -12,7 +12,7 @@ const breakpointConditions: Record<Breakpoint, (width: number) => boolean> = {
   xl: (width) => width >= 1280,
 };
 
-export const BreakpointSettings = (wrapperRef: React.RefObject<HTMLDivElement>) => {
+export const BreakpointSettings = (wrapperRef: React.RefObject<HTMLDivElement| null>) => {
   const [sliderWidth, setSliderWidth] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(2);
   const isClient = typeof window !== "undefined";

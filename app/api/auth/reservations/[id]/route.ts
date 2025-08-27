@@ -1,10 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import connect from "@/lib/db";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import Reservation from "@/app/models/Reservation";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(
+  req: NextRequest,
+ context: { params: Promise<{ id: string }> }
+) {
   try {
     await connect();
 
@@ -22,7 +25,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
       return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
 
-    const { id } = params; //reservation ID
+   const { id } = await context.params;//reservation ID
     const body = await req.json();
 
     //reservation & user_id relationship

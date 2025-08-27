@@ -31,36 +31,38 @@ export default function AnimatedSections({
           ${reverse && styles.reverseDefinition} 
           ${reverse && styles.reverseRowDefinition} 
           `}>
-          <AnimatedOnScroll
-            animationClass={styles.animateinView}
-            className={`
-              ${styles.definitionImage} 
-              ${styles.imageVisible}
-            `}
-          >
-            <Image
-              className={styles.imageFirst}
-              src={images.src1}
-              alt={images.alt}
-              loading="eager"
-              quality={100}
-              sizes="100%"
-              width={50} 
-              height={150}
-            />
-            <Image
-              className={styles.imageSecond} 
-              src={images.src2}
-              alt={images.alt}
-              loading="eager" 
-              quality={100} 
-              sizes='100%' 
-              width={50} 
-              height={150}
-            />
+            {images && (
+              <AnimatedOnScroll
+                animationClass={styles.animateinView}
+                className={`
+                  ${styles.definitionImage} 
+                  ${styles.imageVisible}
+                `}
+              >
+                <Image
+                  className={styles.imageFirst}
+                  src={images.src1}
+                  alt={images.alt}
+                  loading="eager"
+                  quality={100}
+                  sizes="100%"
+                  width={50} 
+                  height={150}
+                />
+                <Image
+                  className={styles.imageSecond} 
+                  src={images.src2}
+                  alt={images.alt}
+                  loading="eager" 
+                  quality={100} 
+                  sizes='100%' 
+                  width={50} 
+                  height={150}
+                />
 
-            {coloredArea && <div className={styles.colorsBackground} />}
-          </AnimatedOnScroll>
+                {coloredArea && <div className={styles.colorsBackground} />}
+              </AnimatedOnScroll>
+            )}
           <p>{description}</p>
         </div>
       </div>

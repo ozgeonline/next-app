@@ -51,8 +51,8 @@ export default function CardsSection({
         </div>
         <div className={styles.card}>
           <Image 
-            src={imgSrc}
-            alt={imgAlt}
+            src={imgSrc!}
+            alt={imgAlt!}
             fill
             sizes='100%'
             width={0}
