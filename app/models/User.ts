@@ -18,13 +18,17 @@ const userSchema =new Schema<User>(
 
 userSchema.pre("save", async function (next) {
   const user = this as User;
+
+  //only works when the password is created or updated
   if (!user.isModified("password")) return next();
 
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
-  
-  next();
-  throw new Error('something went wrong--save');
+  try {
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+    next();
+  } catch (error: any) {
+    next(error);
+  }
 });
 
 const User : Model<User> = mongoose.models.User || mongoose.model<User>("User", userSchema);

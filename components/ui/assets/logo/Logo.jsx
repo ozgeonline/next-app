@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useTheme } from "@/components/providers/ThemeContext";
+import { useTheme } from "@/components/providers/theme/ThemeContext";
 import { useScroll } from "@/components/providers/navbar/ScrollingContext";
 import styles from "./logo.module.css"
 export default function Logo() {

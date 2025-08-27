@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@/components/providers/ThemeContext";
+import { useTheme } from "@/components/providers/theme/ThemeContext";
 // import { useScroll } from "@/components/providers/ScrollingContext";
 import { CiStar } from "react-icons/ci";
 import { IoMdMoon,IoIosCloudy } from "react-icons/io";

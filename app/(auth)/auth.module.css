@@ -17,7 +17,46 @@
 }
 
 [data-theme="light"] .lightGradient {
-  background: linear-gradient(90deg, var(--science-blue-500), var( --international-orange-600),var(--science-blue-500));
+ background: 
+  linear-gradient(46deg, 
+    rgba(18, 18, 18, 0.01) 0%, 
+    rgba(18, 18, 18, 0.01) 50%,
+    rgba(10, 10, 10, 0.01) 50%, 
+    rgba(10, 10, 10, 0.01) 100%),
+  linear-gradient(338deg, 
+    rgba(232, 232, 232, 0.03) 0%, 
+    rgba(232, 232, 232, 0.03) 50%,
+    rgba(174, 174, 174, 0.03) 50%, 
+    rgba(174, 174, 174, 0.03) 100%),
+  linear-gradient(26deg, 
+    rgba(180, 180, 180, 0.02) 0%, 
+    rgba(180, 180, 180, 0.02) 50%,
+    rgba(191, 191, 191, 0.02) 50%, 
+    rgba(191, 191, 191, 0.02) 100%),
+  linear-gradient(129deg, 
+    rgba(52, 52, 52, 0.03) 0%, 
+    rgba(52, 52, 52, 0.03) 50%,
+    rgba(188, 188, 188, 0.03) 50%, 
+    rgba(188, 188, 188, 0.03) 100%),
+  linear-gradient(86deg, 
+    rgba(234, 234, 234, 0.03) 0%, 
+    rgba(234, 234, 234, 0.03) 50%,
+    rgba(100, 100, 100, 0.03) 50%, 
+    rgba(100, 100, 100, 0.03) 100%),
+  linear-gradient(73deg, 
+    rgba(203, 203, 203, 0.02) 0%, 
+    rgba(203, 203, 203, 0.02) 50%,
+    rgba(24, 24, 24, 0.02) 50%, 
+    rgba(24, 24, 24, 0.02) 100%),
+  linear-gradient(90deg, rgb(237, 46, 8),rgb(2255, 239, 0));
+}
+
+[data-theme="light"] .containerWrapper.gradientBackground {
+  background:  linear-gradient(90deg, rgb(237, 46, 8),rgb(2255, 239, 0));
+}
+
+[data-theme="dark"] .containerWrapper.gradientBackground {
+  background:  linear-gradient(90deg, var(--science-blue-500),var( --shark-50));
 }
 
 .containerWrapper .loading {
@@ -53,6 +92,7 @@
 
 .userCard {
   background: rgba(255, 255, 255, 0.1);
+  color: #f4f4f4;
   border-radius: 1rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
@@ -88,21 +128,20 @@
 }
 
 .userCard .top .name {
-  color: #ffffc2;
   text-transform: capitalize;
   top: 25%;
   position: absolute;
 }
 
 .userCard .bottom .button {
-  color:#ffffc2;
   border: none;
   border-radius: .5rem;
   text-transform: lowercase;
   padding: 0.7rem 4em;
   font-size: medium;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.1s ease;
+  color: #f4f4f4;
 }
 
 .userCard .bottom a.button {
@@ -110,14 +149,14 @@
 }
 
 .userCard .bottom .forReservation {
-  color: #ffffc2;
+  font-style: oblique;
 }
 
 [data-theme="dark"] .userCard .bottom .button:hover {
   filter: hue-rotate(90deg)  saturate(2);
 }
 [data-theme="light"] .userCard .bottom .button:hover {
-  filter: saturate(2.5);
+  filter: brightness(1.2);
 }
 
 @media screen and (min-width: 1024px) {
@@ -137,7 +176,7 @@
   width: 7rem;
   height: 7rem;
   border-radius: 50%;
-  color: #ffffc2;
+  color: #f4f4f4;
   text-transform: uppercase;
   font-size: 2em;
   overflow: hidden;

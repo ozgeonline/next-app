@@ -1,0 +1,167 @@
+.containerWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  opacity: 1;
+  z-index: 100;
+  color: var(--shark-900);
+  padding-bottom: 5rem;
+  padding-top: 4rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .containerWrapper {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .containerWrapper {
+    padding-top: 0;
+  }
+  
+}
+
+[data-theme="dark"] .containerWrapper,
+.loading  {
+  background: linear-gradient(90deg,  var(--shark-50), var(--science-blue-500), var( --shark-50));
+}
+
+[data-theme="light"] .containerWrapper,
+.loading{
+   background: 
+  linear-gradient(46deg, 
+    rgba(18, 18, 18, 0.01) 0%, 
+    rgba(18, 18, 18, 0.01) 50%,
+    rgba(10, 10, 10, 0.01) 50%, 
+    rgba(10, 10, 10, 0.01) 100%),
+  linear-gradient(338deg, 
+    rgba(232, 232, 232, 0.03) 0%, 
+    rgba(232, 232, 232, 0.03) 50%,
+    rgba(174, 174, 174, 0.03) 50%, 
+    rgba(174, 174, 174, 0.03) 100%),
+  linear-gradient(26deg, 
+    rgba(180, 180, 180, 0.02) 0%, 
+    rgba(180, 180, 180, 0.02) 50%,
+    rgba(191, 191, 191, 0.02) 50%, 
+    rgba(191, 191, 191, 0.02) 100%),
+  linear-gradient(129deg, 
+    rgba(52, 52, 52, 0.03) 0%, 
+    rgba(52, 52, 52, 0.03) 50%,
+    rgba(188, 188, 188, 0.03) 50%, 
+    rgba(188, 188, 188, 0.03) 100%),
+  linear-gradient(86deg, 
+    rgba(234, 234, 234, 0.03) 0%, 
+    rgba(234, 234, 234, 0.03) 50%,
+    rgba(100, 100, 100, 0.03) 50%, 
+    rgba(100, 100, 100, 0.03) 100%),
+  linear-gradient(73deg, 
+    rgba(203, 203, 203, 0.02) 0%, 
+    rgba(203, 203, 203, 0.02) 50%,
+    rgba(24, 24, 24, 0.02) 50%, 
+    rgba(24, 24, 24, 0.02) 100%),
+  linear-gradient(90deg, rgb(237, 46, 8),rgb(2255, 239, 0));
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffc2;
+  height: 100vh;
+  width: 100%;
+  z-index: 10;
+  position: relative;
+
+}
+
+.formSection, .infoSection {
+  flex: 1;
+  color: #f4f4f4;
+  padding: 1.5rem;
+  margin: 1rem;
+  border-radius: 8px;
+  /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); */
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  width: 70%;
+}
+
+@media screen and (min-width: 768px) {
+  .formSection, .infoSection {
+    margin: 3rem;
+  }
+  
+}
+
+@media screen and (min-width: 1280px) {
+  .formSection, .infoSection {
+    margin: 6rem;
+  }
+  
+}
+
+.formSection h2,
+.infoSection h2 {
+  margin-bottom: 1rem;
+}
+
+.formSection .error {
+  color: var(--error);
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+}
+
+.input, .textarea {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.input:focus, .textarea:focus {
+  outline: none;
+}
+
+.textarea {
+  resize: none;
+}
+
+.button {
+  padding: 0.7rem;
+  border: none;
+  background: var(--science-blue-800);
+  color: var(--shark-50);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  background: var(--shark-200);
+  color: var(--shark-900);
+}
+
+.reservationCard {
+  background: var(--background-low-opacity);
+  padding: 2rem;
+  border-radius: 6px;
+}
+
+.reservationCard p {
+  margin: 0.5rem 0;
+}

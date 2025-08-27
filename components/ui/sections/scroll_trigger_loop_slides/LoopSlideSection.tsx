@@ -1,4 +1,4 @@
-import ScrollToSection from "@/components/providers/ScrollToSection";
+import ScrollToSection from "@/components/providers/trigger-scroll/ScrollToSection";
 import AnimatedOnScroll from "@/components/providers/animation/AnimatedOnScroll";
 import InfiniteSlideLoop from "../../slides/loopSlides/InfiniteSlideLoop";
 import { infoImages } from "../../slides/slideshow-items";

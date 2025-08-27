@@ -1,11 +1,11 @@
-import AuthForm from '@/components/ui/actions/form/auth/AuthForm';
-
+import AuthForm from "@/components/ui/actions/form/auth/AuthForm";
 export default function LoginPage() {
   return (
-    <AuthForm 
-      formType="login" 
+    <AuthForm
+      formType="login"
       fetchApiPath="login"
-      referencePath='signup'
+      referencePath="signup"
+      nonTokenPath="/profile"
     />
   );
 }

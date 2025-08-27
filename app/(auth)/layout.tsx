@@ -1,41 +1,70 @@
 "use client";
 
-import { useAuth } from "@/hooks/useAuth";
+import { ReactNode, useEffect } from 'react';
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/components/providers/auth/AuthProvider";
 import styles from "./auth.module.css";
 
-export default function AuthLayout({ children }) {
-  const { user, isAuthenticated, loading } = useAuth();
+export default function AuthLayout({ children }: { children: ReactNode }) {
+  const { user, isAuthenticated, loading, setIsLogout } = useAuth();
+  const pathname = usePathname();
+  const router = useRouter();
+  // console.log("AuthLayout state:", {
+  //   user,
+  //   isAuthenticated,
+  //   loading,
+  //   pathname
+  // });
 
-  if (loading) {
+// Redirect to /profile if auth
+  useEffect(() => {
+    if (loading) return;
+    if (isAuthenticated && (pathname === "/login" || pathname === "/signup")) {
+      //console.log("AuthLayout: auth user, redirecting to /profile");
+      router.push("/profile");
+    }
+  }, [isAuthenticated, pathname, router, loading]);
+
+  const handleSignout = async () => {
+    const event = new CustomEvent("authChange", { detail: { isLogout: true }});
+    
+    try {
+      //console.log("AuthLayout: sending POST to /api/auth/logout");
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      if (res.ok) {
+        //console.log("AuthLayout: logout successful, redirecting to /login");
+        setIsLogout(true);
+        window.dispatchEvent(event);
+        router.push("/profile");
+      } else {
+        //console.error("AuthLayout: logout failed");
+        //await new Promise((resolve) => setTimeout(resolve, 100));
+        window.dispatchEvent(event);
+        router.push("/profile");
+      }
+    } catch (err) {
+      //console.error("AuthLayout: error logout:", err);
+      window.dispatchEvent(event);
+      router.push("/profile");
+    }
+  };
+
+  if (loading || (isAuthenticated && (pathname === "/login" || pathname === "/signup"))) {
     return (
-      <div className={styles.containerWrapper + " " + styles.darkGradient + " " + styles.lightGradient}>
+      <div className={`${styles.containerWrapper} ${styles.gradientBackground}`}>
         <h3 className={styles.loading}>Loading...</h3>
       </div>
     );
   }
 
-  const handleSignout = async () => {
-    try {
-      const res = await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-
-      if (res.ok) {
-        window.location.reload();
-      } else {
-        console.error("Logout failed");
-      }
-    } catch (err) {
-      console.error("Error logging out:", err);
-    }
-  };
-
   return (
     <div className={styles.containerWrapper + " " + styles.darkGradient + " " + styles.lightGradient}>
       <div className={styles.card}>
-        <div className={styles.userCard + " " + styles.darkGradient + " " + styles.lightGradient}>
+        <div className={styles.userCard + " " + styles.darkGradient}>
           <div className={styles.top}>
             <div className={styles.name}>
               Hello, {user?.name || "Guest"}
@@ -52,7 +81,7 @@ export default function AuthLayout({ children }) {
                 logout
               </button>
               <Link
-                href="/reservation"
+                href="/reservations"
                 className={styles.button + " " + styles.darkGradient + " " + styles.lightGradient}
               >
                 my reservations
@@ -66,15 +95,13 @@ export default function AuthLayout({ children }) {
         </div>
         
         <div className={styles.avatar + "  " + styles.darkGradient + " " + styles.lightGradient}>
-          {user?.name.slice(0, 2)}
+          {user?.name ? user.name.slice(0, 2).toUpperCase() : "G"}
         </div>
       </div>
 
-      {!isAuthenticated && (
-        <div className={styles.card}>
-          {children}
-        </div>
-      )}
+      <div className={styles.card}>
+        {children}
+      </div>
     </div>
   );
 }

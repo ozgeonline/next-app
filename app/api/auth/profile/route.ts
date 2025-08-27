@@ -10,6 +10,7 @@ interface DecodedToken {
 }
 
 export async function GET() {
+  await connect();
   const cookieStore = await cookies();
   
   const token = cookieStore.get('token')?.value;
@@ -18,7 +19,6 @@ export async function GET() {
   const decoded = verifyToken(token) as DecodedToken;
   if (!decoded) return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
 
-  await connect();
   const user = await User.findById(decoded.id).select('-password');
   return NextResponse.json(user);
 }

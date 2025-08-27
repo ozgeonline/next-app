@@ -14,3 +14,8 @@ export async function POST() {
 
   return response;
 }
+
+export async function GET() {
+  console.log("GET /api/auth/logout: Method not allowed");
+  return NextResponse.json({ error: "Method Not Allowed - Use POST for logout" }, { status: 405 });
+}

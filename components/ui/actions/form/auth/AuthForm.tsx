@@ -2,14 +2,15 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from "./auth-form.module.css";
+import { useAuth } from "@/components/providers/auth/AuthProvider";
 import Link from 'next/link';
+import styles from "./auth-form.module.css";
 
 interface FormData {
-  formType: string;
+  formType: "login" | "signup";
+  referencePath: string;
   fetchApiPath: string;
   nonTokenPath?: string;
-  referencePath: string;
 }
 export default function AuthForm({
   formType,
@@ -19,51 +20,51 @@ export default function AuthForm({
 }: FormData) {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [isTouched, setIsTouched] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+   const [error, setError] = useState("");
+  const { isAuthenticated, loading } = useAuth();
   const router = useRouter();
-
-  useEffect(() => {
-    async function checkAuth() {
-      try {
-        const res = await fetch("/api/auth/user", { credentials: "include" });
-        if (res.ok) {
-          const data = await res.json();
-          if (data?.user && nonTokenPath) {
-            router.push(nonTokenPath);
-          }
-        }
-      } catch (err) {
-        console.error("Auth check error:", err);
-      }
-    }
-    checkAuth();
-  }, [nonTokenPath, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+     setError("");
 
-    const res = await fetch(`/api/auth/${fetchApiPath}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(formData),
-    });
+    try {
+      const payload = formType === "login" ? { email: formData.email, password: formData.password } : formData;
+      console.log("AuthForm: Sending POST to", `/api/auth/${fetchApiPath}`, payload);
 
-    const data = await res.json();
-    //console.log("API res:", data);
+      const res = await fetch(`/api/auth/${fetchApiPath}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(payload),
+      });
 
-    if (res.ok) {
-      router.push(nonTokenPath || "/reservation");
-    } else {
-      if (formType === "signup" && data.error?.toLowerCase().includes("already in use")) {
-        router.push("/login");
+      const data = await res.json();
+      console.log("AuthForm: API response:", data);
+
+      if (res.ok) {
+        window.dispatchEvent(new CustomEvent("authChange", { detail: { isLogout: false } }));
+        console.log("AuthForm: Redirecting to", nonTokenPath || "/profile");
+        router.push(nonTokenPath || "/profile");
       } else {
-        alert( formType === "signup" ? "Signup failed" : "Login failed");
-        //console.log("auth Error:",data.error)
+        if (formType === "signup" && data.error?.toLowerCase().includes("already in use")) {
+          router.push("/login");
+        } else if (formType === "login" && data.error?.toLowerCase().includes("user not found")) {
+          router.push("/signup");
+        } else {
+           setError(data.error || `${formType === "signup" ? "Signup" : "Login"} failed`);
+        }
       }
+    } catch (err: any) {
+      console.error("AuthForm: Submit error:", err);
+       setError(err.message || "An error occurred");
+    } finally {
+      setIsSubmitting(false);
+      setIsTouched(false);
     }
-    setIsTouched(false);
   };
-
   const validateEmail = useCallback((email: string): boolean => {
     const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -71,12 +72,22 @@ export default function AuthForm({
   
   const emailIsValid = useMemo(() => validateEmail(formData.email), [formData.email, validateEmail]);
   // if (isLoading) return null; 
+  const isFormValid = formType === "login"
+    ? emailIsValid && formData.password.length >= 6
+    : emailIsValid && formData.name.length >= 2 && formData.password.length >= 6;
+    
 
   return (
     <div className={styles.formWrapper}>
       {/* <div className={styles.containerTopNavbar} /> */}
-      <h2>{formType}</h2>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      {loading ? (
+        
+        <div className={styles.loading}>Loading...</div>
+      ) : (
+        <>
+        <h2>{formType}</h2>
+        {error && <p className={styles.error}>{error}</p>}
+        <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
           <label htmlFor="name">Name</label>
           <input
@@ -130,9 +141,16 @@ export default function AuthForm({
         <button
           type="submit"
           className={styles.submitButton}
+           disabled={isSubmitting || !isFormValid}
         >
-          {formType}
+          {isSubmitting ? "Submitting..." : formType === "login" ? "Login" : "Sign Up"}
         </button>
+         {/* <p>
+              {formType === "login" ? "Don’t have an account?" : "Already have an account?"}{" "}
+              <Link href={`/${referencePath}`} className={styles.referencePath}>
+                {formType === "login" ? "Sign Up" : "Login"}
+              </Link>
+            </p> */}
         <h3>Already have an account?</h3>
         <Link
           href={referencePath}
@@ -142,6 +160,9 @@ export default function AuthForm({
           {referencePath}
         </Link>
       </form>
+        </>
+      )}
+     
     </div>
   );
 }

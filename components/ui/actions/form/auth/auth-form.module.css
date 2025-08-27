@@ -12,6 +12,15 @@
   padding: 2rem 4rem;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: #f4f6f7;
+}
+
 .formWrapper form {
   position: relative;
   display: flex;

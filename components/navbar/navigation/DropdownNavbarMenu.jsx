@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useTheme } from "@/components/providers/ThemeContext";
+import { useTheme } from "@/components/providers/theme/ThemeContext";
 import { useScroll } from "@/components/providers/navbar/ScrollingContext";
 import { useNavigation } from "@/components/providers/navbar/NavigationContext";
 import MenuIcon from "@/components/ui/icon/MenuIcon";
