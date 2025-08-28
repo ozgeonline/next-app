@@ -16,6 +16,7 @@ export default function ReservationPage() {
   } = useReservations();
 
   const [reservation, setReservation] = useState<SavedReservation>({
+    _id: "",
     userId: "",
     name: "",
     email: "",
@@ -28,6 +29,8 @@ export default function ReservationPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  console.log("editReservationId", editReservationId);
 
   const showError = (msg: string) => {
     setError(msg);
@@ -58,6 +61,7 @@ export default function ReservationPage() {
   // Update reservation
   const handleEdit = (res: SavedReservation) => {
     setReservation({
+      _id: res._id || "",
       userId: user?._id || "",
       name: user?.name || "",
       email: user?.email || "",
@@ -169,6 +173,7 @@ export default function ReservationPage() {
       
       showSuccess(`Reservation ${editReservationId ? "updated" : "saved"} successfully!`);
       setReservation({
+        _id: "",
         userId: user?._id || "",
         name: user?.name || "",
         email: user?.email || "",

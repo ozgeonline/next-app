@@ -5,7 +5,7 @@ export interface AuthUser {
 }
 
 export interface SavedReservation {
-  _id?: string;
+  _id: string;
   userId: string;
   date: string;
   time: string;
