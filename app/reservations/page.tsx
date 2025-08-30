@@ -15,11 +15,32 @@ export default function ReservationPage() {
     refetchReservations,
   } = useReservations();
 
+//   const createReservation = async () => {
+//   try {
+//     const res = await fetch("/api/auth/reservations", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         date: "2025-09-01",   //ISO
+//         time: "19:00",
+//         guests: 4,
+//         notes: "Pencere kenarı masa lütfen",
+//       }),
+//     });
+
+//     const data = await res.json();
+//     console.log("Response:", data);
+//   } catch (err) {
+//     console.error("Error creating reservation:", err);
+//   }
+// };
+
+
   const [reservation, setReservation] = useState<SavedReservation>({
+    userId: { _id: "", email: "", name: "" },
     _id: "",
-    userId: "",
-    name: "",
-    email: "",
     date: "",
     time: "",
     guests: 1,
@@ -29,8 +50,11 @@ export default function ReservationPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  console.log("user from AuthProvider:", user);
 
-  console.log("editReservationId", editReservationId);
+
+  // console.log("editReservationId", editReservationId);
+   //console.log("reservation", reservation);
 
   const showError = (msg: string) => {
     setError(msg);
@@ -51,9 +75,11 @@ export default function ReservationPage() {
     if (user && !authLoading) {
       setReservation((prev) => ({
         ...prev,
-        userId: user._id,
-        name: user.name || "",
-        email: user.email || "",
+        userId: {
+          _id: user._id as string,
+          email: user.email,
+          name: user.name,
+        },
       }));
     }
   }, [user, authLoading]);
@@ -62,9 +88,11 @@ export default function ReservationPage() {
   const handleEdit = (res: SavedReservation) => {
     setReservation({
       _id: res._id || "",
-      userId: user?._id || "",
-      name: user?.name || "",
-      email: user?.email || "",
+      userId: {
+        _id: user?._id as string || "",
+        email: user?.email || "",
+        name: user?.name || "",
+      },
       date: new Date(res.date).toISOString().split("T")[0],
       time: res.time,
       guests: res.guests,
@@ -146,7 +174,9 @@ export default function ReservationPage() {
       const url = editReservationId
         ? `/api/auth/reservations/${editReservationId}`
         : "/api/auth/reservations";
+
       const method = editReservationId ? "PUT" : "POST";
+      // console.log("method", method);
 
       const res = await fetch(url, {
         method,
@@ -156,12 +186,14 @@ export default function ReservationPage() {
       });
 
       // check json body
-      const contentType = res.headers.get("content-type");
       let data = null;
+      const contentType = res.headers.get("content-type");
 
       if (contentType && contentType.includes("application/json")) {
         data = await res.json();
       }
+
+      await refetchReservations();
 
       if (!res.ok) {
         throw new Error(
@@ -169,20 +201,22 @@ export default function ReservationPage() {
         );
       }
 
-      await refetchReservations();
-      
       showSuccess(`Reservation ${editReservationId ? "updated" : "saved"} successfully!`);
       setReservation({
+        userId: {
+          _id: "",
+          name: "",
+          email: "",
+        },
         _id: "",
-        userId: user?._id || "",
-        name: user?.name || "",
-        email: user?.email || "",
         date: "",
         time: "",
         guests: 1,
         notes: "",
       });
       setEditReservationId(null);
+
+      //console.log("Reservation req:", { url, method, editReservationId, body: payload });
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -214,7 +248,7 @@ export default function ReservationPage() {
             <input
               type="text"
               name="name"
-              value={reservation.name}
+              value={reservation.userId.name}
               className={`${styles.input}`}
               readOnly
             />
@@ -225,7 +259,7 @@ export default function ReservationPage() {
             <input
               type="email"
               name="email"
-              value={reservation.email}
+              value={reservation.userId.email}
               className={`${styles.input}`}
               readOnly
             />
@@ -290,9 +324,10 @@ export default function ReservationPage() {
         <h2>Your Reservations</h2>
         {reservations.length > 0 ? (
           reservations.map((res) => (
+            // console.log("res", res),
             <div key={res._id || `${res.date}-${res.time}`} className={styles.reservationCard}>
-              <p><strong>Name:</strong> {res.name || "N/A"}</p>
-              <p><strong>Email:</strong> {res.email || "N/A"}</p>
+              <p><strong>Name:</strong> {user?.name || "N/A"}</p>
+              <p><strong>Email:</strong> {user?.email || "N/A"}</p>
               <p><strong>Date:</strong> {new Date(res.date).toLocaleDateString()}</p>
               <p><strong>Time:</strong> {res.time}</p>
               <p><strong>Guests:</strong> {res.guests}</p>

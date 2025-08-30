@@ -1,15 +1,23 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import type { ClientUser  } from "@/types/userTypes";
 
-interface User {
-  _id: string;
-  email: string;
-  name?: string;
-}
+// interface User {
+//   _id: string;
+//   email: string;
+//   name?: string;
+// }
+
+// interface User extends Document {
+//   _id: string;
+//   email: string;
+//   name?: string;
+// }
+
 
 interface AuthContextType {
-  user: User | null;
+  user: ClientUser  | null;
   isAuthenticated: boolean;
   loading: boolean;
   setIsLogout: (loading: boolean) => void;
@@ -18,7 +26,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<ClientUser  | null>(null);
   const [loading, setLoading] = useState(true);
   const [authTrigger, setAuthTrigger] = useState(0);
   const [isLogout, setIsLogout] = useState<boolean>(() => {
@@ -28,6 +36,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return false;
   });
 
+  //console.log("AuthProvider: userId: ",user?._id);
+  
   useEffect(() => {
     localStorage.setItem("isLogout", String(isLogout));
     //console.log("isLogout:", isLogout);
@@ -47,10 +57,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         credentials: "include"
       });
 
+      const data = await res.json();
+      //console.log("AuthProvider: /api/auth/user response data:", data);
       if (res.ok) {
-        const data = await res.json();
-        //console.log("AuthProvider: /api/auth/user response:", data);
-        setUser(data.user || null);
+        setUser(
+          data ? { 
+            _id: data.user.userId as string, 
+            email: data.user.email as string, 
+            name: data.user.name as string,
+          } : null
+        );
       } else {
         // console.log("AuthProvider: /api/auth/user failed:", await res.text());
         setUser(null);

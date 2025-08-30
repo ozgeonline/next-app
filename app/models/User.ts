@@ -1,11 +1,12 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Schema, Model } from "mongoose";
+import type { User } from "@/types/userTypes";
 import bcrypt from "bcrypt";
 
-interface User extends Document {
-  email: string;
-  password: string;
-  name?: string;
-}
+// interface User extends Document {
+//   email: string;
+//   password: string;
+//   name?: string;
+//}
 
 const userSchema =new Schema<User>(
   {

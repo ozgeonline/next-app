@@ -6,11 +6,10 @@ import Reservation from "@/app/models/Reservation";
 
 export async function PUT(
   req: NextRequest,
- context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ id: string }>}
 ) {
   try {
     await connect();
-
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
 
@@ -25,7 +24,7 @@ export async function PUT(
       return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
 
-   const { id } = await context.params;//reservation ID
+    const { id } = await context.params;//reservation ID
     const body = await req.json();
 
     //reservation & user_id relationship
@@ -45,7 +44,7 @@ export async function PUT(
 
     await reservation.save();
 
-    //populate userId for response
+    //populate: userId for response
     const populated = await reservation.populate("userId", "name email");
 
     return NextResponse.json({

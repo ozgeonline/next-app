@@ -1,12 +1,8 @@
-export interface AuthUser {
-  _id: string;
-  email: string;
-  name?: string;
-}
+import type { ClientUser } from "@/types/userTypes";
 
 export interface SavedReservation {
   _id: string;
-  userId: string;
+  userId: ClientUser;
   date: string;
   time: string;
   guests: number;

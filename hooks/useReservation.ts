@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "@/components/providers/auth/AuthProvider";
 import { SavedReservation } from "@/types/reservationTypes";
@@ -15,6 +16,8 @@ export const useReservations = (): ReservationState => {
   const [reservations, setReservations] = useState<SavedReservation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  //console.log("Reservations:", reservations);
 
   const fetchReservations = useCallback(async () => {
     if (!isAuthenticated || !user) {
@@ -33,25 +36,25 @@ export const useReservations = (): ReservationState => {
       });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = await res.json(); //?
         throw new Error(data.error || "Failed to fetch reservations");
       }
 
       const data = await res.json();
+      //console.log("useReservations, API response:", data);
+
       const fetchedReservations: SavedReservation[] = data.reservations.map(
         (reservation: any) => ({
           _id: reservation._id,
-          userId: reservation.userId._id,
           date: reservation.date,
           time: reservation.time,
           guests: reservation.guests,
           notes: reservation.notes || null,
-          name: reservation.userId.name,
-          email: reservation.userId.email,
         })
       );
 
       setReservations(fetchedReservations);
+      
     } catch (err: any) {
       setError(err.message);
       setReservations([]);
