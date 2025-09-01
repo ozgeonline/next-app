@@ -26,7 +26,7 @@ export default function CardsSection({
 }:CardsSectionProps) {
   return (
     <AnimatedOnScroll
-      className={styles.cardsWrapper}
+      className={styles.cardsWrapper  + ' ' + "mainBackground"}
       animationClass={styles.animateInRight}
     >
       <div className={styles.cards}>

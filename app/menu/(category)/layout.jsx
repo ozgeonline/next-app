@@ -4,8 +4,8 @@ import { useEffect, useState, useTransition, useRef } from "react";
 import { createPortal } from "react-dom";
 import FoodsIcon from "@/components/ui/icon/FoodsIcon";
 import { menuLinks } from "../menu-items";
-import { ArrowUp } from 'lucide-react';
 import styles from "./category.module.css";
+import TopScrollButton from "@/components/ui/actions/topScrollButton/TopScrollButton";
 export default function RootLayout({ children }) {
   const router = useRouter();
   const scrollRef = useRef(null); 
@@ -31,15 +31,9 @@ export default function RootLayout({ children }) {
     });
   };
 
-  const handleScroll = () => {
-   if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <>
-    <div ref={scrollRef} className={styles.categoryWrapper}>
+    <div ref={scrollRef} className={styles.categoryWrapper + ' ' + "mainBackground"}>
       <div className={styles.containerTopNavbar} />
         <div className={styles.linkWrapper}>
           {menuLinks.map((item, index) => {
@@ -57,9 +51,7 @@ export default function RootLayout({ children }) {
         </div>
         {animationPortal}
         {children}
-        <div className={styles.containerBottom} onClick={handleScroll}>
-          <ArrowUp className={styles.arrow}/>
-        </div>
+        <TopScrollButton scrollRef={scrollRef}/>
     </div>
     </>
   );

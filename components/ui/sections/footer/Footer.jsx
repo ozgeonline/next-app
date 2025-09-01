@@ -1,8 +1,11 @@
+"use client";
+
 import {links} from "./link-items";
 import Link from "next/link";
-import styles from "./footer.module.css";
 import ContactForm from "@/components/ui/actions/form/contact/ContactForm";
 import SocialMedia from "../../social/SocialMedia";
+import TopScrollButton from "../../actions/topScrollButton/TopScrollButton";
+import styles from "./footer.module.css";
 
 export default function Footer() {
   return (
@@ -45,6 +48,8 @@ export default function Footer() {
       <div className={styles.copyright}>
         <p>&copy; {new Date().getFullYear()} ozgeonline. All rights reserved.</p>
       </div>
+
+      <TopScrollButton />
     </footer>
   )
 }

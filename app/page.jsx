@@ -33,8 +33,8 @@ export default function Home() {
 
       <>
       <SlideSection isCommunityInfoVisible={isCommunityInfoVisible} />
-      <main className={styles.main}>
-        <div className={styles.mainContent}>
+      <main className={styles.main + ' ' + "mainBackground"}>
+        <div className={styles.mainContent  + ' ' + "mainBackground"}>
           <PositionedImage isCommunityInfoVisible={isCommunityInfoVisible} />
           <CTA isCommunityInfoVisible={isCommunityInfoVisible} />
         </div>
@@ -62,7 +62,7 @@ export default function Home() {
         />
        
         {/***********  Animated Sections ***********/}
-        <div style={{position: 'relative', width: '100%'}}>
+        <div style={{position: 'relative', width: '100%'}} className="animatedSections mainBackground">
           {items.map((item, index) => {
             const sectionData = item.savor || item.desserts || item.energy;
             if (!sectionData) return null;

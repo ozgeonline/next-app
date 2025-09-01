@@ -40,16 +40,16 @@
   
 }
 
-.blurOverlay {
+/* .blurOverlay {
   position: absolute;
   bottom: 3rem;
   left: 0;
   right: 0;
   height: 8rem;
-  background: linear-gradient(to top, var(--background) 50%, transparent);
+  background: linear-gradient(to top, var(--background) 50%, transparent 100%);
   pointer-events: none;
   z-index: 1;
-}
+} */
 
 .viewAlllink {
   width: 100%;
@@ -59,6 +59,13 @@
   justify-content: center;
   text-decoration: none;
   color: var(--text);
+}
+
+@media screen and (min-width: 1024px) {
+  .viewAlllink {
+    margin-top: -3rem;
+  }
+  
 }
 
 .viewAllButton {

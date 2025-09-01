@@ -9,13 +9,17 @@
 }
 
 .containerTopNavbar {
-  background: linear-gradient(90deg, var(--international-orange-500), var(--science-blue-500));
   height: 4rem;
 }
 
 [data-theme="dark"] .containerTopNavbar {
-  background: linear-gradient(90deg, var(--international-orange-500), var( --shark-50));
+  background: linear-gradient(to bottom, var(--background), transparent);
 }
+
+[data-theme="light"] .containerTopNavbar {
+   background: linear-gradient(to bottom, var(--science-blue-600), transparent);
+}
+
 
 .linkWrapper {
   width: 100%;
@@ -24,19 +28,21 @@
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .linkWrapper button {
   text-decoration: none;
   font-size: large;
   font-weight: bold;
-  background: linear-gradient(90deg, var(--international-orange-600), var(--international-orange-300));
+  background: var(--shark-800);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   border: none;
   cursor: pointer;
 }
+
 
 .menuItemsWrapper {
   display: flex;
@@ -89,27 +95,4 @@
     transform: translateX(100%);
   
   }
-}
-
-.containerBottom {
-  position: absolute;
-  bottom: 1rem;
-  right: 5%;
-  cursor: pointer;
-  border: 1px solid var(--shark-50);
-  padding: 0.5rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--shark-50);
-  transition: filter 0.3s ease-out;
-}
-
-.containerBottom:hover {
-  filter: brightness(1.3);
-}
-
-.arrow {
-  stroke: #fb5607;
 }

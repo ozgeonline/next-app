@@ -1,5 +1,5 @@
 import MenuPreview from "@/components/menu/MenuPreview";
-import styles from "../menu/menu.module.css";
+import styles from "../menu.module.css";
 
 export default function MenuSection({ data }) {
   return (

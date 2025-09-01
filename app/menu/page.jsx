@@ -33,7 +33,7 @@ export default function MenuPage() {
       </Carousel>
 
       <main className={styles.main}>
-        <div className={styles.cardsWrapper}>
+        <div className={styles.cardsWrapper + ' ' + "mainBackground"}>
           <CardsSection
             infoTitle={menuPageitems.infoCard.title}
             infoDes={menuPageitems.infoCard.description}
@@ -43,7 +43,7 @@ export default function MenuPage() {
             imgDes={menuPageitems.imgCard.description}
           />
         </div>
-        <div className={styles.menu}>
+        <div className={styles.menu + ' ' + "mainBackground"}>
           <h2>Menu</h2>
           <Carousel 
             autoSlide={false}
@@ -73,7 +73,7 @@ export default function MenuPage() {
           </Carousel>
         </div>
 
-        <div className={styles.contactBadgeWrapper}>
+        <div className={styles.contactBadgeWrapper + ' ' + "mainBackground"}>
           <div className={styles.containerBadge}>
             <ReservationBanner />
           </div>

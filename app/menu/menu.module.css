@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  background: #9f2f0d;
   min-height: 100vh;
 }
 
@@ -69,11 +68,10 @@
   min-height: 100vh;
   flex: 1;
   z-index: 100;
-  background: var(--background);
 }
 
 .cardsWrapper {
-  height: 70vh;
+  height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -86,6 +84,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 
 .menu h2 {
@@ -111,10 +111,10 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .contactBadgeWrapper {
+  /* .contactBadgeWrapper {
     align-items: start;
     padding-top: 20vh;
-  }
+  } */
   
 }
 

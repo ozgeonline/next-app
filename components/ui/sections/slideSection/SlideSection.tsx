@@ -11,7 +11,7 @@ interface SlideSectionProps {
 
 export default function SlideSection({ isCommunityInfoVisible }: SlideSectionProps){
   return (
-    <div className={styles.slideSection}>
+    <div className={styles.slideSection + ' ' + "mainBackground"}>
       <div className={styles.animateContent}>
         <div className={styles.slideShowWrapper}>
           <ImageSlideshow />
