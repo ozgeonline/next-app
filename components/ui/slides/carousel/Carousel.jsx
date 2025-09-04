@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, memo, useRef } from "react";
 import Link from "next/link";
-import { menuLinks } from "@/app/menu/menu-items";
+import { menuLinks } from "@/app/(pages)/menu/menu-items";
 import styles from "./carousel.module.css";
 
 function Carousel({ 

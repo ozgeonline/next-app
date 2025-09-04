@@ -231,120 +231,122 @@ export default function ReservationPage() {
   // }
 
   return (
-    <div className={styles.containerWrapper}>
-      <div className={styles.formSection}>
-        
-        <h2>{editReservationId ? "Update Reservation" : "Make a Reservation"}</h2>
+    <>
+      <div className={styles.containerWrapper + ' ' + "mainBackground"}>
+      <div className={styles.containerTopNavbar} />
+        <div className={styles.formSection}>
+          <h2>{editReservationId ? "Update Reservation" : "Make a Reservation"}</h2>
 
-        {/* error-success info */}
-        {error && <p className={styles.error}>{error}</p>}
-        {reservationsError && <p className={styles.error}>{reservationsError}</p>}
-        {success && <p className={styles.success}>{success}</p>}
+          {/* error-success info */}
+          {error && <p className={styles.error}>{error}</p>}
+          {reservationsError && <p className={styles.error}>{reservationsError}</p>}
+          {success && <p className={styles.success}>{success}</p>}
 
-        {/* reservation - form area */}
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <label>
-            Name:
-            <input
-              type="text"
-              name="name"
-              value={reservation.userId.name}
-              className={`${styles.input}`}
-              readOnly
-            />
-          </label>
+          {/* reservation - form area */}
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <label>
+              Name:
+              <input
+                type="text"
+                name="name"
+                value={reservation.userId.name}
+                className={`${styles.input}`}
+                readOnly
+              />
+            </label>
 
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={reservation.userId.email}
-              className={`${styles.input}`}
-              readOnly
-            />
-          </label>
+            <label>
+              Email:
+              <input
+                type="email"
+                name="email"
+                value={reservation.userId.email}
+                className={`${styles.input}`}
+                readOnly
+              />
+            </label>
 
-          <label>
-            Date:
-            <input
-              type="date"
-              name="date"
-              value={reservation.date}
-              onChange={handleChange}
-              className={styles.input}
-              required
-            />
-          </label>
+            <label>
+              Date:
+              <input
+                type="date"
+                name="date"
+                value={reservation.date}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+            </label>
 
-          <label>
-            Time:
-            <input
-              type="time"
-              name="time"
-              value={reservation.time}
-              onChange={handleChange}
-              className={styles.input}
-              required
-            />
-          </label>
+            <label>
+              Time:
+              <input
+                type="time"
+                name="time"
+                value={reservation.time}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+            </label>
 
-          <label>
-            Number of Guests:
-            <input
-              type="number"
-              name="guests"
-              min="1"
-              max="20"
-              value={reservation.guests}
-              onChange={handleChange}
-              className={styles.input}
-              required
-            />
-          </label>
+            <label>
+              Number of Guests:
+              <input
+                type="number"
+                name="guests"
+                min="1"
+                max="20"
+                value={reservation.guests}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+            </label>
 
-          <label>
-            Special Notes:
-            <textarea
-              name="notes"
-              value={reservation.notes || ""}
-              placeholder="Enter any special notes"
-              onChange={handleChange}
-              className={styles.textarea}
-            />
-          </label>
+            <label>
+              Special Notes:
+              <textarea
+                name="notes"
+                value={reservation.notes || ""}
+                placeholder="Enter any special notes"
+                onChange={handleChange}
+                className={styles.textarea}
+              />
+            </label>
 
-          <button type="submit" className={styles.button} disabled={isSubmitting}>
-            {isSubmitting ? "Saving..." : editReservationId ? "Save Changes" : "Reserve"}
-          </button>
-        </form>
+            <button type="submit" className={styles.button} disabled={isSubmitting}>
+              {isSubmitting ? "Saving..." : editReservationId ? "Save Changes" : "Reserve"}
+            </button>
+          </form>
+        </div>
+
+        <div className={styles.infoSection}>
+          <h2>Your Reservations</h2>
+          {reservations.length > 0 ? (
+            reservations.map((res) => (
+              // console.log("res", res),
+              <div key={res._id || `${res.date}-${res.time}`} className={styles.reservationCard}>
+                <p><strong>Name:</strong> {user?.name || "N/A"}</p>
+                <p><strong>Email:</strong> {user?.email || "N/A"}</p>
+                <p><strong>Date:</strong> {new Date(res.date).toLocaleDateString()}</p>
+                <p><strong>Time:</strong> {res.time}</p>
+                <p><strong>Guests:</strong> {res.guests}</p>
+                <p><strong>Notes:</strong> {res.notes || "-"}</p>
+                <button
+                  onClick={() => handleEdit(res)}
+                  className={styles.button}
+                  disabled={editReservationId === res._id}
+                >
+                  Update
+                </button>
+              </div>
+            ))
+          ) : (
+            <p>No reservations found.</p>
+          )}
+        </div>
       </div>
-
-      <div className={styles.infoSection}>
-        <h2>Your Reservations</h2>
-        {reservations.length > 0 ? (
-          reservations.map((res) => (
-            // console.log("res", res),
-            <div key={res._id || `${res.date}-${res.time}`} className={styles.reservationCard}>
-              <p><strong>Name:</strong> {user?.name || "N/A"}</p>
-              <p><strong>Email:</strong> {user?.email || "N/A"}</p>
-              <p><strong>Date:</strong> {new Date(res.date).toLocaleDateString()}</p>
-              <p><strong>Time:</strong> {res.time}</p>
-              <p><strong>Guests:</strong> {res.guests}</p>
-              <p><strong>Notes:</strong> {res.notes || "-"}</p>
-              <button
-                onClick={() => handleEdit(res)}
-                className={styles.button}
-                disabled={editReservationId === res._id}
-              >
-                Update
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>No reservations found.</p>
-        )}
-      </div>
-    </div>
+    </>
   );
 }

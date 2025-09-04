@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     const token = cookieStore.get("token")?.value;
 
     if (!token) {
-      return NextResponse.json({ error: "No token found" }, { status: 401 });
+      return NextResponse.json({ error: "User not authenticated, please log in" }, { status: 401 });
     }
 
     let decoded: any;

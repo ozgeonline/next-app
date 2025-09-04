@@ -1,3 +1,10 @@
+/* .section {
+  width: 100%;
+  border-bottom: 1px solid var(--shark-500);
+  box-shadow: 0 0 20px var(--shark-900);
+  z-index: 10000;
+} */
+ 
 .container {
   display: flex;
   flex-direction: column;

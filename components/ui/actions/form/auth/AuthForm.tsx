@@ -81,88 +81,82 @@ export default function AuthForm({
     <div className={styles.formWrapper}>
       {/* <div className={styles.containerTopNavbar} /> */}
       {loading ? (
-        
-        <div className={styles.loading}>Loading...</div>
+        <div className={styles.loading}>
+          Loading...
+        </div>
       ) : (
         <>
         <h2>{formType}</h2>
         {error && <p className={styles.error}>{error}</p>}
         <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.formGroup}>
-          <label htmlFor="name">Name</label>
-          <input
-            name="name"
-            type="text"
-            placeholder="Name"
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            onBlur={() => setIsTouched(true)}
-            required
-            className={`
-              ${formData.name ? `${styles.validValueColor}` 
-                : !formData.name && isTouched ? `${styles.invalidValueColor}` 
-                : `${styles.defaultValueColor}`
-              }
-            `}
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="name">Email</label>
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            onBlur={() => setIsTouched(true)}
-            required
-            className={`
-              ${(formData.name && emailIsValid) ? `${styles.validValueColor}` 
-                : (!formData.name || !emailIsValid) && isTouched ? `${styles.invalidValueColor}` 
-                : `${styles.defaultValueColor}`
-              }
-            `}
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="name">Password</label>
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-            required
-            className={`
-              ${formData.name ? `${styles.validValueColor}` 
-                : !formData.name && isTouched ? `${styles.invalidValueColor}` 
-                : `${styles.defaultValueColor}`
-              }
-            `}
-          />
-        </div>
-        <button
-          type="submit"
-          className={styles.submitButton}
-           disabled={isSubmitting || !isFormValid}
-        >
-          {isSubmitting ? "Submitting..." : formType === "login" ? "Login" : "Sign Up"}
-        </button>
-         {/* <p>
-              {formType === "login" ? "Don’t have an account?" : "Already have an account?"}{" "}
-              <Link href={`/${referencePath}`} className={styles.referencePath}>
-                {formType === "login" ? "Sign Up" : "Login"}
-              </Link>
-            </p> */}
-        <h3>Already have an account?</h3>
-        <Link
-          href={referencePath}
-          type="submit"
-          className={styles.referencePath}
-        >
-          {referencePath}
-        </Link>
-      </form>
+          <div className={styles.formGroup}>
+            <label htmlFor="name">Name</label>
+            <input
+              name="name"
+              type="text"
+              placeholder="Name"
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onBlur={() => setIsTouched(true)}
+              required
+              className={`
+                ${formData.name ? `${styles.validValueColor}` 
+                  : !formData.name && isTouched ? `${styles.invalidValueColor}` 
+                  : `${styles.defaultValueColor}`
+                }
+              `}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="name">Email</label>
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onBlur={() => setIsTouched(true)}
+              required
+              className={`
+                ${(formData.name && emailIsValid) ? `${styles.validValueColor}` 
+                  : (!formData.name || !emailIsValid) && isTouched ? `${styles.invalidValueColor}` 
+                  : `${styles.defaultValueColor}`
+                }
+              `}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="name">Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              required
+              className={`
+                ${formData.name ? `${styles.validValueColor}` 
+                  : !formData.name && isTouched ? `${styles.invalidValueColor}` 
+                  : `${styles.defaultValueColor}`
+                }
+              `}
+            />
+          </div>
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={isSubmitting || !isFormValid}
+          >
+            {isSubmitting ? "Submitting..." : formType === "login" ? "Login" : "Sign Up"}
+          </button>
+          <h3>Already have an account?</h3>
+          <Link
+            href={referencePath}
+            type="submit"
+            className={styles.referencePath}
+          >
+            {referencePath}
+          </Link>
+        </form>
         </>
       )}
-     
     </div>
   );
 }

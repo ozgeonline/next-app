@@ -12,15 +12,7 @@
 }
 
 .containerWrapper .loading {
-  color: #ffffc2;
-}
-
-[data-theme="dark"] .darkGradient {
-  background: linear-gradient(90deg,  var(--shark-50), var(--science-blue-500), var( --shark-50));
-}
-
-[data-theme="light"] .lightGradient {
-  background: linear-gradient(90deg, var(--science-blue-500), var( --international-orange-600),var(--science-blue-500));
+  color: var(--shark-800);
 }
 
 .card {
@@ -51,29 +43,32 @@
 
 .profileWrapper h3 {
   font-size: 1.2rem;
-  color: #f4f6f7;
+  color: var(--shark-800);
   text-align: center;
 }
 
 .referencePathBtn {
   padding: 0.75rem 1.5rem;
   margin: 2em 0;
-  background: var(--background);
-  color: var(--shark-800);
+  background: var(--shark-50);
+  color: var(--shark-700);
   border: none;
   border-radius: 8px;
   font-weight: bold;
   font-size: medium;
   cursor: pointer;
   text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 [data-theme="dark"] .referencePathBtn:hover {
   background: linear-gradient(90deg, var(--science-blue-600), var(--science-blue-100));
+  color: #f4f6f7;
 }
 
 [data-theme="light"] .referencePathBtn:hover {
-  background: var(--broom-100);
+  background: var(--science-blue-800);
+  color: #f4f6f7;
 }
 
 .loading {
@@ -82,7 +77,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-  color: #f4f6f7;
+  color: var(--shark-800);
 }
 
 .authProfile {
@@ -101,7 +96,10 @@
   gap: 1rem;
 }
 
-.authProfile button{
+.updateSection button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   border: none;
   border-radius: .5rem;
@@ -110,18 +108,26 @@
   font-size: medium;
   cursor: pointer;
   transition: all 0.1s ease;
-  color: var(--text);
-  background: var(--background);
+  color: #212529;
+  /* background: var(--background); */
+  border: 1px solid var(--shark-800);
 }
 
-@media screen and (min-width: 1024px) {
-  .authProfile button {
+@media screen and (min-width: 640px) {
+  .updateSection button {
     width: 50%;
   }
 }
 
-.authProfile button:hover {
-  filter: brightness(0.9);
+@media screen and (min-width: 1024px) {
+  .updateSection button {
+    width: 100%;
+  }
+}
+
+.updateSection button:hover {
+  background: #0466c8;
+  color: #f4f6f7;
 }
 
 .profileInfo {
@@ -129,6 +135,7 @@
   flex-direction: column;
   align-items: start;
   justify-content: center;
+  width: 100%;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -137,16 +144,29 @@
   padding: 1rem 2rem;
 }
 
+@media screen and (min-width: 640px) {
+  .profileInfo {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .profileInfo {
+    width: 100%;
+  }
+  
+}
+
 .mailInfo,
 .nameInfo {
-  color: #f4f6f7;
+  color: var(--shark-800);
 }
 
 .mailInfo span,
 .nameInfo span {
   font-size: small;
   font-style: italic;
-  color: var(--background);
+  color: var(--shark-800);
 }
 
 .updateSection {
@@ -162,18 +182,24 @@
   width: 100%;
   padding: 0.5rem;
   border-radius: 4px;
-  border: 1px solid #ddd;
-  color: #f4f6f7;
-  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--text-opacity);
+  color: var(--shark-800);
+  background: var(--background);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(9.3px);
   outline: none;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 640px) {
   .updateSection input {
     width: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .updateSection input {
+    width: 100%;
   }
   
 }

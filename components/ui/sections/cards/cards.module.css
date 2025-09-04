@@ -177,7 +177,7 @@
 .card .cardText {
   position: absolute;
   left: 0;
-  top: 0;
+  top: 10%;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   padding: 1rem;

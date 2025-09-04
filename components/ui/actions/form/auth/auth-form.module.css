@@ -1,3 +1,12 @@
+.containerTopNavbar {
+  background: linear-gradient(90deg, var(--international-orange-500), var(--science-blue-500));
+  height: 4rem;
+}
+
+[data-theme="dark"] .containerTopNavbar {
+  background: linear-gradient(90deg, var(--international-orange-500), var( --shark-50));
+}
+
 .formWrapper {
   display: flex;
   flex-direction: column;
@@ -21,7 +30,7 @@
   color: #f4f6f7;
 }
 
-.formWrapper form {
+.formWrapper .form {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -30,35 +39,21 @@
   opacity: 1;
   z-index: 100;
   overflow: hidden;
+  gap: 1rem;
 }
 
 .formWrapper h2 {
   font-size: 1.4rem;
   margin-bottom: 1.5rem;
-  color: #f4f6f7;
+  color: var(--shark-800);
   text-transform: capitalize;
 }
 
 .formWrapper h3 {
   font-size: 1rem;
-  color: var(--text);
+  color: var(--shark-800);
   font-weight: 500;
   text-align: center;
-}
-
-.containerTopNavbar {
-  background: linear-gradient(90deg, var(--international-orange-500), var(--science-blue-500));
-  height: 4rem;
-}
-
-[data-theme="dark"] .containerTopNavbar {
-  background: linear-gradient(90deg, var(--international-orange-500), var( --shark-50));
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
 
 .validValueColor {
@@ -81,7 +76,7 @@
 .formGroup label {
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: #f4f6f7;
+  color: var(--shark-800);
 }
 
 .formGroup ::placeholder {
@@ -125,21 +120,28 @@
 .submitButton,
 .referencePath {
   padding: 0.75rem 1.5rem;
-  background: var(--background);
+  background: var(--shark-50);
   color: var(--shark-800);
   border: none;
   border-radius: 8px;
   font-weight: bold;
   font-size: medium;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .referencePath {
   text-align: center;
   text-decoration: none;
+  text-transform: capitalize;
 }
 
-.submitButton:hover {
-  filter: brightness(1.1);
+.submitButton:hover,
+.referencePath:hover {
+  background: #0466c8;
+}
+
+[data-theme="light"] .submitButton:hover,
+[data-theme="light"] .referencePath:hover {
+  color: #f4f6f7;
 }

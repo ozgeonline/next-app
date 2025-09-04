@@ -17,7 +17,7 @@ export default function ProfilePage() {
   
    if (loading) {
     return (
-      <div className={` ${styles.darkGradient} ${styles.lightGradient}`}>
+      <div>
         <h3 className={styles.loading}>Loading...</h3>
       </div>
     );
@@ -56,6 +56,7 @@ export default function ProfilePage() {
       <div className={styles.card}>
         <div className={styles.profileWrapper}>
           {!isAuthenticated ? (
+            // Not Authenticated Profile
             <>
               <Link
                 href="/signup"
@@ -74,6 +75,7 @@ export default function ProfilePage() {
               </Link>
             </>
           ) : (
+            // Authenticated Profile
             <div className={styles.authProfile}>
               <h3>Profile</h3>
               <div className={styles.profileInfo}>
@@ -85,10 +87,11 @@ export default function ProfilePage() {
                 </p>
               </div>
               <h3>Update account name:</h3>
-              {!showInput ? (
+              <div className={styles.updateSection}>
+                 {!showInput ? (
                 <button onClick={() => setShowInput(true)}>Update</button>
               ) : (
-                <div className={styles.updateSection}>
+                <>
                   <input
                     type="text"
                     value={newName}
@@ -99,8 +102,10 @@ export default function ProfilePage() {
                     {saving ? "Saving..." : "Save"}
                   </button>
                   <button onClick={() => setShowInput(false)}>Cancel</button>
-                </div>
+                </>
               )}
+              </div>
+             
             </div>
           )}
         </div>

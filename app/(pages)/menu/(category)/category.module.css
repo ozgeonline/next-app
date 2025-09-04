@@ -12,12 +12,8 @@
   height: 4rem;
 }
 
-[data-theme="dark"] .containerTopNavbar {
-  background: linear-gradient(to bottom, var(--background), transparent);
-}
-
 [data-theme="light"] .containerTopNavbar {
-   background: linear-gradient(to bottom, var(--science-blue-600), transparent);
+   background:  var(--science-blue-800);
 }
 
 
@@ -41,8 +37,15 @@
   -webkit-text-fill-color: transparent;
   border: none;
   cursor: pointer;
+  transition: all 0.2s linear;
 }
 
+.linkWrapper button:hover {
+  background: #0466c8;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .menuItemsWrapper {
   display: flex;

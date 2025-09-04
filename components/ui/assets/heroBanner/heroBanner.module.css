@@ -139,6 +139,14 @@
   display: flex;
   align-items: center;
   color: #f4f6f7;
+  padding-right: 2rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .location {
+    /* padding-right: 3rem; */
+  }
+  
 }
 
 .location span {

@@ -101,7 +101,7 @@
 
   /* Main Colors */
   /* --background: #edf6f9; */
-  --background: #dee2e6;
+  --background: #e0e0e0;
   --background-high: #edf6f970;
   --background-opacity: #edf6f950;
   --background-low-opacity: #edf6f910;
@@ -231,7 +231,7 @@
   --background-opacity: #1A1A1A50;
   --background-low-opacity: #1A1A1A10;
 
-  --text: #f4f4f9;
+  --text: #e0e0e0;
   --text-opacity: #f4f4f950;
   --text-low-opacity: #f4f4f910;
   
@@ -408,7 +408,8 @@ body {
 }
 
 [data-theme="light"] .mainBackground {
- background-image: 
+  background: #e0e0e0;
+ /* background-image: 
   linear-gradient(46deg, 
     rgba(18, 18, 18, 0.01) 0%, 
     rgba(18, 18, 18, 0.01) 50%,
@@ -439,5 +440,5 @@ body {
     rgba(203, 203, 203, 0.02) 50%,
     rgba(24, 24, 24, 0.02) 50%, 
     rgba(24, 24, 24, 0.02) 100%),
-  linear-gradient(90deg, rgb(244, 244, 244),rgb(236, 251, 255));
+  linear-gradient(90deg, rgb(244, 244, 244),rgb(155, 155, 155)); */
 }

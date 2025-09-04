@@ -1,3 +1,15 @@
+.containerTopNavbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4rem;
+  width: 100%;
+}
+
+[data-theme="light"] .containerTopNavbar {
+  background: var(--science-blue-800);
+}
+
 .containerWrapper {
   display: flex;
   align-items: center;
@@ -12,11 +24,144 @@
   padding: 5rem 0;
 }
 
+[data-theme="light"] .containerWrapper.gradientBackground {
+  background:  linear-gradient(90deg, rgb(237, 46, 8),rgb(2255, 239, 0));
+}
+
+[data-theme="dark"] .containerWrapper.gradientBackground {
+  background:  linear-gradient(90deg, var(--science-blue-500),var( --shark-50));
+}
+
 [data-theme="dark"] .darkGradient {
   background: linear-gradient(90deg,  var( --shark-50), var(--science-blue-500), var( --shark-50));
 }
 
-[data-theme="light"] .lightGradient {
+.containerWrapper .loading { color: #ffffc2;}
+
+@media screen and (min-width: 1024px) {
+  .containerWrapper {
+    flex-direction: row;
+    min-height: 100vh;
+    padding: 5rem;
+  }
+}
+
+.card {
+  width: 90%;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+@media screen and (min-width: 1024px) {
+  .card {
+    width: 40%;
+    height: 70vh;
+  }
+}
+
+.userCard {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--shark-800);
+  border-radius: 1rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(9.3px);
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .userCard {
+    height: 60vh;
+  }
+  
+}
+
+.userCard .top ,
+.userCard .bottom {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.userCard .top .name {
+  text-transform: capitalize;
+  top: 25%;
+  position: absolute;
+}
+
+.userCard .bottom .button {
+  border: none;
+  border-radius: .5rem;
+  text-transform: lowercase;
+  padding: 0.7rem 4em;
+  font-size: medium;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #f4f4f4;
+}
+
+[data-theme="light"] .userCard .bottom .button {
+  background: var(--science-blue-800);
+  color: #f4f4f4;
+}
+
+[data-theme="light"] .userCard .bottom .button:hover {
+  filter: brightness(1.2);
+}
+
+[data-theme="dark"] .userCard .bottom .button:hover {
+  filter: hue-rotate(90deg)  saturate(2);
+}
+
+.userCard .bottom a.button {
+  text-decoration: none;
+}
+
+.userCard .bottom .forReservation {
+  font-style: oblique;
+}
+
+@media screen and (min-width: 1024px) {
+  .userCard .top .name {
+    font-size: 1.5rem;
+    font-weight: bold;
+  } 
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 40%;
+  transform: translateY(-40%);
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  color: #f4f4f4;
+  text-transform: uppercase;
+  font-size: 2em;
+  overflow: hidden;
+}
+
+[data-theme="light"] .lightGradientAvatar {
  background: 
   linear-gradient(46deg, 
     rgba(18, 18, 18, 0.01) 0%, 
@@ -48,138 +193,7 @@
     rgba(203, 203, 203, 0.02) 50%,
     rgba(24, 24, 24, 0.02) 50%, 
     rgba(24, 24, 24, 0.02) 100%),
-  linear-gradient(90deg, rgb(237, 46, 8),rgb(2255, 239, 0));
-}
-
-[data-theme="light"] .containerWrapper.gradientBackground {
-  background:  linear-gradient(90deg, rgb(237, 46, 8),rgb(2255, 239, 0));
-}
-
-[data-theme="dark"] .containerWrapper.gradientBackground {
-  background:  linear-gradient(90deg, var(--science-blue-500),var( --shark-50));
-}
-
-.containerWrapper .loading {
-  color: #ffffc2;
-}
-
-@media screen and (min-width: 1024px) {
-  .containerWrapper {
-    flex-direction: row;
-    min-height: 100vh;
-    padding: 5rem;
-  }
-  
-}
-
-.card {
-  width: 90%;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-   position: relative;
-}
-
-@media screen and (min-width: 1024px) {
-  .card {
-    width: 40%;
-    height: 70vh;
-  }
-  
-}
-
-.userCard {
-  background: rgba(255, 255, 255, 0.1);
-  color: #f4f4f4;
-  border-radius: 1rem;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(9.3px);
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 1rem;
-}
-
-@media screen and (max-width: 1024px) {
-  .userCard {
-    height: 60vh;
-  }
-  
-}
-
-.userCard .top,
-.userCard .bottom {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-top: 1rem;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.userCard .top .name {
-  text-transform: capitalize;
-  top: 25%;
-  position: absolute;
-}
-
-.userCard .bottom .button {
-  border: none;
-  border-radius: .5rem;
-  text-transform: lowercase;
-  padding: 0.7rem 4em;
-  font-size: medium;
-  cursor: pointer;
-  transition: all 0.1s ease;
-  color: #f4f4f4;
-}
-
-.userCard .bottom a.button {
-  text-decoration: none;
-}
-
-.userCard .bottom .forReservation {
-  font-style: oblique;
-}
-
-[data-theme="dark"] .userCard .bottom .button:hover {
-  filter: hue-rotate(90deg)  saturate(2);
-}
-[data-theme="light"] .userCard .bottom .button:hover {
-  filter: brightness(1.2);
-}
-
-@media screen and (min-width: 1024px) {
-  .userCard .top .name {
-    font-size: 1.5rem;
-    font-weight: bold;
-  } 
-}
-
-.avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 40%;
-  transform: translateY(-40%);
-  width: 7rem;
-  height: 7rem;
-  border-radius: 50%;
-  color: #f4f4f4;
-  text-transform: uppercase;
-  font-size: 2em;
-  overflow: hidden;
+  linear-gradient(90deg, var(--science-blue-800), var(--science-blue-100));
 }
 
 @media screen and (min-width: 1024px) {

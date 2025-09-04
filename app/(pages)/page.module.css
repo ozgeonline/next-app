@@ -1,0 +1,12 @@
+.containerTopNavbar {
+  height: 4rem;
+  width: 100%;
+}
+
+[data-theme="dark"] .containerTopNavbar {
+  background: linear-gradient(to bottom, var(--background), transparent);
+}
+
+[data-theme="light"] .containerTopNavbar {
+  background: linear-gradient(to bottom, var(--science-blue-300), transparent);
+}

@@ -1,14 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition, useRef } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { createPortal } from "react-dom";
 import FoodsIcon from "@/components/ui/icon/FoodsIcon";
 import { menuLinks } from "../menu-items";
 import styles from "./category.module.css";
-import TopScrollButton from "@/components/ui/actions/topScrollButton/TopScrollButton";
 export default function RootLayout({ children }) {
   const router = useRouter();
-  const scrollRef = useRef(null); 
   const [isPending, startTransition] = useTransition();
   const [isClient, setIsClient] = useState(false);
 
@@ -33,7 +31,7 @@ export default function RootLayout({ children }) {
 
   return (
     <>
-    <div ref={scrollRef} className={styles.categoryWrapper + ' ' + "mainBackground"}>
+    <div className={styles.categoryWrapper + ' ' + "mainBackground"}>
       <div className={styles.containerTopNavbar} />
         <div className={styles.linkWrapper}>
           {menuLinks.map((item, index) => {
@@ -51,7 +49,6 @@ export default function RootLayout({ children }) {
         </div>
         {animationPortal}
         {children}
-        <TopScrollButton scrollRef={scrollRef}/>
     </div>
     </>
   );

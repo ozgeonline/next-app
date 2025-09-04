@@ -1,0 +1,134 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 100;
+}
+
+.containerTopNavbar {
+  height: 4rem;
+  width: 100%;
+}
+
+[data-theme="dark"] .containerTopNavbar {
+  background: linear-gradient(to bottom, var(--background), transparent);
+}
+
+.header {
+  gap: 3rem;
+  margin: 1rem auto;
+  width: 90%;
+  max-width: 75rem;
+  color: var(--shark-800);
+  text-align: center;
+}
+
+.header h1 {
+  font-family: 'Montserrat', sans-serif; 
+}
+
+.header p {
+  font-size: 1.2rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .header h1 { font-size: 3rem;}
+  
+}
+
+.highlight {
+  background: linear-gradient(90deg, #f9572a, #ff8a05);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 40rem;
+  margin: 2rem auto;
+  column-gap: 2rem;
+  text-align: center;
+}
+
+.main .meals h2,
+.main .perks h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  color: var(--shark-800);
+}
+
+@media screen and (min-width: 1024px) {
+  .main .meals h2,
+  .main .perks h2 {
+    font-size: 2.5rem;
+  }
+  
+}
+
+.meals,
+.perks {
+  margin-bottom: 2rem;
+}
+
+.meals {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.meals a {
+  text-decoration: none;
+  background: linear-gradient(90deg, #f9572a, #ff8a05);
+  color: #ddd6cb;
+  padding: .5em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: fit-content;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.meals a:hover {
+  filter: brightness(1.2);
+}
+
+.main h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.perks {
+  list-style: none;
+  padding: 0;
+}
+
+.perks li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.perks li p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  color: var(--shark-800);
+}
+
+@media screen and (min-width: 1024px) {
+  .perks li p {
+    font-size: 1.2rem;
+  }
+  
+}

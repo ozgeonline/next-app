@@ -1,3 +1,15 @@
+.containerTopNavbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4rem;
+  width: 100%;
+}
+
+[data-theme="light"] .containerTopNavbar {
+  background: var(--science-blue-800);
+}
+
 .containerWrapper {
   position: relative;
   display: flex;
@@ -31,7 +43,7 @@
   background: linear-gradient(90deg,  var(--shark-50), var(--science-blue-500), var( --shark-50));
 }
 
-[data-theme="light"] .containerWrapper,
+/* [data-theme="light"] .containerWrapper,
 .loading{
    background: 
   linear-gradient(46deg, 
@@ -65,7 +77,7 @@
     rgba(24, 24, 24, 0.02) 50%, 
     rgba(24, 24, 24, 0.02) 100%),
   linear-gradient(90deg, rgb(237, 46, 8),rgb(2255, 239, 0));
-}
+} */
 
 .loading {
   display: flex;
@@ -76,23 +88,23 @@
   width: 100%;
   z-index: 10;
   position: relative;
-
 }
 
 .formSection, .infoSection {
   flex: 1;
-  color: #f4f4f4;
+  color: var(--shark-900);
   padding: 1.5rem;
   margin: 1rem;
   border-radius: 8px;
   /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); */
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  width: 70%;
+  /* border: 1px solid var(--shark-700); */
+  width: 98%;
 }
 
 @media screen and (min-width: 768px) {
   .formSection, .infoSection {
     margin: 3rem;
+    width: 70%;
   }
   
 }
@@ -112,6 +124,7 @@
 .formSection .error {
   color: var(--error);
 }
+
 .form {
   display: flex;
   flex-direction: column;
@@ -143,21 +156,20 @@
 .button {
   padding: 0.7rem;
   border: none;
-  background: var(--science-blue-800);
-  color: var(--shark-50);
+  background: #0466c8;
+  color: #b4eeff;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease;
 }
 
 .button:hover {
-  background: var(--shark-200);
-  color: var(--shark-900);
+  background: #0299ff;
 }
 
 .reservationCard {
-  background: var(--background-low-opacity);
+  background: var(--background-opacity);
   padding: 2rem;
   border-radius: 6px;
 }

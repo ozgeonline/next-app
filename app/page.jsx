@@ -4,6 +4,7 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import {items} from '@/components/ui/sections/animated_sections/sections-items';
 import {homePageitems} from "@/components/ui/sections/cards/card-items";
+import TopScrollButton from "@/components/ui/topScrollButton/TopScrollButton";
 import styles from './page.module.css';
 
 const HeroBanner = dynamic(() => import('@/components/ui/assets/heroBanner/HeroBanner'));
@@ -22,6 +23,7 @@ export default function Home() {
   return (
     <>
     <div className={styles.container}>
+      {/* SECTİON */}
       {/* first view area */}
       <HeroBanner 
         srcImage="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDMrKaB2nlPGFDafBuW154icVrsNKdbwvp82nJ"
@@ -32,16 +34,21 @@ export default function Home() {
       />
 
       <>
+      {/* SECTİON */}
       <SlideSection isCommunityInfoVisible={isCommunityInfoVisible} />
+
       <main className={styles.main + ' ' + "mainBackground"}>
+        {/* SECTİON */}
         <div className={styles.mainContent  + ' ' + "mainBackground"}>
           <PositionedImage isCommunityInfoVisible={isCommunityInfoVisible} />
           <CTA isCommunityInfoVisible={isCommunityInfoVisible} />
         </div>
 
+        {/* SECTİON */}
         {/***Community Info Visible Section*/}
         <CommunityInfo setIsCommunityInfoVisible={setIsCommunityInfoVisible} />
 
+        {/* SECTİON */}
         {/*Scroll Trigger - Loop Slide Section */}
         <LoopSlideSection
           isCommunityInfoVisible={isCommunityInfoVisible}
@@ -61,6 +68,7 @@ export default function Home() {
           imgDes={homePageitems.imgCard.description}
         />
        
+        {/* SECTİON */}
         {/***********  Animated Sections ***********/}
         <div style={{position: 'relative', width: '100%'}} className="animatedSections mainBackground">
           {items.map((item, index) => {
@@ -81,6 +89,8 @@ export default function Home() {
       </main>
       </>
     </div>
+    
+    <TopScrollButton />
     </>
   );
 };

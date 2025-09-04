@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/components/providers/auth/AuthProvider";
 import styles from "./auth.module.css";
+import TopScrollButton from '@/components/ui/topScrollButton/TopScrollButton';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   const { user, isAuthenticated, loading, setIsLogout } = useAuth();
@@ -28,7 +29,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 
   const handleSignout = async () => {
     const event = new CustomEvent("authChange", { detail: { isLogout: true }});
-    
+
     try {
       //console.log("AuthLayout: sending POST to /api/auth/logout");
       const res = await fetch("/api/auth/logout", {
@@ -62,7 +63,8 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className={styles.containerWrapper + " " + styles.darkGradient + " " + styles.lightGradient}>
+    <div className={styles.containerWrapper + " " + "mainBackground"}>
+      <div className={styles.containerTopNavbar} />
       <div className={styles.card}>
         <div className={styles.userCard + " " + styles.darkGradient}>
           <div className={styles.top}>
@@ -75,14 +77,14 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             <div className={styles.bottom}>
               <button
                 type="button"
-                className={styles.button + " " + styles.darkGradient + " " + styles.lightGradient}
+                className={styles.button + " " + styles.darkGradient}
                 onClick={handleSignout}
               >
                 logout
               </button>
               <Link
                 href="/reservations"
-                className={styles.button + " " + styles.darkGradient + " " + styles.lightGradient}
+                className={styles.button + " " + styles.darkGradient}
               >
                 my reservations
               </Link>
@@ -94,7 +96,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           )}
         </div>
         
-        <div className={styles.avatar + "  " + styles.darkGradient + " " + styles.lightGradient}>
+        <div className={styles.avatar + "  " + styles.lightGradientAvatar + " " + styles.darkGradient}>
           {user?.name ? user.name.slice(0, 2).toUpperCase() : "G"}
         </div>
       </div>
@@ -102,6 +104,8 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       <div className={styles.card}>
         {children}
       </div>
+
+      <TopScrollButton />
     </div>
   );
 }
