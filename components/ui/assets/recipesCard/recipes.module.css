@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1.2;
+  overflow: hidden;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.recipe-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.recipe-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: top;
+  overflow: hidden;
+}
+
+.spotlight-image {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  transition: transform 0.5s linear;
+  transform-origin: top;
+  overflow: hidden;
+}
+
+.recipe-image .image-inner,
+.spotlight-image .image-inner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: top;
+}
+
+.spotlight-image:hover {
+  transform: scaleY(2);
+  transform-origin: top;
+}
+
+.recipe-card .recipe-overlay,
+.spotlight-image .recipe-overlay {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  padding: .5rem;
+  background: var(--shark-50);
+  color: var(--shark-800);
+}
+
+.spotlight-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  gap: .2rem;
+  padding: .5rem;
+}
+
+.spotlight-info a {
+  text-decoration: none;
+  color: var(--shark-50);
+  background: var(--shark-800);
+  padding: .3em .8em;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+}
+
+.spotlight-info a:hover {
+  filter: brightness(1.2);
+}

@@ -1,15 +1,11 @@
-import Image from 'next/image';
-
-// import mealIcon from '@/public/cafe/coffee.webp';
-// import communityIcon from '@/public/cafe/a.webp';
-// import eventsIcon from '@/public/cafe/c.webp';
-import styles from './page.module.css';
 import Link from 'next/link';
+import RecipesCard from '@/components/ui/assets/recipesCard/RecipesCard';
+import styles from './page.module.css';
 
 export default function CommunityPage() {
   return (
     <div className={styles.container + ' ' + "mainBackground"}>
-      {/* <div className={styles.containerTopNavbar} /> */}
+      <div className={styles.containerTopNavbar} />
       <header className={styles.header}>
         <h1>
           One shared passion: <span className={styles.highlight}>Food</span>
@@ -18,25 +14,34 @@ export default function CommunityPage() {
       </header>
       
       <main className={styles.main}>
+        <section className={styles.section}>
+          <h2 className={styles['section-title']}>Trending Recipes</h2>
+          <div className={styles['recipe-grid']}>
+            <RecipesCard />
+            <RecipesCard />
+            <RecipesCard />
+            <RecipesCard />
+            <RecipesCard />
+          </div>
+        </section>
+
         <div className={styles.meals}>
           <h2>Meals Shared</h2>
           <Link href="/meals">Browse Meals</Link>
         </div>
 
-        <div className={styles.perks}>
-          <h2>Community Perks</h2>
-          <ul className={styles.perks}>
-            <li>
-              <p>Share & discover recipes</p>
-            </li>
-            <li>
-              <p>Find new friends & like-minded people</p>
-            </li>
-            <li>
-              <p>Participate in exclusive events</p>
-            </li>
-          </ul>
-        </div>
+        <section className={styles.section}>
+          <h2 className={styles['section-title']}>User Spotlights</h2>
+          <div className={styles["spotlight-grid"]}>
+            <RecipesCard spotlight={true} />
+            <RecipesCard spotlight={true} />
+            <RecipesCard spotlight={true} />
+            <RecipesCard spotlight={true} />
+            <RecipesCard spotlight={true} />
+            <RecipesCard spotlight={true} />
+            <RecipesCard spotlight={true} />
+          </div>
+        </section>
       </main>
     </div>
   );
