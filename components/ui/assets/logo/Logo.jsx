@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useTheme } from "@/components/providers/theme/ThemeContext";
-import { useScroll } from "@/components/providers/navbar/ScrollingContext";
+import { useTheme } from "@/context/theme/ThemeContext";
+import { useScroll } from "@/context/navbar/ScrollingContext";
 import styles from "./logo.module.css"
 export default function Logo() {
   const { theme } = useTheme();

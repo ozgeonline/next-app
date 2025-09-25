@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useAuth } from "@/components/providers/auth/AuthProvider";
+import { useAuth } from "@/context/auth/AuthProvider";
 import { SavedReservation } from "@/types/reservationTypes";
 
 interface ReservationState {

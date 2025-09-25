@@ -11,6 +11,7 @@
   height: 100vh;
   overflow: hidden;
   transition: transform filter 0.1s ease-out; 
+  background: #1a1a1a;
 }
 
 .imgBrightness {

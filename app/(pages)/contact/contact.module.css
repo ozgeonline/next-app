@@ -103,7 +103,6 @@
 @media screen and (min-width: 1024px) {
   .formWrapper {
     height: 100%;
-    padding: 1.25rem 0;
   }
   
 }
@@ -114,13 +113,7 @@
   justify-content: center;
   align-items: stretch;
   flex: 1;
-  background: rgba(255, 255, 255, 0.2);
   border-radius: 24px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(9.3px);
-  border: 1px solid rgba(33, 37, 41, 0.1);
-  padding: 1rem;
   color: var(--shark-800);
 }
 
@@ -176,24 +169,30 @@
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  border-bottom: 1px solid #f4f4f4;
-  padding: .5rem 0;
 }
 
-@media screen and (min-width: 640px) {
-  .contactInfo .infoWrapper .info {
-    border-bottom: none;
-  }
-  
+.contactInfo .infoWrapper .info h3{
+  border-bottom: 1px solid #dedede;
 }
 
 .info h3 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.05rem;
 }
 
 .info p {
-  font-size: .9rem;
+  font-size: .8em;
   letter-spacing: 0.05rem;
 }
+
+@media screen and (min-width: 1024px) {
+  .info h3 {
+    font-size: 1.1rem;
+  }
+
+  .info p {
+    font-size: .9rem;
+  }
+}
+

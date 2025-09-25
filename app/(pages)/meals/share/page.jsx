@@ -11,7 +11,7 @@ export default function ShareMealPage() {
   //console.log("state:", state);
   
   return (
-    <div className={styles.container}>
+    <div className={styles.container + ' ' + "mainBackground"}>
       <header className={styles.header}>
         <h1>
           Share your <span className={styles.highlight}>favorite meal</span>

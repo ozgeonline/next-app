@@ -274,6 +274,18 @@ body {
   overflow-x: hidden;
 }
 
+.containerTopNavbar {
+  height: 4rem;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+[data-theme="light"] .containerTopNavbar {
+  background: var(--science-blue-800);
+}
+
 .not-found,
 .error {
   display: flex;
@@ -282,6 +294,8 @@ body {
   align-items: center;
   height: 100vh;
   text-align: center;
+  position: relative;
+  z-index: 100;
 }
 
 .not-found h1,
@@ -306,6 +320,22 @@ body {
   color:var(--text);
 }
 
+.not-found a,
+.error a {
+  color: var(--shark-50);
+  border: 1px solid var(--shark-800);
+  background: var(--shark-800);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.not-found a:hover,
+.error a:hover {
+  filter: brightness(1.2);
+}
 
 .footerWrapper {
   display: flex;

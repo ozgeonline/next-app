@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useTheme } from "@/components/providers/theme/ThemeContext";
-import { useScroll } from "@/components/providers/navbar/ScrollingContext";
-import { useNavigation } from "@/components/providers/navbar/NavigationContext";
+import { useTheme } from "@/context/theme/ThemeContext";
+import { useScroll } from "@/context/navbar/ScrollingContext";
+import { useNavigation } from "@/context/navbar/NavigationContext";
 import MenuIcon from "@/components/ui/icon/MenuIcon";
 import FoodsIcon from "@/components/ui/icon/FoodsIcon";
 import styles from "./dropdown.module.css";

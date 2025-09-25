@@ -1,25 +1,15 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
-import { Schema } from "mongoose";
 import Reservation from "@/app/models/Reservation";
 import connect from "@/lib/db";
+import { getUserFromCookies } from "@/lib/getUserFromCookies";
 
 export async function GET(req: Request) {
   try {
     await connect();
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
 
-    if (!token) {
-      return NextResponse.json({ error: "No token found" }, { status: 401 });
-    }
-
-    let decoded: any;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string;};
-    } catch (error) {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+    const decoded = await getUserFromCookies();
+    if (!decoded) {
+      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
     }
 
     const reservations = await Reservation.find({ userId: decoded.userId })
@@ -38,27 +28,16 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     await connect();
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
-
-    if (!token) {
-      return NextResponse.json({ error: "User not authenticated, please log in" }, { status: 401 });
-    }
-
-    let decoded: any;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string;}; //type?
-      if (typeof decoded !== 'object') {
-        throw new Error('Invalid token payload');
-      }
-    } catch (error) {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+    
+    const decoded = await getUserFromCookies();
+    if (!decoded) {
+      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
     }
 
     const body = await req.json();
 
     const newReservation = new Reservation({
-      userId: decoded.userId as Schema.Types.ObjectId,
+      userId: decoded.userId,
       date: new Date(body.date),
       time: body.time,
       guests: body.guests,

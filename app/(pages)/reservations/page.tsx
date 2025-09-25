@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAuth } from "@/components/providers/auth/AuthProvider";
+import { useAuth } from "@/context/auth/AuthProvider";
 import { useReservations } from "@/hooks/useReservation";
 import { SavedReservation } from "@/types/reservationTypes";
 import styles from "./reservation.module.css";
@@ -23,7 +23,7 @@ export default function ReservationPage() {
 //         "Content-Type": "application/json",
 //       },
 //       body: JSON.stringify({
-//         date: "2025-09-01",   //ISO
+//         date: "2025-09-01",
 //         time: "19:00",
 //         guests: 4,
 //         notes: "Pencere kenarı masa lütfen",
@@ -50,11 +50,9 @@ export default function ReservationPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  console.log("user from AuthProvider:", user);
-
-
+  //console.log("user from AuthProvider:", user);
   // console.log("editReservationId", editReservationId);
-   //console.log("reservation", reservation);
+  //console.log("reservation", reservation);
 
   const showError = (msg: string) => {
     setError(msg);

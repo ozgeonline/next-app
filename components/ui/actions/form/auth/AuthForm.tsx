@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from "@/components/providers/auth/AuthProvider";
+import { useAuth } from "@/context/auth/AuthProvider";
 import Link from 'next/link';
 import styles from "./auth-form.module.css";
 

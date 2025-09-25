@@ -3,9 +3,9 @@ import Footer from "@/components/ui/sections/footer/Footer";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
-import {ThemeProvider} from "@/components/providers/theme/ThemeContext";
-import { AuthProvider } from "@/components/providers/auth/AuthProvider";
-import { NavigationProvider } from "@/components/providers/navbar/NavigationContext";
+import {ThemeProvider} from "@/context/theme/ThemeContext";
+import { AuthProvider } from "@/context/auth/AuthProvider";
+import { NavigationProvider } from "@/context/navbar/NavigationContext";
 import './globals.css';
 
 

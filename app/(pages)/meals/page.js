@@ -1,13 +1,13 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import MealsGrid from "@/components/meals/meals-grid";
 import styles from "./page.module.css";
 import { notFound } from "next/navigation";
+import RecipesCard from "@/components/ui/assets/recipesCard/RecipesCard";
 
 export const dynamic = 'force-dynamic';
  async function getData() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meals`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meals/meal`, {
       cache: 'no-cache',
     });
 
@@ -28,7 +28,7 @@ export default async function MealsPage() {
   //meals.map(meal => console.log(meal));
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container + ' ' + "mainBackground"}>
       <header className={styles.header}>
         <h1>Delicious meals, created 
           <span className={styles.highlight}> by you</span>
@@ -41,15 +41,13 @@ export default async function MealsPage() {
         </p>
       </header>
       <main className={styles.main}>
-        <Suspense 
-          fallback={
-            <p className={styles.loading}>loading meals...</p>
-          }
-        >
-            {meals.length === 0 ? (
+        <Suspense fallback={<p className={styles.loading}>loading meals...</p>}>
+          {meals.length === 0 ? (
             <p className={styles.error}>No meals available. Please try again later.</p>
           ) : (
-            <MealsGrid meals={meals} />
+            <div className={styles['meals-grid']}>
+              <RecipesCard spotlight={true} meals={meals} />
+            </div>
           )}
         </Suspense>
       </main>

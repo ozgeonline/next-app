@@ -1,23 +1,16 @@
 import { NextResponse } from "next/server";
 import connect from "@/lib/db";
 import User from "@/app/models/User";
-import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
+import { getUserFromCookies } from "@/lib/getUserFromCookies";
+import Rating from "@/app/models/Rating";
+import Meal from "@/app/models/Meal";
 
 export async function GET(req: Request) {
   try {
     await connect();
 
-    const cookieStore = await cookies();
-    const token = cookieStore.get('token')?.value;
-    if (!token) {
-      return NextResponse.json({ error: "No token found" }, { status: 401 });
-    }
-
-    let decoded:any;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string; name: string; email: string };
-    } catch (error) {
+    const decoded = await getUserFromCookies();
+    if (!decoded) {
       return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
     }
 
@@ -26,13 +19,38 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    const url = new URL(req.url);
+    const ratingsOnly = url.searchParams.get('ratings') === 'true';
+
+    if (ratingsOnly) {
+      const ratings = await Rating.find({ userId: decoded.userId })
+        .populate({ path: 'mealId', select: 'title slug' })
+        .lean();
+        
+      const userRatings = ratings.map((rating) => ({
+        mealId: rating.mealId._id.toString(),
+        mealTitle: rating.mealId.title,
+        mealSlug: rating.mealId.slug,
+        rating: rating.rating,
+        createdAt: rating.createdAt,
+      }));
+
+      return NextResponse.json({
+        message: 'User ratings fetched successfully',
+        ratings: userRatings,
+      });
+    }
+
     return NextResponse.json({
       message: "User data fetched successfully",
       user: { 
         name: user.name, 
         email: user.email, 
         userId: user._id 
-      }
+      },
+      ratings: await Rating.find({ userId: decoded.userId })
+      // .populate('mealId', 'title slug').lean()
+      .populate({ path: 'mealId', select: 'title slug'}).lean()
     });
 
   } catch (error) {
@@ -44,24 +62,9 @@ export async function PUT(req: Request) {
   try {
     await connect();
 
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
-    if (!token) {
-      return NextResponse.json({ error: "No token found" }, { status: 401 });
-    }
-
-    let decoded: any;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
-        userId: string;
-        name: string;
-        email: string;
-      };
-    } catch (error) {
-      return NextResponse.json(
-        { error: "Invalid token-user middleware" },
-        { status: 401 }
-      );
+    const decoded = await getUserFromCookies();
+    if (!decoded) {
+      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
     }
 
     const body = await req.json();
@@ -72,7 +75,7 @@ export async function PUT(req: Request) {
     }
 
     const updatedUser = await User.findByIdAndUpdate(
-      decoded.userId,
+      decoded?.userId,
       { name },
       { new: true }
     ).select("name email");

@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useAuth } from "@/components/providers/auth/AuthProvider";
+import { useAuth } from "@/context/auth/AuthProvider";
 import styles from "./profile.module.css";
 
 export default function ProfilePage() {
-  const { user, isAuthenticated, loading } = useAuth();
+  const { user, isAuthenticated, loading, mutateUser } = useAuth();
   const [showInput, setShowInput] = useState(false);
   const [newName, setNewName] = useState("");
   const [saving, setSaving] = useState(false);
@@ -38,7 +38,7 @@ export default function ProfilePage() {
       });
 
       if (res.ok) {
-        window.dispatchEvent(new CustomEvent("authChange"));
+        mutateUser();
         setShowInput(false);
         setNewName("");
       } else {
@@ -55,7 +55,39 @@ export default function ProfilePage() {
     <div className={styles.containerWrapper}>
       <div className={styles.card}>
         <div className={styles.profileWrapper}>
-          {!isAuthenticated ? (
+          {isAuthenticated ? (
+             // Authenticated Profile
+            <div className={styles.authProfile}>
+              <h3>Profile</h3>
+              <div className={styles.profileInfo}>
+                <p className={styles.mailInfo}>
+                  <span>mail:</span> {user?.email}
+                </p>
+                <p className={styles.nameInfo}>
+                  <span>name:</span> {user?.name || "Not set"}
+                </p>
+              </div>
+              <h3>Update account name:</h3>
+              <div className={styles.updateSection}>
+                {!showInput ? (
+                  <button onClick={() => setShowInput(true)}>Update</button>
+                ) : (
+                  <>
+                    <input
+                      type="text"
+                      value={newName}
+                      onChange={(e) => setNewName(e.target.value)}
+                      placeholder="Enter new name"
+                    />
+                    <button onClick={handleUpdate} disabled={saving}>
+                      {saving ? "Saving..." : "Save"}
+                    </button>
+                    <button onClick={() => setShowInput(false)}>Cancel</button>
+                  </>
+                )}
+              </div>
+            </div>
+          ) : (
             // Not Authenticated Profile
             <>
               <Link
@@ -74,39 +106,6 @@ export default function ProfilePage() {
                 Login
               </Link>
             </>
-          ) : (
-            // Authenticated Profile
-            <div className={styles.authProfile}>
-              <h3>Profile</h3>
-              <div className={styles.profileInfo}>
-                <p className={styles.mailInfo}>
-                  <span>mail:</span> {user?.email}
-                </p>
-                <p className={styles.nameInfo}>
-                  <span>name:</span> {user?.name || "Not set"}
-                </p>
-              </div>
-              <h3>Update account name:</h3>
-              <div className={styles.updateSection}>
-                 {!showInput ? (
-                <button onClick={() => setShowInput(true)}>Update</button>
-              ) : (
-                <>
-                  <input
-                    type="text"
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    placeholder="Enter new name"
-                  />
-                  <button onClick={handleUpdate} disabled={saving}>
-                    {saving ? "Saving..." : "Save"}
-                  </button>
-                  <button onClick={() => setShowInput(false)}>Cancel</button>
-                </>
-              )}
-              </div>
-             
-            </div>
           )}
         </div>
       </div>

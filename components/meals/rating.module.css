@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.starContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.starWrapper {
+  display: flex;
+}
+
+.star {
+  display: flex;
+  flex-direction: row;
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+.star-half {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  font-size: 0.8rem;
+  color: var(--shark-800);
+  margin-left: .5rem;
+}
+
+.error {
+  color: red;
+  opacity: 0.5;
+  width: 100%;
+  font-size: 0.8rem;
+  text-align: center;
+  font-style: italic;
+}

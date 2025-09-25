@@ -9,6 +9,7 @@ const mealSchema = new Schema({
   creator: { type: String, required: true },
   creator_email: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
+  averageRating: { type: Number, default: 0 },
 },{ timestamps: true });
 
 const Meal = mongoose.models.Meal || mongoose.model('Meal', mealSchema);

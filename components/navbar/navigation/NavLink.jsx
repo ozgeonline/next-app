@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useEffect, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { useNavigation } from "@/components/providers/navbar/NavigationContext";
-import { useScroll } from "@/components/providers/navbar/ScrollingContext";
+import { useNavigation } from "@/context/navbar/NavigationContext";
+import { useScroll } from "@/context/navbar/ScrollingContext";
 import styles from "./nav-link.module.css";
 
 export default function NavLink({href, children}) {

@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { links } from "./navlinks.constant";
-import { ScrollProvider } from '@/components/providers/navbar/ScrollingContext';
+import { ScrollProvider } from '@/context/navbar/ScrollingContext';
 import DarkLightToogle from "../settings/theme/DarkLightToogle";
 import Logo from "@/components/ui/assets/logo/Logo"
 import styles from "./navbar.module.css";

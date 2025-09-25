@@ -2,22 +2,7 @@
 .navbarScroll {
   background-color: var(--background);
   z-index: 10000000000000;
-  /* color: var(--text); */
 }
-
-/* [data-theme="light"] .container:not(.navbarScroll) .nav a {
-  color: white;
-}
-
-[data-theme="light"] .container:not(.navbarScroll) .container{
-  color: white;
-  background: var(--background);
-}
-
-[data-theme="light"] .container.navbarScroll .nav a {
-  color: var(--text);
-  background: var(--background);
-} */
 
 .container {
   display: flex;

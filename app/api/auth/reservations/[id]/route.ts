@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connect from "@/lib/db";
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
 import Reservation from "@/app/models/Reservation";
+import { getUserFromCookies } from "@/lib/getUserFromCookies";
 
 export async function PUT(
   req: NextRequest,
@@ -10,18 +9,9 @@ export async function PUT(
 ) {
   try {
     await connect();
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
-
-    if (!token) {
-      return NextResponse.json({ error: "No token found" }, { status: 401 });
-    }
-
-    let decoded: any;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string };
-    } catch (error) {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+    const decoded = await getUserFromCookies();
+    if (!decoded) {
+      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
     }
 
     const { id } = await context.params;//reservation ID
