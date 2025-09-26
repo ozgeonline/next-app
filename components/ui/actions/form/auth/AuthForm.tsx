@@ -22,7 +22,7 @@ export default function AuthForm({
   const [isTouched, setIsTouched] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
    const [error, setError] = useState("");
-  const { isAuthenticated, loading } = useAuth();
+  const { loading, mutateUser } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,6 +47,7 @@ export default function AuthForm({
       if (res.ok) {
         window.dispatchEvent(new CustomEvent("authChange", { detail: { isLogout: false } }));
         console.log("AuthForm: Redirecting to", nonTokenPath || "/profile");
+        mutateUser(); 
         router.push(nonTokenPath || "/profile");
       } else {
         if (formType === "signup" && data.error?.toLowerCase().includes("already in use")) {

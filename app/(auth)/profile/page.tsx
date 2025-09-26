@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/auth/AuthProvider";
 import styles from "./profile.module.css";
@@ -11,9 +11,10 @@ export default function ProfilePage() {
   const [newName, setNewName] = useState("");
   const [saving, setSaving] = useState(false);
 
-  // useEffect(() => {
-  //   console.log("loading:", loading);
-  // }, [loading]);
+  useEffect(() => {
+    console.log("loading:", loading);
+    console.log("isAuthenticated:", isAuthenticated);
+  }, [loading]);
   
    if (loading) {
     return (
