@@ -45,13 +45,13 @@ export default function DropdownNavbarMenu({children}) {
         :  "var(--background)"
   };
 
-  const border = {
-    border: 
-      theme === "light" && scrolling ? "1px solid #1A1A1A"
-        : theme === "light" && !scrolling ? "1px solid #f4f4f9" : 
-        "1px solid #f4f4f9"
+  // const border = {
+  //   border: 
+  //     theme === "light" && scrolling ? "1px solid #1A1A1A"
+  //       : theme === "light" && !scrolling ? "1px solid #f4f4f9" : 
+  //       "1px solid #f4f4f9"
 
-  };
+  // };
 
   const strokeColor = 
     theme === "light" && scrolling ? "#1A1A1A"

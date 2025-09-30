@@ -39,7 +39,7 @@
     "app/models/User.ts",
     "env.d.ts",
     "env.local.d.ts"
-, "components/ui/topScrollButton/TopScrollButton.tsx"  ],
+, "components/ui/topScrollButton/TopScrollButton.tsx", "app/(pages)/loading.js"  ],
   "exclude": [
     "node_modules"
   ]

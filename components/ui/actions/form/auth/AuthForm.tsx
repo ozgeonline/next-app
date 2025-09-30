@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/context/auth/AuthProvider";
 import Link from 'next/link';
@@ -129,6 +129,7 @@ export default function AuthForm({
             <input
               name="password"
               type="password"
+              autoComplete="new-password"
               placeholder="Password"
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               required

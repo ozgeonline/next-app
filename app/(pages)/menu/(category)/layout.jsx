@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { useTransition } from "react";
 import { createPortal } from "react-dom";
 import FoodsIcon from "@/components/ui/icon/FoodsIcon";
 import { menuLinks } from "../menu-items";
@@ -8,13 +8,13 @@ import styles from "./category.module.css";
 export default function RootLayout({ children }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const [isClient, setIsClient] = useState(false);
+  // const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
 
-  const animationPortal = isPending && isClient
+  const animationPortal = isPending
     ? createPortal(
         <div className={styles.overlay}>
           <FoodsIcon stroke="white" className={styles.icon} width="50%" />

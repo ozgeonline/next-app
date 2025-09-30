@@ -8,6 +8,13 @@
   padding: 1rem;
 }
 
+@media screen and (min-width: 640px) {
+  .container {
+    margin: 1rem;
+  }
+  
+}
+
 .card {
   position: relative;
   display: flex;

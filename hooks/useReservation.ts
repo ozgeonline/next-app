@@ -46,6 +46,7 @@ export const useReservations = (): ReservationState => {
       const fetchedReservations: SavedReservation[] = data.reservations.map(
         (reservation: any) => ({
           _id: reservation._id,
+          userId: reservation.userId,
           date: reservation.date,
           time: reservation.time,
           guests: reservation.guests,

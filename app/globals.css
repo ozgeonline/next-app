@@ -249,7 +249,7 @@
 }
 
 :root {
-  --background-gradient: linear-gradient(90deg, #f9572a, #ffc905);
+  --background-gradient: linear-gradient(90deg, var(--science-blue-600), var(--science-blue-100));
 }
 
 

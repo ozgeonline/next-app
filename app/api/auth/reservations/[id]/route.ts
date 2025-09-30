@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connect from "@/lib/db";
-import Reservation from "@/app/models/Reservation";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
+import Reservation from "@/app/models/Reservation";
 
 export async function PUT(
   req: NextRequest,
@@ -16,6 +16,7 @@ export async function PUT(
 
     const { id } = await context.params;//reservation ID
     const body = await req.json();
+    //console.log("PUT /api/auth/reservations/[id]: body:", body);
 
     //reservation & user_id relationship
     const reservation = await Reservation.findOne({ _id: id, userId: decoded.userId });
@@ -27,7 +28,7 @@ export async function PUT(
     }
 
     //update the reservation
-    reservation.date = new Date(body.date);
+    reservation.date = new Date(body.date).toISOString().split("T")[0];
     reservation.time = body.time;
     reservation.guests = body.guests;
     reservation.notes = body.notes || null;

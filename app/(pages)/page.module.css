@@ -10,3 +10,25 @@
 [data-theme="light"] .containerTopNavbar {
   background: linear-gradient(to bottom, var(--science-blue-300), transparent);
 }
+
+[data-theme="light"] .containerWrapper.gradientBackground {
+  background:  linear-gradient(90deg, var(--science-blue-600), var(--science-blue-100));
+}
+
+[data-theme="dark"] .containerWrapper.gradientBackground {
+  background:  linear-gradient(90deg, var(--science-blue-500),var( --shark-50));
+}
+
+.containerWrapper .loading { color: #ffffc2;}
+
+.containerWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  opacity: 1;
+  z-index: 100;
+}

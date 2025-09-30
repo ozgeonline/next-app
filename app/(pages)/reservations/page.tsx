@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "@/context/auth/AuthProvider";
 import { useReservations } from "@/hooks/useReservation";
 import { SavedReservation } from "@/types/reservationTypes";
@@ -39,8 +39,6 @@ export default function ReservationPage() {
 
 
   const [reservation, setReservation] = useState<SavedReservation>({
-    userId: { _id: "", email: "", name: "" },
-    _id: "",
     date: "",
     time: "",
     guests: 1,
@@ -68,29 +66,10 @@ export default function ReservationPage() {
     }, 3000);
   };
 
-  // pre-fill
-  useEffect(() => {
-    if (user && !authLoading) {
-      setReservation((prev) => ({
-        ...prev,
-        userId: {
-          _id: user._id as string,
-          email: user.email,
-          name: user.name,
-        },
-      }));
-    }
-  }, [user, authLoading]);
-
   // Update reservation
   const handleEdit = (res: SavedReservation) => {
     setReservation({
       _id: res._id || "",
-      userId: {
-        _id: user?._id as string || "",
-        email: user?.email || "",
-        name: user?.name || "",
-      },
       date: new Date(res.date).toISOString().split("T")[0],
       time: res.time,
       guests: res.guests,
@@ -103,7 +82,7 @@ export default function ReservationPage() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    if (name !== "name" && name !== "email") {
+    if (name !== "name" && name !== "email") { //readonly
       setReservation((prev) => ({
         ...prev,
         [name]: name === "guests" ? parseInt(value) : value,
@@ -126,6 +105,7 @@ export default function ReservationPage() {
       return;
     }
 
+    //if a reservation is made today, check if the selected time is in the future
     if (parsedDay.getTime() === todayDay.getTime()) {
       const [hours, minutes] = reservation.time.split(":").map(Number);
 
@@ -135,15 +115,15 @@ export default function ReservationPage() {
       const nowTime = new Date();
       nowTime.setSeconds(0, 0);
 
-      // console.log("---- TEST ----");
-      // console.log("selectedTime:", selectedTime.toString());
-      // console.log("nowTime     :", nowTime.toString());
-      // console.log("selected <= now ?", selectedTime <= nowTime);
-
       if (selectedTime <= nowTime) {
         showError("You cannot select a past time for today.");
         return;
       }
+
+      // console.log("---- TEST ----");
+      // console.log("selectedTime:", selectedTime.toString());
+      // console.log("nowTime     :", nowTime.toString());
+      // console.log("selected <= now ?", selectedTime <= nowTime);
     }
 
     if (parsedDay < todayDay) {
@@ -201,11 +181,6 @@ export default function ReservationPage() {
 
       showSuccess(`Reservation ${editReservationId ? "updated" : "saved"} successfully!`);
       setReservation({
-        userId: {
-          _id: "",
-          name: "",
-          email: "",
-        },
         _id: "",
         date: "",
         time: "",
@@ -223,15 +198,11 @@ export default function ReservationPage() {
   };
 
   if (authLoading && reservationsLoading) return <div className={styles.loading}>Loading...</div>;
-  // if (!isAuthenticated) {
-  //   router.push("/login");
-  //   return null;
-  // }
 
   return (
     <>
       <div className={styles.containerWrapper + ' ' + "mainBackground"}>
-      <div className={styles.containerTopNavbar} />
+        <div className={styles.containerTopNavbar} />
         <div className={styles.formSection}>
           <h2>{editReservationId ? "Update Reservation" : "Make a Reservation"}</h2>
 
@@ -247,7 +218,7 @@ export default function ReservationPage() {
               <input
                 type="text"
                 name="name"
-                value={reservation.userId.name}
+                value={user?.name || ""}
                 className={`${styles.input}`}
                 readOnly
               />
@@ -258,7 +229,7 @@ export default function ReservationPage() {
               <input
                 type="email"
                 name="email"
-                value={reservation.userId.email}
+                value={user?.email || ""}
                 className={`${styles.input}`}
                 readOnly
               />

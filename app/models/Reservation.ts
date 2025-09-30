@@ -1,16 +1,10 @@
-import { Schema, model, models, Types, InferSchemaType, Model } from "mongoose";
-export interface IReservation {
-  userId: Types.ObjectId;
-  date: Date;
-  time: string;
-  guests: number;
-  notes?: string;
-}
+import { Schema, model, models, InferSchemaType, Model } from "mongoose";
+import { SavedReservation } from "@/types/reservationTypes";
 
-const reservationSchema = new Schema<IReservation>(
+const reservationSchema = new Schema<SavedReservation>(
   {
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     time: { type: String, required: true },
     guests: { type: Number, required: true },
     notes: { type: String },

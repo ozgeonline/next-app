@@ -3,7 +3,7 @@ import Reservation from "@/app/models/Reservation";
 import connect from "@/lib/db";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
     await connect();
 
@@ -38,6 +38,7 @@ export async function POST(req: Request) {
 
     const newReservation = new Reservation({
       userId: decoded.userId,
+      name: decoded.name,
       date: new Date(body.date),
       time: body.time,
       guests: body.guests,
@@ -46,13 +47,14 @@ export async function POST(req: Request) {
 
     const saved = await newReservation.save();
     await saved.populate("userId", "name email");
+    //console.log("newReservation:", saved);
 
     return NextResponse.json({
       message: "Reservation created successfully",
       reservation: {
         _id: saved._id.toString(),
-        userId: saved.userId.id,
-        date: saved.date.toISOString(),
+        userId: saved.userId,
+        date: saved.date.toString(),
         time: saved.time,
         guests: saved.guests,
         notes: saved.notes || null,

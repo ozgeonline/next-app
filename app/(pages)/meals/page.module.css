@@ -21,6 +21,7 @@
   max-width: 75rem;
   font-size: 1rem;
   color: var(--shark-800);
+  padding: 1rem;
 }
 .header h1,
 .header p {

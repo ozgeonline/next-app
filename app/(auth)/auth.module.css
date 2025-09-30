@@ -25,7 +25,7 @@
 }
 
 [data-theme="light"] .containerWrapper.gradientBackground {
-  background:  linear-gradient(90deg, rgb(237, 46, 8),rgb(2255, 239, 0));
+  background:  linear-gradient(90deg, var(--science-blue-600), var(--science-blue-100));
 }
 
 [data-theme="dark"] .containerWrapper.gradientBackground {
