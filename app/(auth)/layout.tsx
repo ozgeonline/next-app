@@ -38,7 +38,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       });
       if (res.ok) {
         //console.log("AuthLayout: logout successful, redirecting to /login");
-        mutate("/api/auth/user", undefined, false);
+        mutate("/api/auth/user", undefined, false); //reset cache user
         router.push("/profile");
       } else {
         //console.error("AuthLayout: logout failed");
@@ -64,6 +64,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <div className={styles.containerWrapper + " " + "mainBackground"}>
       <div className={styles.containerTopNavbar} />
       <div className={styles.card}>
+        <div className={styles.avatar + "  " + styles.lightGradientAvatar + " " + styles.darkGradient}>
+          {user?.name ? user.name.slice(0, 2).toUpperCase() : "G"}
+        </div>
         <div className={styles.userCard + " " + styles.darkGradient}>
           <div className={styles.top}>
             <div className={styles.name}>
@@ -89,13 +92,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             </div>
           ) : (
             <div className={styles.bottom}>
-              <span className={styles.forReservation}>Log in to make a reservation</span>
+              <span className={styles.nonauth}>Login for account information</span>
             </div>
           )}
-        </div>
-        
-        <div className={styles.avatar + "  " + styles.lightGradientAvatar + " " + styles.darkGradient}>
-          {user?.name ? user.name.slice(0, 2).toUpperCase() : "G"}
         </div>
       </div>
 

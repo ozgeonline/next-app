@@ -2,19 +2,17 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import {items} from '@/components/ui/sections/animated_sections/sections-items';
-import {homePageitems} from "@/components/ui/sections/cards/card-items";
 import TopScrollButton from "@/components/ui/topScrollButton/TopScrollButton";
 import styles from './page.module.css';
 
-const HeroBanner = dynamic(() => import('@/components/ui/assets/heroBanner/HeroBanner'));
-const SlideSection = dynamic(() => import('@/components/ui/sections/slideSection/SlideSection'));
-const PositionedImage = dynamic(() => import('@/components/ui/sections/positioned_img/PositionedImage'));
-const CTA = dynamic(() => import('@/components/ui/sections/cta/CTA'));
-const CommunityInfo = dynamic(() => import('@/components/ui/sections/community_info/CommunityInfo'));
-const LoopSlideSection = dynamic(() => import('@/components/ui/sections/scroll_trigger_loop_slides/LoopSlideSection'));
-const CardsSection = dynamic(() => import('@/components/ui/sections/cards/CardsSection'));
-const AnimatedSections = dynamic(() => import('@/components/ui/sections/animated_sections/AnimatedSections'));
+const HeroBanner = dynamic(() => import('@/components/assets/heroBanner/HeroBanner'));
+const SlideSection = dynamic(() => import('@/components/sections/slideSection/SlideSection'));
+const PositionedImage = dynamic(() => import('@/components/sections/positioned_img/PositionedImage'));
+const CTA = dynamic(() => import('@/components/sections/cta/CTA'));
+const CommunityInfo = dynamic(() => import('@/components/sections/community_info/CommunityInfo'));
+const LoopSlideSection = dynamic(() => import('@/components/sections/scroll_trigger_loop_slides/LoopSlideSection'));
+const CardsSection = dynamic(() => import('@/components/sections/cards/CardsSection'));
+const AnimatedSections = dynamic(() => import('@/components/sections/animated_sections/AnimatedSections'));
 
 export default function Home() {
   const [isLoopSlideVisible, setIsLoopSlideVisible] = useState(false);
@@ -57,34 +55,15 @@ export default function Home() {
         />
 
         {/* Hover Cards Section */}
-        <CardsSection
-          infoTitle={homePageitems.infoCard.title}
-          infoDes={homePageitems.infoCard.description}
-          infoBtn={true}
-          imgBtn={true}
-          imgSrc={homePageitems.imgCard.images.src}
-          imgAlt={homePageitems.imgCard.images.alt}
-          imgTitle={homePageitems.imgCard.title}
-          imgDes={homePageitems.imgCard.description}
-        />
+        <CardsSection homePage={true} />
        
         {/* SECTİON */}
-        {/***********  Animated Sections ***********/}
-        <div style={{position: 'relative', width: '100%'}} className="animatedSections mainBackground">
-          {items.map((item, index) => {
-            const sectionData = item.savor || item.desserts || item.energy;
-            if (!sectionData) return null;
-            return (
-              <AnimatedSections
-                key={index}
-                title={sectionData.title}
-                description={sectionData.description}
-                images={sectionData.images}
-                reverse={sectionData.reverse}
-                coloredArea={true}
-              />
-            );
-          })}
+        {/***********  Animated Cards Sections ***********/}
+        <div
+          style={{position: 'relative', width: '100%'}}
+          className="animatedSections mainBackground"
+        >
+          <AnimatedSections />
         </div>
       </main>
       </>

@@ -1,13 +1,12 @@
 import dynamic from "next/dynamic";
-import Carousel from "@/components/ui/slides/carousel/Carousel";
+import Carousel from "@/components/slides/carousel/Carousel";
 import {menuSlides, menuLinks} from "./menu-items";
-import { menuPageitems } from "@/components/ui/sections/cards/card-items";
+import { MenuPreview } from "@/components/menu/MenuSection";
 import styles from "./menu.module.css";
 
-const HeroBanner = dynamic(() => import('@/components/ui/assets/heroBanner/HeroBanner'));
-const CardsSection = dynamic(() => import('@/components/ui/sections/cards/CardsSection'));
-const MenuPreview = dynamic(() => import('@/components/menu/MenuPreview'));
-const ReservationBanner = dynamic(() => import('@/components/ui/assets/reservationBanner/ReservationBanner'));
+const HeroBanner = dynamic(() => import('@/components/assets/heroBanner/HeroBanner'));
+const CardsSection = dynamic(() => import('@/components/sections/cards/CardsSection'));
+const ReservationBanner = dynamic(() => import('@/components/assets/reservationBanner/ReservationBanner'));
 
 export default function MenuPage() {
   return (
@@ -34,14 +33,7 @@ export default function MenuPage() {
 
       <main className={styles.main}>
         <div className={styles.cardsWrapper + ' ' + "mainBackground"}>
-          <CardsSection
-            infoTitle={menuPageitems.infoCard.title}
-            infoDes={menuPageitems.infoCard.description}
-            imgSrc={menuPageitems.imgCard.images.src}
-            imgAlt={menuPageitems.imgCard.images.alt}
-            imgTitle={menuPageitems.imgCard.title}
-            imgDes={menuPageitems.imgCard.description}
-          />
+          <CardsSection menuPage={true} />
         </div>
         <div className={styles.menu + ' ' + "mainBackground"}>
           <h2>Menu</h2>

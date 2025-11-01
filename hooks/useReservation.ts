@@ -12,7 +12,7 @@ interface ReservationState {
 }
 
 export const useReservations = (): ReservationState => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, loading: authLoading } = useAuth();
   const [reservations, setReservations] = useState<SavedReservation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,6 +20,9 @@ export const useReservations = (): ReservationState => {
   //console.log("Reservations:", reservations);
 
   const fetchReservations = useCallback(async () => {
+
+    if (authLoading) return setLoading(true);
+    
     if (!isAuthenticated || !user) {
       setReservations([]);
       setLoading(false);

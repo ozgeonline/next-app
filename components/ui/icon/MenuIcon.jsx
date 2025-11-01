@@ -1,7 +1,7 @@
 "use client";
 
-import { useTheme } from "@/context/theme/ThemeContext";
-import { useScroll } from "@/context/navbar/ScrollingContext";
+import { useTheme } from "@/context/theme/ThemeProvider";
+import { useScroll } from "@/context/scroll/ScrollingProvider";
 import styles from "./icon.module.css";
 export default function MenuIcon({onClick, open}) {
   const { theme } = useTheme();

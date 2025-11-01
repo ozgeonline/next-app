@@ -2,9 +2,9 @@
 
 import dynamic from 'next/dynamic';
 import { links } from "./navlinks.constant";
-import { ScrollProvider } from '@/context/navbar/ScrollingContext';
+import { ScrollProvider } from '@/context/scroll/ScrollingProvider';
 import DarkLightToogle from "../settings/theme/DarkLightToogle";
-import Logo from "@/components/ui/assets/logo/Logo"
+import Logo from "@/components/assets/logo/Logo"
 import styles from "./navbar.module.css";
 
 const NavLink = dynamic(() => import('./navigation/NavLink'), { ssr: false });

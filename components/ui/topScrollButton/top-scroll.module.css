@@ -1,10 +1,10 @@
 .containerBottom {
   position: fixed;
   bottom: 1rem;
-  right: .5rem;
+  right: .1rem;
   cursor: pointer;
   border: 1px solid var(--shark-300);
-  padding: 0.1rem;
+  /* padding: 0.1rem; */
   border-radius: 50%;
   display: flex;
   align-items: center;

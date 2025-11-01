@@ -1,11 +1,22 @@
-import { Suspense } from "react";
+// import { Suspense } from "react";
 import Link from "next/link";
-import styles from "./page.module.css";
 import { notFound } from "next/navigation";
-import RecipesCard from "@/components/ui/assets/recipesCard/RecipesCard";
+import RecipesCard from "@/components/assets/recipesCard/RecipesCard";
+import styles from "./page.module.css";
 
 export const dynamic = 'force-dynamic';
- async function getData() {
+
+async function MealsList() {
+  const meals = await getData();
+  if(!meals || meals.length === 0) return notFound();
+  return (
+    <div className={styles['meals-grid']}>
+      <RecipesCard spotlight={true} meals={meals} />
+    </div>
+  );
+}
+
+async function getData() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meals/meal`, {
       cache: 'no-cache',
@@ -22,11 +33,7 @@ export const dynamic = 'force-dynamic';
   }
 }
 
-export default async function MealsPage() {
-  const meals = await getData();
-  if(!meals) return notFound();
-  //meals.map(meal => console.log(meal));
-
+export default function MealsPage() {
   return (
     <div className={styles.container + ' ' + "mainBackground"}>
       <header className={styles.header}>
@@ -41,15 +48,9 @@ export default async function MealsPage() {
         </p>
       </header>
       <main className={styles.main}>
-        <Suspense fallback={<p className={styles.loading}>loading meals...</p>}>
-          {meals.length === 0 ? (
-            <p className={styles.error}>No meals available. Please try again later.</p>
-          ) : (
-            <div className={styles['meals-grid']}>
-              <RecipesCard spotlight={true} meals={meals} />
-            </div>
-          )}
-        </Suspense>
+        {/* <Suspense fallback={<p className={styles.loading}>loading meals...</p>}> */}
+          <MealsList />
+        {/* </Suspense> */}
       </main>
     </div>
   )

@@ -3,7 +3,6 @@ import connect from "@/lib/db";
 import User from "@/app/models/User";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import Rating from "@/app/models/Rating";
-import Meal from "@/app/models/Meal";
 
 export async function GET(req: Request) {
   try {

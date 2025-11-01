@@ -1,6 +1,46 @@
 import Link from 'next/link';
-import RecipesCard from '@/components/ui/assets/recipesCard/RecipesCard';
+import RecipesCard from '@/components/assets/recipesCard/RecipesCard';
 import styles from './page.module.css';
+
+export const dynamic = "force-dynamic";
+
+function NoMeals() {
+  return (
+    <p className={styles.error}>
+      No meals available. Please try again later or create your own recipe.
+    </p>
+  );
+}
+
+async function LatestMealsList() {
+  const meals = await getData();
+  return (
+    <>
+      {meals.length === 0 ? (
+        <NoMeals />
+      ) : (
+        <div className={styles['recipe-grid']}>
+          <RecipesCard meals={meals}/>
+        </div>
+      )}
+    </>
+  )
+}
+
+async function SpotlightMealsList() {
+  const meals = await getData();
+  return (
+    <>
+     {meals.length === 0 ? (
+        <NoMeals />
+      ) : (
+        <div className={styles['spotlight-grid']}>
+          <RecipesCard meals={meals} spotlight={true} />
+        </div>
+      )}
+    </>
+  )
+}
 
 async function getData() {
   try {
@@ -19,9 +59,7 @@ async function getData() {
   }
 };
 
-export default async function CommunityPage() {
-  const meals = await getData();
-
+export default function CommunityPage() {
   return (
     <div className={styles.container + ' ' + "mainBackground"}>
       <div className={styles.containerTopNavbar} />
@@ -35,15 +73,7 @@ export default async function CommunityPage() {
       <main className={styles.main}>
         <section className={styles.section}>
           <h2 className={styles['section-title']}>Latest Recipes</h2>
-          {meals.length === 0 ? (
-            <p className={styles.error}>
-              No meals available. Please try again later or create your own recipe.
-            </p>
-          ) : (
-            <div className={styles['recipe-grid']}>
-              <RecipesCard meals={meals}/>
-            </div>
-          )}
+          <LatestMealsList />
         </section>
 
         <div className={styles.meals}>
@@ -53,15 +83,7 @@ export default async function CommunityPage() {
 
         <section className={styles.section}>
           <h2 className={styles['section-title']}>User Spotlights</h2>
-          {meals.length === 0 ? (
-            <p className={styles.error}>
-              No meals available. Please try again later or create your own recipe.
-            </p>
-          ) : (
-            <div className={styles['spotlight-grid']}>
-              <RecipesCard meals={meals} spotlight={true} />
-            </div>
-          )}
+          <SpotlightMealsList />
         </section>
       </main>
     </div>

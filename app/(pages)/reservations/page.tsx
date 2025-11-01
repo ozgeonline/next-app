@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/context/auth/AuthProvider";
 import { useReservations } from "@/hooks/useReservation";
+import { cleanupExpiredReservations } from "@/utils/reservations/cleanupExpiredReservations";
 import { SavedReservation } from "@/types/reservationTypes";
 import styles from "./reservation.module.css";
 
 export default function ReservationPage() {
-  const { user, loading: authLoading } = useAuth();
+  const { user } = useAuth();
   const {
     reservations,
     loading: reservationsLoading,
@@ -37,7 +38,6 @@ export default function ReservationPage() {
 //   }
 // };
 
-
   const [reservation, setReservation] = useState<SavedReservation>({
     date: "",
     time: "",
@@ -45,25 +45,18 @@ export default function ReservationPage() {
     notes: "",
   });
   const [editReservationId, setEditReservationId] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+  const [message, setMessage] = useState<{ type: "error" | "success"; text: string } | null>(null);
+  const [expiredMessage, setExpiredMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
   //console.log("user from AuthProvider:", user);
   // console.log("editReservationId", editReservationId);
   //console.log("reservation", reservation);
 
-  const showError = (msg: string) => {
-    setError(msg);
-    setTimeout(() => {
-      setError(null);
-    }, 3000);
-  };
-
-  const showSuccess = (msg: string) => {
-    setSuccess(msg);
-    setTimeout(() => {
-      setSuccess(null);
-    }, 3000);
+  const showMessage = (type: "error" | "success", text: string) => {
+    setMessage({ type, text });
+    setTimeout(() => setMessage(null), 3000);
   };
 
   // Update reservation
@@ -90,71 +83,93 @@ export default function ReservationPage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const validateInputs = () => {
+    const parsedDate = new Date(reservation.date);
 
-    //validate input 
+    if (isNaN(parsedDate.getTime()) || !reservation.time || reservation.guests < 1) {
+      showMessage("error", "Please provide a valid date, time, and number of guests.");
+      return false;
+    }
+    return true;
+  };
+
+  //if a reservation is made today, check if the selected time is in the future
+  const checkDateConstraints = () => {
     const parsedDate = new Date(reservation.date);
     const parsedDay = new Date(parsedDate.getFullYear(), parsedDate.getMonth(), parsedDate.getDate());
 
     const today = new Date();
     const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
-    if (isNaN(parsedDate.getTime()) || !reservation.time || reservation.guests < 1) {
-      setError("Please provide a valid date, time, and number of guests.");
-      return;
+    const isToday = parsedDay.toDateString() === todayDay.toDateString();
+
+    if (parsedDay < todayDay && !isToday) {
+      showMessage("error", "You cannot make a reservation for a past date.");
+      return false;
     }
 
-    //if a reservation is made today, check if the selected time is in the future
-    if (parsedDay.getTime() === todayDay.getTime()) {
+    if (isToday) {
       const [hours, minutes] = reservation.time.split(":").map(Number);
 
-      const selectedTime = new Date();
-      selectedTime.setHours(hours, minutes, 0, 0);
+      const now = new Date();
+      now.setSeconds(0, 0);
 
-      const nowTime = new Date();
-      nowTime.setSeconds(0, 0);
-
-      if (selectedTime <= nowTime) {
-        showError("You cannot select a past time for today.");
-        return;
+      const selected = new Date();
+      selected.setHours(hours, minutes, 0, 0);
+      
+      if (selected <= now) {
+        showMessage("error", "You cannot select a past time for today.");
+        return false;
       }
-
-      // console.log("---- TEST ----");
-      // console.log("selectedTime:", selectedTime.toString());
-      // console.log("nowTime     :", nowTime.toString());
-      // console.log("selected <= now ?", selectedTime <= nowTime);
     }
 
-    if (parsedDay < todayDay) {
-      showError("You cannot make a reservation for a past date.");
-      return;
-    }
+    return true;
+  };
 
-    // check reservation limit
-    if (!editReservationId && reservations.length > 0) {
-      showError("You can only have one active reservation.");
-      return;
-    }
+  // check reservation limit
+  const checkReservationLimit = () => {
+  if (!editReservationId && reservations.length > 0) {
+    showMessage("error", "You can only have one active reservation.");
+    return false;
+  }
+  return true;
+};
+
+  const buildRequestData = () => {
+    const payload = {
+      date: new Date(reservation.date).toISOString(),
+      time: reservation.time,
+      guests: reservation.guests,
+      notes: reservation.notes,
+    };
+
+    const url = editReservationId
+      ? `/api/auth/reservations/${editReservationId}`
+      : `/api/auth/reservations`;
+
+    const method = editReservationId ? "PUT" : "POST";
+
+    // console.log("method", method);
+    return { url, method, payload };
+  };
+
+  const resetForm = () => {
+    setReservation({ date: "", time: "", guests: 1, notes: "" });
+    setEditReservationId(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+      
+    if (!validateInputs()) return;
+    if (!checkDateConstraints()) return;
+    if (!checkReservationLimit()) return;
 
     try {
       setIsSubmitting(true);
-      setError("");
-      setSuccess("");
+      setMessage(null);
 
-      const payload = {
-        date: new Date(reservation.date).toISOString(),
-        time: reservation.time,
-        guests: reservation.guests,
-        notes: reservation.notes,
-      };
-
-      const url = editReservationId
-        ? `/api/auth/reservations/${editReservationId}`
-        : "/api/auth/reservations";
-
-      const method = editReservationId ? "PUT" : "POST";
-      // console.log("method", method);
+      const { url, method, payload } = buildRequestData();
 
       const res = await fetch(url, {
         method,
@@ -163,41 +178,54 @@ export default function ReservationPage() {
         body: JSON.stringify(payload),
       });
 
-      // check json body
-      let data = null;
-      const contentType = res.headers.get("content-type");
-
-      if (contentType && contentType.includes("application/json")) {
-        data = await res.json();
-      }
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || `Failed to ${editReservationId ? "update" : "save"} reservation`);
 
       await refetchReservations();
-
-      if (!res.ok) {
-        throw new Error(
-          data?.error || `Failed to ${editReservationId ? "update" : "save"} reservation`
-        );
-      }
-
-      showSuccess(`Reservation ${editReservationId ? "updated" : "saved"} successfully!`);
-      setReservation({
-        _id: "",
-        date: "",
-        time: "",
-        guests: 1,
-        notes: "",
-      });
-      setEditReservationId(null);
+      showMessage("success", `Reservation ${editReservationId ? "updated" : "created"} successfully.`);
+      resetForm();
 
       //console.log("Reservation req:", { url, method, editReservationId, body: payload });
     } catch (err: any) {
-      setError(err.message);
+      showMessage("error", err.message || "Something went wrong.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (authLoading && reservationsLoading) return <div className={styles.loading}>Loading...</div>;
+  const handleDelete = async (id: string) => {
+    setIsDeleting(true);
+
+    try {
+      const res = await fetch(`/api/auth/reservations/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      if (!res.ok) throw new Error("Failed to delete reservation");
+
+      resetForm();
+      
+      await refetchReservations();
+
+      showMessage("success", "Reservation deleted successfully.");
+    } catch (err: any) {
+      showMessage("error", err.message || "Something went wrong.");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  useEffect(() => {
+    const cleanup = async () => {
+      await cleanupExpiredReservations(refetchReservations, ( text) => {
+        setExpiredMessage(text);
+      });
+    };
+
+    cleanup();
+  }, []);
+
 
   return (
     <>
@@ -207,9 +235,13 @@ export default function ReservationPage() {
           <h2>{editReservationId ? "Update Reservation" : "Make a Reservation"}</h2>
 
           {/* error-success info */}
-          {error && <p className={styles.error}>{error}</p>}
+          {message && (
+            <p className={message.type === "error" ? styles.error : styles.success}>
+              {message.text}
+            </p>
+          )}
+
           {reservationsError && <p className={styles.error}>{reservationsError}</p>}
-          {success && <p className={styles.success}>{success}</p>}
 
           {/* reservation - form area */}
           <form onSubmit={handleSubmit} className={styles.form}>
@@ -292,9 +324,10 @@ export default function ReservationPage() {
 
         <div className={styles.infoSection}>
           <h2>Your Reservations</h2>
-          {reservations.length > 0 ? (
+          {reservationsLoading ? (
+            <div>Loading...</div>
+          ) : reservations.length > 0 ? (
             reservations.map((res) => (
-              // console.log("res", res),
               <div key={res._id || `${res.date}-${res.time}`} className={styles.reservationCard}>
                 <p><strong>Name:</strong> {user?.name || "N/A"}</p>
                 <p><strong>Email:</strong> {user?.email || "N/A"}</p>
@@ -309,10 +342,22 @@ export default function ReservationPage() {
                 >
                   Update
                 </button>
+                <button
+                  type="button"
+                  className={styles.button}
+                  onClick={() => handleDelete(res._id || "")}
+                >
+                  {isDeleting ? "Deleting..." : "Delete Reservation"}
+                </button>
               </div>
             ))
           ) : (
-            <p>No reservations found.</p>
+           !reservationsLoading && reservations.length === 0 && 
+            <p>No reservations found.</p> 
+          )}
+
+          {expiredMessage && (
+            <div>{expiredMessage}</div>
           )}
         </div>
       </div>

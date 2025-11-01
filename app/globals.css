@@ -472,3 +472,37 @@ body {
     rgba(24, 24, 24, 0.02) 100%),
   linear-gradient(90deg, rgb(244, 244, 244),rgb(155, 155, 155)); */
 }
+/* [data-theme="dark"] .cardBackground {
+ background-image: 
+  linear-gradient(46deg, 
+    rgba(18, 18, 18, 0.01) 0%, 
+    rgba(18, 18, 18, 0.01) 50%,
+    rgba(10, 10, 10, 0.01) 50%, 
+    rgba(10, 10, 10, 0.01) 100%),
+  linear-gradient(338deg, 
+    rgba(232, 232, 232, 0.03) 0%, 
+    rgba(232, 232, 232, 0.03) 50%,
+    rgba(174, 174, 174, 0.03) 50%, 
+    rgba(174, 174, 174, 0.03) 100%),
+  linear-gradient(26deg, 
+    rgba(180, 180, 180, 0.02) 0%, 
+    rgba(180, 180, 180, 0.02) 50%,
+    rgba(191, 191, 191, 0.02) 50%, 
+    rgba(191, 191, 191, 0.02) 100%),
+  linear-gradient(129deg, 
+    rgba(52, 52, 52, 0.03) 0%, 
+    rgba(52, 52, 52, 0.03) 50%,
+    rgba(188, 188, 188, 0.03) 50%, 
+    rgba(188, 188, 188, 0.03) 100%),
+  linear-gradient(86deg, 
+    rgba(234, 234, 234, 0.03) 0%, 
+    rgba(234, 234, 234, 0.03) 50%,
+    rgba(100, 100, 100, 0.03) 50%, 
+    rgba(100, 100, 100, 0.03) 100%),
+  linear-gradient(73deg, 
+    rgba(203, 203, 203, 0.02) 0%, 
+    rgba(203, 203, 203, 0.02) 50%,
+    rgba(24, 24, 24, 0.02) 50%, 
+    rgba(24, 24, 24, 0.02) 100%),
+  linear-gradient(90deg, #cacaca,#404040);
+} */

@@ -1,18 +1,21 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useTransition } from "react";
 import { createPortal } from "react-dom";
 import FoodsIcon from "@/components/ui/icon/FoodsIcon";
 import { menuLinks } from "../menu-items";
 import styles from "./category.module.css";
+
 export default function RootLayout({ children }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
-  // const [isClient, setIsClient] = useState(false);
 
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
+  const handleLinkClick = (href) => {
+    startTransition(() => {
+      router.push(href);
+    });
+  };
 
   const animationPortal = isPending
     ? createPortal(
@@ -23,24 +26,21 @@ export default function RootLayout({ children }) {
       )
     : null;
 
-  const handleLinkClick = (href) => {
-    startTransition(() => {
-      router.push(href);
-    });
-  };
-
   return (
     <>
     <div className={styles.categoryWrapper + ' ' + "mainBackground"}>
       <div className={styles.containerTopNavbar} />
         <div className={styles.linkWrapper}>
-          {menuLinks.map((item, index) => {
-          const itemsData = item.desserts || item.drinks  || item.meals || item.salads;
+          {menuLinks.map((item,index) => {
+            const itemsData = item.desserts || item.drinks  || item.meals || item.salads;
             if (!itemsData) return null;
+            const currentCategory = pathname.split("/").pop();
+            //console.log("currentCategory:", currentCategory);
             return (
               <button
                 key={index}
-                onClick={() => handleLinkClick(itemsData.href)}
+                onClick={() => handleLinkClick(`/menu/${itemsData.href}`)}
+                className={currentCategory === itemsData.href ? styles.active : ""}
               >
                 {itemsData.title}
               </button>

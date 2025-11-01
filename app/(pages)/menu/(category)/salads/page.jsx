@@ -1,4 +1,4 @@
-import MenuSection from "../MenuSection";
+import {MenuSection} from "@/components/menu/MenuSection";
 import { menuLinks } from "../../menu-items";
 import styles from "../category.module.css";
 export default function Salads() {

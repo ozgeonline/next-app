@@ -1,25 +1,22 @@
 "use client";
 
+import { useEffect, useTransition, useRef } from "react";
 import Link from "next/link";
-import { useEffect, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { useNavigation } from "@/context/navbar/NavigationContext";
-import { useScroll } from "@/context/navbar/ScrollingContext";
+import { useNavigation } from "@/context/navigation/NavigationProvider";
+import { useScroll } from "@/context/scroll/ScrollingProvider";
 import styles from "./nav-link.module.css";
 
 export default function NavLink({href, children}) {
   const path = usePathname();
   const router = useRouter();
   const { scrolling } = useScroll();
-  const { setIsOpen,isOpen, triggerNavigation, setIsLoading } = useNavigation();
+  const { setIsOpen, triggerNavigation, setIsLoading } = useNavigation();
   const [isPending, startTransition] = useTransition();
-  
-  const linkStyle = {
-    color:
-      !scrolling
-        ? "#FFFFFF"
-        :  "var(--shark-800)"
-  };
+  const isMountedRef = useRef(true);
+
+  const isActive = href === "/" ? path === "/" : path.startsWith(href);
+  const linkStyle = { color: !scrolling ? "#FFFFFF" :  "var(--shark-800)"};
 
  const handleClick = (e) => {
     e.preventDefault();
@@ -30,7 +27,6 @@ export default function NavLink({href, children}) {
     }
 
     setIsLoading(true);
-    setIsOpen(false);
 
     //trigger transition
     triggerNavigation(() => {
@@ -41,17 +37,27 @@ export default function NavLink({href, children}) {
     });
   };
 
-  //reset loading state
+  // reset loading when transition completes
   useEffect(() => {
-    if (!isPending && !isOpen) {
-      setIsLoading(false);
+    if (!isPending && isMountedRef.current ) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 300);
+      
+      return () => clearTimeout(timer);
     }
-  }, [isPending, isOpen, setIsLoading]);
+  }, [isPending, setIsLoading, path]);
+
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   return (
     <Link
       href={href}
-      className={path === `${href}` ? styles.active : ""}
+      className={isActive ? styles.active : ""}
       style={linkStyle}
       onClick={handleClick}
     >

@@ -41,7 +41,14 @@
 }
 
 .linkWrapper button:hover {
-  background: #0466c8;
+  background: #ff6e0e;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.linkWrapper button.active {
+  background: #ff6e0e;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

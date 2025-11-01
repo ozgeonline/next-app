@@ -1,4 +1,4 @@
-import ContactForm from "@/components/ui/actions/form/contact/ContactForm";
+import ContactForm from "@/components/forms/contact/ContactForm";
 import styles from "./contact.module.css";
 import SocialMedia from "@/components/ui/social/SocialMedia";
 export default function ContactUs() {

@@ -1,10 +1,12 @@
 "use client";
 
 import { useActionState } from 'react';
-import shareMeal from '@/lib/share-actions';
+import shareMeal from '@/app/(pages)/meals/share/actions/share-actions';
 import ImagePicker from '@/components/meals/Image-picker';
 import MealsFormSubmit from '@/components/meals/meals-form-submit';
 import styles from './page.module.css';
+
+export const dynamic = 'force-dynamic'; 
 
 export default function ShareMealPage() {
   const [state, formAction] = useActionState(shareMeal,{message:null} );
@@ -57,5 +59,3 @@ export default function ShareMealPage() {
     </div>
   );
 }
-
-export const dynamic = 'force-dynamic'; 

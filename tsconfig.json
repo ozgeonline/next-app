@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
     "target": "ES2017",
     "lib": [
@@ -20,7 +22,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "plugins": [
       {
         "name": "next"
@@ -32,14 +34,19 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "app/api/uploadthing/core.ts", 
-    "lib/db.js", 
-    "app/api/auth/signup/route.ts", 
-    "app/api/auth/login/route.ts", 
+    "app/api/uploadthing/core.ts",
+    "lib/db.js",
+    "app/api/auth/signup/route.ts",
+    "app/api/auth/login/route.ts",
     "app/models/User.ts",
     "env.d.ts",
-    "env.local.d.ts"
-, "components/ui/topScrollButton/TopScrollButton.tsx", "app/(pages)/loading.js"  ],
+    "env.local.d.ts",
+    "components/ui/topScrollButton/TopScrollButton.tsx",
+    "app/(pages)/loading.js",
+    ".next\\dev/types/**/*.ts",
+    ".next\\dev/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

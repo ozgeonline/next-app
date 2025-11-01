@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { UploadButton } from "@/utils/uploadthing";
+import { UploadButton } from "@/utils/upload/uploadthing";
 import styles from "./image-picker.module.css";
 import Image from "next/image";
 
