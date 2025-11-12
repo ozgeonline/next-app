@@ -4,7 +4,8 @@ import Link from "next/link";
 
 export default function ErrorPage() {
   return (
-    <main className="error">
+    <main className="error mainBackground">
+      <div className="containerTopNavbarColor" />
       <p>Failed to create meal. Please try again later or contact support.</p>
       <Link href="/meals/share">
         Back to Share a Meal

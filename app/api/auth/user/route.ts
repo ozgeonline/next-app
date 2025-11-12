@@ -53,7 +53,10 @@ export async function GET(req: Request) {
     });
 
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    if (process.env.NODE_ENV !== "production") {
+      console.error("Error fetching user data:", error);
+    }
+
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
@@ -88,7 +91,9 @@ export async function PUT(req: Request) {
       },
     });
   } catch (error) {
-    //console.error("Error updating user:", error);
+    if (process.env.NODE_ENV !== "production") {
+      console.error("Error updating user:", error);
+    }
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

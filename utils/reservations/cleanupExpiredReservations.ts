@@ -23,12 +23,14 @@ export const cleanupExpiredReservations = async (
       // first render msg, after refetch
       showMsg("Your reservation has been deleted because it has expired.");
 
-      setTimeout(async () => {
-        //console.log("___Refetching reservations___");
-        await refetchReservations();
-        //console.log("___Refetch done___");
-      }, 500);
+      await refetchReservations();
+      // setTimeout(async () => {
+      //   //console.log("___Refetching reservations___");
+      //   await refetchReservations();
+      //   //console.log("___Refetch done___");
+      // }, 500);
     } else {
+      await refetchReservations();
       console.log("No expired to delete");
     }
   } catch (err) {

@@ -44,6 +44,10 @@
   background: linear-gradient(45deg, var(--science-blue-950), var(--science-blue-400));
 }
 
+[data-theme="dark"] .card {
+  background: var(--background);
+}
+
 .card .cardTextLeft {
   padding: 2rem;
   color: var(--shark-200);
@@ -53,6 +57,10 @@
 .cardTextLeft p {
   max-width: 90%;
   font-size: .85rem;
+}
+
+[data-theme="dark"] .cardTextLeft p {
+  color: var(--pale-prim-900);
 }
 
 .cardTextLeft h2 {
@@ -68,7 +76,7 @@
 }
 
 .card:nth-child(1):hover {
-  filter: hue-rotate(-90deg);
+  /* filter: hue-rotate(-180deg); */
   cursor: pointer;
 }
 
@@ -80,14 +88,22 @@
   width: 20vh;
   height: 5vh;
   border: 1px solid var(--shark-300);
-  margin-top: 2rem;
+  margin-top: 1rem;
   transition: transform 0.5s ease-out;
+}
+
+[data-theme="dark"] .learnMoreLeft {
+  border: 1px solid var(--pale-prim-900);
 }
 
 .learnMoreLeft a {
   text-decoration: none;
   color: var(--shark-300);
   font-size: large;
+}
+
+[data-theme="dark"] .learnMoreLeft a {
+  color: var(--pale-prim-900);
 }
 
 .learnMoreLeft:hover a{
@@ -136,7 +152,7 @@
   right: 10%;
   filter: brightness(1);
   transform: scale(1);
-  stroke: #ff9b05;
+  stroke: #e1b453;
   stroke-width: 0.5;
 }
 
@@ -203,6 +219,10 @@
   font-size: 1.3rem;
 }
 
+[data-theme="dark"] .cardText p {
+  color: var(--pale-prim-900);
+}
+
 @media screen and (min-width: 1024px) {
   .cardText h2 { 
     font-size: 1.5rem; 
@@ -236,9 +256,15 @@
   transition: all 0.3s ease-in-out;
 }
 
+[data-theme="dark"] .cardText .learnMore {
+  border: 1px solid var(--pale-prim-900);
+  color: var(--pale-prim-900);
+}
+
 .cardText .learnMore:hover {
   transform: translateY(-5%);
 }
+
 @media screen and (min-width: 768px) {
   .cards {
     flex-direction: row;
@@ -247,7 +273,7 @@
   }
 
   .card {
-    width: 30vw;
+    width: 40vw;
     margin-inline: 2rem;
     height: 90%;
   }
@@ -284,6 +310,10 @@
 }
 
 @media screen and (min-width: 1024px) {
+  .card {
+    width: 30vw;
+  }
+
   .cardText {
     left: 0;
     bottom: 30%;

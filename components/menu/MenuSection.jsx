@@ -31,7 +31,7 @@ export function MenuPreview({
       <div className={styles.info}>
         <h3>
           {isNew && (
-            <span className={styles.new}>(NEW) </span>
+            <span className={styles.new + ' ' + "gradient-gold-text"}>(NEW) </span>
           )}
           {title}:
         </h3>

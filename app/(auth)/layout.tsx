@@ -54,7 +54,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 
   if (loading || (isAuthenticated && (pathname === "/login" || pathname === "/signup"))) {
     return (
-      <div className={`${styles.containerWrapper} ${styles.gradientBackground}`}>
+      <div className={`${styles.containerWrapper} background-gradient`}>
         <h3 className={styles.loading}>Loading...</h3>
       </div>
     );
@@ -64,10 +64,10 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <div className={styles.containerWrapper + " " + "mainBackground"}>
       <div className={styles.containerTopNavbar} />
       <div className={styles.card}>
-        <div className={styles.avatar + "  " + styles.lightGradientAvatar + " " + styles.darkGradient}>
+        <div className={styles.avatar}>
           {user?.name ? user.name.slice(0, 2).toUpperCase() : "G"}
         </div>
-        <div className={styles.userCard + " " + styles.darkGradient}>
+        <div className={styles.userCard}>
           <div className={styles.top}>
             <div className={styles.name}>
               Hello, {user?.name || "Guest"}
@@ -78,14 +78,14 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             <div className={styles.bottom}>
               <button
                 type="button"
-                className={styles.button + " " + styles.darkGradient}
+                className={styles.button}
                 onClick={handleSignout}
               >
                 logout
               </button>
               <Link
                 href="/reservations"
-                className={styles.button + " " + styles.darkGradient}
+                className={styles.button}
               >
                 my reservations
               </Link>

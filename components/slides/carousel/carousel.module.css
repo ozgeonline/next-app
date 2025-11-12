@@ -12,6 +12,10 @@
   border-bottom: 3px solid #fb5607;
 }
 
+[data-theme="dark"] .activeText {
+  border-bottom: 3px solid var(--pale-prim-800);
+}
+
 .slider {
   position: relative;
   display: flex;
@@ -34,22 +38,8 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .textWrapper {
-    padding: 2rem;
-  }
-  
+  .textWrapper { padding: 2rem; }
 }
-
-/* .blurOverlay {
-  position: absolute;
-  bottom: 3rem;
-  left: 0;
-  right: 0;
-  height: 8rem;
-  background: linear-gradient(to top, var(--background) 50%, transparent 100%);
-  pointer-events: none;
-  z-index: 1;
-} */
 
 .viewAlllink {
   width: 100%;
@@ -62,21 +52,18 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .viewAlllink {
-    margin-top: -3rem;
-  }
-  
+  .viewAlllink { margin-top: -3rem; }
 }
 
 .viewAllButton {
   position: relative;
   z-index: 10;
   background: linear-gradient(90deg, #f9572a, #ffc905);
-  color: #fcfde8;
+  color: #ffffc2;
   border: none;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-radius: 4px;
   font-weight: 500;
   font-size: medium;
   cursor: pointer;
@@ -84,12 +71,15 @@
   transition: all 0.3s;
 }
 
+[data-theme="dark"] .viewAllButton {
+  border: 1px solid #ffffc2 !important;
+}
+
 @media screen and (min-width: 1024px) {
   .viewAllButton {
     margin-top: 5rem;
     width: 30%;
   }
-  
 }
 
 .viewAllButton:hover {
@@ -102,6 +92,10 @@
   border-radius: 100%;
   background: #fb5607;
   cursor: pointer;
+}
+
+[data-theme="dark"] .dot {
+  background: #ffffc2;
 }
 
 .opacity50 {

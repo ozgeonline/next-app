@@ -1,12 +1,19 @@
 import dynamic from "next/dynamic";
 import Carousel from "@/components/slides/carousel/Carousel";
 import {menuSlides, menuLinks} from "./menu-items";
+import { menuPageitems, menuPageitemsBottom } from "@/components/sections/cards/card-items";
 import { MenuPreview } from "@/components/menu/MenuSection";
 import styles from "./menu.module.css";
 
 const HeroBanner = dynamic(() => import('@/components/assets/heroBanner/HeroBanner'));
 const CardsSection = dynamic(() => import('@/components/sections/cards/CardsSection'));
 const ReservationBanner = dynamic(() => import('@/components/assets/reservationBanner/ReservationBanner'));
+
+export const metadata = {
+  title: "Menu",
+  description: "Discover our creative menu of original recipes served fresh in our restaurant.",
+  keywords: "TasteShare, food, recipes, community"
+};
 
 export default function MenuPage() {
   return (
@@ -33,7 +40,7 @@ export default function MenuPage() {
 
       <main className={styles.main}>
         <div className={styles.cardsWrapper + ' ' + "mainBackground"}>
-          <CardsSection menuPage={true} />
+          <CardsSection data={menuPageitems}/>
         </div>
         <div className={styles.menu + ' ' + "mainBackground"}>
           <h2>Menu</h2>
@@ -70,6 +77,11 @@ export default function MenuPage() {
             <ReservationBanner />
           </div>
         </div>
+
+        <div className={styles.cardsWrapper + ' ' + "mainBackground"}>
+          <CardsSection data={menuPageitemsBottom} learnMore={true} />
+        </div>
+        
       </main>
     </div>
     </>

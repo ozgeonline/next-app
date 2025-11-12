@@ -71,11 +71,18 @@
 }
 
 .cardsWrapper {
-  height: 100vh;
+  height: 80vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (min-width: 1024px) {
+  .cardsWrapper {
+    height: 100vh;
+  }
+  
 }
 
 .menu {
@@ -111,10 +118,9 @@
 }
 
 @media screen and (min-width: 1024px) {
-  /* .contactBadgeWrapper {
-    align-items: start;
-    padding-top: 20vh;
-  } */
+  .contactBadgeWrapper {
+    padding-bottom: 5rem;
+  }
   
 }
 
@@ -129,11 +135,9 @@
   height: 100%;
 }
 
-@media screen and (min-width: 1024px) {
-  /* .containerBadge {
-    height: 100%;
-  } */
-  
+[data-theme="dark"] .containerBadge {
+  background: var(--shark-50);
+  background-size: 100%;
 }
 
 .containerBadge h2 {

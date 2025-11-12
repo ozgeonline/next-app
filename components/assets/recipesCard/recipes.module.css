@@ -123,15 +123,18 @@
 
 .spotlight-info .spotlight-button {
   text-decoration: none;
-  color: #e3e7ea;
-  background: #212529;
   padding: .5em 1em;
   margin: 1.5rem 0;
   border-radius: 4px;
   transition: all 0.3s ease-in-out;
 }
 
-.spotlight-info .spotlight-button:hover { filter: brightness(1.2);}
+[data-theme="light"] .spotlight-info .spotlight-button {
+  color: var(--shark-50);
+  background: var(--shark-950);
+}
+
+.spotlight-info .spotlight-button:hover { filter: brightness(1.1);}
 
 .spotlight-info p {
   font-size: 0.9rem;

@@ -8,33 +8,58 @@
 
 @keyframes animateFirst {
   from {
-    top: -35%;
     left: -35%;
     scale: 0.5;
   }
   to {
-    top: 15%;
-    left: 15%;
+    left: 30%;
     scale: 1;
   }
 }
 
 @keyframes animateSecond {
   from {
-    top: 35%;
     left: 35%;
     scale: 0.5;
   }
   to {
-    top: -15%;
-    left: -15%;
+    left: -30%;
     scale: 1;
   }
 }
 
-@keyframes colorsBackground {
-  from { scale: 0.5;}
-  to { scale: 1; }
+@media screen and (min-width: 640px) {
+  @keyframes animateFirst {
+    from {
+      top: -35%;
+      left: -35%;
+      scale: 0.5;
+    }
+    to {
+      top: 15%;
+      left: 15%;
+      scale: 1;
+    }
+  }
+
+  @keyframes animateSecond {
+    from {
+      top: 35%;
+      left: 35%;
+      scale: 0.5;
+    }
+    to {
+      top: -15%;
+      left: -15%;
+      scale: 1;
+    }
+  }
+    
+  }
+
+  @keyframes colorsBackground {
+    from { scale: 0.5;}
+    to { scale: 1; }
 }
 
 .containerWrapper {
@@ -46,7 +71,6 @@
   justify-content: center;
   will-change: transform, opacity;
   transition: all 0.5s ease-out;
-  padding-bottom: 5rem;
 }
 
 .heroDefault {
@@ -72,12 +96,11 @@
 
 .heroDefault h1,
 .heroDefault h2 {
-  background: linear-gradient(90deg, var(--cumin-400), var(--cumin-600), var(--cumin-900));
+ background: linear-gradient(90deg,  var(--science-blue-900), var(--science-blue-600));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 
 @media screen and (min-width: 768px) {
   .heroDefault h1 { font-size: 1.5rem; }
@@ -122,7 +145,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width:35vw;
+  width:45vw;
   height: 15vh;
   box-sizing: border-box;
   border-radius: 2rem;

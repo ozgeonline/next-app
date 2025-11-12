@@ -28,8 +28,8 @@
   opacity: 0;
 }
 
- [data-theme="dark"] .communityInvite {
-  border: 1px solid #19b7ff50;
+[data-theme="dark"] .communityInvite {
+  border: 1px solid #be8c3c80;
 }
 
 .communityInvite .inviteText {
@@ -77,6 +77,11 @@
   z-index: -1;
 }
 
+[data-theme="dark"] .communityInvite .actionButtons a:nth-child(1)::before {
+   background:linear-gradient(90deg, #d3b15f, #be8c3c);
+   color: var(--background);
+}
+
 .communityInvite .actionButtons a:nth-child(1) {
   background: transparent;
   color: var(--science-blue-600);
@@ -86,6 +91,11 @@
   overflow: hidden;
   transition: background 0.5s ease, color 0.3s ease, filter 0.3s ease;
   z-index: 1;
+}
+
+[data-theme="dark"] .communityInvite .actionButtons a:nth-child(1) {
+  border: 1px solid #d3b15f50;
+  color: var(--pale-prim-900);
 }
 
 .communityInvite .actionButtons a:nth-child(1):hover::before {
@@ -101,6 +111,10 @@
 .communityInvite .actionButtons a:nth-child(2) {
   background: linear-gradient(90deg, var(--science-blue-700), var(--science-blue-400));
   color: #f4f4f9;
+}
+
+[data-theme="dark"] .communityInvite .actionButtons a:nth-child(2) {
+  background:linear-gradient(90deg, #d3b15f, #be8c3c);
 }
 
 .communityInvite .actionButtons a:nth-child(2):hover {
@@ -130,10 +144,6 @@
   .communityInvite .inviteText {
     font-size: larger;
   }
-}
-
-@media screen and (min-width: 768px) {
- 
 }
 
 @media screen and (min-width: 1024px) {

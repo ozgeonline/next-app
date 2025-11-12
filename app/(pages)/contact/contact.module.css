@@ -9,18 +9,6 @@
   z-index: 100;
 }
 
-.containerTopNavbar {
-  height: 4rem;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-[data-theme="light"] .containerTopNavbar {
-  background: var(--science-blue-800);
-}
-
 .header {
   padding: 2rem;
   display: flex;
@@ -44,6 +32,10 @@
 .header p {
   font-size: 1rem;
   text-align: center;
+}
+
+[data-theme="dark"] .header p {
+ color: var(--pale-prim-900);
 }
 
 @media screen and (min-width: 1024px) {
@@ -73,13 +65,12 @@
   width: 100%;
   height: 100%;
   gap: 1rem;
-  padding: 0 1rem;
+  padding: 0 1rem 3rem;
 }
 
 @media screen and (min-width: 1024px) {
   .contactWrapper {
     padding: 0 5rem;
-    gap: 5rem;
   }
   
 }
@@ -172,9 +163,9 @@
   align-items: start;
 }
 
-.contactInfo .infoWrapper .info h3{
+/* .contactInfo .infoWrapper .info h3{
   border-bottom: 1px solid #dedede;
-}
+} */
 
 .info h3 {
   font-size: 1rem;

@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
   return (
     <>
     <div className={styles.categoryWrapper + ' ' + "mainBackground"}>
-      <div className={styles.containerTopNavbar} />
+      <div className="containerTopNavbarColor"/>
         <div className={styles.linkWrapper}>
           {menuLinks.map((item,index) => {
             const itemsData = item.desserts || item.drinks  || item.meals || item.salads;

@@ -61,8 +61,7 @@
   transition: all 0.5s ease-out;
 }
 
-.hero,
-.heroDefault {
+.hero {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,38 +71,25 @@
   margin-top: 1.2rem;
 }
 
-.heroDefault h2,
-.heroDefault h1,
-.hero h1,
-.hero h2 {
+.hero h1 {
   font-size: 1rem;
   font-weight: bold;
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.15rem;
-  padding: 0.7rem;
+  letter-spacing: 0.1rem;
+  padding: 0.5rem;
   text-align: center;
 }
 
-.heroDefault h1,
-.heroDefault h2 {
-  background: linear-gradient(90deg, var(--cumin-400), var(--cumin-600), var(--cumin-900));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero h1,
-.hero h2 {
-  background: linear-gradient(90deg, var(--international-orange-600), var(--broom-500));
+.hero h1 {
+  background-image: linear-gradient(90deg, var(--razzmatazz-600), var(--science-blue-600));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 @media screen and (min-width: 768px) {
-  .heroDefault h1, .hero h1 { font-size: 1.5rem; }
-  .heroDefault h2, .hero h2 { font-size: 1.3rem; }
+  .hero h1 { font-size: 1.5rem; }
 }
 
 .containerWrapper .cta {
@@ -112,29 +98,39 @@
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .containerWrapper .cta a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 0.7rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  background: linear-gradient(90deg, #f9572a, #ff9b05);
+  background: #373d42;
+  border:1px solid var(--text);
   color: #ffffff;
   font-weight: bold;
   text-decoration: none;
   font-size: 1rem;
 }
 
+.containerWrapper .cta a span {
+  padding-left: .5rem;
+}
+
 .cta a:first-child {
+  border: none;
   background: transparent;
-  color: #ff9b05;
+  color: #373d42;
   padding-left: 0;
 }
 
+[data-theme="dark"] .cta a:first-child { color: #ffffff; }
+
 .cta a:first-child:hover,
 .cta a:first-child:active {
-  background: transparent;
   filter: brightness(1.2);
   transition: all 0.3s ease-in-out;
 }

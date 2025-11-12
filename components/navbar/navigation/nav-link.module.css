@@ -5,3 +5,10 @@
   -webkit-text-fill-color: transparent;
   font-weight: bolder;
 }
+
+[data-theme="dark"] .active {
+  background:var(--pale-prim-800);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

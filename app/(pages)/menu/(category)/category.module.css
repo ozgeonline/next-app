@@ -6,16 +6,8 @@
   z-index: 100;
   background: var(--background);
   position: relative;
+  padding-top: 1rem;
 }
-
-.containerTopNavbar {
-  height: 4rem;
-}
-
-[data-theme="light"] .containerTopNavbar {
-   background:  var(--science-blue-800);
-}
-
 
 .linkWrapper {
   width: 100%;

@@ -26,7 +26,7 @@ export default function LoopSlideSection({
         animationClass={styles.animateInRight}
         onVisibilityChange={isVisible => setIsLoopSlideVisible(isVisible)}
       >
-        <div className={isCommunityInfoVisible ? styles.hero : styles.heroDefault}>
+        <div className={isCommunityInfoVisible ? styles.hero  : styles.heroDefault}>
           <h2>
             Brew Focus. Eat Clean. Change Everything.
           </h2>

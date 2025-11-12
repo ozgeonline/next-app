@@ -32,11 +32,11 @@ export default function PositionedImage({ isCommunityInfoVisible }: MainContentP
           className={styles.imageContent}
           animationClass={styles.animateInRight}
         >
-          <h1>Nourish your body, energize your mind</h1>
+          <h1 className='gradient-gold-text'>Nourish your body, energize your mind</h1>
           <h2>Brew Focus. Eat Clean. Change Everything.</h2>
           <p>
             Support your mental clarity with coffee and your physical health with nutritious meals 
-            — small habits that lead to lasting change.
+            small habits that lead to lasting change.
           </p>
         </AnimatedOnScroll>
       )}

@@ -92,7 +92,7 @@ function Carousel({
 
                 return (
                   <Link key={itemsData.href} href={`menu/${itemsData.href}`} className={styles.viewAlllink}>
-                    <button className={styles.viewAllButton}>
+                    <button className={styles.viewAllButton + ' ' + "button-gold-on-dark"}>
                       View All {itemsData.title}
                     </button>
                   </Link>

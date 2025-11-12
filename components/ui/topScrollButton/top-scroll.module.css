@@ -1,16 +1,16 @@
 .containerBottom {
   position: fixed;
   bottom: 1rem;
-  right: .1rem;
+  right: .5rem;
   cursor: pointer;
   border: 1px solid var(--shark-300);
-  /* padding: 0.1rem; */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: filter 0.3s ease-out;
   z-index: 1000;
+  background: var(--shark-50);
 }
 
 .containerBottom:hover {
@@ -19,11 +19,14 @@
 
 @media screen and (min-width: 1024px) {
   .containerBottom {
-      padding: 0.4rem;
-      background: var(--shark-50);
+    padding: 0.4rem;
   }
   
 }
 .arrow {
   stroke: #fb5607;
+}
+
+[data-theme="dark"] .arrow {
+  stroke: #ffffc2;
 }

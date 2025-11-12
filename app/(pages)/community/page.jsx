@@ -4,6 +4,13 @@ import styles from './page.module.css';
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Community",
+  description:
+    "Join the community! Share your original recipes, discover others' dishes, and connect with food lovers around the world.",
+  keywords: "Meals Share, food, recipes, community"
+};
+
 function NoMeals() {
   return (
     <p className={styles.error}>
@@ -62,27 +69,35 @@ async function getData() {
 export default function CommunityPage() {
   return (
     <div className={styles.container + ' ' + "mainBackground"}>
-      <div className={styles.containerTopNavbar} />
+      <div className="containerTopNavbarColor" />
       <header className={styles.header}>
         <h1>
-          One shared passion: <span className={styles.highlight}>Food</span>
+          One shared passion: <span className="gradient-gold-text">Food</span>
         </h1>
         <p>Join our community and share your favorite recipes!</p>
       </header>
       
       <main className={styles.main}>
         <section className={styles.section}>
-          <h2 className={styles['section-title']}>Latest Recipes</h2>
+          <h2
+            className={styles['section-title'] + " " + 'gradient-gold-text'}
+          >
+            Latest Recipes
+          </h2>
           <LatestMealsList />
         </section>
 
         <div className={styles.meals}>
-          <h2>Meals Shared</h2>
-          <Link href="/meals">Browse Meals</Link>
+          <h2 className='gradient-gold-text'>Meals Shared</h2>
+          <Link href="/meals" className='text-gold-on-dark'>Browse Meals</Link>
         </div>
 
         <section className={styles.section}>
-          <h2 className={styles['section-title']}>User Spotlights</h2>
+          <h2
+            className={styles['section-title']  + " " + 'gradient-gold-text'}
+          >
+            User Spotlights
+          </h2>
           <SpotlightMealsList />
         </section>
       </main>

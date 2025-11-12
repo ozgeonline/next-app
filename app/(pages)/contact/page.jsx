@@ -1,12 +1,19 @@
 import ContactForm from "@/components/forms/contact/ContactForm";
 import styles from "./contact.module.css";
 import SocialMedia from "@/components/ui/social/SocialMedia";
+
+export const metadata = {
+  title: "Contact Us",
+  description:
+    "If you have any questions or feedback, don't hesitate to reach out to us.",
+  keywords: "Contact, TasteShare, food, recipes, community",
+}
 export default function ContactUs() {
   return (
     <div className={styles.container + ' ' + "mainBackground"}>
-      <div className={styles.containerTopNavbar} />
+      <div className="containerTopNavbarColor" />
       <header className={styles.header}>
-        <h1>Contact Us</h1>
+        <h1 className="gradient-gold-text">Contact Us</h1>
         <p>
           If you have any questions or feedback, please don't hesitate to reach out to us.
         </p>

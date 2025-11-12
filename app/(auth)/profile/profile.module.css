@@ -8,7 +8,6 @@
   z-index: 100;
   position: relative;
   gap: 2rem;
-  /* background: linear-gradient(90deg, var(--science-blue-600), var(--science-blue-100)); */
 }
 
 .containerWrapper .loading {
@@ -17,7 +16,7 @@
 
 .card {
   width: 100%;
-  height: 70vh;
+  height: 32rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -34,7 +33,6 @@
   width: 100%;
   height: 100%;
   border-radius: 1rem;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .profileWrapper h3 {
@@ -58,13 +56,13 @@
 }
 
 [data-theme="dark"] .referencePathBtn:hover {
-  background: linear-gradient(90deg, var(--science-blue-600), var(--science-blue-100));
-  color: #f4f6f7;
+  color: var(--pale-prim-900);
+  background: var(--shark-50);
 }
 
 [data-theme="light"] .referencePathBtn:hover {
   background: var(--science-blue-800);
-  color: #f4f6f7;
+  color: var(--science-blue-50);
 }
 
 .loading {
@@ -83,47 +81,79 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 1rem;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(9.3px);
   padding: 1rem 2rem;
   gap: 1rem;
 }
 
+[data-theme="dark"] .authProfile {
+  background: var(--shark-50);
+}
+
+.updateSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.updateSection input,
 .updateSection button {
+  width: 100%;
+  border-radius: 4px;
+  border: none;
+  color: #f4f6f7;
+  background: #0466c8;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(9.3px);
+  outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  border: none;
-  border-radius: .5rem;
   text-transform: lowercase;
-  padding: 0.5rem 4em;
+  padding: 0.5rem 3.5em;
   font-size: medium;
   cursor: pointer;
   transition: all 0.1s ease;
-  color: #212529;
-  /* background: var(--background); */
-  border: 1px solid var(--shark-800);
+}
+
+.updateSection input::placeholder {
+  color: var(--background);
+}
+
+[data-theme="dark"] input::placeholder {
+  color: var(--pale-prim-900);
+}
+
+.updateSection button:hover {
+  filter: brightness(1.1);
 }
 
 @media screen and (min-width: 640px) {
+  .updateSection input,
   .updateSection button {
     width: 50%;
   }
 }
 
 @media screen and (min-width: 1024px) {
+  .updateSection input,
   .updateSection button {
     width: 100%;
   }
 }
 
-.updateSection button:hover {
-  background: #0466c8;
-  color: #f4f6f7;
+@media screen and (min-width: 1280px) {
+  .updateSection input,
+  .updateSection button {
+    width: 50%;
+  }
+  
 }
 
 .profileInfo {
@@ -133,11 +163,14 @@
   justify-content: center;
   width: 100%;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: .5rem;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(9.3px);
-  padding: 1rem 2rem;
+  padding: 1rem;
+}
+
+[data-theme="dark"] .profileInfo {
+  background: var(--background-opacity);
 }
 
 @media screen and (min-width: 640px) {
@@ -164,54 +197,21 @@
   color: var(--shark-800);
 }
 
+[data-theme="dark"] .mailInfo,
+[data-theme="dark"] .nameInfo {
+}
+
 .mailInfo span,
 .nameInfo span {
-  font-size: small;
-  font-style: italic;
+  display: inline-block;
+  font-size: medium;
   color: var(--shark-800);
+  width: 3rem;
+  font-weight: bolder;
 }
 
-.updateSection {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
 
-.updateSection input,
-.updateSection button {
-  width: 100%;
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid var(--text-opacity);
-  color: var(--shark-800);
-  background: var(--background);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(9.3px);
-  outline: none;
-}
-
-@media screen and (min-width: 640px) {
-  .updateSection input,
-  .updateSection button {
-    width: 50%;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .updateSection input,
-  .updateSection button {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .updateSection input,
-  .updateSection button {
-    width: 50%;
-  }
-  
+[data-theme="dark"] .mailInfo span,
+[data-theme="dark"] .nameInfo span {
+  color: var(--shark-300);
 }

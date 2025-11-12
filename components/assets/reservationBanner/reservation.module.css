@@ -56,9 +56,8 @@
   align-items: center;
   justify-content: center;
   margin-top: 6rem;
-  border: 1px solid rgb(255, 213, 167);
+  border: 1px solid #ffffc2;
   width: max-content;
-  background: rgba(255, 213, 167, 0.1);
   transition: backdrop-filter 0.3s ease-in-out, background 0.3s ease-in-out;
 }
 
@@ -66,20 +65,22 @@
   .reservation {
     margin-top: 4rem;
   }
-  
 }
 
 .reservation a {
   text-decoration: none;
-  color: #f4f6f7;
+  color: #ffffc2;
+  font-weight: 600;
   width: 100%;
   padding: 0.7rem 1.5rem;
-  font-size: 0.9rem;
 }
 
 .reservation:hover {
-  backdrop-filter: blur(10px);
-  background: rgba(255, 213, 167, 0.2);
+  backdrop-filter: blur(10px) brightness(1.1);
+}
+
+.container h2 {
+  color: #ffffc2;
 }
 
 .blurOverlayTop,
@@ -103,4 +104,9 @@
 .blurOverlayBottom {
   bottom: -2.9rem;
   background: linear-gradient(90deg, #f9572a, #ffc905);
+}
+
+[data-theme="dark"] .blurOverlayTop,
+[data-theme="dark"] .blurOverlayBottom {
+  background: var(--shark-50);
 }

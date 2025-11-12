@@ -103,9 +103,9 @@
   width: 2em;
   height: 100%;
   rotate: 270deg;
-  color: var(--broom-550) !important;
-  fill: var(--broom-550) !important;
-  stroke: var(--broom-550) !important;
+  color: var(--pale-prim-400) !important;
+  fill: var(--pale-prim-400) !important;
+  stroke: var(--pale-prim-400) !important;
   filter: brightness(1.5);
   animation: lightIcon 0.6s ease;
 }

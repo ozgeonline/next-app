@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Montserrat:wght@400;700&display=swap');
 
 :root {
-    /* Shark Palette */
+  /* Shark Palette */
   --shark-50: #f4f6f7;
   --shark-100: #e3e7ea;
   --shark-200: #cbd3d6;
@@ -14,21 +14,20 @@
   --shark-900: #373d42;
   --shark-950: #212529;
 
-    /* Mondok Palette */
-  --mondo-50: #f7f6ef;
-  --mondo-100: #ebead6;
-  --mondo-200: #d9d5af;
-  --mondo-300: #c3ba81;
-  --mondo-400: #b1a25e;
-  --mondo-500: #4b4737;
-  --mondo-600: #8b7643;
-  --mondo-700: #705a38;
-  --mondo-800: #5f4c34;
-  --mondo-900: #48392a;
-  --mondo-950: #2f2419;
+  /* Pale Prim Palette */
+  --pale-prim-50: #fefee8;
+  --pale-prim-100: #ffffc2;
+  --pale-prim-200: #fffb88;
+  --pale-prim-300: #fff244;
+  --pale-prim-400: #fee211;
+  --pale-prim-500: #eec904;
+  --pale-prim-600: #cd9c01;
+  --pale-prim-700: #a47004;
+  --pale-prim-800: #87570c;
+  --pale-prim-900: #734710;
+  --pale-prim-950: #432505;
 
-
-    /* Science Blue Palette */
+  /* Science Blue Palette */
   --science-blue-50: #ecfbff;
   --science-blue-100: #d5f4ff;
   --science-blue-200: #b4eeff;
@@ -54,34 +53,6 @@
   --international-orange-900: #80290e;
   --international-orange-950: #451205;
 
-  /* Cumin Palette */
-  --cumin-950: #1a0d06;
-  --cumin-900: #231006;
-  --cumin-800: #3a1a0b;
-  --cumin-700: #53240d;
-  --cumin-600: #972d07;
-  --cumin-500: #9a400f;
-  --cumin-400: #bc5616;
-  --cumin-300: #db721c;
-  --cumin-200: #f7911f;
-  --cumin-100: #ffb347;
-  --cumin-50: #ffe3c2;
-
-
-  /* Broom Palette */
-  --broom-50: #fcffe7;
-  --broom-100: #f5ffc1;
-  --broom-200: #f0ff86;
-  --broom-300: #f0ff41;
-  --broom-400: #fffd0d;
-  --broom-500: #ffef00;
-  --broom-550: #ffcc00;
-  --broom-600: #d1bb00;
-  --broom-700: #a68802;
-  --broom-800: #89690a;
-  --broom-900: #74560f;
-  --broom-950: #442e04;
-
   /* Fuego Palette */
   --fuego-50:  #fcfde8;
   --fuego-100: #f6facd;
@@ -95,35 +66,41 @@
   --fuego-900: #445116;
   --fuego-950: #232d06;
 
-  --accent: #F4A261;
-  --accent-dark: #E68A44;
-  --accent-light: #F7B384;
+  /* Razzmatazz Palette */
+  --razzmatazz-50: #fef1f7;
+  --razzmatazz-100: #fde6f1;
+  --razzmatazz-200: #fdcde4;
+  --razzmatazz-300: #fda4cd;
+  --razzmatazz-400: #fa6caa;
+  --razzmatazz-500: #f3418a;
+  --razzmatazz-600: #da1b60;
+  --razzmatazz-700: #c6104d;
+  --razzmatazz-800: #a31140;
+  --razzmatazz-900: #881338;
+  --razzmatazz-950: #53041c;
 
-  /* Main Colors */
-  /* --background: #edf6f9; */
+  /************************* Main Colors *********************/
   --background: #e0e0e0;
   --background-high: #edf6f970;
   --background-opacity: #edf6f950;
   --background-low-opacity: #edf6f910;
 
   --text: #1a1a1a;
+  --text-high: #1a1a1a95;
   --text-opacity: #1a1a1a90;
   --text-low-opacity: #1a1a1a10;
 
   --border: #D3D3D3;
 
+  --accent: #F4A261;
+  --accent-dark: #E68A44;
+  --accent-light: #F7B384;
+
   /* Feedback Colors */
   --success: #28A745;
   --error: #DC3545;
 
-  /* Transition Color*/
-  --fuego-to-dark: #333333;
-  --fuego-to-dark-50: #33333350;
-
-   --background-focus: #2f241950;
-
   overflow-x: hidden;
-
 }
 
 [data-theme="dark"] {
@@ -140,18 +117,18 @@
   --shark-900: #e3e7ea;
   --shark-950: #f4f6f7;
 
-  /* Mondo Palette */
-  --mondo-50: #2f2419;
-  --mondo-100: #48392a;
-  --mondo-200: #5f4c34;
-  --mondo-300: #705a38;
-  --mondo-400: #8b7643;
-  --mondo-500: #7f5539;
-  --mondo-600: #b1a25e;
-  --mondo-700: #c3ba81;
-  --mondo-800: #d9d5af;
-  --mondo-900: #ebead6;
-  --mondo-950: #f7f6ef;
+  /* Pale Prim Palette */
+  --pale-prim-50: #432505;
+  --pale-prim-100: #734710;
+  --pale-prim-200: #87570c;
+  --pale-prim-300: #a47004;
+  --pale-prim-400: #cd9c01;
+  --pale-prim-500: #eec904;
+  --pale-prim-600: #fee211;
+  --pale-prim-700: #fff244;
+  --pale-prim-800: #fffb88;
+  --pale-prim-900: #ffffc2;
+  --pale-prim-950: #fefee8;
 
   
   /* Science Blue Palette */
@@ -180,33 +157,6 @@
   --international-orange-900: #ffecd3;
   --international-orange-950: #fff7ec;
 
-  /* Cumin Palette */
-  --cumin-50: #1a0d06;
-  --cumin-100: #231006;
-  --cumin-200: #3a1a0b;
-  --cumin-300: #53240d;
-  --cumin-400: #972d07;
-  --cumin-500: #9a400f;
-  --cumin-600: #bc5616;
-  --cumin-700: #db721c;
-  --cumin-800: #f7911f;
-  --cumin-900: #ffb347;
-  --cumin-950: #ffe3c2;
-
-   /* Broom Palette */
-  --broom-950: #fcffe7;
-  --broom-900: #f5ffc1;
-  --broom-800: #f0ff86;
-  --broom-700: #f0ff41;
-  --broom-600: #f7ff0d;
-  --broom-500: #f5f000;
-  --broom-550: #ffcc00;
-  --broom-400: #d1bb00;
-  --broom-300: #a68802;
-  --broom-200: #89690a;
-  --broom-100: #74560f;
-  --broom-50: #442e04;
-
   /* Fuego Palette */
   --fuego-50:  #232d06;
   --fuego-100: #445116;
@@ -220,10 +170,18 @@
   --fuego-900: #f6facd;
   --fuego-950: #fcfde8;
 
-  --accent: var(--science-blue-500); /* #19b7ff */
-  --accent-dark: var(--science-blue-300); /* #0080fa */
-  --accent-light: var(--science-blue-700); /* #80e6ff */
-
+  /* Razzmatazz Palette */
+  --razzmatazz-50: #fef1f7;
+  --razzmatazz-100: #fde6f1;
+  --razzmatazz-200: #fdcde4;
+  --razzmatazz-300: #fda4cd;
+  --razzmatazz-400: #fa6caa;
+  --razzmatazz-500: #f3418a;
+  --razzmatazz-600: #da1b60;
+  --razzmatazz-700: #c6104d;
+  --razzmatazz-800: #a31140;
+  --razzmatazz-900: #881338;
+  --razzmatazz-950: #53041c;
 
   /* Main Colors*/
   --background: #1a1a1a;
@@ -236,31 +194,17 @@
   --text-low-opacity: #f4f4f910;
   
   --border: #4B4B4B;
+
   --success: #34C759;
-  --error: #FF4C4C;
-  --white: #1A1A1A;
-  --black: #E5E5E5;
-
-   /* Transition Color*/
-  --fuego-to-dark: #c1df1f;
-  --fuego-to-dark-50: #c1df1f;
-
-     --background-focus: #2f241950;
+  --error: #FF4C4C;  
 }
-
-:root {
-  --background-gradient: linear-gradient(90deg, var(--science-blue-600), var(--science-blue-100));
-}
-
 
 /* Reset default styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
-
 
 html {
   font-family: 'Quicksand', sans-serif;
@@ -269,12 +213,11 @@ html {
 
 body {
   margin: 0;
-  /* background: radial-gradient(circle at center , var(--shark-500), var(--shark-950)); */
   background: var(--background);
   overflow-x: hidden;
 }
 
-.containerTopNavbar {
+.containerTopNavbarColor {
   height: 4rem;
   width: 100%;
   position: absolute;
@@ -282,10 +225,11 @@ body {
   left: 0;
 }
 
-[data-theme="light"] .containerTopNavbar {
+[data-theme="light"] .containerTopNavbarColor {
   background: var(--science-blue-800);
 }
 
+/* NOT-FOUND PAGE && ERROR PAGE */
 .not-found,
 .error {
   display: flex;
@@ -304,7 +248,6 @@ body {
   margin: 0px;
   font-weight: 900;
   text-transform: uppercase;
-  background: linear-gradient(90deg, #f9572a, #ffc905);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -317,26 +260,29 @@ body {
 .error p {
   font-size: 1.5rem;
   font-weight: 500;
-  color:var(--text);
+  color:#ffffc2;
 }
 
 .not-found a,
 .error a {
-  color: var(--shark-50);
-  border: 1px solid var(--shark-800);
-  background: var(--shark-800);
+  background: var(--background);
+  border: 1px solid #fffb88;
+  color: var(--text);
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   margin-top: 1rem;
+  font-weight: bold;
   transition: all 0.3s ease-in-out;
 }
 
 .not-found a:hover,
 .error a:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.1);
 }
+/**************************/
 
+/* FOOTER */
 .footerWrapper {
   display: flex;
   width: 100%;
@@ -360,13 +306,8 @@ body {
   transition: opacity 0.5s ease-in-out;
 }
 
-.animatedSections {
-  position: relative;
-  width: 100%;
-  padding-top: 3rem;
-}
-
-[data-theme="light"] .footer {
+[data-theme="light"] .footer,
+[data-theme="light"] .background-gradient {
  background-image: 
   linear-gradient(46deg, 
     rgba(18, 18, 18, 0.01) 0%, 
@@ -398,11 +339,11 @@ body {
     rgba(203, 203, 203, 0.02) 50%,
     rgba(24, 24, 24, 0.02) 50%, 
     rgba(24, 24, 24, 0.02) 100%),
-  linear-gradient(90deg, rgb(237, 46, 8),rgb(2255, 239, 0));
+  linear-gradient(90deg, #0c355f, #0080fa);
 }
 
 [data-theme="dark"] .footer,
-[data-theme="dark"] .mainBackground {
+[data-theme="dark"] .background-gradient {
  background-image: 
   linear-gradient(46deg, 
     rgba(18, 18, 18, 0.01) 0%, 
@@ -437,72 +378,57 @@ body {
   linear-gradient(90deg, rgb(26, 26, 26),rgb(0, 0, 0));
 }
 
+
+[data-theme="dark"] .mainBackground {
+  background: #1A1A1A;
+}
+
 [data-theme="light"] .mainBackground {
   background: #e0e0e0;
- /* background-image: 
-  linear-gradient(46deg, 
-    rgba(18, 18, 18, 0.01) 0%, 
-    rgba(18, 18, 18, 0.01) 50%,
-    rgba(10, 10, 10, 0.01) 50%, 
-    rgba(10, 10, 10, 0.01) 100%),
-  linear-gradient(338deg, 
-    rgba(232, 232, 232, 0.03) 0%, 
-    rgba(232, 232, 232, 0.03) 50%,
-    rgba(174, 174, 174, 0.03) 50%, 
-    rgba(174, 174, 174, 0.03) 100%),
-  linear-gradient(26deg, 
-    rgba(180, 180, 180, 0.02) 0%, 
-    rgba(180, 180, 180, 0.02) 50%,
-    rgba(191, 191, 191, 0.02) 50%, 
-    rgba(191, 191, 191, 0.02) 100%),
-  linear-gradient(129deg, 
-    rgba(52, 52, 52, 0.03) 0%, 
-    rgba(52, 52, 52, 0.03) 50%,
-    rgba(188, 188, 188, 0.03) 50%, 
-    rgba(188, 188, 188, 0.03) 100%),
-  linear-gradient(86deg, 
-    rgba(234, 234, 234, 0.03) 0%, 
-    rgba(234, 234, 234, 0.03) 50%,
-    rgba(100, 100, 100, 0.03) 50%, 
-    rgba(100, 100, 100, 0.03) 100%),
-  linear-gradient(73deg, 
-    rgba(203, 203, 203, 0.02) 0%, 
-    rgba(203, 203, 203, 0.02) 50%,
-    rgba(24, 24, 24, 0.02) 50%, 
-    rgba(24, 24, 24, 0.02) 100%),
-  linear-gradient(90deg, rgb(244, 244, 244),rgb(155, 155, 155)); */
 }
-/* [data-theme="dark"] .cardBackground {
- background-image: 
-  linear-gradient(46deg, 
-    rgba(18, 18, 18, 0.01) 0%, 
-    rgba(18, 18, 18, 0.01) 50%,
-    rgba(10, 10, 10, 0.01) 50%, 
-    rgba(10, 10, 10, 0.01) 100%),
-  linear-gradient(338deg, 
-    rgba(232, 232, 232, 0.03) 0%, 
-    rgba(232, 232, 232, 0.03) 50%,
-    rgba(174, 174, 174, 0.03) 50%, 
-    rgba(174, 174, 174, 0.03) 100%),
-  linear-gradient(26deg, 
-    rgba(180, 180, 180, 0.02) 0%, 
-    rgba(180, 180, 180, 0.02) 50%,
-    rgba(191, 191, 191, 0.02) 50%, 
-    rgba(191, 191, 191, 0.02) 100%),
-  linear-gradient(129deg, 
-    rgba(52, 52, 52, 0.03) 0%, 
-    rgba(52, 52, 52, 0.03) 50%,
-    rgba(188, 188, 188, 0.03) 50%, 
-    rgba(188, 188, 188, 0.03) 100%),
-  linear-gradient(86deg, 
-    rgba(234, 234, 234, 0.03) 0%, 
-    rgba(234, 234, 234, 0.03) 50%,
-    rgba(100, 100, 100, 0.03) 50%, 
-    rgba(100, 100, 100, 0.03) 100%),
-  linear-gradient(73deg, 
-    rgba(203, 203, 203, 0.02) 0%, 
-    rgba(203, 203, 203, 0.02) 50%,
-    rgba(24, 24, 24, 0.02) 50%, 
-    rgba(24, 24, 24, 0.02) 100%),
-  linear-gradient(90deg, #cacaca,#404040);
-} */
+/**************************/
+
+.animatedSections {
+  position: relative;
+  width: 100%;
+  padding-top: 3rem;
+}
+
+/************************************** Gold Theme ***********************************/
+
+[data-theme="dark"] .gradient-gold-text,
+.not-found h1,
+.error h1 {
+  background-image: 
+    repeating-linear-gradient(
+      to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%, 
+      #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%
+    );
+  background-size: 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-full-gold-text {
+  background-image: 
+    repeating-linear-gradient(
+      to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%, 
+      #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%
+    );
+  background-size: 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="dark"] .text-gold-on-dark {
+  color: var(--pale-prim-900);
+  background: var(--shark-50);
+}
+
+[data-theme="dark"] .button-gold-on-dark {
+  color: var(--pale-prim-900);
+  /* border: 1px solid var(--pale-prim-900); */
+  background: var(--background);
+}

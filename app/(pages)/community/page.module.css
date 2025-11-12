@@ -10,18 +10,6 @@
   z-index: 100;
 }
 
-.containerTopNavbar {
-  height: 4rem;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-[data-theme="light"] .containerTopNavbar {
-  background: var(--science-blue-800);
-}
-
 .header {
   gap: 3rem;
   margin: 1rem auto;
@@ -44,7 +32,8 @@
   .header h1 { font-size: 3rem;}
 }
 
-.highlight {
+.header h1 span {
+  font-family: 'Montserrat', sans-serif;
   background: linear-gradient(90deg, #f9572a, #ff8a05);
   background-clip: text;
   -webkit-background-clip: text;

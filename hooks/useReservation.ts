@@ -17,7 +17,7 @@ export const useReservations = (): ReservationState => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  //console.log("Reservations:", reservations);
+  console.log("Reservations:", reservations);
 
   const fetchReservations = useCallback(async () => {
 

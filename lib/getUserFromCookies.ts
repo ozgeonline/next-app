@@ -16,7 +16,10 @@ export async function getUserFromCookies(): Promise<DecodedToken | null> {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as DecodedToken;
     return decoded;
   } catch(error) {
-    console.error("Invalid token:", error);
+    if (process.env.NODE_ENV !== "production") {
+      console.error("Invalid token:", error);
+    }
+
     return null;
   }
 }

@@ -67,7 +67,7 @@
 }
 
 .cta a:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.1);
   transition: all 0.3s ease-in-out;
 }
 

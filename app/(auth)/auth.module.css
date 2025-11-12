@@ -20,20 +20,7 @@
   opacity: 1;
   z-index: 100;
   position: relative;
-  gap: 2rem;
   padding: 5rem 0;
-}
-
-[data-theme="light"] .containerWrapper.gradientBackground {
-  background:  linear-gradient(90deg, var(--science-blue-600), var(--science-blue-100));
-}
-
-[data-theme="dark"] .containerWrapper.gradientBackground {
-  background:  linear-gradient(90deg, var(--science-blue-500),var( --shark-50));
-}
-
-[data-theme="dark"] .darkGradient {
-  background: linear-gradient(90deg,  var( --shark-50), var(--science-blue-500), var( --shark-50));
 }
 
 .containerWrapper .loading { color: #ffffc2;}
@@ -41,6 +28,7 @@
 @media screen and (min-width: 1024px) {
   .containerWrapper {
     flex-direction: row;
+    gap: 2rem;
     min-height: 100vh;
     padding: 5rem;
   }
@@ -48,6 +36,7 @@
 
 .card {
   width: 90%;
+  height: 32rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -59,15 +48,13 @@
 @media screen and (min-width: 1024px) {
   .card {
     width: 40%;
-    height: 75vh;
   }
 }
 
 .userCard {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.3);
   color: var(--shark-800);
   border-radius: 1rem;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(9.3px);
   display: flex;
@@ -78,6 +65,10 @@
   justify-content: center;
   overflow: hidden;
   border-radius: 1rem;
+}
+
+[data-theme="dark"] .userCard {
+  background: var(--shark-50);
 }
 
 @media screen and (max-width: 1024px) {
@@ -108,26 +99,28 @@
 
 .userCard .bottom .button {
   border: none;
-  border-radius: .5rem;
+  border-radius: 4px;
   text-transform: lowercase;
-  padding: 0.7rem 4em;
+  padding: 0.5rem 3.5em;
   font-size: medium;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #f4f4f4;
+  color: var(--science-blue-50);
 }
 
-[data-theme="light"] .userCard .bottom .button {
+.userCard .bottom .button {
   background: var(--science-blue-800);
-  color: #f4f4f4;
+  color: var(--science-blue-50);
 }
 
-[data-theme="light"] .userCard .bottom .button:hover {
-  filter: brightness(1.2);
+[data-theme="dark"] .userCard .bottom .button {
+  background: var(--background);
+  color:var(--pale-prim-900);
+  /* border: 1px solid var(--pale-prim-900); */
 }
 
-[data-theme="dark"] .userCard .bottom .button:hover {
-  filter: hue-rotate(90deg)  saturate(2);
+.userCard .bottom .button:hover {
+  filter: brightness(1.1);
 }
 
 .userCard .bottom a.button {
@@ -159,41 +152,43 @@
   text-transform: uppercase;
   font-size: 2em;
   overflow: hidden;
+  background: 
+    linear-gradient(46deg, 
+      rgba(18, 18, 18, 0.01) 0%, 
+      rgba(18, 18, 18, 0.01) 50%,
+      rgba(10, 10, 10, 0.01) 50%, 
+      rgba(10, 10, 10, 0.01) 100%),
+    linear-gradient(338deg, 
+      rgba(232, 232, 232, 0.03) 0%, 
+      rgba(232, 232, 232, 0.03) 50%,
+      rgba(174, 174, 174, 0.03) 50%, 
+      rgba(174, 174, 174, 0.03) 100%),
+    linear-gradient(26deg, 
+      rgba(180, 180, 180, 0.02) 0%, 
+      rgba(180, 180, 180, 0.02) 50%,
+      rgba(191, 191, 191, 0.02) 50%, 
+      rgba(191, 191, 191, 0.02) 100%),
+    linear-gradient(129deg, 
+      rgba(52, 52, 52, 0.03) 0%, 
+      rgba(52, 52, 52, 0.03) 50%,
+      rgba(188, 188, 188, 0.03) 50%, 
+      rgba(188, 188, 188, 0.03) 100%),
+    linear-gradient(86deg, 
+      rgba(234, 234, 234, 0.03) 0%, 
+      rgba(234, 234, 234, 0.03) 50%,
+      rgba(100, 100, 100, 0.03) 50%, 
+      rgba(100, 100, 100, 0.03) 100%),
+    linear-gradient(73deg, 
+      rgba(203, 203, 203, 0.02) 0%, 
+      rgba(203, 203, 203, 0.02) 50%,
+      rgba(24, 24, 24, 0.02) 50%, 
+      rgba(24, 24, 24, 0.02) 100%),
+    linear-gradient(90deg, var(--science-blue-800), var(--science-blue-100));
 }
 
-[data-theme="light"] .lightGradientAvatar {
- background: 
-  linear-gradient(46deg, 
-    rgba(18, 18, 18, 0.01) 0%, 
-    rgba(18, 18, 18, 0.01) 50%,
-    rgba(10, 10, 10, 0.01) 50%, 
-    rgba(10, 10, 10, 0.01) 100%),
-  linear-gradient(338deg, 
-    rgba(232, 232, 232, 0.03) 0%, 
-    rgba(232, 232, 232, 0.03) 50%,
-    rgba(174, 174, 174, 0.03) 50%, 
-    rgba(174, 174, 174, 0.03) 100%),
-  linear-gradient(26deg, 
-    rgba(180, 180, 180, 0.02) 0%, 
-    rgba(180, 180, 180, 0.02) 50%,
-    rgba(191, 191, 191, 0.02) 50%, 
-    rgba(191, 191, 191, 0.02) 100%),
-  linear-gradient(129deg, 
-    rgba(52, 52, 52, 0.03) 0%, 
-    rgba(52, 52, 52, 0.03) 50%,
-    rgba(188, 188, 188, 0.03) 50%, 
-    rgba(188, 188, 188, 0.03) 100%),
-  linear-gradient(86deg, 
-    rgba(234, 234, 234, 0.03) 0%, 
-    rgba(234, 234, 234, 0.03) 50%,
-    rgba(100, 100, 100, 0.03) 50%, 
-    rgba(100, 100, 100, 0.03) 100%),
-  linear-gradient(73deg, 
-    rgba(203, 203, 203, 0.02) 0%, 
-    rgba(203, 203, 203, 0.02) 50%,
-    rgba(24, 24, 24, 0.02) 50%, 
-    rgba(24, 24, 24, 0.02) 100%),
-  linear-gradient(90deg, var(--science-blue-800), var(--science-blue-100));
+[data-theme="dark"] .avatar {
+  background: #faf0a0;
+  color: #212529;
 }
 
 @media screen and (min-width: 1024px) {

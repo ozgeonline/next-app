@@ -16,6 +16,11 @@
   margin-bottom: 1rem;
 }
 
+[data-theme="dark"] .formWrapper h3,
+[data-theme="dark"] .submitButton {
+   color: var(--pale-prim-900);
+}
+
 .contactForm {
   display: flex;
   flex-direction: column;
@@ -51,7 +56,7 @@
 .formGroup input:focus,
 .formGroup textarea:focus {
   outline: none;
-  background: var(--background-opacity);
+  background: none;
 }
 
 .formGroup input:autofill {
@@ -69,11 +74,11 @@
 }
 
 .formGroup input::selection{
-  color: var(--cumin-400) !important;
+  color: var(--science-blue-500) !important;
 }
 
 .formGroup input:focus::details-content{
-  color: var(--cumin-400) !important;
+  color: var(--science-blue-500) !important;
 }
 
 
@@ -117,6 +122,5 @@
   .formWrapper {
     min-width: 100%;
     align-items: center;
-    text-align: center;
   }
 }

@@ -77,10 +77,15 @@
 }
 
 .hero h2 {
-  background: linear-gradient(90deg, var(--international-orange-600), var(--broom-500));
-  background-clip: text;
+  background-image: 
+    repeating-linear-gradient(
+      to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%, 
+      #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%
+    );
+  background-size: 150%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 @media screen and (min-width: 768px) {

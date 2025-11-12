@@ -1,17 +1,17 @@
 import AnimatedOnScroll from "@/components/providers/animation/AnimatedOnScroll";
 import Link from "next/link";
 import Image from "next/image";
-import { menuPageitems, homePageitems } from "@/components/sections/cards/card-items";
+import { Cards } from "@/types/cardTypes";
 import { ChevronsRight, MousePointerClick, Sun } from "lucide-react";
 import styles from "./cards.module.css";
 
 interface CardsSectionProps {
-  homePage?:boolean
-  menuPage?:boolean
+  data:Cards
+  learnMore?:boolean
 }
 export default function CardsSection({
-  homePage,
-  menuPage
+  data,
+  learnMore
 }:CardsSectionProps) {
   return (
     <AnimatedOnScroll
@@ -21,21 +21,12 @@ export default function CardsSection({
       <div className={styles.cards}>
         <div className={styles.card}>
           <div className={styles.cardTextLeft}>
-            <h2>{homePage ? homePageitems.infoCard.title : menuPageitems.infoCard.title}</h2>
-            <p>{homePage ? homePageitems.infoCard.description : menuPageitems.infoCard.description}</p>
+            <h2 className="gradient-gold-text">{data.infoCard.title}</h2>
+            <p>{data.infoCard.description}</p>
             <div className={styles.learnMoreLeft}>
-              {homePage && (
-                <Link href="/drinks">
-                  Learn More
-                  <span className={styles.arrow}>
-                    <ChevronsRight size={20}/>
-                  </span>
-                </Link>
-              )}
-
-              {menuPage && (
-                <Link href="/meals/share">
-                  Share Meals
+              {data.link && (
+                <Link href={data.link.href}>
+                  {data.link.text}
                   <span className={styles.arrow}>
                     <ChevronsRight size={20}/>
                   </span>
@@ -49,8 +40,8 @@ export default function CardsSection({
         </div>
         <div className={styles.card}>
           <Image 
-            src={homePage ? homePageitems.imgCard.images.src! : menuPageitems.imgCard.images.src!}
-            alt={homePage ? homePageitems.imgCard.images.alt! : menuPageitems.imgCard.images.alt!}
+            src={data.imgCard.images.src}
+            alt={data.imgCard.images.alt}
             fill
             sizes='100%'
             width={0}
@@ -61,9 +52,9 @@ export default function CardsSection({
             <MousePointerClick />
           </span>
           <div className={styles.cardText}>
-            <h2>{homePage ? homePageitems.imgCard.title : menuPageitems.imgCard.title}</h2>
-            <p>{homePage ? homePageitems.imgCard.description : menuPageitems.imgCard.description}</p>
-            {homePage && (
+            <h2 className="gradient-gold-text">{data.imgCard.title}</h2>
+            <p>{data.imgCard.description}</p>
+            {learnMore && (
               <Link href="/meals" className={styles.learnMore}>
                 Learn More
               </Link>

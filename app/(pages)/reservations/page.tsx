@@ -226,13 +226,14 @@ export default function ReservationPage() {
     cleanup();
   }, []);
 
-
   return (
     <>
       <div className={styles.containerWrapper + ' ' + "mainBackground"}>
-        <div className={styles.containerTopNavbar} />
+        <div className="containerTopNavbarColor" />
         <div className={styles.formSection}>
-          <h2>{editReservationId ? "Update Reservation" : "Make a Reservation"}</h2>
+          <h2 className="gradient-gold-text">
+            {editReservationId ? "Update Reservation" : "Make a Reservation"}
+          </h2>
 
           {/* error-success info */}
           {message && (
@@ -316,35 +317,39 @@ export default function ReservationPage() {
               />
             </label>
 
-            <button type="submit" className={styles.button} disabled={isSubmitting}>
+            <button
+              type="submit"
+              className={styles.button + " " + "button-gold-on-dark"}
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Saving..." : editReservationId ? "Save Changes" : "Reserve"}
             </button>
           </form>
         </div>
 
         <div className={styles.infoSection}>
-          <h2>Your Reservations</h2>
+          <h2 className="gradient-gold-text">Your Reservation</h2>
           {reservationsLoading ? (
             <div>Loading...</div>
           ) : reservations.length > 0 ? (
             reservations.map((res) => (
               <div key={res._id || `${res.date}-${res.time}`} className={styles.reservationCard}>
-                <p><strong>Name:</strong> {user?.name || "N/A"}</p>
-                <p><strong>Email:</strong> {user?.email || "N/A"}</p>
-                <p><strong>Date:</strong> {new Date(res.date).toLocaleDateString()}</p>
-                <p><strong>Time:</strong> {res.time}</p>
-                <p><strong>Guests:</strong> {res.guests}</p>
-                <p><strong>Notes:</strong> {res.notes || "-"}</p>
+                <div className={styles.infoItem}><div className={styles.bold}>Name</div>: {user?.name || "N/A"}</div>
+                <div className={styles.infoItem}><div className={styles.bold}>Email</div>: {user?.email || "N/A"}</div>
+                <div className={styles.infoItem}><div className={styles.bold}>Date</div>: {new Date(res.date).toLocaleDateString()}</div>
+                <div className={styles.infoItem}><div className={styles.bold}>Time</div>: {res.time}</div>
+                <div className={styles.infoItem}><div className={styles.bold}>Guests</div>: {res.guests}</div>
+                <div className={styles.infoItem}><div className={styles.bold}>Notes</div>: {res.notes || "-"}</div>
                 <button
                   onClick={() => handleEdit(res)}
-                  className={styles.button}
+                  className={styles.button + " " + "button-gold-on-dark"}
                   disabled={editReservationId === res._id}
                 >
                   Update
                 </button>
                 <button
                   type="button"
-                  className={styles.button}
+                  className={styles.button + " " + "button-gold-on-dark"}
                   onClick={() => handleDelete(res._id || "")}
                 >
                   {isDeleting ? "Deleting..." : "Delete Reservation"}

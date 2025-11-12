@@ -54,6 +54,7 @@ export default function HeroBanner({
           width={0}
           height={0}
           onLoad={()=>setLoaded(true)}
+          priority
         />
       </div>
      

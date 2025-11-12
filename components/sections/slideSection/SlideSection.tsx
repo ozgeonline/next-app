@@ -4,6 +4,7 @@ import { removeBGimages } from '@/components/slides/slideshow-items';
 import ImageSlideshow from "@/components/slides/slideShow/Image-slideshow";
 import InfiniteSlideLoop from "@/components/slides/loopSlides/InfiniteSlideLoop";
 import styles from "./slide-section.module.css";
+import { MousePointerClick } from "lucide-react";
 
 interface SlideSectionProps {
   isCommunityInfoVisible: boolean;
@@ -21,10 +22,15 @@ export default function SlideSection({ isCommunityInfoVisible }: SlideSectionPro
           animationClass={styles.animateInRight}
         >
           <div className={styles.hero}>
-            <h1>Taste & share food from all over the world.</h1>
+            <h1 className="gradient-gold-text">Taste & share food from all over the world.</h1>
           </div>
           <div className={styles.cta}>
-            <Link href="/community">Join the Community</Link>
+            <Link href="/community">
+              Join the Community 
+              <span>
+                <MousePointerClick />
+              </span>
+            </Link>
             <Link href="/meals">Explore Meals</Link>
           </div>
         </AnimatedOnScroll>
