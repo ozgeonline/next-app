@@ -126,7 +126,7 @@
   color: var(--background);
 }
 
-[data-theme="dark"] input::placeholder {
+[data-theme="dark"] .updateSection input::placeholder {
   color: var(--pale-prim-900);
 }
 
@@ -197,9 +197,6 @@
   color: var(--shark-800);
 }
 
-[data-theme="dark"] .mailInfo,
-[data-theme="dark"] .nameInfo {
-}
 
 .mailInfo span,
 .nameInfo span {
