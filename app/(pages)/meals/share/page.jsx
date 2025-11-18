@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from 'react';
+import { useAuth } from '@/context/auth/AuthProvider';
 import shareMeal from '@/app/(pages)/meals/share/actions/share-actions';
 import ImagePicker from '@/components/meals/Image-picker';
 import MealsFormSubmit from '@/components/meals/meals-form-submit';
@@ -9,6 +10,7 @@ import styles from './page.module.css';
 export const dynamic = 'force-dynamic'; 
 
 export default function ShareMealPage() {
+  const { user } = useAuth();
   const [state, formAction] = useActionState(shareMeal,{message:null} );
   //console.log("state:", state);
   
@@ -16,7 +18,7 @@ export default function ShareMealPage() {
     <div className={styles.container + ' ' + "mainBackground"}>
       <header className={styles.header}>
         <h1>
-          Share your <span className={styles.highlight}>favorite meal</span>
+          Share your <span className="highlight-gradient-text">favorite meal</span>
         </h1>
         <p>Or any other meal you feel needs sharing!</p>
       </header>
@@ -25,11 +27,11 @@ export default function ShareMealPage() {
           <div className={styles.row}>
             <p>
               <label htmlFor="name">Your name</label>
-              <input type="text" id="name" name="name" required />
+              <input type="text" id="name" name="name" value={user?.name || ""} readOnly />
             </p>
             <p>
               <label htmlFor="email">Your email</label>
-              <input type="email" id="email" name="email" required />
+              <input type="email" id="email" name="email" value={user?.email || ""} readOnly />
             </p>
           </div>
           <p>
@@ -51,9 +53,9 @@ export default function ShareMealPage() {
           </p>
           <ImagePicker label="Your Meal Image" name="image"/>
           {state?.message && <p>{state.message}</p>}
-          <p className={styles.actions}>
+          <div className={styles.actions}>
             <MealsFormSubmit  />
-          </p>
+          </div>
         </form>
       </main>
     </div>

@@ -70,7 +70,7 @@
 }
 
 .heroDefault h1,.heroDefault h2 {
-  background: linear-gradient(90deg,  var(--science-blue-900), var(--science-blue-600));
+  background: #212529;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

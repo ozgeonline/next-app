@@ -120,7 +120,7 @@
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 0.15rem;
   text-transform: uppercase;
-  background: linear-gradient(90deg, var(--science-blue-700), var(--science-blue-400));
+  background: linear-gradient(90deg, #ffffc2, #d3b15f);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -129,7 +129,7 @@
 .imageContent h2 {
   font-size: 1.3rem;
   text-shadow: 0 1px 0 var(--text-low-opacity);
-  color: var(--text);
+  color:#f4f6f7;
 }
 
 .imageContent p {
@@ -138,7 +138,6 @@
   text-shadow: 0 0 0.5rem var(--text);
   color: #f4f6f7;
   transition: all 1s ease-out;
-  width: 80%;
 }
 
 .imageContent h1,
@@ -166,8 +165,19 @@
     text-shadow: none;
   }
 
+  .imageContent p {
+    width: 80%;
+  }
+
   [data-theme="light"] .imageContent h2,
   [data-theme="light"] .imageContent p {
-    color: #21252990;
+    color: #21252990 ! important;
+  }
+
+  [data-theme="light"] .imageContent h1 {
+    background: var(--shark-500);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }

@@ -72,7 +72,7 @@ export default function CommunityPage() {
       <div className="containerTopNavbarColor" />
       <header className={styles.header}>
         <h1>
-          One shared passion: <span className="gradient-gold-text">Food</span>
+          One shared passion: <span className="highlight-gradient-text">Food</span>
         </h1>
         <p>Join our community and share your favorite recipes!</p>
       </header>
@@ -80,7 +80,7 @@ export default function CommunityPage() {
       <main className={styles.main}>
         <section className={styles.section}>
           <h2
-            className={styles['section-title'] + " " + 'gradient-gold-text'}
+            className={styles['section-title']}
           >
             Latest Recipes
           </h2>
@@ -88,13 +88,13 @@ export default function CommunityPage() {
         </section>
 
         <div className={styles.meals}>
-          <h2 className='gradient-gold-text'>Meals Shared</h2>
+          <h2>Meals Shared</h2>
           <Link href="/meals" className='text-gold-on-dark'>Browse Meals</Link>
         </div>
 
         <section className={styles.section}>
           <h2
-            className={styles['section-title']  + " " + 'gradient-gold-text'}
+            className={styles['section-title']}
           >
             User Spotlights
           </h2>

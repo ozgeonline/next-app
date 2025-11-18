@@ -223,6 +223,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1000;
 }
 
 [data-theme="light"] .containerTopNavbarColor {
@@ -232,49 +233,46 @@ body {
 /* NOT-FOUND PAGE && ERROR PAGE */
 .not-found,
 .error {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
   text-align: center;
-  position: relative;
   z-index: 100;
-}
-
-.not-found h1,
-.error h1 {
-  font-size: 5rem;
-  margin: 0px;
-  font-weight: 900;
-  text-transform: uppercase;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: cover;
-  background-position: center;
-  font-family: 'Montserrat', sans-serif;
+  gap: 1rem;
 }
 
 .not-found p,
 .error p {
-  font-size: 1.5rem;
   font-weight: 500;
   color:#ffffc2;
 }
 
 .not-found a,
 .error a {
-  background: var(--background);
-  border: 1px solid #fffb88;
+  border-radius: 4px;
+  border: none;
   color: var(--text);
+  background: var(--background);
+  border: 1px solid var(--border);
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: lowercase;
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  margin-top: 1rem;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
+  padding: 0.5rem 3.5em;
+  margin: .5rem 1rem;
+  font-size: medium;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s ease;
 }
+
+
 
 .not-found a:hover,
 .error a:hover {
@@ -339,7 +337,7 @@ body {
     rgba(203, 203, 203, 0.02) 50%,
     rgba(24, 24, 24, 0.02) 50%, 
     rgba(24, 24, 24, 0.02) 100%),
-  linear-gradient(90deg, #0c355f, #0080fa);
+  linear-gradient(90deg, #0466c8, #0080fa);
 }
 
 [data-theme="dark"] .footer,
@@ -396,9 +394,26 @@ body {
 
 /************************************** Gold Theme ***********************************/
 
-[data-theme="dark"] .gradient-gold-text,
-.not-found h1,
-.error h1 {
+.highlight-gradient-text {
+  font-family: 'Montserrat', sans-serif;
+  /* background: linear-gradient(90deg, #0c355f ,#0b589d); */
+  background: #212529;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h1.highlight-gradient-text {
+  font-size: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  h1.highlight-gradient-text {
+    font-size: 3rem;
+  }
+}
+
+[data-theme="dark"] .highlight-gradient-text{
   background-image: 
     repeating-linear-gradient(
       to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%, 
@@ -429,6 +444,5 @@ body {
 
 [data-theme="dark"] .button-gold-on-dark {
   color: var(--pale-prim-900);
-  /* border: 1px solid var(--pale-prim-900); */
   background: var(--background);
 }

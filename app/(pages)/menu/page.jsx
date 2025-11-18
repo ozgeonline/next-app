@@ -39,9 +39,6 @@ export default function MenuPage() {
       </Carousel>
 
       <main className={styles.main}>
-        <div className={styles.cardsWrapper + ' ' + "mainBackground"}>
-          <CardsSection data={menuPageitems}/>
-        </div>
         <div className={styles.menu + ' ' + "mainBackground"}>
           <h2>Menu</h2>
           <Carousel 
@@ -71,6 +68,10 @@ export default function MenuPage() {
             })}
           </Carousel>
         </div>
+
+        {/* <div className={styles.cardsWrapper + ' ' + "mainBackground"}>
+          <CardsSection data={menuPageitems}/>
+        </div> */}
 
         <div className={styles.contactBadgeWrapper + ' ' + "mainBackground"}>
           <div className={styles.containerBadge}>

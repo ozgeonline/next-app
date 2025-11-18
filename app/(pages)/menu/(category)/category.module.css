@@ -46,6 +46,14 @@
   -webkit-text-fill-color: transparent;
 }
 
+[data-theme="dark"] .linkWrapper button.active,
+[data-theme="dark"] .linkWrapper button:hover {
+  background: #ffffc2;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .menuItemsWrapper {
   display: flex;
   flex-direction: column;

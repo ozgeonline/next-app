@@ -21,7 +21,7 @@ export default function CardsSection({
       <div className={styles.cards}>
         <div className={styles.card}>
           <div className={styles.cardTextLeft}>
-            <h2 className="gradient-gold-text">{data.infoCard.title}</h2>
+            <h2>{data.infoCard.title}</h2>
             <p>{data.infoCard.description}</p>
             <div className={styles.learnMoreLeft}>
               {data.link && (
@@ -52,7 +52,7 @@ export default function CardsSection({
             <MousePointerClick />
           </span>
           <div className={styles.cardText}>
-            <h2 className="gradient-gold-text">{data.imgCard.title}</h2>
+            <h2>{data.imgCard.title}</h2>
             <p>{data.imgCard.description}</p>
             {learnMore && (
               <Link href="/meals" className={styles.learnMore}>

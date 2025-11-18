@@ -8,27 +8,36 @@
   min-height: 100vh;
   height: auto;
   z-index: 100;
-  /* padding: 4rem 2rem; */
+  padding: 4rem 1rem;
 }
+
+/* @media screen and (min-width: 1024px) {
+  .container {
+    padding: 0;
+  }
+  
+} */
 
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 2rem auto;
+  margin: 1rem auto;
   width: 100%;
   max-width: 75rem;
   font-size: 1rem;
   color: var(--shark-800);
-  padding: 1rem;
 }
 .header h1,
 .header p {
   text-align: center;
 }
 
-.header p { margin: 0;}
+.header p { 
+  margin: 0;
+  padding: .75rem 0;
+}
 
 @media screen and (min-width: 640px) {
   .header {
@@ -39,35 +48,31 @@
 @media screen and (min-width: 1280px) {
   .header {
     font-size: 1.5rem;
-    margin: 3rem auto;
+    margin: 2rem auto;
   }
   
 }
 
 .main {
   width: 100%;
-}
-
-.highlight {
-  background: linear-gradient(90deg, #f9572a, #ff8a05);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  padding: 1rem;
 }
 
 .cta a {
   display: inline-block;
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
+  margin-top: .5rem;
+  padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   background: linear-gradient(90deg, #f9572a, #ff9b05);
   color: #ffffff;
   font-weight: bold;
   text-decoration: none;
+  filter: brightness(0.9);
+  border: 1px solid #ffffc2;
 }
 
 .cta a:hover {
-  filter: brightness(1.1);
+  filter: brightness(1);
   transition: all 0.3s ease-in-out;
 }
 

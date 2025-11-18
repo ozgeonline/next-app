@@ -22,7 +22,7 @@ export default function ReservationBanner() {
           sizes="100%"
         />
       </div>
-      <h2 className="gradient-gold-text">for a Wonderful Experience</h2>
+      <h2>for a Wonderful Experience</h2>
       <div className={styles.reservation}>
         <Link href="/reservations">
           Make Reservation 

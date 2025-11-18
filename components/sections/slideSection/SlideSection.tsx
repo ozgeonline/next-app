@@ -22,7 +22,7 @@ export default function SlideSection({ isCommunityInfoVisible }: SlideSectionPro
           animationClass={styles.animateInRight}
         >
           <div className={styles.hero}>
-            <h1 className="gradient-gold-text">Taste & share food from all over the world.</h1>
+            <h1 className="highlight-gradient-text">Taste & share food from all over the world.</h1>
           </div>
           <div className={styles.cta}>
             <Link href="/community">

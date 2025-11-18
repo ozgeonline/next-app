@@ -32,10 +32,7 @@
 .header p {
   font-size: 1rem;
   text-align: center;
-}
-
-[data-theme="dark"] .header p {
- color: var(--pale-prim-900);
+  color: var(--text);
 }
 
 @media screen and (min-width: 1024px) {
@@ -128,14 +125,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(9.3px);
   height: 30%;
   width: 100%;
   border-radius: 8px;
-  padding: .5rem 2rem;
+  padding: .5rem 1rem;
   gap: .5rem;
 }
 
@@ -151,7 +147,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  width: 100%;
+  width: auto;
   color: #f4f4f4;
   gap: .5rem;
 }

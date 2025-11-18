@@ -43,3 +43,19 @@
 .preview img {
   object-fit: cover;
 }
+
+.back {
+  text-decoration: none;
+  padding: .3rem 1rem;
+  margin: .5rem 0;
+  border: 1px solid var(--pale-prim-900);
+  opacity: .8;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all .3s ease-in-out;
+}
+
+.back { 
+  color: var(--shark-100);
+  background: var(--shark-900);
+}

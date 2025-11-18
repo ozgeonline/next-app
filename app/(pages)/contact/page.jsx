@@ -13,7 +13,7 @@ export default function ContactUs() {
     <div className={styles.container + ' ' + "mainBackground"}>
       <div className="containerTopNavbarColor" />
       <header className={styles.header}>
-        <h1 className="gradient-gold-text">Contact Us</h1>
+        <h1 className="highlight-gradient-text">Contact Us</h1>
         <p>
           If you have any questions or feedback, please don't hesitate to reach out to us.
         </p>

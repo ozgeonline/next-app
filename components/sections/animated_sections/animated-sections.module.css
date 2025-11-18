@@ -94,13 +94,7 @@
   text-align: center;
 }
 
-.heroDefault h1,
-.heroDefault h2 {
- background: linear-gradient(90deg,  var(--science-blue-900), var(--science-blue-600));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+
 
 @media screen and (min-width: 768px) {
   .heroDefault h1 { font-size: 1.5rem; }
@@ -149,7 +143,6 @@
   height: 15vh;
   box-sizing: border-box;
   border-radius: 2rem;
-  margin-top: 2rem;
 }
 
 .imageFirst,

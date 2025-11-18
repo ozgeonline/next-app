@@ -50,21 +50,18 @@
 
 .card .cardTextLeft {
   padding: 2rem;
-  color: var(--shark-200);
   z-index: 10;
 }
 
 .cardTextLeft p {
   max-width: 90%;
   font-size: .85rem;
-}
-
-[data-theme="dark"] .cardTextLeft p {
-  color: var(--pale-prim-900);
+  color: #ddd6cb;
 }
 
 .cardTextLeft h2 {
   font-size: 1.3rem;
+  color: #ffffc2;
 }
 
 @media screen and (min-width: 1024px) {
@@ -72,6 +69,7 @@
   .cardTextLeft h2 { 
     font-size: 1.5rem; 
     margin-bottom: .5rem;
+    padding: 1rem 0;
   }
 }
 
@@ -87,18 +85,14 @@
   border-radius: 0.4rem;
   width: 20vh;
   height: 5vh;
-  border: 1px solid var(--shark-300);
+  border: 1px solid #ffffc2;
   margin-top: 1rem;
   transition: transform 0.5s ease-out;
 }
 
-[data-theme="dark"] .learnMoreLeft {
-  border: 1px solid var(--pale-prim-900);
-}
-
 .learnMoreLeft a {
   text-decoration: none;
-  color: var(--shark-300);
+  color: #ffffc2;
   font-size: large;
 }
 
@@ -192,11 +186,19 @@
 
 .card .cardText {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
   left: 0;
-  top: 10%;
+  top: 0;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   padding: 1rem;
+}
+
+.cardText p {
+  padding-bottom: 1rem;
 }
 
 @media screen and (min-width: 1024px) {
@@ -217,10 +219,7 @@
   padding-bottom: 1vh;
   font-size: medium;
   font-size: 1.3rem;
-}
-
-[data-theme="dark"] .cardText p {
-  color: var(--pale-prim-900);
+  color: #ffffc2;
 }
 
 @media screen and (min-width: 1024px) {
@@ -240,7 +239,6 @@
 }
 
 .cardText .learnMore {
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -251,9 +249,10 @@
   border-radius: 0.4rem;
   width: 20vh;
   height: 5vh;
-  border: 1px solid #ddd6cb;
-  color: #ddd6cb;
+  border: 1px solid #ffffc2;
+  color: #ffffc2;
   transition: all 0.3s ease-in-out;
+  filter: brightness(0.8);
 }
 
 [data-theme="dark"] .cardText .learnMore {
@@ -262,7 +261,7 @@
 }
 
 .cardText .learnMore:hover {
-  transform: translateY(-5%);
+  filter: brightness(1);
 }
 
 @media screen and (min-width: 768px) {
@@ -280,7 +279,7 @@
   
   .card .cardText {
     left: 0;
-    bottom: 50%;
+    bottom: 0;
   }
 
   .cardText p {

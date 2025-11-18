@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { UploadButton } from "@/utils/upload/uploadthing";
 import styles from "./image-picker.module.css";
 import Image from "next/image";
@@ -79,6 +80,9 @@ export default function ImagePicker({label,name}) {
               },
             }}
           />
+          <Link href="./" className={styles.back + ' ' + "button-gold-on-dark"}>
+            back meals
+          </Link>
           {error && <p style={{fontSize:"0.8em"}}>{error}</p>}
         </div>
       </div>

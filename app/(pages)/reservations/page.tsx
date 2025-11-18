@@ -231,7 +231,7 @@ export default function ReservationPage() {
       <div className={styles.containerWrapper + ' ' + "mainBackground"}>
         <div className="containerTopNavbarColor" />
         <div className={styles.formSection}>
-          <h2 className="gradient-gold-text">
+          <h2>
             {editReservationId ? "Update Reservation" : "Make a Reservation"}
           </h2>
 
@@ -328,7 +328,7 @@ export default function ReservationPage() {
         </div>
 
         <div className={styles.infoSection}>
-          <h2 className="gradient-gold-text">Your Reservation</h2>
+          <h2>Your Reservation</h2>
           {reservationsLoading ? (
             <div>Loading...</div>
           ) : reservations.length > 0 ? (

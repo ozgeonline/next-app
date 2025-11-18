@@ -14,7 +14,7 @@ export default function AnimatedSections() {
         return (
           <div key={index} className={styles.containerWrapper}>
             <div className={styles.heroDefault}>
-              <h2 className="gradient-gold-text">{title}</h2>
+              <h2 className="highlight-gradient-text">{title}</h2>
             </div>
 
             <div
