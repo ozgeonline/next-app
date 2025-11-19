@@ -50,7 +50,7 @@ export default async function MealDetailsPage({params}) {
         </div>
       </header>
       <main className={styles.main}>
-        <h2><span>{meal.title}'s</span> instructions</h2>
+        <h2><span>{meal.title}&#39;s</span> instructions</h2>
         <div 
           className={styles.instructions}
           dangerouslySetInnerHTML={{
