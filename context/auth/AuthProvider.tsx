@@ -37,9 +37,14 @@ export function AuthProvider({
     "/api/auth/user",
     fetcher,
     {
-      fallbackData: initialUser || null, // SSR’den gelen user
+      fallbackData: initialUser || null, // User from SSR
       revalidateOnFocus: true,
+      revalidateOnMount: true, // component is first loaded: SWR's req to pull data
       dedupingInterval: 10000,
+      onError: (error) => {
+        // for 500 Internal Server Error 
+        console.error("AuthProvider: Kimlik doğrulama verisi çekilemedi:", error);
+      },
     }
   );
 
@@ -51,8 +56,13 @@ export function AuthProvider({
         loading: isLoading,
         mutateUser: (newUser?: ClientUser | null) => {
           if (newUser === null) {
-            mutate(undefined, false); //logout için
+            // Logout: clear cache
+            mutate(null, false);
+          } else if (newUser) {
+            // update cache
+            mutate(newUser, false);
           } else {
+            // trigger re-fetch
             mutate();
           }
         },

@@ -16,27 +16,27 @@ export default function ReservationPage() {
     refetchReservations,
   } = useReservations();
 
-//   const createReservation = async () => {
-//   try {
-//     const res = await fetch("/api/auth/reservations", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         date: "2025-09-01",
-//         time: "19:00",
-//         guests: 4,
-//         notes: "Pencere kenarı masa lütfen",
-//       }),
-//     });
+  //   const createReservation = async () => {
+  //   try {
+  //     const res = await fetch("/api/reservations", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         date: "2025-09-01",
+  //         time: "19:00",
+  //         guests: 4,
+  //         notes: "Pencere kenarı masa lütfen",
+  //       }),
+  //     });
 
-//     const data = await res.json();
-//     console.log("Response:", data);
-//   } catch (err) {
-//     console.error("Error creating reservation:", err);
-//   }
-// };
+  //     const data = await res.json();
+  //     console.log("Response:", data);
+  //   } catch (err) {
+  //     console.error("Error creating reservation:", err);
+  //   }
+  // };
 
   const [reservation, setReservation] = useState<SavedReservation>({
     date: "",
@@ -116,7 +116,7 @@ export default function ReservationPage() {
 
       const selected = new Date();
       selected.setHours(hours, minutes, 0, 0);
-      
+
       if (selected <= now) {
         showMessage("error", "You cannot select a past time for today.");
         return false;
@@ -128,12 +128,12 @@ export default function ReservationPage() {
 
   // check reservation limit
   const checkReservationLimit = () => {
-  if (!editReservationId && reservations.length > 0) {
-    showMessage("error", "You can only have one active reservation.");
-    return false;
-  }
-  return true;
-};
+    if (!editReservationId && reservations.length > 0) {
+      showMessage("error", "You can only have one active reservation.");
+      return false;
+    }
+    return true;
+  };
 
   const buildRequestData = () => {
     const payload = {
@@ -144,8 +144,8 @@ export default function ReservationPage() {
     };
 
     const url = editReservationId
-      ? `/api/auth/reservations/${editReservationId}`
-      : `/api/auth/reservations`;
+      ? `/api/reservations/${editReservationId}`
+      : `/api/reservations`;
 
     const method = editReservationId ? "PUT" : "POST";
 
@@ -160,7 +160,7 @@ export default function ReservationPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-      
+
     if (!validateInputs()) return;
     if (!checkDateConstraints()) return;
     if (!checkReservationLimit()) return;
@@ -197,7 +197,7 @@ export default function ReservationPage() {
     setIsDeleting(true);
 
     try {
-      const res = await fetch(`/api/auth/reservations/${id}`, {
+      const res = await fetch(`/api/reservations/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -205,7 +205,7 @@ export default function ReservationPage() {
       if (!res.ok) throw new Error("Failed to delete reservation");
 
       resetForm();
-      
+
       await refetchReservations();
 
       showMessage("success", "Reservation deleted successfully.");
@@ -218,7 +218,7 @@ export default function ReservationPage() {
 
   useEffect(() => {
     const cleanup = async () => {
-      await cleanupExpiredReservations(refetchReservations, ( text) => {
+      await cleanupExpiredReservations(refetchReservations, (text) => {
         setExpiredMessage(text);
       });
     };
@@ -357,8 +357,8 @@ export default function ReservationPage() {
               </div>
             ))
           ) : (
-           !reservationsLoading && reservations.length === 0 && 
-            <p>No reservations found.</p> 
+            !reservationsLoading && reservations.length === 0 &&
+            <p>No reservations found.</p>
           )}
 
           {expiredMessage && (

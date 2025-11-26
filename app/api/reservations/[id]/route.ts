@@ -5,7 +5,7 @@ import Reservation from "@/app/models/Reservation";
 
 export async function PUT(
   req: NextRequest,
-  context: { params: Promise<{ id: string }>}
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     await connect();
@@ -16,7 +16,7 @@ export async function PUT(
 
     const { id } = await context.params;//reservation ID
     const body = await req.json();
-    //console.log("PUT /api/auth/reservations/[id]: body:", body);
+    //console.log("PUT /api/reservations/[id]: body:", body);
 
     //reservation & user_id relationship
     const reservation = await Reservation.findOne({ _id: id, userId: decoded.userId });
@@ -48,8 +48,8 @@ export async function PUT(
 }
 
 export async function DELETE(
-   req: NextRequest,
-  context: { params: Promise<{ id: string }>}
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     await connect();

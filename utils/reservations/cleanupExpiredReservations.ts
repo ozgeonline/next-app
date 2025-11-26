@@ -5,7 +5,7 @@ export const cleanupExpiredReservations = async (
   //console.log("______CLEANUP START______");
 
   try {
-    const res = await fetch("/api/auth/reservations/cleanup", {
+    const res = await fetch("/api/reservations/cleanup", {
       method: "DELETE",
     });
 

@@ -2,61 +2,67 @@ import { NextResponse } from "next/server";
 import connect from "@/lib/db";
 import User from "@/app/models/User";
 import jwt from "jsonwebtoken";
+import { getAuthCookieOptions } from "@/lib/authHelpers";
 
 export async function POST(req: Request) {
+
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is not defined in environment variables.");
+  }
+
   try {
-    //console.log("POST /api/auth/signup: Request successful");
+    //console.log("signup: Request successful");
     await connect();
-    
     const { name, email, password } = await req.json();
 
     if (!name || !email || !password) {
-      //console.error("POST /api/auth/signup: Missing name, email, or password");
+      console.error("signup: Missing name, email, or password");
       return NextResponse.json({ error: "Name, email, and password are required" }, { status: 400 });
     }
 
-    const existingUser = await User.findOne({ email: email.toLowerCase() }).lean();
+    const lowerCaseEmail = email.toLowerCase();
+
+    const existingUser = await User.findOne({ email: lowerCaseEmail }).lean();
     if (existingUser) {
-      //console.error("POST /api/auth/signup: Email already in use:", email);
+      console.error("signup: Email already in use:", email);
       return NextResponse.json({ error: "Email already in use" }, { status: 400 });
     }
 
     const user = await User.create({
       name,
-      email: email.toLowerCase(),
+      email: lowerCaseEmail,
       password
     });
 
     const token = jwt.sign(
-      { userId: user._id, name: user.name, email: user.email },
+      {
+        userId: user._id,
+        name: user.name,
+        email: user.email
+      },
       process.env.JWT_SECRET!,
       { expiresIn: "7d" }
     );
-
-    //console.log("POST /api/auth/signup: Generated token:", token);
+    //console.log("signup: Generated token:", token);
 
     const res = NextResponse.json({
       message: "Signup successful",
-      user: { _id: user._id, email: user.email, name: user.name },
+      user: {
+        _id: user._id.toString(),
+        email: user.email,
+        name: user.name
+      }
     });
 
-    res.cookies.set("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 7,
-    });
-
-    //console.log("POST /api/auth/signup: Response sent with cookie");
+    res.cookies.set("token", token, getAuthCookieOptions());
     return res;
   } catch (error: any) {
-    //console.error("POST /api/auth/signup error:", error);
+    console.error("signup error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
 export async function GET() {
-  console.log("GET /api/auth/signup: Method not allowed");
+  console.log("GET - signup: Method not allowed");
   return NextResponse.json({ error: "Method Not Allowed - Use POST for signup" }, { status: 405 });
 }

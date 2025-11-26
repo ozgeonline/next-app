@@ -22,7 +22,7 @@ export const useReservations = (): ReservationState => {
   const fetchReservations = useCallback(async () => {
 
     if (authLoading) return setLoading(true);
-    
+
     if (!isAuthenticated || !user) {
       setReservations([]);
       setLoading(false);
@@ -33,7 +33,7 @@ export const useReservations = (): ReservationState => {
       setLoading(true);
       setError(null);
 
-      const res = await fetch("/api/auth/reservations", {
+      const res = await fetch("/api/reservations", {
         method: "GET",
         credentials: "include",
       });
@@ -58,7 +58,7 @@ export const useReservations = (): ReservationState => {
       );
 
       setReservations(fetchedReservations);
-      
+
     } catch (err: any) {
       setError(err.message);
       setReservations([]);
