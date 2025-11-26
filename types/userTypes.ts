@@ -4,7 +4,7 @@ export interface User extends Document {
   email: string;
   password: string;
   name?: string;
-  _id: Types.ObjectId;
+  _id: string;
   comparePassword(userPassword: string): Promise<boolean>;
 }
 
