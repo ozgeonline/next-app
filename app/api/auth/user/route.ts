@@ -5,6 +5,21 @@ import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import Rating from "@/app/models/Rating";
 
 export async function GET(req: Request) {
+
+  const formatRatings = (ratings: any[]) => {
+    return ratings.map((rating) => {
+      const meal = rating.mealId;
+      return {
+        _id: rating._id.toString(),
+        mealId: meal ? meal._id.toString() : null,
+        mealTitle: meal ? meal.title : "Silinmiş Yemek",
+        mealSlug: meal ? meal.slug : null,
+        rating: rating.rating,
+        createdAt: rating.createdAt,
+      };
+    });
+  };
+
   try {
     await connect();
 
@@ -21,45 +36,38 @@ export async function GET(req: Request) {
     const url = new URL(req.url);
     const ratingsOnly = url.searchParams.get('ratings') === 'true';
 
-    if (ratingsOnly) {
-      const ratings = await Rating.find({ userId: decoded.userId })
-        .populate({ path: 'mealId', select: 'title slug' })
-        .lean();
-        
-      const userRatings = ratings.map((rating) => ({
-        mealId: rating.mealId._id.toString(),
-        mealTitle: rating.mealId.title,
-        mealSlug: rating.mealId.slug,
-        rating: rating.rating,
-        createdAt: rating.createdAt,
-      }));
+    const ratingsQuery = Rating.find({ userId: decoded.userId })
+      .populate({ path: 'mealId', select: 'title slug' })
+      .lean();
 
+    if (ratingsOnly) {
+      const ratings = await ratingsQuery;
       return NextResponse.json({
         message: 'User ratings fetched successfully',
-        ratings: userRatings,
+        ratings: formatRatings(ratings),
       });
-    }
+    };
+
+    const ratings = await ratingsQuery;
 
     return NextResponse.json({
       message: "User data fetched successfully",
-      user: { 
-        name: user.name, 
-        email: user.email, 
-        userId: user._id 
+      user: {
+        name: user.name,
+        email: user.email,
+        userId: user._id.toString()
       },
-      ratings: await Rating.find({ userId: decoded.userId })
-      // .populate('mealId', 'title slug').lean()
-      .populate({ path: 'mealId', select: 'title slug'}).lean()
+      ratings: formatRatings(ratings),
     });
 
   } catch (error) {
     if (process.env.NODE_ENV !== "production") {
       console.error("Error fetching user data:", error);
     }
-
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
+
 export async function PUT(req: Request) {
   try {
     await connect();
@@ -78,16 +86,20 @@ export async function PUT(req: Request) {
 
     const updatedUser = await User.findByIdAndUpdate(
       decoded?.userId,
-      { name },
-      { new: true }
+      { name: name.trim() },
+      { new: true, runValidators: true }
     ).select("name email");
+
+    if (!updatedUser) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
 
     return NextResponse.json({
       message: "User updated successfully",
       user: {
         name: updatedUser?.name,
         email: updatedUser?.email,
-        userId: updatedUser?._id,
+        userId: updatedUser?._id.toString(),
       },
     });
   } catch (error) {

@@ -8,6 +8,14 @@ interface DecodedToken {
 }
 
 export async function getUserFromCookies(): Promise<DecodedToken | null> {
+
+  if (!process.env.JWT_SECRET) { //for runtime error
+    if (process.env.NODE_ENV !== "production") {
+      console.error("JWT_SECRET ortam değişkeni tanımlı değil. Kimlik doğrulama başarısız olacak.");
+    }
+    return null;
+  }
+
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
   if (!token) return null;
@@ -15,7 +23,7 @@ export async function getUserFromCookies(): Promise<DecodedToken | null> {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as DecodedToken;
     return decoded;
-  } catch(error) {
+  } catch (error) {
     if (process.env.NODE_ENV !== "production") {
       console.error("Invalid token:", error);
     }

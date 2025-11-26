@@ -1,11 +1,8 @@
 import mongoose from 'mongoose';
-import Meal from './Meal';
-import User from './User';
 
 const RatingSchema = new mongoose.Schema({
-  mealId: { type: mongoose.Schema.Types.ObjectId, ref: Meal, required: true },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: User, required: true },
-  userName: { type: String, required: true },
+  mealId: { type: mongoose.Schema.Types.ObjectId, ref: 'Meal', required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   rating: { type: Number, min: 1, max: 5, required: true },
   createdAt: { type: Date, default: Date.now },
 });
