@@ -1,33 +1,22 @@
 "use client";
 
-import {  useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/auth/AuthProvider";
 import styles from "./profile.module.css";
 
 export default function ProfilePage() {
-  const { user, isAuthenticated, loading, mutateUser } = useAuth();
+  const { user, isAuthenticated, mutateUser } = useAuth();
   const [showInput, setShowInput] = useState(false);
   const [newName, setNewName] = useState("");
   const [saving, setSaving] = useState(false);
-
-  // useEffect(() => {
-  //   console.log("loading:", loading);
-  //   console.log("isAuthenticated:", isAuthenticated);
-  // }, [loading]);
-  
-   if (loading) {
-    return (
-      <div>
-        <h3 className={styles.loading}>Loading...</h3>
-      </div>
-    );
-  }
+  const [error, setError] = useState<string | null>(null);
 
   const handleUpdate = async () => {
     if (!newName.trim()) return;
-
+    setError(null);
     setSaving(true);
+
     try {
       const res = await fetch("/api/auth/user", {
         method: "PUT",
@@ -43,13 +32,19 @@ export default function ProfilePage() {
         setShowInput(false);
         setNewName("");
       } else {
-        //console.error(await res.json());
+        const errorData = await res.json();
+        setError(errorData.error || "Update failed.");
       }
     } catch (err) {
-      //console.error("Update error:", err);
+      setError("Network error. Please try again.");
     } finally {
       setSaving(false);
     }
+  };
+
+  const handleShowInput = () => {
+    setShowInput(true);
+    setNewName(user?.name || "");
   };
 
   return (
@@ -57,7 +52,7 @@ export default function ProfilePage() {
       <div className={styles.card}>
         <div className={styles.profileWrapper}>
           {isAuthenticated ? (
-             // Authenticated Profile
+            // Authenticated Profile
             <div className={styles.authProfile}>
               <h3>Profile</h3>
               <div className={styles.profileInfo}>
@@ -70,10 +65,11 @@ export default function ProfilePage() {
               </div>
               <h3>Update account name:</h3>
               <div className={styles.updateSection}>
+                {error && <p className={styles.errorMessage}>Error: {error}</p>}
                 {!showInput ? (
                   <button
-                    onClick={() => setShowInput(true)}
-                    className="button-gold-on-dark"
+                    onClick={handleShowInput}
+                    className="button-gold-on-dark blueButton"
                   >
                     Update
                   </button>
@@ -84,18 +80,18 @@ export default function ProfilePage() {
                       value={newName}
                       onChange={(e) => setNewName(e.target.value)}
                       placeholder="Enter new name"
-                      className="button-gold-on-dark"
+                      className="button-gold-on-dark blueButton"
                     />
                     <button
                       onClick={handleUpdate}
                       disabled={saving}
-                      className="button-gold-on-dark"  
+                      className="button-gold-on-dark blueButton"
                     >
                       {saving ? "Saving..." : "Save"}
                     </button>
                     <button
                       onClick={() => setShowInput(false)}
-                      className="button-gold-on-dark"
+                      className="button-gold-on-dark blueButton"
                     >
                       Cancel
                     </button>
@@ -105,11 +101,11 @@ export default function ProfilePage() {
             </div>
           ) : (
             // Not Authenticated Profile
-            <>
+            <div className={styles.nonAuthProfile}>
               <Link
                 href="/signup"
                 type="submit"
-                className={styles.referencePathBtn + " " + "text-gold-on-dark"}
+                className={styles.referencePathBtn + " " + "text-gold-on-dark blueButton"}
               >
                 Sign Up
               </Link>
@@ -117,11 +113,11 @@ export default function ProfilePage() {
               <Link
                 href="/login"
                 type="submit"
-                className={styles.referencePathBtn + " " + "text-gold-on-dark"}
+                className={styles.referencePathBtn + " " + "text-gold-on-dark blueButton"}
               >
                 Login
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>

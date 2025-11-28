@@ -11,14 +11,10 @@
   gap: 2rem;
 }
 
-.containerWrapper .loading {
-  color: var(--shark-800);
-}
-
 .card {
   width: 100%;
   height: 24rem;
-  border-radius: 1rem;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +26,6 @@
   .card {
     height: 32rem;
   }
-  
 }
 
 .profileWrapper {
@@ -40,7 +35,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  border-radius: 1rem;
+  border-radius: 8px;
 }
 
 .profileWrapper h3 {
@@ -49,38 +44,7 @@
   text-align: center;
 }
 
-.referencePathBtn {
-  padding: 0.75rem 1.5rem;
-  margin: 2em 0;
-  background: var(--shark-50);
-  color: var(--shark-700);
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: medium;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-[data-theme="dark"] .referencePathBtn:hover {
-  color: var(--pale-prim-900);
-  background: var(--shark-50);
-}
-
-[data-theme="light"] .referencePathBtn:hover {
-  background: var(--science-blue-800);
-  color: var(--science-blue-50);
-}
-
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  color: var(--shark-800);
-}
+/* ---------------------------------------- authProfile ---------------------------------------- */
 
 .authProfile {
   display: flex;
@@ -90,7 +54,7 @@
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 1rem;
+  border-radius: 8px;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(9.3px);
   padding: 1rem 2rem;
@@ -101,76 +65,13 @@
   background: var(--shark-50);
 }
 
-.updateSection {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.updateSection input,
-.updateSection button {
-  width: 100%;
-  border-radius: 4px;
-  border: none;
-  color: #f4f6f7;
-  background: #0466c8;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(9.3px);
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: lowercase;
-  padding: 0.5rem 3.5em;
-  font-size: medium;
-  cursor: pointer;
-  transition: all 0.1s ease;
-}
-
-.updateSection input::placeholder {
-  color: var(--background);
-}
-
-[data-theme="dark"] .updateSection input::placeholder {
-  color: var(--pale-prim-900);
-}
-
-.updateSection button:hover {
-  filter: brightness(1.1);
-}
-
-@media screen and (min-width: 640px) {
-  .updateSection input,
-  .updateSection button {
-    width: 50%;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .updateSection input,
-  .updateSection button {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .updateSection input,
-  .updateSection button {
-    width: 50%;
-  }
-  
-}
-
 .profileInfo {
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
   width: 100%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: .5rem;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(9.3px);
@@ -197,14 +98,12 @@
   .profileInfo {
     width: 50%;
   }
-  
 }
 
 .mailInfo,
 .nameInfo {
   color: var(--shark-800);
 }
-
 
 .mailInfo span,
 .nameInfo span {
@@ -215,8 +114,86 @@
   font-weight: bolder;
 }
 
-
 [data-theme="dark"] .mailInfo span,
 [data-theme="dark"] .nameInfo span {
   color: var(--shark-300);
+}
+
+.errorMessage {
+  color: var(--international-orange-500);
+  font-size: .9rem;
+}
+
+.updateSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.updateSection input,
+.updateSection button {
+  width: 100%;
+  border-radius: 4px;
+  border: none;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(9.3px);
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: lowercase;
+  text-align: center;
+  padding: 0.5rem 3.5em;
+  font-size: medium;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+@media screen and (min-width: 640px) {
+
+  .updateSection input,
+  .updateSection button {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+
+  .updateSection input,
+  .updateSection button {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+
+  .updateSection input,
+  .updateSection button {
+    width: 50%;
+  }
+}
+
+/* ---------------------------------------- nonAuthProfile ---------------------------------------- */
+
+.nonAuthProfile {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.referencePathBtn {
+  padding: 0.75rem 1.5rem;
+  margin: 2em 0;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: medium;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }

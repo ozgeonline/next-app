@@ -23,7 +23,9 @@
   padding: 5rem 0;
 }
 
-.containerWrapper .loading { color: #ffffc2;}
+.containerWrapper .loading {
+  color: #ffffc2;
+}
 
 @media screen and (min-width: 1024px) {
   .containerWrapper {
@@ -37,13 +39,14 @@
 .card {
   width: 90%;
   height: 24rem;
-  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
   margin: 1rem;
 }
 
@@ -57,7 +60,6 @@
 .userCard {
   background: rgba(255, 255, 255, 0.3);
   color: var(--shark-800);
-  border-radius: 1rem;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(9.3px);
   display: flex;
@@ -67,7 +69,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 1rem;
+  border-radius: 8px;
 }
 
 [data-theme="dark"] .userCard {
@@ -78,10 +80,10 @@
   .userCard {
     height: 60vh;
   }
-  
+
 }
 
-.userCard .top ,
+.userCard .top,
 .userCard .bottom {
   width: 100%;
   height: 100%;
@@ -108,17 +110,11 @@
   font-size: medium;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: var(--science-blue-50);
-}
-
-.userCard .bottom .button {
-  background: var(--science-blue-800);
-  color: var(--science-blue-50);
 }
 
 [data-theme="dark"] .userCard .bottom .button {
   background: var(--background);
-  color:var(--pale-prim-900);
+  color: var(--pale-prim-900);
   /* border: 1px solid var(--pale-prim-900); */
 }
 
@@ -138,7 +134,7 @@
   .userCard .top .name {
     font-size: 1.5rem;
     font-weight: bold;
-  } 
+  }
 }
 
 .avatar {
@@ -155,36 +151,36 @@
   text-transform: uppercase;
   font-size: 2em;
   overflow: hidden;
-  background: 
-    linear-gradient(46deg, 
-      rgba(18, 18, 18, 0.01) 0%, 
+  background:
+    linear-gradient(46deg,
+      rgba(18, 18, 18, 0.01) 0%,
       rgba(18, 18, 18, 0.01) 50%,
-      rgba(10, 10, 10, 0.01) 50%, 
+      rgba(10, 10, 10, 0.01) 50%,
       rgba(10, 10, 10, 0.01) 100%),
-    linear-gradient(338deg, 
-      rgba(232, 232, 232, 0.03) 0%, 
+    linear-gradient(338deg,
+      rgba(232, 232, 232, 0.03) 0%,
       rgba(232, 232, 232, 0.03) 50%,
-      rgba(174, 174, 174, 0.03) 50%, 
+      rgba(174, 174, 174, 0.03) 50%,
       rgba(174, 174, 174, 0.03) 100%),
-    linear-gradient(26deg, 
-      rgba(180, 180, 180, 0.02) 0%, 
+    linear-gradient(26deg,
+      rgba(180, 180, 180, 0.02) 0%,
       rgba(180, 180, 180, 0.02) 50%,
-      rgba(191, 191, 191, 0.02) 50%, 
+      rgba(191, 191, 191, 0.02) 50%,
       rgba(191, 191, 191, 0.02) 100%),
-    linear-gradient(129deg, 
-      rgba(52, 52, 52, 0.03) 0%, 
+    linear-gradient(129deg,
+      rgba(52, 52, 52, 0.03) 0%,
       rgba(52, 52, 52, 0.03) 50%,
-      rgba(188, 188, 188, 0.03) 50%, 
+      rgba(188, 188, 188, 0.03) 50%,
       rgba(188, 188, 188, 0.03) 100%),
-    linear-gradient(86deg, 
-      rgba(234, 234, 234, 0.03) 0%, 
+    linear-gradient(86deg,
+      rgba(234, 234, 234, 0.03) 0%,
       rgba(234, 234, 234, 0.03) 50%,
-      rgba(100, 100, 100, 0.03) 50%, 
+      rgba(100, 100, 100, 0.03) 50%,
       rgba(100, 100, 100, 0.03) 100%),
-    linear-gradient(73deg, 
-      rgba(203, 203, 203, 0.02) 0%, 
+    linear-gradient(73deg,
+      rgba(203, 203, 203, 0.02) 0%,
       rgba(203, 203, 203, 0.02) 50%,
-      rgba(24, 24, 24, 0.02) 50%, 
+      rgba(24, 24, 24, 0.02) 50%,
       rgba(24, 24, 24, 0.02) 100%),
     linear-gradient(90deg, var(--science-blue-800), var(--science-blue-100));
 }

@@ -20,7 +20,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
   //   pathname
   // });
 
-// Redirect to /profile if auth
+  // Redirect to /profile if auth
   useEffect(() => {
     if (loading) return;
     if (isAuthenticated && (pathname === "/login" || pathname === "/signup")) {
@@ -78,14 +78,14 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             <div className={styles.bottom}>
               <button
                 type="button"
-                className={styles.button}
+                className={styles.button + " blueButton"}
                 onClick={handleSignout}
               >
                 logout
               </button>
               <Link
                 href="/reservations"
-                className={styles.button}
+                className={styles.button + " blueButton"}
               >
                 my reservations
               </Link>
