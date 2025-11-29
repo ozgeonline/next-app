@@ -449,7 +449,8 @@ h1.highlight-gradient-text {
   background: var(--science-blue-800);
 }
 
-.blueButton:hover {
+.blueButton:hover,
+.button-gold-on-dark:hover {
   filter: brightness(1.1);
 }
 

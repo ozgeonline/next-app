@@ -46,14 +46,42 @@
   position: relative;
   border-color: rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 1rem;
+}
+
+.card:nth-child(3) {
+  height: 36rem;
 }
 
 @media screen and (min-width: 1024px) {
   .card {
     width: 40%;
-    height: 32rem;
+    height: 36rem;
+  }
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  color: var(--shark-50);
+  text-transform: uppercase;
+  font-size: 2em;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .avatar {
+  background: #faf0a0;
+}
+
+@media screen and (min-width: 1024px) {
+  .avatar {
+    width: 10rem;
+    height: 10rem;
+    left: auto;
   }
 }
 
@@ -67,20 +95,13 @@
   width: 100%;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   overflow: hidden;
   border-radius: 8px;
 }
 
 [data-theme="dark"] .userCard {
   background: var(--shark-50);
-}
-
-@media screen and (max-width: 1024px) {
-  .userCard {
-    height: 60vh;
-  }
-
 }
 
 .userCard .top,
@@ -98,8 +119,6 @@
 
 .userCard .top .name {
   text-transform: capitalize;
-  top: 25%;
-  position: absolute;
 }
 
 .userCard .bottom .button {
@@ -110,16 +129,6 @@
   font-size: medium;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-[data-theme="dark"] .userCard .bottom .button {
-  background: var(--background);
-  color: var(--pale-prim-900);
-  /* border: 1px solid var(--pale-prim-900); */
-}
-
-.userCard .bottom .button:hover {
-  filter: brightness(1.1);
 }
 
 .userCard .bottom a.button {
@@ -134,66 +143,5 @@
   .userCard .top .name {
     font-size: 1.5rem;
     font-weight: bold;
-  }
-}
-
-.avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 40%;
-  transform: translateY(-40%);
-  width: 7rem;
-  height: 7rem;
-  border-radius: 50%;
-  color: #f4f4f4;
-  text-transform: uppercase;
-  font-size: 2em;
-  overflow: hidden;
-  background:
-    linear-gradient(46deg,
-      rgba(18, 18, 18, 0.01) 0%,
-      rgba(18, 18, 18, 0.01) 50%,
-      rgba(10, 10, 10, 0.01) 50%,
-      rgba(10, 10, 10, 0.01) 100%),
-    linear-gradient(338deg,
-      rgba(232, 232, 232, 0.03) 0%,
-      rgba(232, 232, 232, 0.03) 50%,
-      rgba(174, 174, 174, 0.03) 50%,
-      rgba(174, 174, 174, 0.03) 100%),
-    linear-gradient(26deg,
-      rgba(180, 180, 180, 0.02) 0%,
-      rgba(180, 180, 180, 0.02) 50%,
-      rgba(191, 191, 191, 0.02) 50%,
-      rgba(191, 191, 191, 0.02) 100%),
-    linear-gradient(129deg,
-      rgba(52, 52, 52, 0.03) 0%,
-      rgba(52, 52, 52, 0.03) 50%,
-      rgba(188, 188, 188, 0.03) 50%,
-      rgba(188, 188, 188, 0.03) 100%),
-    linear-gradient(86deg,
-      rgba(234, 234, 234, 0.03) 0%,
-      rgba(234, 234, 234, 0.03) 50%,
-      rgba(100, 100, 100, 0.03) 50%,
-      rgba(100, 100, 100, 0.03) 100%),
-    linear-gradient(73deg,
-      rgba(203, 203, 203, 0.02) 0%,
-      rgba(203, 203, 203, 0.02) 50%,
-      rgba(24, 24, 24, 0.02) 50%,
-      rgba(24, 24, 24, 0.02) 100%),
-    linear-gradient(90deg, var(--science-blue-800), var(--science-blue-100));
-}
-
-[data-theme="dark"] .avatar {
-  background: #faf0a0;
-  color: #212529;
-}
-
-@media screen and (min-width: 1024px) {
-  .avatar {
-    width: 10rem;
-    height: 10rem;
-    left: auto;
   }
 }

@@ -52,7 +52,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <div className={styles.containerWrapper + " " + "mainBackground"}>
       <div className={styles.containerTopNavbar} />
       <div className={styles.card}>
-        <div className={styles.avatar}>
+        <div className={styles.avatar + " " + "background-gradient"}>
           {user?.name ? user.name.slice(0, 2).toUpperCase() : "G"}
         </div>
         <div className={styles.userCard}>
@@ -66,14 +66,14 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             <div className={styles.bottom}>
               <button
                 type="button"
-                className={styles.button + " blueButton"}
+                className={styles.button + " " + "button-gold-on-dark blueButton"}
                 onClick={handleSignout}
               >
                 logout
               </button>
               <Link
                 href="/reservations"
-                className={styles.button + " blueButton"}
+                className={styles.button + " " + "button-gold-on-dark blueButton"}
               >
                 my reservations
               </Link>
