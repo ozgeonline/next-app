@@ -3,14 +3,12 @@
 import { ReactNode, useEffect } from 'react';
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useSWRConfig } from "swr";
 import { useAuth } from "@/context/auth/AuthProvider";
 import styles from "./auth.module.css";
 import TopScrollButton from '@/components/ui/topScrollButton/TopScrollButton';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
-  const { user, isAuthenticated, loading } = useAuth();
-  const { mutate } = useSWRConfig();
+  const { user, isAuthenticated, loading, logout } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
   // console.log("AuthLayout state:", {
@@ -31,23 +29,13 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 
   const handleSignout = async () => {
     try {
-      //console.log("AuthLayout: sending POST to /api/auth/logout");
-      const res = await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-      if (res.ok) {
-        //console.log("AuthLayout: logout successful, redirecting to /login");
-        mutate("/api/auth/user", undefined, false); //reset cache user
-        router.push("/profile");
-      } else {
-        //console.error("AuthLayout: logout failed");
-        //await new Promise((resolve) => setTimeout(resolve, 100));
-        router.push("/profile");
-      }
+      await logout();
+      router.push("/profile");
     } catch (err) {
-      //console.error("AuthLayout: error logout:", err);
-      mutate("/api/auth/user", undefined, false);
+      logout();
+      router.push("/profile");
+    } finally {
+      logout();
       router.push("/profile");
     }
   };

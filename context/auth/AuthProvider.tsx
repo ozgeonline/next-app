@@ -9,6 +9,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   loading: boolean;
   mutateUser: (newUser?: ClientUser | null) => void;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -48,6 +49,29 @@ export function AuthProvider({
     }
   );
 
+  const contextMutateUser = (newUser?: ClientUser | null) => {
+    if (newUser === null) {
+      mutate(null, { revalidate: false });
+    } else if (newUser) {
+      mutate(newUser, { revalidate: false });
+    } else {
+      mutate();
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include"
+      });
+    } catch (error) {
+      console.error("provider logout API not working:", error);
+    } finally {
+      contextMutateUser(null);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -56,16 +80,14 @@ export function AuthProvider({
         loading: isLoading,
         mutateUser: (newUser?: ClientUser | null) => {
           if (newUser === null) {
-            // Logout: clear cache
             mutate(null, false);
           } else if (newUser) {
-            // update cache
             mutate(newUser, false);
           } else {
-            // trigger re-fetch
             mutate();
           }
         },
+        logout: handleLogout
       }}
     >
       {children}
