@@ -3,24 +3,26 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { UploadButton } from "@/utils/upload/uploadthing";
+import { useAuth } from "@/context/auth/AuthProvider";
 import styles from "./image-picker.module.css";
 import Image from "next/image";
 
-export default function ImagePicker({label,name}) {
+export default function ImagePicker({ label, name }) {
+  const { isAuthenticated } = useAuth();
   const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
   const [error, setError] = useState(null);
   const imgInput = useRef();
 
   function handlePickClick() {
     imgInput.current.click();
-    setError(null); 
+    setError(null);
   }
 
   function handleClientUpload(res) {
-    const file =res[0].ufsUrl;
+    const file = res[0].ufsUrl;
     setUploadedImageUrl(file);
     if (!file) {
-      setError(null); 
+      setError(null);
       return;
     }
   }
@@ -29,7 +31,7 @@ export default function ImagePicker({label,name}) {
     console.log(`ERROR! ${error.message}`);
     setError(error.message.split(": ")[1]);
   }
-  
+
   return (
     <div className={styles.picker}>
       <label htmlFor={name}>{label}</label>
@@ -41,8 +43,8 @@ export default function ImagePicker({label,name}) {
           )}
         </div>
 
-         {uploadedImageUrl && (
-          <input 
+        {uploadedImageUrl && (
+          <input
             ref={imgInput}
             type="hidden"
             name={name}
@@ -51,39 +53,45 @@ export default function ImagePicker({label,name}) {
           />
         )}
 
-        <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
-          <UploadButton
-            ref={imgInput}
-            onClick={handlePickClick}
-            endpoint="recipeImageUploader"
-            onClientUploadComplete={ handleClientUpload}
-            onChange={handleClientUpload}
-            onUploadError={handleUploadError}
-            appearance={{
-              button({ ready, isUploading }) {
-                return {
-                  fontSize: "0.8em",
-                  color: "black",
-                  ...(ready && { color: "#ecfdf5" }),
-                  ...(isUploading && { color: "#d1d5db" }),
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center"
-                };
-              },
-              
-              container: {
-                marginTop: "1rem",
-              },
-              allowedContent: {
-                color: "#a1a1aa",
-              },
-            }}
-          />
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          {isAuthenticated ? (
+            <UploadButton
+              ref={imgInput}
+              onClick={handlePickClick}
+              endpoint="recipeImageUploader"
+              onClientUploadComplete={handleClientUpload}
+              onChange={handleClientUpload}
+              onUploadError={handleUploadError}
+              appearance={{
+                button({ ready, isUploading }) {
+                  return {
+                    fontSize: "0.8em",
+                    color: "black",
+                    ...(ready && { color: "#ecfdf5" }),
+                    ...(isUploading && { color: "#d1d5db" }),
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                  };
+                },
+
+                container: {
+                  marginTop: "1rem",
+                },
+                allowedContent: {
+                  color: "#a1a1aa",
+                },
+              }}
+            />
+          ) : (
+            <p style={{ fontSize: "0.9em", color: "#f87171", marginTop: "1rem" }}>
+              Resim yüklemek için giriş yapmalısınız.
+            </p>
+          )}
           <Link href="./" className={styles.back + ' ' + "button-gold-on-dark"}>
             back meals
           </Link>
-          {error && <p style={{fontSize:"0.8em"}}>{error}</p>}
+          {error && <p style={{ fontSize: "0.8em" }}>{error}</p>}
         </div>
       </div>
     </div>
