@@ -86,7 +86,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         </div>
       </div>
 
-      <div className={styles.card}>
+      <div className={styles.card + " " + (isAuthenticated ? styles.authCard : styles.nonauthCard)}>
         {children}
       </div>
 

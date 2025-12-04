@@ -38,25 +38,38 @@
 
 .card {
   width: 90%;
-  height: 24rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--shark-50);
   border-radius: 8px;
+  margin: .5rem;
 }
 
-.card:nth-child(3) {
+.card:nth-child(2) {
+  height: 24rem;
+}
+
+.authCard {
+  height: 24rem;
+}
+
+.nonauthCard {
   height: 36rem;
 }
 
 @media screen and (min-width: 1024px) {
   .card {
     width: 40%;
+  }
+
+  .authCard,
+  .card:nth-child(2) {
     height: 36rem;
   }
+
 }
 
 .avatar {
@@ -86,7 +99,7 @@
 }
 
 .userCard {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--shark-50);
   color: var(--shark-800);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(9.3px);
@@ -98,10 +111,6 @@
   justify-content: space-evenly;
   overflow: hidden;
   border-radius: 8px;
-}
-
-[data-theme="dark"] .userCard {
-  background: var(--shark-50);
 }
 
 .userCard .top,

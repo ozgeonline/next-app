@@ -435,7 +435,7 @@ h1.highlight-gradient-text {
 
 [data-theme="dark"] .text-gold-on-dark {
   color: var(--pale-prim-900);
-  background: var(--shark-50);
+  background: var(--shark-100);
 }
 
 /* ------------------------------ Button ------------------------------ */
