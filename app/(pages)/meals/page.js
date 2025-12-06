@@ -1,4 +1,4 @@
-// import { Suspense } from "react";
+import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import RecipesCard from "@/components/assets/recipesCard/RecipesCard";
@@ -48,9 +48,9 @@ export default function MealsPage() {
         </p>
       </header>
       <main className={styles.main}>
-        {/* <Suspense fallback={<p className={styles.loading}>loading meals...</p>}> */}
+        <Suspense fallback={<p className={styles.loading}>loading meals...</p>}>
           <MealsList />
-        {/* </Suspense> */}
+        </Suspense>
       </main>
     </div>
   )

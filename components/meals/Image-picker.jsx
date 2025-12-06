@@ -84,9 +84,14 @@ export default function ImagePicker({ label, name }) {
               }}
             />
           ) : (
-            <p style={{ fontSize: "0.9em", color: "#f87171", marginTop: "1rem" }}>
-              Resim yüklemek için giriş yapmalısınız.
-            </p>
+            <>
+              <p style={{ fontSize: "0.9em", color: "#f87171", marginTop: "1rem" }}>
+                Resim yüklemek için giriş yapmalısınız.
+              </p>
+              <Link href="/login" className={styles.back + ' ' + "button-gold-on-dark"}>
+                login
+              </Link>
+            </>
           )}
           <Link href="./" className={styles.back + ' ' + "button-gold-on-dark"}>
             back meals

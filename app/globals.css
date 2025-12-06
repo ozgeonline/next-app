@@ -246,9 +246,16 @@ body {
 }
 
 .not-found p,
-.error p {
+.error p,
+.not-found h1,
+.error h1 {
   font-weight: 500;
   color: #ffffc2;
+}
+
+.not-found h1,
+.error h1 {
+  font-size: 2rem;
 }
 
 .not-found a,
@@ -276,6 +283,8 @@ body {
 .error a:hover {
   filter: brightness(1.1);
 }
+
+
 
 /**************************/
 
