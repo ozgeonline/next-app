@@ -1,49 +1,28 @@
 "use server";
 
-import connect from "../../../../../lib/db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import slugify from "slugify";
-import xss from "xss";
-import Meal from "@/app/models/Meal";
+import { saveMeal } from "@/lib/meals";
 
 function isInvalidText(text) {
   return !text || text.trim() === '';
 }
 
 export default async function shareMeal(prevState,formData) {
-  await connect();
   const meal = {
-    title: xss(formData.get("title")),
-    slug : slugify(formData.get('title'), { lower: true }),
-    summary: xss(formData.get("summary")),
-    instructions: xss(formData.get("instructions")),
-    creator: xss(formData.get("name")),
-    creator_email: xss(formData.get("email")),
-  }
-
-  const imageFile = formData.get('image');
-  if (imageFile) {
-    meal.image = imageFile;
-  }
-
-  let slug = slugify(meal.title, { lower: true });
-  let counter = 1;
-  while (await Meal.findOne({ slug })) {
-    slug = `${slugify(meal.title, { lower: true })}-${counter}`;
-    counter++;
-  }
-  meal.slug = slug;
-
-  if (typeof meal.image === 'string' && !meal.image.startsWith('http')) {
-    meal.image = `/images/${meal.slug}`;
-  }
+    title: formData.get("title"),
+    summary: formData.get("summary"),
+    instructions: formData.get("instructions"),
+    creator: formData.get("name"),
+    creator_email: formData.get("email"),
+    image: formData.get("image")
+  };
 
   //console.log("Form data:", Object.fromEntries(formData));
 
-  if (prevState !== undefined) {
-    console.log(`Previous state: ${prevState.message}`);
-  }
+  // if (prevState !== undefined) {
+  //   //console.log(`Previous state: ${prevState.message}`);
+  // }
 
   if(
     isInvalidText(meal.title) || 
@@ -52,15 +31,15 @@ export default async function shareMeal(prevState,formData) {
     isInvalidText(meal.creator) || 
     isInvalidText(meal.creator_email) ||
     !meal.creator_email.includes('@') ||
-    !meal.image || 
-    meal.image.size === "0"
+    !meal.image ||
+    meal.image === ""
   ) {
     return {
       message:'Please fill out all fields.'
     }
   }
 
-  await Meal.create(meal);
+  await saveMeal(meal);
   revalidatePath("/meals");
   redirect("/meals");
 }

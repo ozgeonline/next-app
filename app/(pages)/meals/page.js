@@ -2,35 +2,19 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import RecipesCard from "@/components/assets/recipesCard/RecipesCard";
+import { getMealsWithRatings } from "@/lib/meals";
 import styles from "./page.module.css";
 
 export const dynamic = 'force-dynamic';
 
 async function MealsList() {
-  const meals = await getData();
+  const meals = await getMealsWithRatings();
   if(!meals || meals.length === 0) return notFound();
   return (
     <div className={styles['meals-grid']}>
       <RecipesCard spotlight={true} meals={meals} />
     </div>
   );
-}
-
-async function getData() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meals/meal`, {
-      cache: 'no-cache',
-    });
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
-    }
-
-    return res.json();
-  } catch (error) {
-    console.error('Error fetching meals:', error);
-    return []; 
-  }
 }
 
 export default function MealsPage() {
