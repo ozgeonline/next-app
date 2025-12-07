@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
+import mongoose from 'mongoose';
 import connect from '@/lib/db';
 import Rating from '@/app/models/Rating';
-// import mongoose from 'mongoose';
 import { getUserFromCookies } from '@/lib/getUserFromCookies';
 
 interface RatingDocument {
-  mealId: string;
+  mealId: mongoose.Types.ObjectId;
   userId: string;
   userName: string;
   rating: number;
@@ -22,9 +22,14 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ meal
     }
 
     const { mealId } = await params;
-    //const mealObjectId = new mongoose.Types.ObjectId(mealId);
-    //console.log('GET /api/meals/ratings/[mealId] query:', { mealId, userId: decoded.userId });
-    const rating = await Rating.findOne({ mealId, userId: decoded.userId }).lean<RatingDocument>();
+    if (!mongoose.Types.ObjectId.isValid(mealId)) {
+      return NextResponse.json({ error: "Invalid Meal ID format" }, { status: 400 });
+    }
+
+    const mealObjectId = new mongoose.Types.ObjectId(mealId);
+    //console.log('GET /api/meals/ratings/[mealId] query:', { mealId: mealObjectId, userId: decoded.userId });
+    const rating = await Rating.findOne({ mealId: mealObjectId, userId: decoded.userId }).lean<RatingDocument>();
+    //console.log('GET /api/meals/ratings/[mealId] rating:', rating);
 
     return NextResponse.json({
       message: 'Rating fetched successfully',

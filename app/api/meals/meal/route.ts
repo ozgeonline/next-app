@@ -12,6 +12,7 @@ export const GET = async () => {
           from: "ratings", //<collection to join>
           localField: "_id", // <field from the input docs> Meal._id
           foreignField: "mealId", // <field from the docs of the Rating collection> Rating.mealId
+          pipeline: [{ $project: { rating: 1 } }], //select fields
           as: "ratings", // <output array field> meals.ratings
         },
       },

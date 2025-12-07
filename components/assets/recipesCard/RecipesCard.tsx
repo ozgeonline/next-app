@@ -37,7 +37,7 @@ export default async function RecipesCard({ spotlight, meals }: RecipesCardProps
         image: meal.image && meal.image !== "" ? meal.image : null,
         summary: meal.summary || "No summary available",
         creator: meal.creator || "Unknown",
-        averageRating: meal.averageRating || computedAverage,
+        averageRating: computedAverage,
         ratingCount,
       };
       //console.log('RecipesCard transformedMeal:', transformedMeal);
@@ -54,10 +54,10 @@ export default async function RecipesCard({ spotlight, meals }: RecipesCardProps
       stars.push(<Star key={i} fill="#111" strokeWidth={1} stroke="#111" />);
     }
     if (hasHalfStar) {
-      stars.push(<StarHalf key="half" fill="#111" strokeWidth={1} stroke="#111"/>);
+      stars.push(<StarHalf key="half" fill="#111" strokeWidth={1} stroke="#111" />);
     }
     for (let i = stars.length; i < 5; i++) {
-      stars.push(<Star key={i}  strokeWidth={1} stroke="#111" />);
+      stars.push(<Star key={i} strokeWidth={1} stroke="#111" />);
     }
     return stars;
   };

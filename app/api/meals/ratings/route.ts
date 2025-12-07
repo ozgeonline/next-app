@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import mongoose from 'mongoose';
 import connect from '@/lib/db';
 import Rating from '@/app/models/Rating';
-import Meal from '@/app/models/Meal';
-import mongoose from 'mongoose';
 import { getUserFromCookies } from '@/lib/getUserFromCookies';
 
 export async function POST(req: NextRequest) {
@@ -15,8 +14,10 @@ export async function POST(req: NextRequest) {
     }
 
     const { mealId, rating } = await req.json();
+    //console.log('POST /api/meals/ratings received:', { mealId, rating, userId: decoded.userId });
 
     if (!mealId || !rating || rating < 1 || rating > 5) {
+      //console.log('Invalid input defined');
       return NextResponse.json(
         { error: 'Invalid input' },
         { status: 400 }
@@ -29,33 +30,41 @@ export async function POST(req: NextRequest) {
 
     const existingRating = await Rating.findOne(
       {
-        mealId:objectId,
+        mealId: objectId,
         userId: decoded.userId
       }
     );
+    //console.log('Existing rating found:', existingRating ? existingRating._id : 'null');
 
     if (existingRating) {
+      //console.log('Updating existing rating to:', rating);
       existingRating.rating = rating;
       existingRating.userName = decoded.name;
       await existingRating.save();
+      //console.log('Update result:', await Rating.findById(existingRating._id));
     } else {
+      //console.log('Creating new rating:', rating);
       await Rating.create({
-        mealId :objectId,
+        mealId: objectId,
         userId: decoded.userId,
-        userName : decoded.name,
+        userName: decoded.name,
         rating,
       });
     }
 
-    const ratings = await Rating.find({ mealId });
-    const totalRatings = ratings.length;
-    const sumRatings = ratings.reduce((sum: number, r: any) => sum + r.rating, 0);
-    const averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
+    const stats = await Rating.aggregate([
+      { $match: { mealId: objectId } },
+      {
+        $group: {
+          _id: "$mealId",
+          averageRating: { $avg: "$rating" },
+          totalRatings: { $count: {} }
+        }
+      }
+    ]);
 
-    await Meal.updateOne(
-      { _id: mealId },
-      { $set: { averageRating }}
-    );
+    const averageRating = stats.length > 0 ? stats[0].averageRating : 0;
+    const totalRatings = stats.length > 0 ? stats[0].totalRatings : 0;
 
     return NextResponse.json(
       {
