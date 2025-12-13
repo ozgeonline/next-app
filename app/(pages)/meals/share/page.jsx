@@ -7,13 +7,17 @@ import ImagePicker from '@/components/meals/Image-picker';
 import MealsFormSubmit from '@/components/meals/meals-form-submit';
 import styles from './page.module.css';
 
-export const dynamic = 'force-dynamic'; 
+export const dynamic = 'force-dynamic';
 
 export default function ShareMealPage() {
   const { user } = useAuth();
-  const [state, formAction] = useActionState(shareMeal,{message:null} );
+  const [state, formAction] = useActionState(shareMeal, { message: null });
   //console.log("state:", state);
-  
+
+  if (!user) {
+    return <p>You must be logged in to share a meal.</p>;
+  }
+
   return (
     <div className={styles.container + ' ' + "mainBackground"}>
       <header className={styles.header}>
@@ -27,11 +31,11 @@ export default function ShareMealPage() {
           <div className={styles.row}>
             <p>
               <label htmlFor="name">Your name</label>
-              <input type="text" id="name" name="name" value={user?.name || ""} readOnly />
+              <input type="text" id="name" value={user?.name || ""} readOnly />
             </p>
             <p>
               <label htmlFor="email">Your email</label>
-              <input type="email" id="email" name="email" value={user?.email || ""} readOnly />
+              <input type="email" id="email" value={user?.email || ""} readOnly />
             </p>
           </div>
           <p>
@@ -51,10 +55,10 @@ export default function ShareMealPage() {
               required
             ></textarea>
           </p>
-          <ImagePicker label="Your Meal Image" name="image"/>
+          <ImagePicker label="Your Meal Image" name="image" />
           {state?.message && <p>{state.message}</p>}
           <div className={styles.actions}>
-            <MealsFormSubmit  />
+            <MealsFormSubmit />
           </div>
         </form>
       </main>
