@@ -11,6 +11,7 @@ const mealSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   averageRating: { type: Number, default: 0 },
 },{ timestamps: true });
+mealSchema.index({ createdAt: -1 });
 
 const Meal = mongoose.models.Meal || mongoose.model('Meal', mealSchema);
 

@@ -1,6 +1,8 @@
 import connect from '../lib/db.js';
 import Rating from '../app/models/Rating.js';
+import Meal from '../app/models/Meal.js';
 import mongoose from 'mongoose';
+import process from 'process';
 
 async function createDatabaseIndexes() {
   console.log('Veritabanına bağlanılıyor...');
@@ -9,7 +11,11 @@ async function createDatabaseIndexes() {
   try {
     console.log('Rating koleksiyonu indeksleri senkronize ediliyor...');
     await Rating.syncIndexes();
-    console.log('İndeksler başarıyla senkronize edildi.');
+    console.log('Rating indeksleri başarıyla senkronize edildi.');
+
+    console.log('Meal koleksiyonu indeksleri senkronize ediliyor...');
+    await Meal.syncIndexes();
+    console.log('Meal indeksleri başarıyla senkronize edildi.');
   } catch (error) {
     console.error('İndeks oluşturma hatası:', error);
     process.exit(1);

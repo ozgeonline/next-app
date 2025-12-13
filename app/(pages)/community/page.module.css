@@ -21,7 +21,7 @@
 }
 
 .header h1 {
-  font-family: 'Montserrat', sans-serif; 
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
 }
 
@@ -30,8 +30,13 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .header h1 { font-size: 3rem;}
-  .header p { font-size: 1.2rem;}
+  .header h1 {
+    font-size: 3rem;
+  }
+
+  .header p {
+    font-size: 1.2rem;
+  }
 }
 
 .main {
@@ -60,10 +65,10 @@
   .main .meals h2 {
     font-size: 2rem;
   }
-  
+
 }
 
-.meals{
+.meals {
   margin-bottom: 3rem;
 }
 
@@ -106,48 +111,4 @@
   color: var(--shark-800);
   font-weight: 900;
   padding-bottom: 1rem;
-}
-
-.recipe-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem
-}
-
-@media screen and (min-width: 640px) {
-  .recipe-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media screen and (min-width: 768px) {
-  .recipe-grid {
-    grid-template-columns: repeat(4, 1fr);
-  } 
-}
-@media screen and (min-width: 1024px) {
-  .recipe-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-.spotlight-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 1rem
-}
-
-@media screen and (min-width: 512px) {
-  .spotlight-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media screen and (min-width: 768px) {
-  .spotlight-grid {
-    grid-template-columns: repeat(3, 1fr);
-  } 
-}
-@media screen and (min-width: 1024px) {
-  .spotlight-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }

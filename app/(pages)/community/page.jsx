@@ -26,8 +26,8 @@ async function LatestMealsList() {
       {meals.length === 0 ? (
         <NoMeals />
       ) : (
-        <div className={styles['recipe-grid']}>
-          <RecipesCard meals={meals}/>
+        <div className="grid-cols-2-to-5">
+          <RecipesCard meals={meals} />
         </div>
       )}
     </>
@@ -38,10 +38,10 @@ async function SpotlightMealsList() {
   const meals = await getData();
   return (
     <>
-     {meals.length === 0 ? (
+      {meals.length === 0 ? (
         <NoMeals />
       ) : (
-        <div className={styles['spotlight-grid']}>
+        <div className="grid-cols-1-to-5">
           <RecipesCard meals={meals} spotlight={true} />
         </div>
       )}
@@ -62,7 +62,7 @@ async function getData() {
     return res.json();
   } catch (error) {
     console.error('Error fetching meals:', error);
-    return []; 
+    return [];
   }
 };
 
@@ -76,7 +76,7 @@ export default function CommunityPage() {
         </h1>
         <p>Join our community and share your favorite recipes!</p>
       </header>
-      
+
       <main className={styles.main}>
         <section className={styles.section}>
           <h2

@@ -77,7 +77,20 @@
   --razzmatazz-700: #c6104d;
   --razzmatazz-800: #a31140;
   --razzmatazz-900: #881338;
-  --razzmatazz-950: #53041c;
+  --razzmatazz-950: #880d1e;
+
+  /* Monza Palette */
+  --monza-50: #fef2f2;
+  --monza-100: #ffe1e2;
+  --monza-200: #ffc9ca;
+  --monza-300: #fea3a5;
+  --monza-400: #fb6e71;
+  --monza-500: #f34043;
+  --monza-600: #e02226;
+  --monza-700: #ba181b;
+  --monza-800: #9c181a;
+  --monza-900: #811b1d;
+  --monza-950: #46090a;
 
   /************************* Main Colors *********************/
   --background: #e0e0e0;
@@ -181,7 +194,20 @@
   --razzmatazz-700: #c6104d;
   --razzmatazz-800: #a31140;
   --razzmatazz-900: #881338;
-  --razzmatazz-950: #53041c;
+  --razzmatazz-950: #880d1e;
+
+  /* Monza Palette */
+  --monza-950: #fef2f2;
+  --monza-900: #ffe1e2;
+  --monza-800: #ffc9ca;
+  --monza-700: #fea3a5;
+  --monza-600: #fb6e71;
+  --monza-500: #f34043;
+  --monza-400: #e02226;
+  --monza-300: #ba181b;
+  --monza-200: #9c181a;
+  --monza-100: #811b1d;
+  --monza-50: #46090a;
 
   /* Main Colors*/
   --background: #1a1a1a;
@@ -227,7 +253,7 @@ body {
 }
 
 [data-theme="light"] .containerTopNavbarColor {
-  background: var(--science-blue-800);
+  background: var(--text);
 }
 
 /* NOT-FOUND PAGE && ERROR PAGE */
@@ -406,7 +432,7 @@ body {
 .highlight-gradient-text {
   font-family: 'Montserrat', sans-serif;
   /* background: linear-gradient(90deg, #0c355f ,#0b589d); */
-  background: #212529;
+  background: var(--monza-700);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -444,7 +470,7 @@ h1.highlight-gradient-text {
 
 [data-theme="dark"] .text-gold-on-dark {
   color: var(--pale-prim-900);
-  background: var(--shark-100);
+  background: var(--background);
 }
 
 /* ------------------------------ Button ------------------------------ */
@@ -471,4 +497,61 @@ input.blueButton::placeholder {
   color: var(--background);
   opacity: .5;
   font-weight: lighter;
+}
+
+/* grid screen 1 to 5 */
+.grid-cols-1-to-5 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem
+}
+
+@media screen and (min-width: 640px) {
+  .grid-cols-1-to-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .grid-cols-1-to-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .grid-cols-1-to-5 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .grid-cols-1-to-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* recipe grid 2 to 5 */
+
+.grid-cols-2-to-5 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem
+}
+
+@media screen and (min-width: 640px) {
+  .grid-cols-2-to-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .grid-cols-2-to-5 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .grid-cols-2-to-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }

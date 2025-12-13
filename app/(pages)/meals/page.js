@@ -11,7 +11,7 @@ async function MealsList() {
   const meals = await getMealsWithRatings();
   if(!meals || meals.length === 0) return notFound();
   return (
-    <div className={styles['meals-grid']}>
+    <div className="grid-cols-1-to-5">
       <RecipesCard spotlight={true} meals={meals} />
     </div>
   );
@@ -19,7 +19,7 @@ async function MealsList() {
 
 export default function MealsPage() {
   return (
-    <div className={styles.container + ' ' + "mainBackground"}>
+    <div className={styles.container}>
       <header className={styles.header}>
         <h1>Delicious meals, created 
           <span className="highlight-gradient-text"> by you</span>

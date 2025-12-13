@@ -11,13 +11,6 @@
   padding: 4rem 1rem;
 }
 
-/* @media screen and (min-width: 1024px) {
-  .container {
-    padding: 0;
-  }
-  
-} */
-
 .header {
   display: flex;
   flex-direction: column;
@@ -27,7 +20,7 @@
   width: 100%;
   max-width: 75rem;
   font-size: 1rem;
-  color: var(--shark-800);
+  color: var(--text);
 }
 
 .header h1,
@@ -48,15 +41,9 @@
 
 @media screen and (min-width: 1280px) {
   .header {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin: 2rem auto;
   }
-
-}
-
-.main {
-  width: 100%;
-  padding: 1rem;
 }
 
 .cta a {
@@ -64,17 +51,22 @@
   margin-top: .5rem;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
-  background: linear-gradient(90deg, #f9572a, #ff9b05);
+  background: var(--monza-700);
   color: #ffffff;
   font-weight: bold;
   text-decoration: none;
   filter: brightness(0.9);
-  border: 1px solid #ffffc2;
+  border: 1px solid #ffffc270;
 }
 
 .cta a:hover {
   filter: brightness(1);
   transition: all 0.3s ease-in-out;
+}
+
+.main {
+  width: 100%;
+  padding: 1rem;
 }
 
 .loading {
@@ -84,45 +76,14 @@
 
 @keyframes loading {
   0% {
-    color: #e9e9e9;
+    color: var(--text);
   }
 
   50% {
-    color: #ffffc2;
+    color: var(--background-opacity);
   }
 
   100% {
-    color: #e9e9e9;
-  }
-}
-
-/* grid screen */
-.meals-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 1rem
-}
-
-@media screen and (min-width: 640px) {
-  .meals-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .meals-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .meals-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .meals-grid {
-    grid-template-columns: repeat(5, 1fr);
+    color: var(--text);
   }
 }
