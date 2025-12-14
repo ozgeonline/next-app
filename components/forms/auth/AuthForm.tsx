@@ -12,6 +12,7 @@ interface FormData {
   fetchApiPath: string;
   nonTokenPath?: string;
 }
+
 export default function AuthForm({
   formType,
   fetchApiPath,
@@ -50,9 +51,11 @@ export default function AuthForm({
         mutateUser();
         router.push(nonTokenPath || "/profile");
       } else {
-        if (formType === "signup" && data.error?.toLowerCase().includes("already in use")) {
+        const errorMsg = data.error?.toLowerCase() || "";
+
+        if (formType === "signup" && errorMsg.includes("already in use")) {
           router.push("/login");
-        } else if (formType === "login" && data.error?.toLowerCase().includes("user not found")) {
+        } else if (formType === "login" && errorMsg.includes("user not found")) {
           router.push("/signup");
         } else {
           setError(data.error || `${formType === "signup" ? "Signup" : "Login"} failed`);
@@ -72,11 +75,47 @@ export default function AuthForm({
   }, []);
 
   const emailIsValid = useMemo(() => validateEmail(formData.email), [formData.email, validateEmail]);
-  // if (isLoading) return null; 
+
   const isFormValid = formType === "login"
     ? emailIsValid && formData.password.length >= 6
     : emailIsValid && formData.name.length >= 2 && formData.password.length >= 6;
 
+  const getInputClassName = (isValid: boolean, value: string) => {
+    if (value && isValid) return styles.validValueColor;
+    if ((!value || !isValid) && isTouched) return styles.invalidValueColor;
+    return styles.defaultValueColor;
+  };
+
+  const formFields = [
+    {
+      name: "name",
+      type: "text",
+      placeholder: "Name",
+      label: "Name",
+      condition: formType === "signup",
+      isValid: formData.name.length >= 2,
+      errorMessage: "Please enter 2 or more characters",
+    },
+    {
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+      label: "Email",
+      condition: true,
+      isValid: emailIsValid,
+      errorMessage: null,
+    },
+    {
+      name: "password",
+      type: "password",
+      placeholder: "Password",
+      label: "Password",
+      condition: true,
+      isValid: formData.password.length >= 6,
+      errorMessage: "Please enter 6 or more characters",
+      autoComplete: "new-password"
+    }
+  ];
 
   return (
     <div className={styles.formWrapper}>
@@ -90,63 +129,28 @@ export default function AuthForm({
           {error && <p className={styles.error}>{error}</p>}
 
           <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.formGroup}>
-              <label htmlFor="name">Name</label>
-              <input
-                name="name"
-                type="text"
-                placeholder="Name"
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                onBlur={() => setIsTouched(true)}
-                required
-                className={`
-                ${formData.name ? `${styles.validValueColor}`
-                    : !formData.name && isTouched ? `${styles.invalidValueColor}`
-                      : `${styles.defaultValueColor}`
-                  }
-              `}
-              />
-              <span className={styles.error}>
-                {formData.name.length < 2 && isTouched && "Please enter 2 or more characters"}
-              </span>
-            </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="name">Email</label>
-              <input
-                name="email"
-                type="email"
-                placeholder="Email"
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                onBlur={() => setIsTouched(true)}
-                required
-                className={`
-                ${(formData.name && emailIsValid) ? `${styles.validValueColor}`
-                    : (!formData.name || !emailIsValid) && isTouched ? `${styles.invalidValueColor}`
-                      : `${styles.defaultValueColor}`
-                  }
-              `}
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="name">Password</label>
-              <input
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                placeholder="Password"
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                required
-                className={`
-                ${formData.name ? `${styles.validValueColor}`
-                    : !formData.name && isTouched ? `${styles.invalidValueColor}`
-                      : `${styles.defaultValueColor}`
-                  }
-              `}
-              />
-              <span className={styles.error}>
-                {formData.password.length < 6 && isTouched && "Please enter 6 or more characters"}
-              </span>
-            </div>
+            {formFields.map((field) => (
+              field.condition && (
+                <div key={field.name} className={styles.formGroup}>
+                  <label htmlFor={field.name}>{field.label}</label>
+                  <input
+                    name={field.name}
+                    type={field.type}
+                    id={field.name}
+                    placeholder={field.placeholder}
+                    autoComplete={field.autoComplete}
+                    onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+                    onBlur={() => setIsTouched(true)}
+                    required
+                    className={getInputClassName(field.isValid, formData[field.name as keyof typeof formData])}
+                  />
+                  <span className={styles.error}>
+                    {!field.isValid && isTouched && field.errorMessage}
+                  </span>
+                </div>
+              )
+            ))}
+
             <button
               type="submit"
               className={styles.submitButton}
@@ -157,7 +161,6 @@ export default function AuthForm({
             <h3>Already have an account?</h3>
             <Link
               href={referencePath}
-              type="submit"
               className={styles.referencePath}
             >
               {referencePath}

@@ -74,6 +74,7 @@
 
 .defaultValueColor {
   border-color: rgba(255, 255, 255, 0.3);
+  background: var(--text-opacity);
 }
 
 .formGroup {
@@ -99,8 +100,8 @@
 .formGroup input {
   padding: 0.75rem;
   border-radius: 4px;
-  border-width: 0.1rem;
-  background: var(--background-opacity);
+  border-width: 0;
+  background: var(--shark-200);
   color: var(--shark-800);
   font-size: 1rem;
   outline: none;
@@ -109,7 +110,7 @@
 
 .formGroup input:focus {
   outline: none;
-  background: var(--background-opacity);
+  background: var(--text-low-opacity);
 }
 
 .formGroup input:autofill {
@@ -133,10 +134,11 @@
 .submitButton,
 .referencePath {
   padding: 0.75rem 1.5rem;
-  background: var(--shark-50);
+  background: var(--text-low-opacity);
   color: var(--shark-800);
+  outline: none;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   font-weight: bold;
   font-size: medium;
   cursor: pointer;
@@ -162,6 +164,7 @@
 
 .submitButton:disabled {
   cursor: not-allowed;
+  border: none;
 }
 
 [data-theme="light"] .submitButton:hover,
