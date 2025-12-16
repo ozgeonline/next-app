@@ -1,3 +1,14 @@
+.non-user-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text);
+  font-size: 1.4rem;
+  width: 100%;
+  text-align: center;
+  gap: 1rem;
+}
+
 .containerWrapper {
   position: relative;
   display: flex;
@@ -23,12 +34,12 @@
   .containerWrapper {
     padding-top: 0;
   }
-  
+
 }
 
 [data-theme="dark"] .containerWrapper,
-.loading  {
-  background:var(--background);
+.loading {
+  background: var(--background);
 }
 
 .loading {
@@ -42,7 +53,8 @@
   position: relative;
 }
 
-.formSection, .infoSection {
+.formSection,
+.infoSection {
   flex: 1;
   color: var(--shark-900);
   padding: 1.5rem;
@@ -54,14 +66,18 @@
 }
 
 @media screen and (min-width: 768px) {
-  .formSection, .infoSection {
+
+  .formSection,
+  .infoSection {
     margin: 3rem;
     width: 70%;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .formSection, .infoSection {
+
+  .formSection,
+  .infoSection {
     margin: 6rem;
   }
 }
@@ -94,35 +110,20 @@
   margin-bottom: 0.5em;
 }
 
-.input, .textarea {
+.input,
+.textarea {
   padding: 0.5rem;
   border-radius: 4px;
   border: 1px solid #ddd;
 }
 
-.input:focus, .textarea:focus {
+.input:focus,
+.textarea:focus {
   outline: none;
 }
 
 .textarea {
   resize: none;
-}
-
-.button {
-  padding: 0.7rem;
-  border: none;
-  background: var(--science-blue-800);
-  color: var(--science-blue-50);
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.2s ease;
-  margin-right: 0.5rem;
-  border: none !important;
-}
-
-.button:hover {
-  filter: brightness(1.1);
 }
 
 .reservationCard {

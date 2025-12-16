@@ -66,14 +66,14 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             <div className={styles.bottom}>
               <button
                 type="button"
-                className={styles.button + " " + "button-gold-on-dark blueButton"}
+                className="button-gold-blue"
                 onClick={handleSignout}
               >
                 logout
               </button>
               <Link
                 href="/reservations"
-                className={styles.button + " " + "button-gold-on-dark blueButton"}
+                className="button-gold-blue"
               >
                 my reservations
               </Link>

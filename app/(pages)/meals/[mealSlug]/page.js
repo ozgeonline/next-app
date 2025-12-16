@@ -40,12 +40,9 @@ export default async function MealDetailsPage({params}) {
             <p className={styles.creator}>
               by <a href={`mailto:${meal.creator_email}`}>{meal.creator}</a>
             </p>
-            <Link href="./" className={styles.back + ' ' + "button-gold-on-dark"}>
+            <Link href="./" className="button-gold-blue">
               back meals
             </Link>
-            {/* <p className={styles.summary}>
-              {meal.summary}
-            </p> */}
           </div>
         </div>
       </header>

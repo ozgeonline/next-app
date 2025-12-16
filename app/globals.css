@@ -474,9 +474,25 @@ h1.highlight-gradient-text {
 }
 
 /* ------------------------------ Button ------------------------------ */
-[data-theme="dark"] .button-gold-on-dark {
+.button-gold-blue {
+  padding: 0.5rem 3.5em;
+  border: none;
+  background: var(--science-blue-800);
+  color: var(--science-blue-50);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bolder;
+  transition: all 0.2s ease;
+  margin-right: 0.5rem;
+  border: none !important;
+  text-decoration: none;
+  text-transform: lowercase;
+  font-size: medium;
+}
+
+[data-theme="dark"] .button-gold-blue {
   color: var(--pale-prim-900);
-  background: var(--background);
+  background: var(--shark-200);
 }
 
 .blueButton {
@@ -484,8 +500,7 @@ h1.highlight-gradient-text {
   background: var(--science-blue-800);
 }
 
-.blueButton:hover,
-.button-gold-on-dark:hover {
+.button-gold-blue:hover {
   filter: brightness(1.1);
 }
 

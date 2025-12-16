@@ -32,7 +32,10 @@ export default function AuthForm({
     setError("");
 
     try {
-      const payload = formType === "login" ? { email: formData.email, password: formData.password } : formData;
+      const payload =
+        formType === "login"
+          ? { email: formData.email, password: formData.password }
+          : formData;
       //console.log("AuthForm: Sending POST to", `/api/auth/${fetchApiPath}`, payload);
 
       const res = await fetch(`/api/auth/${fetchApiPath}`, {
@@ -156,7 +159,12 @@ export default function AuthForm({
               className={styles.submitButton}
               disabled={isSubmitting || !isFormValid}
             >
-              {isSubmitting ? "Submitting..." : formType === "login" ? "Login" : "Sign Up"}
+              {isSubmitting
+                ? "Submitting..."
+                : formType === "login"
+                  ? "Login"
+                  : "Sign Up"
+              }
             </button>
             <h3>Already have an account?</h3>
             <Link

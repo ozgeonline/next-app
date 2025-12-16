@@ -54,7 +54,7 @@ export default function ImagePicker({ label, name }) {
         )}
 
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          {isAuthenticated ? (
+          {isAuthenticated && (
             <UploadButton
               ref={imgInput}
               onClick={handlePickClick}
@@ -83,17 +83,8 @@ export default function ImagePicker({ label, name }) {
                 },
               }}
             />
-          ) : (
-            <>
-              <p style={{ fontSize: "0.9em", color: "#f87171", marginTop: "1rem" }}>
-                Resim yüklemek için giriş yapmalısınız.
-              </p>
-              <Link href="/login" className={styles.back + ' ' + "button-gold-on-dark"}>
-                login
-              </Link>
-            </>
           )}
-          <Link href="./" className={styles.back + ' ' + "button-gold-on-dark"}>
+          <Link href="./" className="button-gold-blue">
             back meals
           </Link>
           {error && <p style={{ fontSize: "0.8em" }}>{error}</p>}

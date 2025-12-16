@@ -6,6 +6,7 @@ import { useReservations } from "@/hooks/useReservation";
 import { cleanupExpiredReservations } from "@/utils/reservations/cleanupExpiredReservations";
 import { SavedReservation } from "@/types/reservationTypes";
 import styles from "./reservation.module.css";
+import Link from "next/link";
 
 export default function ReservationPage() {
   const { user } = useAuth();
@@ -228,144 +229,158 @@ export default function ReservationPage() {
 
   return (
     <>
-      <div className={styles.containerWrapper + ' ' + "mainBackground"}>
-        <div className="containerTopNavbarColor" />
-        <div className={styles.formSection}>
-          <h2>
-            {editReservationId ? "Update Reservation" : "Make a Reservation"}
-          </h2>
+      {!user ? (
+        <div className={styles.containerWrapper + ' ' + "mainBackground"}>
+          <div className="containerTopNavbarColor" />
+          <div className={styles["non-user-message"]}>
 
-          {/* error-success info */}
-          {message && (
-            <p className={message.type === "error" ? styles.error : styles.success}>
-              {message.text}
+            <p>
+              You must be logged in to share a meal.
             </p>
-          )}
-
-          {reservationsError && <p className={styles.error}>{reservationsError}</p>}
-
-          {/* reservation - form area */}
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <label>
-              Name:
-              <input
-                type="text"
-                name="name"
-                value={user?.name || ""}
-                className={`${styles.input}`}
-                readOnly
-              />
-            </label>
-
-            <label>
-              Email:
-              <input
-                type="email"
-                name="email"
-                value={user?.email || ""}
-                className={`${styles.input}`}
-                readOnly
-              />
-            </label>
-
-            <label>
-              Date:
-              <input
-                type="date"
-                name="date"
-                value={reservation.date}
-                onChange={handleChange}
-                className={styles.input}
-                required
-              />
-            </label>
-
-            <label>
-              Time:
-              <input
-                type="time"
-                name="time"
-                value={reservation.time}
-                onChange={handleChange}
-                className={styles.input}
-                required
-              />
-            </label>
-
-            <label>
-              Number of Guests:
-              <input
-                type="number"
-                name="guests"
-                min="1"
-                max="20"
-                value={reservation.guests}
-                onChange={handleChange}
-                className={styles.input}
-                required
-              />
-            </label>
-
-            <label>
-              Special Notes:
-              <textarea
-                name="notes"
-                value={reservation.notes || ""}
-                placeholder="Enter any special notes"
-                onChange={handleChange}
-                className={styles.textarea}
-              />
-            </label>
-
-            <button
-              type="submit"
-              className={styles.button + " " + "button-gold-on-dark"}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Saving..." : editReservationId ? "Save Changes" : "Reserve"}
-            </button>
-          </form>
+            <Link href="/login" className="button-gold-blue">Login</Link>
+          </div>
         </div>
+      ) : (
 
-        <div className={styles.infoSection}>
-          <h2>Your Reservation</h2>
-          {reservationsLoading ? (
-            <div>Loading...</div>
-          ) : reservations.length > 0 ? (
-            reservations.map((res) => (
-              <div key={res._id || `${res.date}-${res.time}`} className={styles.reservationCard}>
-                <div className={styles.infoItem}><div className={styles.bold}>Name</div>: {user?.name || "N/A"}</div>
-                <div className={styles.infoItem}><div className={styles.bold}>Email</div>: {user?.email || "N/A"}</div>
-                <div className={styles.infoItem}><div className={styles.bold}>Date</div>: {new Date(res.date).toLocaleDateString()}</div>
-                <div className={styles.infoItem}><div className={styles.bold}>Time</div>: {res.time}</div>
-                <div className={styles.infoItem}><div className={styles.bold}>Guests</div>: {res.guests}</div>
-                <div className={styles.infoItem}><div className={styles.bold}>Notes</div>: {res.notes || "-"}</div>
-                <button
-                  onClick={() => handleEdit(res)}
-                  className={styles.button + " " + "button-gold-on-dark"}
-                  disabled={editReservationId === res._id}
-                >
-                  Update
-                </button>
-                <button
-                  type="button"
-                  className={styles.button + " " + "button-gold-on-dark"}
-                  onClick={() => handleDelete(res._id || "")}
-                >
-                  {isDeleting ? "Deleting..." : "Delete Reservation"}
-                </button>
-              </div>
-            ))
-          ) : (
-            !reservationsLoading && reservations.length === 0 &&
-            <p>No reservations found.</p>
-          )}
+        <div className={styles.containerWrapper + ' ' + "mainBackground"}>
+          <div className="containerTopNavbarColor" />
+          <div className={styles.formSection}>
+            <h2>
+              {editReservationId ? "Update Reservation" : "Make a Reservation"}
+            </h2>
 
-          {expiredMessage && (
-            <div>{expiredMessage}</div>
-          )}
+            {/* error-success info */}
+            {message && (
+              <p className={message.type === "error" ? styles.error : styles.success}>
+                {message.text}
+              </p>
+            )}
+
+            {reservationsError && <p className={styles.error}>{reservationsError}</p>}
+
+            {/* reservation - form area */}
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name"
+                  value={user?.name || ""}
+                  className={`${styles.input}`}
+                  readOnly
+                />
+              </label>
+
+              <label>
+                Email:
+                <input
+                  type="email"
+                  name="email"
+                  value={user?.email || ""}
+                  className={`${styles.input}`}
+                  readOnly
+                />
+              </label>
+
+              <label>
+                Date:
+                <input
+                  type="date"
+                  name="date"
+                  value={reservation.date}
+                  onChange={handleChange}
+                  className={styles.input}
+                  required
+                />
+              </label>
+
+              <label>
+                Time:
+                <input
+                  type="time"
+                  name="time"
+                  value={reservation.time}
+                  onChange={handleChange}
+                  className={styles.input}
+                  required
+                />
+              </label>
+
+              <label>
+                Number of Guests:
+                <input
+                  type="number"
+                  name="guests"
+                  min="1"
+                  max="20"
+                  value={reservation.guests}
+                  onChange={handleChange}
+                  className={styles.input}
+                  required
+                />
+              </label>
+
+              <label>
+                Special Notes:
+                <textarea
+                  name="notes"
+                  value={reservation.notes || ""}
+                  placeholder="Enter any special notes"
+                  onChange={handleChange}
+                  className={styles.textarea}
+                />
+              </label>
+
+              <button
+                type="submit"
+                className="button-gold-blue"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Saving..." : editReservationId ? "Save Changes" : "Reserve"}
+              </button>
+            </form>
+          </div>
+
+          <div className={styles.infoSection}>
+            <h2>Your Reservation</h2>
+            {reservationsLoading ? (
+              <div>Loading...</div>
+            ) : reservations.length > 0 ? (
+              reservations.map((res) => (
+                <div key={res._id || `${res.date}-${res.time}`} className={styles.reservationCard}>
+                  <div className={styles.infoItem}><div className={styles.bold}>Name</div>: {user?.name || "N/A"}</div>
+                  <div className={styles.infoItem}><div className={styles.bold}>Email</div>: {user?.email || "N/A"}</div>
+                  <div className={styles.infoItem}><div className={styles.bold}>Date</div>: {new Date(res.date).toLocaleDateString()}</div>
+                  <div className={styles.infoItem}><div className={styles.bold}>Time</div>: {res.time}</div>
+                  <div className={styles.infoItem}><div className={styles.bold}>Guests</div>: {res.guests}</div>
+                  <div className={styles.infoItem}><div className={styles.bold}>Notes</div>: {res.notes || "-"}</div>
+                  <button
+                    onClick={() => handleEdit(res)}
+                    className="button-gold-blue"
+                    disabled={editReservationId === res._id}
+                  >
+                    Update
+                  </button>
+                  <button
+                    type="button"
+                    className="button-gold-blue"
+                    onClick={() => handleDelete(res._id || "")}
+                  >
+                    {isDeleting ? "Deleting..." : "Delete Reservation"}
+                  </button>
+                </div>
+              ))
+            ) : (
+              !reservationsLoading && reservations.length === 0 &&
+              <p>No reservations found.</p>
+            )}
+
+            {expiredMessage && (
+              <div>{expiredMessage}</div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

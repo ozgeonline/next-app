@@ -130,20 +130,6 @@
   text-transform: capitalize;
 }
 
-.userCard .bottom .button {
-  border: none;
-  border-radius: 4px;
-  text-transform: lowercase;
-  padding: 0.5rem 3.5em;
-  font-size: medium;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.userCard .bottom a.button {
-  text-decoration: none;
-}
-
 .userCard .bottom .nonauth {
   font-style: oblique;
 }

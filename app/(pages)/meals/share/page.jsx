@@ -6,6 +6,7 @@ import shareMeal from '@/app/(pages)/meals/share/actions/share-actions';
 import ImagePicker from '@/components/meals/Image-picker';
 import MealsFormSubmit from '@/components/meals/meals-form-submit';
 import styles from './page.module.css';
+import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +16,14 @@ export default function ShareMealPage() {
   //console.log("state:", state);
 
   if (!user) {
-    return <p>You must be logged in to share a meal.</p>;
+    return (
+      <div className={styles["non-user-message"]}>
+        <p>
+          You must be logged in to share a meal.
+        </p>
+        <Link href="/login" className="button-gold-blue">Login</Link>
+      </div>
+    );
   }
 
   return (

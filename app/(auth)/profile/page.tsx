@@ -69,7 +69,7 @@ export default function ProfilePage() {
                 {!showInput ? (
                   <button
                     onClick={handleShowInput}
-                    className="button-gold-on-dark blueButton"
+                    className="button-gold-blue"
                   >
                     Update
                   </button>
@@ -80,18 +80,18 @@ export default function ProfilePage() {
                       value={newName}
                       onChange={(e) => setNewName(e.target.value)}
                       placeholder="Enter new name"
-                      className="button-gold-on-dark blueButton"
+                      className="button-gold-blue"
                     />
                     <button
                       onClick={handleUpdate}
                       disabled={saving}
-                      className="button-gold-on-dark blueButton"
+                      className="button-gold-blue"
                     >
                       {saving ? "Saving..." : "Save"}
                     </button>
                     <button
                       onClick={() => setShowInput(false)}
-                      className="button-gold-on-dark blueButton"
+                      className="button-gold-blue"
                     >
                       Cancel
                     </button>
@@ -105,7 +105,7 @@ export default function ProfilePage() {
               <Link
                 href="/signup"
                 type="submit"
-                className={styles.referencePathBtn + " " + "text-gold-on-dark blueButton"}
+                className="button-gold-blue"
               >
                 Sign Up
               </Link>
@@ -113,7 +113,7 @@ export default function ProfilePage() {
               <Link
                 href="/login"
                 type="submit"
-                className={styles.referencePathBtn + " " + "text-gold-on-dark blueButton"}
+                className="button-gold-blue"
               >
                 Login
               </Link>

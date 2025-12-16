@@ -4,10 +4,10 @@ import Link from "next/link";
 import { menuLinks } from "@/app/(pages)/menu/menu-items";
 import styles from "./carousel.module.css";
 
-function Carousel({ 
-  children, 
-  autoSlide = true, 
-  dotType = "dot", 
+function Carousel({
+  children,
+  autoSlide = true,
+  dotType = "dot",
   textLabels = [],
   carouselWrapper,
   dotsWrapper,
@@ -91,14 +91,12 @@ function Carousel({
                 if (itemsData.title !== label) return null;
 
                 return (
-                  <Link key={itemsData.href} href={`menu/${itemsData.href}`} className={styles.viewAlllink}>
-                    <button className={styles.viewAllButton + ' ' + "button-gold-on-dark"}>
-                      View All {itemsData.title}
-                    </button>
+                  <Link key={itemsData.href} href={`menu/${itemsData.href}`} className="button-gold-blue">
+                    View All {itemsData.title}
                   </Link>
                 );
               })}
-              <div className={styles.blurOverlay}/>
+            <div className={styles.blurOverlay} />
           </div>
         ))}
       </div>

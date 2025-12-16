@@ -33,7 +33,7 @@
   flex-direction: column;
   width: 100%;
   opacity: 1;
-  z-index: 100;
+  z-index: 10;
   overflow: hidden;
   gap: 1rem;
 }
@@ -65,15 +65,15 @@
 }
 
 .validValueColor {
-  border-color: var(--success);
+  border-color: var(--success) !important;
 }
 
 .invalidValueColor {
-  border-color: var(--error);
+  border-color: var(--error) !important;
 }
 
 .defaultValueColor {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: transparent;
   background: var(--text-opacity);
 }
 
@@ -100,7 +100,7 @@
 .formGroup input {
   padding: 0.75rem;
   border-radius: 4px;
-  border-width: 0;
+  border: 1px solid transparent;
   background: var(--shark-200);
   color: var(--shark-800);
   font-size: 1rem;
@@ -123,10 +123,7 @@
   -webkit-text-fill-color: var(--shark-800) !important;
 }
 
-.formGroup input::selection {
-  color: var(--science-blue-500) !important;
-}
-
+.formGroup input::selection,
 .formGroup input:focus::details-content {
   color: var(--science-blue-500) !important;
 }
@@ -153,7 +150,7 @@
 
 .submitButton:hover,
 .referencePath:hover {
-  background: #0466c8;
+  background: var(--science-blue-800);
 }
 
 [data-theme="dark"] .submitButton:hover,
@@ -165,9 +162,10 @@
 .submitButton:disabled {
   cursor: not-allowed;
   border: none;
+  opacity: 0.7;
 }
 
 [data-theme="light"] .submitButton:hover,
 [data-theme="light"] .referencePath:hover {
-  color: #f4f6f7;
+  color: var(--shark-50);
 }
