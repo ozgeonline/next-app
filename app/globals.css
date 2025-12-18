@@ -310,6 +310,37 @@ body {
 
 /**************************/
 
+/******* Text Disagn */
+.non-user-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text);
+  font-size: 1.4rem;
+  width: 100%;
+  text-align: center;
+  gap: 1rem;
+}
+
+.loading {
+  text-align: center;
+  animation: loading 1s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    color: var(--text);
+  }
+
+  50% {
+    color: var(--background-opacity);
+  }
+
+  100% {
+    color: var(--text);
+  }
+}
+
 /* ---------------------------- FOOTER ---------------------------- */
 .footerWrapper {
   display: flex;

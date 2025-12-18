@@ -1,23 +1,24 @@
 "use client";
 
-import { useActionState } from 'react';
 import { useAuth } from '@/context/auth/AuthProvider';
-import shareMeal from '@/app/(pages)/meals/share/actions/share-actions';
-import ImagePicker from '@/components/meals/Image-picker';
-import MealsFormSubmit from '@/components/meals/meals-form-submit';
 import styles from './page.module.css';
 import Link from 'next/link';
+import ShareMealForm from '@/components/meals/share-meal/share-meal-form';
 
 export const dynamic = 'force-dynamic';
 
 export default function ShareMealPage() {
-  const { user } = useAuth();
-  const [state, formAction] = useActionState(shareMeal, { message: null });
-  //console.log("state:", state);
+  const { user, loading } = useAuth();
 
-  if (!user) {
+  if (loading) {
     return (
-      <div className={styles["non-user-message"]}>
+      <div>
+        <p className='loading'>Loading...</p>
+      </div>
+    );
+  } else if (!user && !loading) {
+    return (
+      <div className="non-user-message">
         <p>
           You must be logged in to share a meal.
         </p>
@@ -28,6 +29,7 @@ export default function ShareMealPage() {
     );
   }
 
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -37,40 +39,7 @@ export default function ShareMealPage() {
         <p>Or any other meal you feel needs sharing!</p>
       </header>
       <main className={styles.main}>
-        <form className={styles.form} action={formAction}>
-          <div className={styles.row}>
-            <p>
-              <label htmlFor="name">Your name</label>
-              <input type="text" id="name" value={user?.name || ""} readOnly />
-            </p>
-            <p>
-              <label htmlFor="email">Your email</label>
-              <input type="email" id="email" value={user?.email || ""} readOnly />
-            </p>
-          </div>
-          <p>
-            <label htmlFor="title">Title</label>
-            <input type="text" id="title" name="title" required />
-          </p>
-          <p>
-            <label htmlFor="summary">Short Summary</label>
-            <input type="text" id="summary" name="summary" required />
-          </p>
-          <p>
-            <label htmlFor="instructions">Instructions</label>
-            <textarea
-              id="instructions"
-              name="instructions"
-              rows="10"
-              required
-            ></textarea>
-          </p>
-          <ImagePicker label="Your Meal Image" name="image" />
-          {state?.message && <p>{state.message}</p>}
-          <div className={styles.actions}>
-            <MealsFormSubmit />
-          </div>
-        </form>
+        <ShareMealForm user={user} />
       </main>
     </div >
   );

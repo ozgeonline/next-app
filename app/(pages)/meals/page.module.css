@@ -68,22 +68,3 @@
   width: 100%;
   padding: 1rem;
 }
-
-.loading {
-  text-align: center;
-  animation: loading 1s ease-in-out infinite;
-}
-
-@keyframes loading {
-  0% {
-    color: var(--text);
-  }
-
-  50% {
-    color: var(--background-opacity);
-  }
-
-  100% {
-    color: var(--text);
-  }
-}

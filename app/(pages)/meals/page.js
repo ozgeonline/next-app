@@ -32,7 +32,7 @@ export default function MealsPage() {
         </p>
       </header>
       <main className={styles.main}>
-        <Suspense fallback={<p className={styles.loading}>loading meals...</p>}>
+        <Suspense fallback={<p className="loading">loading meals...</p>}>
           <MealsList />
         </Suspense>
       </main>

@@ -8,7 +8,11 @@ export default function MealsFormSubmit() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <button type='submit' disabled={pending || !isAuthenticated}>
+    <button 
+      type='submit' 
+      disabled={pending || !isAuthenticated} 
+      className='button-gold-blue'
+    >
       {pending ? 'Submitting...' : 'Share Meal'}
     </button>
   );
