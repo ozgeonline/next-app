@@ -7,7 +7,7 @@ import { useNavigation } from "@/context/navigation/NavigationProvider";
 import { useScroll } from "@/context/scroll/ScrollingProvider";
 import styles from "./nav-link.module.css";
 
-export default function NavLink({href, children}) {
+export default function NavLink({ href, children }) {
   const path = usePathname();
   const router = useRouter();
   const { scrolling } = useScroll();
@@ -16,9 +16,14 @@ export default function NavLink({href, children}) {
   const isMountedRef = useRef(true);
 
   const isActive = href === "/" ? path === "/" : path.startsWith(href);
-  const linkStyle = { color: !scrolling ? "#FFFFFF" :  "var(--shark-800)"};
 
- const handleClick = (e) => {
+  const isSpecialPage = path === "/" || path.startsWith("/menu") || path.startsWith("/menu/");
+
+  const linkStyle = {
+    color: !scrolling && isSpecialPage ? "#FFFFFF" : "var(--shark-800)"
+  };
+
+  const handleClick = (e) => {
     e.preventDefault();
     // console.log(`isOpen: ${isOpen}, href: ${href}, current path: ${path}`);
     if (href === path) {
@@ -39,11 +44,11 @@ export default function NavLink({href, children}) {
 
   // reset loading when transition completes
   useEffect(() => {
-    if (!isPending && isMountedRef.current ) {
+    if (!isPending && isMountedRef.current) {
       const timer = setTimeout(() => {
         setIsLoading(false);
       }, 300);
-      
+
       return () => clearTimeout(timer);
     }
   }, [isPending, setIsLoading, path]);

@@ -50,7 +50,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className={styles.containerWrapper + " " + "mainBackground"}>
-      <div className={styles.containerTopNavbar} />
+      <div className={styles.containerTopNavbar + " " + "menuNavbar"} />
       <div className={styles.card}>
         <div className={styles.avatar + " " + "background-gradient"}>
           {user?.name ? user.name.slice(0, 2).toUpperCase() : "G"}

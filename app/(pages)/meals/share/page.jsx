@@ -21,13 +21,15 @@ export default function ShareMealPage() {
         <p>
           You must be logged in to share a meal.
         </p>
-        <Link href="/login" className="button-gold-blue">Login</Link>
+        <Link href="/login" className="button-gold-blue">
+          Login
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className={styles.container + ' ' + "mainBackground"}>
+    <div className={styles.container}>
       <header className={styles.header}>
         <h1>
           Share your <span className="highlight-gradient-text">favorite meal</span>
@@ -70,6 +72,6 @@ export default function ShareMealPage() {
           </div>
         </form>
       </main>
-    </div>
+    </div >
   );
 }

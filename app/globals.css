@@ -252,10 +252,6 @@ body {
   z-index: 1000;
 }
 
-[data-theme="light"] .containerTopNavbarColor {
-  background: var(--text);
-}
-
 /* NOT-FOUND PAGE && ERROR PAGE */
 .not-found,
 .error {

@@ -6,10 +6,6 @@
   width: 100%;
 }
 
-[data-theme="light"] .containerTopNavbar {
-  background: var(--science-blue-800);
-}
-
 .containerWrapper {
   display: flex;
   align-items: center;
