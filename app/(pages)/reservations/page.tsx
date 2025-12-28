@@ -235,7 +235,7 @@ export default function ReservationPage() {
           <div className={styles["non-user-message"]}>
 
             <p>
-              You must be logged in to share a meal.
+              You must be logged in to make a reservation.
             </p>
             <Link href="/login" className="button-gold-blue">Login</Link>
           </div>

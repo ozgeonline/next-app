@@ -1,0 +1,58 @@
+.controls {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.picker .input {
+  display: none;
+}
+
+.picker label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  color: var(--text-opacity);
+  font-weight: bold;
+}
+
+.preview {
+  width: 10rem;
+  height: 10rem;
+  border: 2px solid #a4abb9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #a4abb9;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.preview p {
+  margin: 0;
+  padding: 1rem;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.uploadContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.backButton {
+  margin-top: 0.5rem;
+}
+
+.errorText {
+  font-size: 0.8em;
+  color: var(--error);
+  margin-top: 0.5rem;
+}

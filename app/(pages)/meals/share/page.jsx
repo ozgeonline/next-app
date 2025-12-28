@@ -3,7 +3,7 @@
 import { useAuth } from '@/context/auth/AuthProvider';
 import styles from './page.module.css';
 import Link from 'next/link';
-import ShareMealForm from '@/components/meals/share-meal/share-meal-form';
+import ShareMealForm from '@/components/meals/share-meal/form';
 
 export const dynamic = 'force-dynamic';
 

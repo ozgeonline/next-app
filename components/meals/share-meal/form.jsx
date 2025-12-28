@@ -2,10 +2,10 @@
 
 import { useActionState } from 'react';
 import shareMeal from '@/app/(pages)/meals/share/actions/share-actions';
-import ImagePicker from '@/components/meals/Image-picker';
+import ImagePicker from '@/components/meals/image-picker/Image-picker';
 import MealsFormSubmit from '@/components/meals/meals-form-submit';
-import FormInput from '@/components/ui/form/form-input';
-import styles from './share-meal-form.module.css';
+import FormInput from '@/components/ui/form/field';
+import styles from './form.module.css';
 
 export default function ShareMealForm({ user }) {
   const [state, formAction] = useActionState(shareMeal, { message: null });

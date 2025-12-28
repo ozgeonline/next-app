@@ -1,13 +1,16 @@
 .container {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  background: var(--background);
   min-height: 100vh;
   width: 100%;
   z-index: 10;
-  padding: 5rem 1rem;
+  padding: 4rem 2rem;
+  margin-top: 5rem;
+  border-radius: 4px;
+  background: var(--text-low-opacity);
 }
 
 @media screen and (min-width: 768px) {
