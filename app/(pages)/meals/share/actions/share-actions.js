@@ -12,6 +12,10 @@ function isInvalidText(text) {
 export default async function shareMeal(prevState,formData) {
   const user = await getUserFromCookies();
 
+  if (!user) {
+    redirect('/login'); 
+  }
+
   const meal = {
     title: formData.get("title"),
     summary: formData.get("summary"),
@@ -35,7 +39,8 @@ export default async function shareMeal(prevState,formData) {
     isInvalidText(meal.creator_email) ||
     !meal.creator_email.includes('@') ||
     !meal.image ||
-    meal.image === ""
+    meal.image === "" ||
+    meal.image.size === 0
   ) {
     return {
       message:'Please fill out all fields.'

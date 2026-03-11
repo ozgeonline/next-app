@@ -1,14 +1,13 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import connect from "@/lib/db";
-import Meal from "@/app/models/Meal";
 import Image from "next/image";
 import styles from "./page.module.css";
+import { getMeal } from "@/lib/meals";
 
-await connect();
+export const dynamic = "force-dynamic";
 export async function generateMetadata({params}) {
   const { mealSlug } = await params;
-  const meal = await Meal.findOne({ slug: mealSlug }).lean();
+  const meal = await getMeal(mealSlug);
 
   if (!meal) return notFound();
 
@@ -20,7 +19,7 @@ export async function generateMetadata({params}) {
 
 export default async function MealDetailsPage({params}) {
   const { mealSlug } = await params;
-  const meal = await Meal.findOne({ slug: mealSlug }).lean();
+  const meal = await getMeal(mealSlug);
 
   if (!meal) return notFound();
 
@@ -41,7 +40,7 @@ export default async function MealDetailsPage({params}) {
               by <a href={`mailto:${meal.creator_email}`}>{meal.creator}</a>
             </p>
             <Link href="./" className="button-gold-blue">
-              back meals
+              Back to Meals
             </Link>
           </div>
         </div>
