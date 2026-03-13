@@ -1,5 +1,5 @@
-import ScrollToSection from "@/components/providers/trigger-scroll/ScrollToSection";
-import AnimatedOnScroll from "@/components/providers/animation/AnimatedOnScroll";
+import ScrollToSection from "@/components/ui/animation/trigger-scroll/ScrollToSection";
+import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
 import InfiniteSlideLoop from "../../slides/loopSlides/InfiniteSlideLoop";
 import { infoImages } from "../../slides/slideshow-items";
 import styles from "./loop-slide-section.module.css";
@@ -14,11 +14,11 @@ export default function LoopSlideSection({
   isLoopSlideVisible,
   setIsLoopSlideVisible,
   isCommunityInfoVisible,
-}: LoopSlideSectionProps)  {
+}: LoopSlideSectionProps) {
   return (
-    <ScrollToSection 
-      className={styles.loopSlideSection} 
-      isVisible={isLoopSlideVisible} 
+    <ScrollToSection
+      className={styles.loopSlideSection}
+      isVisible={isLoopSlideVisible}
       setIsVisible={setIsLoopSlideVisible}
     >
       <AnimatedOnScroll
@@ -26,7 +26,7 @@ export default function LoopSlideSection({
         animationClass={styles.animateInRight}
         onVisibilityChange={isVisible => setIsLoopSlideVisible(isVisible)}
       >
-        <div className={isCommunityInfoVisible ? styles.hero  : styles.heroDefault}>
+        <div className={isCommunityInfoVisible ? styles.hero : styles.heroDefault}>
           <h2>
             Brew Focus. Eat Clean. Change Everything.
           </h2>

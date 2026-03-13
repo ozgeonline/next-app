@@ -1,4 +1,4 @@
-import AnimatedOnScroll from "@/components/providers/animation/AnimatedOnScroll";
+import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
 import Link from "next/link";
 import { removeBGimages } from '@/components/slides/slideshow-items';
 import ImageSlideshow from "@/components/slides/slideShow/Image-slideshow";
@@ -10,7 +10,7 @@ interface SlideSectionProps {
   isCommunityInfoVisible: boolean;
 }
 
-export default function SlideSection({ isCommunityInfoVisible }: SlideSectionProps){
+export default function SlideSection({ isCommunityInfoVisible }: SlideSectionProps) {
   return (
     <div className={styles.slideSection + ' ' + "mainBackground"}>
       <div className={styles.animateContent}>
@@ -26,7 +26,7 @@ export default function SlideSection({ isCommunityInfoVisible }: SlideSectionPro
           </div>
           <div className={styles.cta}>
             <Link href="/community">
-              Join the Community 
+              Join the Community
               <span>
                 <MousePointerClick />
               </span>
@@ -35,13 +35,13 @@ export default function SlideSection({ isCommunityInfoVisible }: SlideSectionPro
           </div>
         </AnimatedOnScroll>
       </div>
-      <div 
+      <div
         className={`
           ${styles.infiniteSlideLoopWrapper} 
           ${isCommunityInfoVisible ? styles.opacity0 : styles.opacity1}
         `}
       >
-        <InfiniteSlideLoop images={removeBGimages} className={styles.itemWrapper}/>
+        <InfiniteSlideLoop images={removeBGimages} className={styles.itemWrapper} />
       </div>
     </div>
   )

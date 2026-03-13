@@ -1,4 +1,4 @@
-import AnimatedOnScroll from "@/components/providers/animation/AnimatedOnScroll";
+import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
 import Link from "next/link";
 import Image from "next/image";
 import { Cards } from "@/types/cardTypes";
@@ -6,16 +6,16 @@ import { ChevronsRight, MousePointerClick, Sun } from "lucide-react";
 import styles from "./cards.module.css";
 
 interface CardsSectionProps {
-  data:Cards
-  learnMore?:boolean
+  data: Cards
+  learnMore?: boolean
 }
 export default function CardsSection({
   data,
   learnMore
-}:CardsSectionProps) {
+}: CardsSectionProps) {
   return (
     <AnimatedOnScroll
-      className={styles.cardsWrapper  + ' ' + "mainBackground"}
+      className={styles.cardsWrapper + ' ' + "mainBackground"}
       animationClass={styles.animateInRight}
     >
       <div className={styles.cards}>
@@ -28,18 +28,18 @@ export default function CardsSection({
                 <Link href={data.link.href}>
                   {data.link.text}
                   <span className={styles.arrow}>
-                    <ChevronsRight size={20}/>
+                    <ChevronsRight size={20} />
                   </span>
                 </Link>
               )}
             </div>
           </div>
           <div className={styles.sunWrapper}>
-            <Sun className={styles.sun}/>
+            <Sun className={styles.sun} />
           </div>
         </div>
         <div className={styles.card}>
-          <Image 
+          <Image
             src={data.imgCard.images.src}
             alt={data.imgCard.images.alt}
             fill
@@ -48,7 +48,7 @@ export default function CardsSection({
             height={0}
           />
           <span className={styles.cardClick}>
-            click me 
+            click me
             <MousePointerClick />
           </span>
           <div className={styles.cardText}>

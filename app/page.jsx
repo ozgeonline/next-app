@@ -24,10 +24,10 @@ export default function Home() {
       <div className={styles.container}>
 
         {/* first view area */}
-        <HeroBanner 
-          srcImage="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDMrKaB2nlPGFDafBuW154icVrsNKdbwvp82nJ"
-          introductionTitle="A Delicious Experience Awaits"
-          introduction="Discover the flavors of the world, one cup at a time"
+        <HeroBanner
+          srcImage="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDwVyPtw4YqlTOprZ9Ac2Vvs1uHfUgS0GEoeBY"
+          introductionTitle=""
+          introduction=""
           reservationLink={true}
           socialLocation={true}
         />
@@ -39,7 +39,7 @@ export default function Home() {
           <main className={styles.main + ' ' + "mainBackground"}>
 
             {/* Fixed Background Image & CTA Links Section*/}
-            <section className={styles.mainContent  + ' ' + "mainBackground"}>
+            <section className={styles.mainContent + ' ' + "mainBackground"}>
               <PositionedImage isCommunityInfoVisible={isCommunityInfoVisible} />
               <CTA isCommunityInfoVisible={isCommunityInfoVisible} />
             </section>
@@ -58,11 +58,11 @@ export default function Home() {
             <section>
               <CardsSection data={homePageitems} learnMore={true} />
             </section>
-          
+
             {/* Scroll Trigger - Animated Image Sections & Image Info */}
             <section>
               <div
-                style={{position: 'relative', width: '100%', paddingBottom: '5rem'}}
+                style={{ position: 'relative', width: '100%', paddingBottom: '5rem' }}
                 className="animatedSections mainBackground"
               >
                 <AnimatedSections />
@@ -71,7 +71,7 @@ export default function Home() {
           </main>
         </>
       </div>
-      
+
       <TopScrollButton />
     </>
   );

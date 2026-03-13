@@ -1,4 +1,4 @@
-import AnimatedOnScroll from "@/components/providers/animation/AnimatedOnScroll";
+import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
 import styles from "./community-info.module.css";
 
 interface CommunityInfoSectionProps {
@@ -17,8 +17,8 @@ export default function CommunityInfo({ setIsCommunityInfoVisible }: CommunityIn
       </div>
       <div className={styles.definitionHero}>
         <p>
-          Tired of the usual menus? Here, you&#39;re free to be creative! 
-          Build your own dish or choose the ingredients and let our chef do the magic. 
+          Tired of the usual menus? Here, you&#39;re free to be creative!
+          Build your own dish or choose the ingredients and let our chef do the magic.
           From breakfast and snacks to drinks and desserts — every flavor is shaped by your imagination.
         </p>
       </div>
@@ -27,8 +27,8 @@ export default function CommunityInfo({ setIsCommunityInfoVisible }: CommunityIn
       </div>
       <div className={styles.definitionHero}>
         <p>
-          This is more than just a place to eat — it&#39;s an experience. 
-          From handcrafted drinks to freshly made desserts, everything is prepared with care. 
+          This is more than just a place to eat — it&#39;s an experience.
+          From handcrafted drinks to freshly made desserts, everything is prepared with care.
           We&#39;re here to delight your taste buds and offer you a cozy, flavorful atmosphere.
         </p>
       </div>

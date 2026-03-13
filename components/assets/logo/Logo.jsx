@@ -6,8 +6,8 @@ import { useScroll } from "@/context/scroll/ScrollingProvider";
 import { usePathname } from "next/navigation";
 import styles from "./logo.module.css"
 
-const LOGO_PRIMARY = "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDBYWgDZxNmQAqG8cge0hkoTSVZRJ3fPUHijlp";
-const LOGO_SECONDARY = "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFD0ScouWaQFyYUIlefwhZsOdp3tLqKazo6cmbV";
+const LOGO_LIGHT = "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDBYWgDZxNmQAqG8cge0hkoTSVZRJ3fPUHijlp";
+const LOGO_DARK = "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFD0ScouWaQFyYUIlefwhZsOdp3tLqKazo6cmbV";
 
 export default function Logo() {
   const { theme } = useTheme();
@@ -20,7 +20,7 @@ export default function Logo() {
 
   return (
     <Image
-      src={showLogo ? LOGO_SECONDARY : LOGO_PRIMARY}
+      src={showLogo ? LOGO_DARK : LOGO_LIGHT}
       alt="cafe logo"
       className={styles.logo}
       priority

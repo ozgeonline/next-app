@@ -1,4 +1,4 @@
-import AnimatedOnScroll from '@/components/providers/animation/AnimatedOnScroll';
+import AnimatedOnScroll from '@/components/ui/animation/animated-scroll/AnimatedOnScroll';
 import Image from 'next/image';
 import styles from "./positioned-image.module.css";
 
@@ -35,7 +35,7 @@ export default function PositionedImage({ isCommunityInfoVisible }: MainContentP
           <h1 className='highlight-gradient-text'>Nourish your body, energize your mind</h1>
           <h2>Brew Focus. Eat Clean. Change Everything.</h2>
           <p>
-            Support your mental clarity with coffee and your physical health with nutritious meals 
+            Support your mental clarity with coffee and your physical health with nutritious meals
             small habits that lead to lasting change.
           </p>
         </AnimatedOnScroll>
