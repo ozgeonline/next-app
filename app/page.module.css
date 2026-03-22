@@ -4,7 +4,7 @@
   box-shadow: 0 0 20px var(--shark-900);
   z-index: 10000;
 } */
- 
+
 .container {
   display: flex;
   flex-direction: column;
@@ -19,16 +19,15 @@
   width: 100%;
   flex: 1;
   z-index: 100;
-  }
+}
 
-.mainContent { 
-  height: 100vh; 
+.mainContent {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 5vh 0;
 }
-
-
-

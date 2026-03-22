@@ -5,6 +5,7 @@ import ImageSlideshow from "@/components/slides/slideShow/Image-slideshow";
 import InfiniteSlideLoop from "@/components/slides/loopSlides/InfiniteSlideLoop";
 import styles from "./slide-section.module.css";
 import { MousePointerClick } from "lucide-react";
+import WavesBackground from "@/components/assets/wavesBackground/WavesBackground";
 
 interface SlideSectionProps {
   isCommunityInfoVisible: boolean;
@@ -12,7 +13,9 @@ interface SlideSectionProps {
 
 export default function SlideSection({ isCommunityInfoVisible }: SlideSectionProps) {
   return (
-    <div className={styles.slideSection + ' ' + "mainBackground"}>
+    <div className={`${styles.slideSection} mainBackground`}>
+      <WavesBackground />
+
       <div className={styles.animateContent}>
         <div className={styles.slideShowWrapper}>
           <ImageSlideshow />

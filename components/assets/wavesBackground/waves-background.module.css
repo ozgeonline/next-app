@@ -1,0 +1,57 @@
+.wavesOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wavesSvg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--background) !important;
+  stroke-width: 0.15;
+  /* Bu değer çok önemli! */
+  opacity: 0.4;
+}
+
+:global([data-theme='dark']) .wavesSvg {
+  stroke: var(--shark-300) !important;
+  opacity: 0.2 !important;
+}
+
+.waveGroup1 {
+  animation: panRight 25s ease-in-out infinite alternate;
+}
+
+.waveGroup2 {
+  animation: panLeft 30s ease-in-out infinite alternate;
+}
+
+.waveGroup3 {
+  animation: panRight 35s ease-in-out infinite alternate;
+}
+
+@keyframes panRight {
+  0% {
+    transform: translateX(-5%) translateY(-2%);
+  }
+
+  100% {
+    transform: translateX(5%) translateY(2%);
+  }
+}
+
+@keyframes panLeft {
+  0% {
+    transform: translateX(5%) translateY(2%);
+  }
+
+  100% {
+    transform: translateX(-5%) translateY(-2%);
+  }
+}

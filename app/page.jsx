@@ -5,15 +5,17 @@ import dynamic from 'next/dynamic';
 import TopScrollButton from "@/components/ui/topScrollButton/TopScrollButton";
 import { homePageitems } from "@/components/sections/cards/card-items";
 import HeroBanner from "@/components/assets/heroBanner/HeroBanner";
+import WavesBackground from "@/components/assets/wavesBackground/WavesBackground";
 import styles from './page.module.css';
 
 const SlideSection = dynamic(() => import('@/components/sections/slideSection/SlideSection'));
-const PositionedImage = dynamic(() => import('@/components/sections/positioned_img/PositionedImage'));
+const PositionedImage = dynamic(() => import('@/components/sections/positioned-image/PositionedImage'));
 const CTA = dynamic(() => import('@/components/sections/cta/CTA'));
 const CommunityInfo = dynamic(() => import('@/components/sections/community_info/CommunityInfo'));
 const LoopSlideSection = dynamic(() => import('@/components/sections/scroll_trigger_loop_slides/LoopSlideSection'));
 const CardsSection = dynamic(() => import('@/components/sections/cards/CardsSection'));
 const AnimatedSections = dynamic(() => import('@/components/sections/animated_sections/AnimatedSections'));
+
 
 export default function Home() {
   const [isLoopSlideVisible, setIsLoopSlideVisible] = useState(false);
@@ -37,9 +39,10 @@ export default function Home() {
           <SlideSection isCommunityInfoVisible={isCommunityInfoVisible} />
 
           <main className={styles.main + ' ' + "mainBackground"}>
-
             {/* Fixed Background Image & CTA Links Section*/}
             <section className={styles.mainContent + ' ' + "mainBackground"}>
+              <WavesBackground />
+
               <PositionedImage isCommunityInfoVisible={isCommunityInfoVisible} />
               <CTA isCommunityInfoVisible={isCommunityInfoVisible} />
             </section>

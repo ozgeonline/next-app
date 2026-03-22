@@ -27,25 +27,25 @@ export default function HeroBanner({
   const [scale, setScale] = useState(1);
   const [brightness, setBrightness] = useState(SCROLL_CONFIG.maxBrightness);
 
-  // requestAnimationFrame ID'sini tutmak için
+  // To keep requestAnimationFrame ID
   const rafId = useRef(null);
   useEffect(() => {
     const handleScroll = () => {
-      // Performans optimizasyonu: Eğer zaten bir hesaplama sırada bekliyorsa yenisini atla
+      // Performance optimization: Skip new calculation if one is already pending
       if (rafId.current) return;
       rafId.current = requestAnimationFrame(() => {
         const scrollY = window.scrollY;
         const { maxScroll, maxScale, minScale, maxBrightness, minBrightness } = SCROLL_CONFIG;
 
-        // scrollY 0 ile maxScroll arasında sınırlandırılır (0 ile 1 arası oran)
+        // scrollY is limited between 0 and maxScroll (ratio between 0 and 1)
         const scrollProgress = Math.min(scrollY / maxScroll, 1);
         setScale(minScale + (maxScale - minScale) * scrollProgress);
         setBrightness(maxBrightness - (maxBrightness - minBrightness) * scrollProgress);
 
-        rafId.current = null; // İşlem bitince ID'yi temizle
+        rafId.current = null; // Clear ID after processing
       });
     };
-    window.addEventListener('scroll', handleScroll, { passive: true }); // passive: true scroll performansını artırır
+    window.addEventListener('scroll', handleScroll, { passive: true }); // passive: true increases scroll performance
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (rafId.current) cancelAnimationFrame(rafId.current);
@@ -88,7 +88,7 @@ export default function HeroBanner({
         )}
       </AnimatedOnScroll>
 
-      {socialLocation ? (
+      {socialLocation && (
         <div className={styles.bottomSection}>
           <div className={styles.content + " " + styles["tracking-in-expand-fwd-top"]}>
             <SocialMedia />
@@ -98,8 +98,7 @@ export default function HeroBanner({
             </div>
           </div>
         </div>
-      ) : null}
-
+      )}
     </div>
   )
 }

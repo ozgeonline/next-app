@@ -60,14 +60,6 @@
   margin-bottom: 0.5rem;
   text-align: center;
   text-shadow: 2px 2px 5px #1a1a1a;
-
-  /* background-image:
-    repeating-linear-gradient(to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%,
-      #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%);
-  background-size: 150%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text; */
 }
 
 .introduction p {
@@ -166,7 +158,8 @@
 
 .bottomSection {
   position: absolute;
-  bottom: 3rem;
+  bottom: 2rem;
+  padding: 0 2rem;
   width: 100%;
   z-index: 10000;
 }
