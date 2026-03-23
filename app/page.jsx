@@ -11,8 +11,8 @@ import styles from './page.module.css';
 const SlideSection = dynamic(() => import('@/components/sections/slideSection/SlideSection'));
 const PositionedImage = dynamic(() => import('@/components/sections/positioned-image/PositionedImage'));
 const CTA = dynamic(() => import('@/components/sections/cta/CTA'));
-const CommunityInfo = dynamic(() => import('@/components/sections/community_info/CommunityInfo'));
-const LoopSlideSection = dynamic(() => import('@/components/sections/scroll_trigger_loop_slides/LoopSlideSection'));
+const CommunityInfo = dynamic(() => import('@/components/sections/community-info/CommunityInfo'));
+const LoopSlideSection = dynamic(() => import('@/components/sections/loop-slide-section/LoopSlideSection'));
 const CardsSection = dynamic(() => import('@/components/sections/cards/CardsSection'));
 const AnimatedSections = dynamic(() => import('@/components/sections/animated_sections/AnimatedSections'));
 
@@ -42,12 +42,11 @@ export default function Home() {
             {/* Fixed Background Image & CTA Links Section*/}
             <section className={styles.mainContent + ' ' + "mainBackground"}>
               <WavesBackground />
-
               <PositionedImage isCommunityInfoVisible={isCommunityInfoVisible} />
               <CTA isCommunityInfoVisible={isCommunityInfoVisible} />
             </section>
 
-            {/***Community Info Text & Visible-Invisible Section */}
+            {/*** Community Info Text & Visible-Invisible Section */}
             <CommunityInfo setIsCommunityInfoVisible={setIsCommunityInfoVisible} />
 
             {/*Scroll Trigger - Loop Slide Section */}

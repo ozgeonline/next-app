@@ -1,124 +1,83 @@
 "use client";
 
-import React, { useRef, useEffect, useCallback, useState } from "react";
+import React, { useRef } from "react";
 import { BreakpointSettings } from "@/components/settings/breakpoint/BreakpointSettings";
-import styles from "./slider.module.css";
+import styles from "./infinite-slide-loop.module.css";
 import Image from "next/image";
 
 interface InfiniteSlideLoopProps {
   images: Array<{ image: React.ReactNode | string; alt?: string; title?: string }>;
   className?: string;
+  itemsWrapperClassName?: string;
   slideTitleStyles?: string;
 }
-export default function InfiniteSlideLoop({images, className, slideTitleStyles}: InfiniteSlideLoopProps) {
+
+export default function InfiniteSlideLoop({ images, className, itemsWrapperClassName, slideTitleStyles }: InfiniteSlideLoopProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const sliderContainerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number | null>(null);
+
+  // Custom hook to get dynamic width per breakpoint
   const { sliderWidth, itemsPerView } = BreakpointSettings(sliderRef);
-  const [movedItems, setMovedItems] = useState(0);
 
-  // useEffect(() => {
-  //   if (sliderRef.current) {
-  //       console.log("sliderWidth:", sliderWidth, "itemsPerView:", itemsPerView, "movedItems:", movedItems);
-  //   }
-  // }, [sliderWidth]);
+  // Fallback to 0 if we haven't mounted or calculated width yet
+  const itemWidth = sliderWidth > 0 && itemsPerView > 0 ? sliderWidth / itemsPerView : 0;
 
-  const speed = 1;
-  //const speed = 0;
-  const buffer = Math.ceil(speed) + 4;
-  const displayItems = [
-    ...images,
-    ...images.slice(0, Math.max(0, itemsPerView + buffer - images.length)),
-  ];
+  // Custom scroll speed: seconds per original image item
+  const SECONDS_PER_IMAGE = 4;
+  const loopDuration = images.length * SECONDS_PER_IMAGE;
 
-  const animate = useCallback(() => {
-    if (!sliderContainerRef.current || !sliderRef.current) return;
+  // Protect against zero division and calculate the precise width of exactly 1 original group
+  const safeImagesLength = Math.max(1, images.length);
+  const groupWidth = safeImagesLength * itemWidth;
 
-    const container = sliderContainerRef.current;
-    const itemWidth = sliderWidth / itemsPerView;
-
-    const computed = getComputedStyle(container).transform;
-    const parsed =
-      computed === "none"
-        ? 0
-        : parseFloat(
-            (computed.match(/matrix.*\((.+)\)/)?.[1]?.split(",")[4] ?? "0").trim()
-          );
-    //console.log("parsed:", parsed);
-
-    let newTransform = parsed - speed;
-    container.style.transform = `translateX(${newTransform}px)`;
-
-    if (Math.abs(newTransform) >= itemWidth) {
-      const firstItem = container.firstElementChild;
-      if (firstItem) {
-        container.insertAdjacentElement("beforeend", firstItem);
-        if (movedItems + 1 > images.length-1) {
-          newTransform = 0;
-          setMovedItems(0);
-        } else {
-              newTransform = newTransform + itemWidth;
-          setMovedItems((prev) => prev + 1);
-        }
-        container.style.transform = `translateX(${newTransform}px)`;
-      }
-    }
-
-    animationRef.current = requestAnimationFrame(animate);
-  }, [sliderWidth, itemsPerView, movedItems]);
-
-  useEffect(() => {
-    setMovedItems(0);
-    if (sliderContainerRef.current) {
-      sliderContainerRef.current.style.transform = `translateX(0px)`;
-    }
-
-    animationRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [animate, sliderWidth, itemsPerView]);
+  // Matematiksel olarak ekranı doldurmak ve mükemmel döngü sağlamak için gereken kopya sayısı
+  const visibleFraction = itemsPerView / safeImagesLength;
+  const clonesNeeded = Math.max(2, Math.ceil(visibleFraction) + 1);
 
   return (
     <div className={styles.sliderWrapper} ref={sliderRef}>
       <div
-        className={styles.slider}
-        ref={sliderContainerRef}
-        style={{ width: sliderWidth > 0 ? `${sliderWidth}px` : "100%" }}
+        className={styles.track}
+        style={{
+          // Pass the exact group width to CSS for the `@keyframes` animation
+          "--group-width": `${groupWidth}px`,
+          animationDuration: `${loopDuration}s`
+        } as React.CSSProperties}
       >
-        {displayItems.map((item, index) => {
-          const isComponent = React.isValidElement(item.image);
+        {/* We only render once itemWidth is correctly calculated */}
+        {itemWidth > 0 && [...Array(clonesNeeded)].map((_, groupIndex) => (
+          <div key={groupIndex} className={styles.slideGroup}>
+            {images.map((item, index) => {
+              const isComponent = React.isValidElement(item.image);
 
-          return (
-            <div key={index} className={styles.containerItems}>
-              <div
-                className={styles.itemsWrapper}
-                style={{ width: `${sliderWidth / itemsPerView}px` }}
-              >
-                <div className={styles.item + " " + className}>
-                  {isComponent ? (
-                    item.image
-                  ) : (
-                    <Image
-                      src={item.image as string}
-                      alt={item.alt ?? ""}
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      loading="eager"
-                    />
-                  )}
+              return (
+                <div key={`${groupIndex}-${index}`} className={styles.containerItems}>
+                  <div
+                    className={`${styles.itemsWrapper} ${itemsWrapperClassName || ""}`}
+                    style={{ width: `${itemWidth}px` }}
+                  >
+                    <div className={`${styles.item} ${className || ""}`}>
+                      {isComponent ? (
+                        item.image
+                      ) : (
+                        <Image
+                          src={item.image as string}
+                          alt={item.alt ?? ""}
+                          width={0}
+                          height={0}
+                          sizes="100%"
+                          loading="eager"
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <p className={slideTitleStyles}>
+                    {item?.title}
+                  </p>
                 </div>
-              </div>
-              <p className={slideTitleStyles}>
-                {item?.title}
-              </p>
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+        ))}
       </div>
     </div>
   );

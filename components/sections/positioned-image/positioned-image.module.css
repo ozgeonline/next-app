@@ -130,9 +130,9 @@
 }
 
 .imageContent h1 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Kaushan Script', cursive;
   letter-spacing: 0.15rem;
   text-transform: uppercase;
   background: linear-gradient(90deg, #ffffc2, #d3b15f);
@@ -147,17 +147,9 @@
   color: #f4f6f7;
 }
 
-.imageContent p {
-  text-align: justify;
-  font-style: italic;
-  text-shadow: 0 0 0.5rem var(--text);
-  color: #f4f6f7;
-  transition: all 1s ease-out;
-}
-
 .imageContent h1,
 .imageContent h2 {
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -178,16 +170,21 @@
     height: 40vh;
   }
 
+  .imageContent h1 {
+    font-size: 1.75rem;
+  }
+
   .imageContent h2 {
     text-shadow: none;
   }
 
   [data-theme="light"] .imageContent h2 {
-    color: #21252990 ! important;
+    color: var(--shark-900) !important;
+    opacity: 0.9;
   }
 
   [data-theme="light"] .imageContent h1 {
-    background: var(--shark-500);
+    background: var(--monza-700);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

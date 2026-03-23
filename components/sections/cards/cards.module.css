@@ -1,9 +1,13 @@
-.animateInRight { animation: animateInRight 1s ease-out forwards; }
+.animateInRight {
+  animation: animateInRight 1s ease-out forwards;
+}
+
 @keyframes animateInRight {
   from {
     opacity: 0;
     transform: translateX(20%);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -17,6 +21,7 @@
   justify-content: center;
   height: 70vh;
   opacity: 0;
+  margin-top: 4rem;
 }
 
 .cards {
@@ -65,9 +70,12 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .cardTextLeft p { font-size: medium;}
-  .cardTextLeft h2 { 
-    font-size: 1.5rem; 
+  .cardTextLeft p {
+    font-size: medium;
+  }
+
+  .cardTextLeft h2 {
+    font-size: 1.5rem;
     margin-bottom: .5rem;
     padding: 1rem 0;
   }
@@ -100,7 +108,7 @@
   color: var(--pale-prim-900);
 }
 
-.learnMoreLeft:hover a{
+.learnMoreLeft:hover a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -111,14 +119,18 @@
   from {
     transform: translateX(0);
   }
+
   to {
-    transform: translateX(-5px); /* Yazıyı sola kaydır */
+    transform: translateX(-5px);
+    /* Yazıyı sola kaydır */
   }
 }
 
-.arrow { display: none;}
+.arrow {
+  display: none;
+}
 
-.learnMoreLeft:hover .arrow { 
+.learnMoreLeft:hover .arrow {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -138,10 +150,10 @@
   stroke-width: 1;
   filter: brightness(0.8);
   transform: scale(0.7);
-  transition: bottom 0.5s ease-out, right 0.5s ease-out, filter 0.5s ease-out, transform 0.5s ease-out; 
+  transition: bottom 0.5s ease-out, right 0.5s ease-out, filter 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.card:hover .sun{
+.card:hover .sun {
   bottom: 20%;
   right: 10%;
   filter: brightness(1);
@@ -171,7 +183,7 @@
   color: var(--text);
 }
 
-.card:hover .cardClick{
+.card:hover .cardClick {
   display: none;
 }
 
@@ -179,7 +191,7 @@
   padding-left: .5rem;
 }
 
-.card:hover img{
+.card:hover img {
   filter: brightness(0.3);
   cursor: pointer;
 }
@@ -202,8 +214,8 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .card .cardText { 
-    padding: 2rem; 
+  .card .cardText {
+    padding: 2rem;
     top: 10%;
   }
 }
@@ -223,8 +235,8 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .cardText h2 { 
-    font-size: 1.5rem; 
+  .cardText h2 {
+    font-size: 1.5rem;
     margin-bottom: .5rem;
   }
 }
@@ -234,8 +246,10 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .cardText p { font-size: medium;}
-  
+  .cardText p {
+    font-size: medium;
+  }
+
 }
 
 .cardText .learnMore {
@@ -276,7 +290,7 @@
     margin-inline: 2rem;
     height: 90%;
   }
-  
+
   .card .cardText {
     left: 0;
     bottom: 0;
@@ -298,7 +312,8 @@
     height: 50%;
     width: 100%;
   }
-  .card:hover .sun{
+
+  .card:hover .sun {
     bottom: 15%;
     right: 5%;
   }

@@ -1,9 +1,13 @@
-.animateInBottom { animation: animateInBottom 1s ease-out forwards; }
+.animateInBottom {
+  animation: animateInBottom 1s ease-out forwards;
+}
+
 @keyframes animateInBottom {
   from {
     opacity: 0;
     transform: translateY(20%);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -25,11 +29,10 @@
   background: var(--background-high);
   color: var(--text);
   border-radius: 8px;
-  opacity: 0;
 }
 
 [data-theme="dark"] .communityInvite {
-  border: 1px solid #be8c3c80;
+  border: 1px solid #ffffc250;
 }
 
 .communityInvite .inviteText {
@@ -48,6 +51,10 @@
   width: 90%;
   position: relative;
   overflow: hidden;
+}
+
+.communityInvite .actionButtons a:active {
+  color: var(--text);
 }
 
 .communityInvite .actionButtons a {
@@ -70,22 +77,17 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, var(--science-blue-900), var(--science-blue-600));
+  background: linear-gradient(90deg, var(--shark-950), var(--shark-500));
   box-sizing: border-box;
   overflow: hidden;
   transition: .5s;
   z-index: -1;
 }
 
-[data-theme="dark"] .communityInvite .actionButtons a:nth-child(1)::before {
-   background:linear-gradient(90deg, #d3b15f, #be8c3c);
-   color: var(--background);
-}
-
 .communityInvite .actionButtons a:nth-child(1) {
   background: transparent;
-  color: var(--science-blue-900);
-  border: 1px solid var(--science-blue-900);
+  color: var(--shark-950);
+  border: 1px solid var(--shark-500);
   margin-bottom: 0.5rem;
   position: relative;
   overflow: hidden;
@@ -93,40 +95,47 @@
   z-index: 1;
 }
 
-[data-theme="dark"] .communityInvite .actionButtons a:nth-child(1) {
-  border: 1px solid #d3b15f50;
-  color: var(--pale-prim-900);
-}
-
 .communityInvite .actionButtons a:nth-child(1):hover::before {
   right: 0;
 }
 
 .communityInvite .actionButtons a:nth-child(1):hover {
-  color: #f4f4f9;
+  color: var(--shark-50);
+  font-weight: 600;
   overflow: hidden;
   box-sizing: border-box;
 }
 
 .communityInvite .actionButtons a:nth-child(2) {
-  background: linear-gradient(90deg, var(--science-blue-900), var(--science-blue-700));
+  background: linear-gradient(90deg, var(--shark-950), var(--shark-500));
   color: #f4f4f9;
-}
-
-[data-theme="dark"] .communityInvite .actionButtons a:nth-child(2) {
-  background:linear-gradient(90deg, #d3b15f, #be8c3c);
+  font-weight: 600;
 }
 
 .communityInvite .actionButtons a:nth-child(2):hover {
   filter: brightness(1.1);
 }
 
-.communityInvite .actionButtons a:active {
-  color: var(--text);
+/* Dark Theme Styles */
+
+[data-theme="dark"] .communityInvite .actionButtons a:nth-child(1)::before {
+  background: var(--pale-prim-900);
+}
+
+[data-theme="dark"] .communityInvite .actionButtons a:nth-child(1) {
+  border: solid thin var(--pale-prim-900);
+  opacity: 0.7;
+  color: var(--pale-prim-900);
+}
+
+[data-theme="dark"] .communityInvite .actionButtons a:nth-child(2) {
+  background: var(--pale-prim-900);
+  color: var(--shark-50);
+  opacity: 0.7;
 }
 
 @media screen and (min-width: 640px) {
- .communityInvite .actionButtons {
+  .communityInvite .actionButtons {
     flex-direction: row;
     margin-top: 0.7rem;
   }
@@ -149,6 +158,6 @@
 @media screen and (min-width: 1024px) {
   .communityInvite {
     width: 50%;
-     margin-top: 3rem;
+    margin-top: 3rem;
   }
 }

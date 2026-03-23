@@ -34,6 +34,7 @@ export default function LoopSlideSection({
         <InfiniteSlideLoop
           images={infoImages}
           className={isCommunityInfoVisible ? styles.infiniteSlideLoop : styles.infiniteSlideLoopDefault}
+          itemsWrapperClassName={isCommunityInfoVisible ? styles.itemsWrapperVisible : styles.itemsWrapperHidden}
           slideTitleStyles={isCommunityInfoVisible ? styles.slideTitle : styles.slideTitleDefault}
         />
       </AnimatedOnScroll>
