@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import  { images } from "../slideshow-items";
+import { images } from "../slideshow-items";
 import Image from 'next/image';
 import styles from './image-slideshow.module.css';
 export default function ImageSlideshow() {

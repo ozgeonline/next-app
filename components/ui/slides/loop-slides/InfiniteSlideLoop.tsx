@@ -12,7 +12,12 @@ interface InfiniteSlideLoopProps {
   slideTitleStyles?: string;
 }
 
-export default function InfiniteSlideLoop({ images, className, itemsWrapperClassName, slideTitleStyles }: InfiniteSlideLoopProps) {
+export default function InfiniteSlideLoop({
+  images,
+  className,
+  itemsWrapperClassName,
+  slideTitleStyles
+}: InfiniteSlideLoopProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   // Custom hook to get dynamic width per breakpoint
@@ -29,7 +34,7 @@ export default function InfiniteSlideLoop({ images, className, itemsWrapperClass
   const safeImagesLength = Math.max(1, images.length);
   const groupWidth = safeImagesLength * itemWidth;
 
-  // Matematiksel olarak ekranı doldurmak ve mükemmel döngü sağlamak için gereken kopya sayısı
+  // Calculating the number of clone copies
   const visibleFraction = itemsPerView / safeImagesLength;
   const clonesNeeded = Math.max(2, Math.ceil(visibleFraction) + 1);
 

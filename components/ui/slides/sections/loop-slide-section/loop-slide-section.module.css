@@ -1,0 +1,210 @@
+/* ---------------------------------
+   Animations 
+----------------------------------- */
+.animateInRight {
+  animation: animateInRight 1s ease-out forwards;
+}
+
+@keyframes animateInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* ---------------------------------
+   Main Wrappers and Layout
+----------------------------------- */
+.sectionWrapper {
+  height: 30vh;
+}
+
+.contentContainer {
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  transition: all 0.5s ease-out;
+  padding: 1rem 0;
+}
+
+@media screen and (min-width: 768px) {
+  .contentContainer {
+    padding: 2rem 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .contentContainer {
+    padding: 3rem 0 1rem;
+  }
+}
+
+
+/* ---------------------------------
+   Section Title 
+----------------------------------- */
+/* Semantic BEM: Base Class */
+.sectionTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 90%;
+  height: 1rem;
+  margin-top: 4rem;
+  /* Default closed state margin */
+  transition: margin-top 0.3s ease;
+}
+
+@media screen and (min-width: 640px) {
+  .sectionTitle {
+    margin-top: 3rem;
+  }
+}
+
+/* Semantic BEM: Active Modifier */
+.sectionTitleActive {
+  margin-top: 1.2rem;
+}
+
+/* Base Title Text Style */
+.titleText {
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  padding: 0.7rem;
+  text-align: center;
+
+  /* Default Solid Color */
+  background: #212529;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .titleText {
+    font-size: 1.3rem;
+  }
+}
+
+/* Reusable gradient applied on Active state or Dark theme */
+.sectionTitleActive .titleText,
+[data-theme="dark"] .titleText {
+  background-image: repeating-linear-gradient(to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%, #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%);
+  background-size: 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+/* ---------------------------------
+   Slider Card Containers 
+----------------------------------- */
+.sliderCard {
+  color: var(--shark-500);
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.sliderCard svg {
+  stroke-width: 1;
+}
+
+/* Active State Modifier */
+.sliderCardActive {
+  width: 4rem;
+  height: 2rem;
+  border-radius: 44% 56% 51% 49% / 0% 100% 0% 100%;
+  padding: 0.5em;
+  margin-top: 1rem;
+  color: #faf0a0;
+}
+
+.sliderCardActive::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: transparent;
+  border: 2px solid #faf0a080;
+  border-radius: 46% 58% 53% 51% / 0% 100% 0% 100%;
+  filter: opacity(.8);
+  z-index: -1;
+}
+
+@media screen and (min-width: 640px) {
+  .sliderCardActive {
+    width: 5rem;
+    height: 2.5rem;
+    margin-top: 0;
+  }
+}
+
+
+/* ---------------------------------
+   Slide Item Titles 
+----------------------------------- */
+.itemTitle {
+  color: var(--shark-700);
+  border-top: 2px solid var(--shark-700);
+  border-radius: 50%;
+  padding: 0.7em;
+  font-size: small;
+  letter-spacing: 0.1rem;
+  transition: all 0.3s ease;
+}
+
+@media screen and (min-width: 640px) {
+  .itemTitle {
+    font-size: medium;
+    margin-top: -1rem;
+  }
+}
+
+/* Active State Modifier */
+.itemTitleActive {
+  color: #faf0a0;
+  border: none;
+  padding: 0;
+}
+
+@media screen and (min-width: 640px) {
+  .itemTitleActive {
+    margin-top: 0;
+  }
+}
+
+
+/* ---------------------------------
+   Dynamic Padding Controls 
+----------------------------------- */
+.itemsWrapperHidden {
+  padding: 0;
+}
+
+@media screen and (min-width: 480px) {
+  .itemsWrapperVisible {
+    padding: 1rem 2rem;
+  }
+}

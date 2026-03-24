@@ -113,7 +113,7 @@
 }
 
 .communityInvite .actionButtons a:nth-child(2):hover {
-  filter: brightness(1.1);
+  filter: brightness(0.8);
 }
 
 /* Dark Theme Styles */
@@ -126,6 +126,10 @@
   border: solid thin var(--pale-prim-900);
   opacity: 0.7;
   color: var(--pale-prim-900);
+}
+
+[data-theme="dark"] .communityInvite .actionButtons a:nth-child(1):hover {
+  color: var(--shark-50);
 }
 
 [data-theme="dark"] .communityInvite .actionButtons a:nth-child(2) {

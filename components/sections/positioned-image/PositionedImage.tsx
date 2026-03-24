@@ -10,6 +10,7 @@ export default function PositionedImage({ isCommunityInfoVisible }: PositionedIm
   return (
     <div className={styles.imgWrapper}>
       <div className={`${isCommunityInfoVisible ? styles.fixedImage : styles.relativeImage} ${styles.defaultImage}`}>
+        <div className={styles.darkPlaceholder}></div>
         <Image
           src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDuHNl2syxsRZPv8rXjBlDd3LWgbnNHmSpeQwJ"
           alt="Cafe Background"

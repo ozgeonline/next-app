@@ -1,8 +1,8 @@
 import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
 import Link from "next/link";
-import { removeBGimages } from '@/components/slides/slideshow-items';
-import ImageSlideshow from "@/components/slides/slideShow/Image-slideshow";
-import InfiniteSlideLoop from "@/components/slides/loopSlides/InfiniteSlideLoop";
+import { removeBGimages } from '@/components/ui/slides/slideshow-items';
+import ImageSlideshow from "@/components/ui/slides/image-slideshow/ImageSlideshow";
+import InfiniteSlideLoop from "@/components/ui/slides/loop-slides/InfiniteSlideLoop";
 import styles from "./slide-section.module.css";
 import { MousePointerClick } from "lucide-react";
 import WavesBackground from "@/components/assets/wavesBackground/WavesBackground";
