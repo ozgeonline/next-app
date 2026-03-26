@@ -22,10 +22,13 @@
    Main Wrappers and Layout
 ----------------------------------- */
 .sectionWrapper {
+  position: relative;
+  z-index: 10;
   height: 30vh;
 }
 
 .contentContainer {
+  position: relative;
   z-index: 100;
   display: flex;
   flex-direction: column;

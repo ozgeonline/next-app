@@ -17,28 +17,18 @@ export default function AnimatedSections() {
               <h2 className="highlight-gradient-text">{title}</h2>
             </div>
 
-            <div
-              className={`
-                ${styles.definitionDefault} 
-                ${reverse ? styles.reverseDefinition : ""} 
-                ${reverse ? styles.reverseRowDefinition : ""}
-              `}
-            >
+            <div className={`${styles.definitionDefault} ${reverse ? `${styles.reverseDefinition} ${styles.reverseRowDefinition}` : ""}`}>
               {images && (
                 <AnimatedOnScroll
                   animationClass={styles.animateinView}
-                  className={`
-                    ${styles.definitionImage} 
-                    ${styles.imageVisible}
-                  `}
+                  className={`${styles.definitionImage} ${styles.imageVisible}`}
                 >
                   <Image
                     className={styles.imageFirst}
                     src={images.src1}
                     alt={images.alt}
-                    loading="eager"
-                    quality={100}
                     sizes="100%"
+                    quality={90}
                     width={50}
                     height={150}
                   />
@@ -46,9 +36,8 @@ export default function AnimatedSections() {
                     className={styles.imageSecond}
                     src={images.src2}
                     alt={images.alt}
-                    loading="eager"
-                    quality={100}
                     sizes="100%"
+                    quality={90}
                     width={50}
                     height={150}
                   />

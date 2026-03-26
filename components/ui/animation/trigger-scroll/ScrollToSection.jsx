@@ -4,12 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function ScrollToSection({ children, isVisible, setIsVisible, className }) {
   const sectionRef = useRef(null);
+
+  // Keep track of scroll direction without triggering React re-renders
   const lastScrollY = useRef(0);
   const scrollingDown = useRef(false);
   const [hasScrolled, setHasScrolled] = useState(false);
-  //console.log("scrollingDown", scrollingDown);
 
-  //visibility & reset hasScrolled
+  // Manage intersection visibility and reset scrolling lock
   useEffect(() => {
     if (typeof window === 'undefined' || !sectionRef.current) return;
 
@@ -17,15 +18,17 @@ export default function ScrollToSection({ children, isVisible, setIsVisible, cla
       ([entry]) => {
         const { isIntersecting, boundingClientRect: rect, rootBounds } = entry;
 
+        // Reset the scroll lock when we scroll back up out of the section
         if (
-          !isIntersecting && 
-          !scrollingDown.current && 
-          rootBounds && 
+          !isIntersecting &&
+          !scrollingDown.current &&
+          rootBounds &&
           rect.bottom > rootBounds.height
         ) {
-          //console.log('Resetting hasScrolled');
           setHasScrolled(false);
         }
+
+        // Notify parent of visibility changes safely
         setIsVisible(isIntersecting);
       },
       {
@@ -36,37 +39,60 @@ export default function ScrollToSection({ children, isVisible, setIsVisible, cla
     );
 
     observer.observe(sectionRef.current);
+
     return () => observer.disconnect();
   }, [setIsVisible]);
 
-  //scroll direction
+  // High-performance scroll direction listener
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const handleScroll = () => {
+    let ticking = false;
+
+    // The actual calculation happens here asynchronously
+    const updateScrollDir = () => {
       const currentScrollY = window.scrollY;
       scrollingDown.current = currentScrollY > lastScrollY.current;
       lastScrollY.current = currentScrollY;
+      ticking = false;
     };
 
+    // The event listener only requests an animation frame if one isn't already queued.
+    // This entirely removes the heavy CPU usage.
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollDir);
+        ticking = true;
+      }
+    };
+
+    // Initialize the starting position
     lastScrollY.current = window.scrollY;
-    window.addEventListener('scroll', handleScroll);
+
+    // Use { passive: true } to tell the browser this listener won't cancel scroll physics (mobile friendly)
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  //trigger scroll
+  // Trigger smooth scroll into view
   useEffect(() => {
+    // Only hijack the scroll if we are scrolling down towards it
+    // and it hasn't been triggered yet.
     if (
       !isVisible &&
       sectionRef.current &&
       scrollingDown.current &&
-      !hasScrolled 
+      !hasScrolled
     ) {
-      //console.log('Triggering scrollIntoView');
       sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setHasScrolled(true);
     }
   }, [isVisible, hasScrolled]);
 
-  return <div className={className} style={{zIndex: 1}} ref={sectionRef}>{children}</div>;
+  return (
+    <div className={className} style={{ zIndex: 1 }} ref={sectionRef}>
+      {children}
+    </div>
+  );
 }

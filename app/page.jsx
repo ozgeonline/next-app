@@ -67,6 +67,7 @@ export default function Home() {
                 style={{ position: 'relative', width: '100%', paddingBottom: '5rem' }}
                 className="animatedSections mainBackground"
               >
+                <WavesBackground />
                 <AnimatedSections />
               </div>
             </section>
