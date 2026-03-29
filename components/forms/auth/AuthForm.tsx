@@ -3,19 +3,18 @@
 import { useState, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/context/auth/AuthProvider";
+import { loginAction, signupAction } from "@/lib/actions/auth";
 import Link from 'next/link';
 import styles from "./auth-form.module.css";
 
 interface FormData {
   formType: "login" | "signup";
   referencePath: string;
-  fetchApiPath: string;
   nonTokenPath?: string;
 }
 
 export default function AuthForm({
   formType,
-  fetchApiPath,
   nonTokenPath,
   referencePath,
 }: FormData) {
@@ -32,41 +31,24 @@ export default function AuthForm({
     setError("");
 
     try {
-      const payload =
-        formType === "login"
-          ? { email: formData.email, password: formData.password }
-          : formData;
-      //console.log("AuthForm: Sending POST to", `/api/auth/${fetchApiPath}`, payload);
+      const result = formType === "login"
+        ? await loginAction(formData.email, formData.password)
+        : await signupAction(formData.name, formData.email, formData.password);
 
-      const res = await fetch(`/api/auth/${fetchApiPath}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-      //console.log("AuthForm: API response:", data);
-
-      if (res.ok) {
+      if (result.success) {
         window.dispatchEvent(new CustomEvent("authChange", { detail: { isLogout: false } }));
-        //console.log("AuthForm: Redirecting to", nonTokenPath || "/profile");
         mutateUser();
         router.push(nonTokenPath || "/profile");
       } else {
-        const errorMsg = data.error?.toLowerCase() || "";
-
-        if (formType === "signup" && errorMsg.includes("already in use")) {
-          router.push("/login");
-        } else if (formType === "login" && errorMsg.includes("user not found")) {
-          router.push("/signup");
+        if (result.redirectTo) {
+          router.push(result.redirectTo);
         } else {
-          setError(data.error || `${formType === "signup" ? "Signup" : "Login"} failed`);
+          setError(result.error || `${formType === "signup" ? "Signup" : "Login"} failed`);
         }
       }
-    } catch (err: any) {
-      //console.error("AuthForm: Submit error:", err);
-      setError(err.message || "An error occurred");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "An error occurred";
+      setError(message);
     } finally {
       setIsSubmitting(false);
       setTouchedFields({});
