@@ -20,7 +20,7 @@ export default function AuthForm({
   referencePath,
 }: FormData) {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
-  const [isTouched, setIsTouched] = useState<boolean>(false);
+  const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const { loading, mutateUser } = useAuth();
@@ -69,7 +69,7 @@ export default function AuthForm({
       setError(err.message || "An error occurred");
     } finally {
       setIsSubmitting(false);
-      setIsTouched(false);
+      setTouchedFields({});
     }
   };
   const validateEmail = useCallback((email: string): boolean => {
@@ -83,9 +83,9 @@ export default function AuthForm({
     ? emailIsValid && formData.password.length >= 6
     : emailIsValid && formData.name.length >= 2 && formData.password.length >= 6;
 
-  const getInputClassName = (isValid: boolean, value: string) => {
+  const getInputClassName = (fieldName: string, isValid: boolean, value: string) => {
     if (value && isValid) return styles.validValueColor;
-    if ((!value || !isValid) && isTouched) return styles.invalidValueColor;
+    if ((!value || !isValid) && touchedFields[fieldName]) return styles.invalidValueColor;
     return styles.defaultValueColor;
   };
 
@@ -143,12 +143,12 @@ export default function AuthForm({
                     placeholder={field.placeholder}
                     autoComplete={field.autoComplete}
                     onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
-                    onBlur={() => setIsTouched(true)}
+                    onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
                     required
-                    className={getInputClassName(field.isValid, formData[field.name as keyof typeof formData])}
+                    className={getInputClassName(field.name, field.isValid, formData[field.name as keyof typeof formData])}
                   />
                   <span className={styles.error}>
-                    {!field.isValid && isTouched && field.errorMessage}
+                    {!field.isValid && touchedFields[field.name] && field.errorMessage}
                   </span>
                 </div>
               )
@@ -166,7 +166,13 @@ export default function AuthForm({
                   : "Sign Up"
               }
             </button>
-            <h3>Already have an account?</h3>
+            <h3>
+              {formType === "login"
+                ? "Don't have an account?"
+                : "Already have an account?"
+              }
+            </h3>
+
             <Link
               href={referencePath}
               className={styles.referencePath}

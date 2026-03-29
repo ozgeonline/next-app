@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import connect from "@/lib/db";
 import User from "@/app/models/User";
 import jwt from "jsonwebtoken";
-import { getAuthCookieOptions } from "@/lib/authHelpers";
+import { getAuthCookieOptions } from "@/lib/auth";
 
 export async function POST(req: Request) {
   try {
