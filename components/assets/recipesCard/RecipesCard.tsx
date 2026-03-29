@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { cache } from "react";
 import connect from "@/lib/db";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import Meal from "@/app/models/Meal";
@@ -9,21 +10,19 @@ import { Star, StarHalf } from "lucide-react";
 
 interface RecipesCardProps {
   spotlight: boolean;
-  // Dışarıdan meals almaya gerek kalmadı, bileşen kendi çekecek
 }
 
-// 1. ADIM: Yardımcı Fonksiyon - Veriyi En Performanslı Şekilde Çekme (Aggregation)
-async function getTopRecipes() {
+// High Performance Data Fetching with Aggregation (for N+1 problem)
+const getTopRecipes = cache(async () => {
   await connect();
 
-  // N+1 problemini çözen mucize: Aggregation Pipeline
-  // Tek bir sorgu ile hem son 5 yemeği alır hem de Rating tablosuyla birleştirip ortalamasını hesaplar.
+  // Solving the N+1 query problem using an aggregation pipeline.
   const mealsData = await Meal.aggregate([
     { $sort: { createdAt: -1 } },
-    { $limit: 5 }, // Sadece 5 tane çek. (Yüzlerce çekip slice yapmaktan kurtulduk)
+    { $limit: 5 },
     {
       $lookup: {
-        from: "ratings", // Rating modelinin MongoDB'deki collection adı (genelde küçük harf ve çoğuldur)
+        from: "ratings",
         localField: "_id",
         foreignField: "mealId",
         as: "mealRatings"
@@ -43,20 +42,19 @@ async function getTopRecipes() {
     }
   ]);
 
-  // MongoDB'den dönen veriyi React'in seveceği temiz bir formata dönüştürüyoruz
   return mealsData.map(meal => ({
     id: meal._id.toString(),
     title: meal.title || "Untitled Meal",
     slug: meal.slug || meal._id.toString(),
-    image: meal.image || null, // Boş string yerine direkt null check
+    image: meal.image || null,
     summary: meal.summary || "No summary available",
     creator: meal.creator || "Unknown",
-    averageRating: meal.averageRating || 0, // Eğer rating yoksa 0 ata
+    averageRating: meal.averageRating || 0,
     ratingCount: meal.ratingCount || 0,
   }));
-}
+});
 
-// 2. ADIM: Yardımcı Fonksiyon - Yıldızları Çizme
+// Star Rating Generator
 const renderStars = (averageRating: number) => {
   const stars = [];
   const fullStars = Math.floor(averageRating);
@@ -77,9 +75,7 @@ const renderStars = (averageRating: number) => {
   return stars;
 };
 
-// 3. ADIM: Ana Bileşen - Sadece Arayüze Odaklanır
 export default async function RecipesCard({ spotlight }: RecipesCardProps) {
-  // Veriyi ve kullanıcıyı paralel olarak çekeriz (Daha hızlı yükleme)
   const [transformedMeals, user] = await Promise.all([
     getTopRecipes(),
     getUserFromCookies()
@@ -95,10 +91,13 @@ export default async function RecipesCard({ spotlight }: RecipesCardProps) {
             <div className={styles["recipe-card"]}>
               <div className={spotlight ? styles["spotlight-image"] : styles["recipe-image"]}>
                 <Image
-                  src={meal.image || "/images/placeholder.jpg"} // Eğer resim yoksa patlamamasini saglar
+                  src={meal.image || "/logo.png"}
                   alt={meal.title}
-                  fill // width={0} vb uğraşmak yerine modern yöntem
+                  width={100}
+                  height={100}
                   sizes="(max-width: 768px) 100vw, 33vw"
+                  quality={90}
+                  priority={spotlight}
                   className={styles["image-inner"]}
                   style={{ objectFit: 'cover' }}
                 />

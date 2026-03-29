@@ -7,13 +7,6 @@
   overflow: hidden;
 }
 
-@media screen and (min-width: 640px) {
-  /* .container {
-    margin: 1rem;
-  }
-   */
-}
-
 .card {
   position: relative;
   display: flex;
@@ -34,6 +27,7 @@
   overflow: hidden;
 }
 
+/* Non-spotlight: image fills the entire card */
 .recipe-image {
   position: relative;
   width: 100%;
@@ -53,8 +47,8 @@
   position: absolute;
   inset: 0;
   backdrop-filter: brightness(0.6);
-  display: flex;  
-  align-items: center;  
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -79,6 +73,7 @@
   object-position: top;
 }
 
+/* Spotlight: image fills top half, overlay fills bottom half */
 .spotlight-image {
   position: relative;
   width: 100%;
@@ -128,7 +123,9 @@
   background: var(--shark-950);
 }
 
-.spotlight-info .spotlight-button:hover { filter: brightness(1.1);}
+.spotlight-info .spotlight-button:hover {
+  filter: brightness(1.1);
+}
 
 .spotlight-info p {
   font-size: 0.9rem;
@@ -155,6 +152,7 @@
   justify-content: center;
   height: 100%;
 }
+
 .ratingCount {
   display: flex;
   justify-content: center;

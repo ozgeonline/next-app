@@ -11,61 +11,6 @@ export const metadata = {
   keywords: "Meals Share, food, recipes, community"
 };
 
-function NoMeals() {
-  return (
-    <p className={styles.error}>
-      No meals available. Please try again later or create your own recipe.
-    </p>
-  );
-}
-
-async function LatestMealsList() {
-  const meals = await getData();
-  return (
-    <>
-      {meals.length === 0 ? (
-        <NoMeals />
-      ) : (
-        <div className="grid-cols-2-to-5">
-          <RecipesCard meals={meals} />
-        </div>
-      )}
-    </>
-  )
-}
-
-async function SpotlightMealsList() {
-  const meals = await getData();
-  return (
-    <>
-      {meals.length === 0 ? (
-        <NoMeals />
-      ) : (
-        <div className="grid-cols-1-to-5">
-          <RecipesCard meals={meals} spotlight={true} />
-        </div>
-      )}
-    </>
-  )
-}
-
-async function getData() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meals/meal`, {
-      cache: 'no-cache',
-    });
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
-    }
-
-    return res.json();
-  } catch (error) {
-    console.error('Error fetching meals:', error);
-    return [];
-  }
-};
-
 export default function CommunityPage() {
   return (
     <div className={styles.container + ' ' + "mainBackground"}>
@@ -79,12 +24,12 @@ export default function CommunityPage() {
 
       <main className={styles.main}>
         <section className={styles.section}>
-          <h2
-            className={styles['section-title']}
-          >
+          <h2 className={styles['section-title']}>
             Latest Recipes
           </h2>
-          <LatestMealsList />
+          <div className="grid-cols-2-to-5">
+            <RecipesCard spotlight={false} />
+          </div>
         </section>
 
         <div className={styles.meals}>
@@ -93,12 +38,12 @@ export default function CommunityPage() {
         </div>
 
         <section className={styles.section}>
-          <h2
-            className={styles['section-title']}
-          >
+          <h2 className={styles['section-title']}>
             User Spotlights
           </h2>
-          <SpotlightMealsList />
+          <div className="grid-cols-1-to-5">
+            <RecipesCard spotlight={true} />
+          </div>
         </section>
       </main>
     </div>
