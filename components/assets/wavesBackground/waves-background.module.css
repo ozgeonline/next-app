@@ -15,13 +15,12 @@
   fill: none;
   stroke: var(--background) !important;
   stroke-width: 0.15;
-  /* Bu değer çok önemli! */
   opacity: 0.4;
 }
 
 :global([data-theme='dark']) .wavesSvg {
-  stroke: var(--shark-300) !important;
-  opacity: 0.2 !important;
+  stroke: var(--pale-prim-900) !important;
+  opacity: 0.1 !important;
 }
 
 .waveGroup1 {

@@ -66,7 +66,7 @@ export function AuthProvider({
         credentials: "include"
       });
     } catch (error) {
-      console.error("provider logout API not working:", error);
+      console.error("AuthProvider: Failed to fetch authentication data:", error);
     } finally {
       contextMutateUser(null);
     }
@@ -78,15 +78,7 @@ export function AuthProvider({
         user: user ?? null,
         isAuthenticated: !!user,
         loading: isLoading,
-        mutateUser: (newUser?: ClientUser | null) => {
-          if (newUser === null) {
-            mutate(null, false);
-          } else if (newUser) {
-            mutate(newUser, false);
-          } else {
-            mutate();
-          }
-        },
+        mutateUser: contextMutateUser,
         logout: handleLogout
       }}
     >

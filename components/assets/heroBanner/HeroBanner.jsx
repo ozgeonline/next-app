@@ -24,41 +24,27 @@ export default function HeroBanner({
   socialLocation
 }) {
   const [loaded, setLoaded] = useState(false);
-  const imageRef = useRef(null);
+  const [scale, setScale] = useState(1);
+  const [brightness, setBrightness] = useState(SCROLL_CONFIG.maxBrightness);
   const rafId = useRef(null);
 
   useEffect(() => {
-    // Provide an initial calculation immediately on component mount
     const handleScroll = () => {
       if (rafId.current) return;
 
       rafId.current = requestAnimationFrame(() => {
         const scrollY = window.scrollY;
-        const {
-          maxScroll,
-          maxScale,
-          minScale,
-          maxBrightness,
-          minBrightness
-        } = SCROLL_CONFIG;
+        const { maxScroll, maxScale, minScale, maxBrightness, minBrightness } = SCROLL_CONFIG;
 
-        // scrollY is constrained to a ratio between 0 and 1
         const scrollProgress = Math.min(scrollY / maxScroll, 1);
-        const newScale = minScale + (maxScale - minScale) * scrollProgress;
-        const newBrightness = maxBrightness - (maxBrightness - minBrightness) * scrollProgress;
-
-        if (imageRef.current) {
-          imageRef.current.style.transform = `scale(${newScale})`;
-          imageRef.current.style.filter = `brightness(${newBrightness})`;
-        }
+        setScale(minScale + (maxScale - minScale) * scrollProgress);
+        setBrightness(maxBrightness - (maxBrightness - minBrightness) * scrollProgress);
 
         rafId.current = null;
       });
     };
 
-    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (rafId.current) cancelAnimationFrame(rafId.current);
@@ -72,15 +58,15 @@ export default function HeroBanner({
     >
       <div className={styles.backgroundWrapper}>
         <Image
-          ref={imageRef}
           src={srcImage}
           alt={introductionTitle || "Hero Background"}
           className={styles.mainBackground}
           style={{
+            transform: `scale(${scale})`,
+            filter: `brightness(${brightness})`,
             objectFit: 'cover',
             width: '100%',
-            height: '100%',
-            willChange: 'transform, filter'
+            height: '100%'
           }}
           width={0}
           height={0}
