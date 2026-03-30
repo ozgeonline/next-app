@@ -70,6 +70,3 @@ A Next.js application for sharing and discovering delicious recipes. This platfo
 - `models/`: Mongoose data models.
 - `context/`: React Context providers (Auth, Theme).
 
-## License
-
-This project is licensed under the MIT License.
