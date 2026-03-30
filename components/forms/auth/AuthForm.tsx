@@ -10,12 +10,12 @@ import styles from "./auth-form.module.css";
 interface FormData {
   formType: "login" | "signup";
   referencePath: string;
-  nonTokenPath?: string;
+  redirectTo?: string;
 }
 
 export default function AuthForm({
   formType,
-  nonTokenPath,
+  redirectTo = "/profile",
   referencePath,
 }: FormData) {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
@@ -38,7 +38,7 @@ export default function AuthForm({
       if (result.success) {
         window.dispatchEvent(new CustomEvent("authChange", { detail: { isLogout: false } }));
         mutateUser();
-        router.push(nonTokenPath || "/profile");
+        router.push(redirectTo);
       } else {
         if (result.redirectTo) {
           router.push(result.redirectTo);
@@ -54,6 +54,7 @@ export default function AuthForm({
       setTouchedFields({});
     }
   };
+
   const validateEmail = useCallback((email: string): boolean => {
     const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);

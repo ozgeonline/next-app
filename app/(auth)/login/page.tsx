@@ -11,7 +11,6 @@ export default function LoginPage() {
     <AuthForm
       formType="login"
       referencePath="signup"
-      nonTokenPath="/profile"
     />
   );
 }
