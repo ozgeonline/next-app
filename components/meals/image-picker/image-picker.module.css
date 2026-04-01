@@ -2,7 +2,7 @@
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .picker .input {
@@ -17,6 +17,12 @@
   text-transform: uppercase;
   color: var(--text-opacity);
   font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .picker label {
+    text-align: center;
+  }
 }
 
 .preview {
@@ -47,6 +53,15 @@
   align-items: center;
 }
 
+.uploadContainer a,
+.uploadContainer button {
+  width: 100%;
+  height: 2.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .backButton {
   margin-top: 0.5rem;
 }
@@ -55,4 +70,20 @@
   font-size: 0.8em;
   color: var(--error);
   margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .uploadContainer {
+    width: 100%;
+  }
+
+  .preview {
+    margin-bottom: 0.5rem;
+  }
 }

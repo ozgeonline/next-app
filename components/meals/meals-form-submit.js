@@ -2,6 +2,7 @@
 
 import { useFormStatus } from 'react-dom';
 import { useAuth } from "@/context/auth/AuthProvider";
+import styles from './meals-form-submit.module.css';
 
 export default function MealsFormSubmit() {
   const { pending } = useFormStatus();
@@ -11,9 +12,9 @@ export default function MealsFormSubmit() {
     <button 
       type='submit' 
       disabled={pending || !isAuthenticated} 
-      className='button-gold-blue'
+      className={`button-gold-blue ${styles.submitButton}`}
     >
-      {pending ? 'Submitting...' : 'Share Meal'}
+      {pending ? 'Submitting...' : 'Share'}
     </button>
   );
 }

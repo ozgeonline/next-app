@@ -1,54 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { UploadButton } from "@/utils/upload/uploadthing";
-import { useAuth } from "@/context/auth/AuthProvider";
 import styles from "./image-picker.module.css";
 
-const UPLOAD_BUTTON_APPEARANCE = {
-  button({ isUploading }) {
-    return {
-      fontSize: "0.8em",
-      color: "#FFFFFF",
-      background: "#0466c8",
-      padding: "0.5rem 1.5rem",
-      borderRadius: "4px",
-      fontWeight: "bold",
-      border: "none",
-      cursor: "pointer",
-      ...(isUploading && { filter: "brightness(0.9)" }),
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    };
-  },
-  container: {
-    marginTop: "1rem",
-  },
-  allowedContent: {
-    color: "#a1a1aa",
-  },
-};
-
 export default function ImagePicker({ label, name }) {
-  const { isAuthenticated } = useAuth();
-  const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
+  const [pickedImage, setPickedImage] = useState(null);
   const [error, setError] = useState(null);
+  const imageInputRef = useRef();
 
-  function handleClientUpload(res) {
-    if (!res) return;
-    const file = res[0].ufsUrl;
-    setUploadedImageUrl(file);
-    setError(null);
+  function handlePickClick() {
+    imageInputRef.current?.click();
   }
 
-  function handleUploadError(error) {
-    if (process.env.NODE_ENV === "development") {
-      console.error(`Upload Error: ${error.message}`);
+  function handleImageChange(event) {
+    const file = event.target.files[0];
+
+    if (!file) {
+      setPickedImage(null);
+      setError(null);
+      return;
     }
-    setError(error.message.split(": ")[1] || error.message);
+
+    if (file.size > 2 * 1048576) {
+      setError("Please select an image smaller than 2MB.");
+      event.target.value = ""; 
+      setPickedImage(null);
+      return;
+    }
+
+    setError(null);
+
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setPickedImage(fileReader.result);
+    };
+    fileReader.readAsDataURL(file);
   }
 
   return (
@@ -56,30 +44,31 @@ export default function ImagePicker({ label, name }) {
       <label htmlFor={name}>{label}</label>
       <div className={styles.controls}>
         <div className={styles.preview}>
-          {!uploadedImageUrl && <p>No image chosen</p>}
-          {uploadedImageUrl && (
-            <Image src={uploadedImageUrl} alt="Picked image" fill className={styles.image} />
+          {!pickedImage && <p>No image chosen</p>}
+          {pickedImage && (
+            <Image src={pickedImage} alt="Picked image" fill className={styles.image} />
           )}
         </div>
 
-        {uploadedImageUrl && (
-          <input
-            type="hidden"
-            name={name}
-            id={name}
-            value={uploadedImageUrl}
-          />
-        )}
+        <input
+          className={styles.input}
+          type="file"
+          id={name}
+          accept="image/png, image/jpeg, image/webp"
+          name={name}
+          ref={imageInputRef}
+          onChange={handleImageChange}
+        />
 
         <div className={styles.uploadContainer}>
-          {isAuthenticated && (
-            <UploadButton
-              endpoint="recipeImageUploader"
-              onClientUploadComplete={handleClientUpload}
-              onUploadError={handleUploadError}
-              appearance={UPLOAD_BUTTON_APPEARANCE}
-            />
-          )}
+          <button
+            className="button-gold-blue"
+            type="button"
+            onClick={handlePickClick}
+          >
+            Pick an image
+          </button>
+
           <Link href="./" className={`button-gold-blue ${styles.backButton}`}>
             back meals
           </Link>
@@ -87,5 +76,5 @@ export default function ImagePicker({ label, name }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
