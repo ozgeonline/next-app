@@ -53,13 +53,13 @@ export default async function shareMeal(prevState, formData) {
 
   // Handle Lazy Upload Here
   try {
-    const response = await utapi.uploadFiles(imageFile);
+    const response = await utapi.uploadFiles(imageFile); 
     if(response.error) {
        console.error("UploadThing Error", response.error);
        return { message: "Failed to upload image." }
     }
-    // Update the meal object with the uploaded image URL so we can save it to DB
-    meal.image = response.data.ufsUrl || response.data.appUrl || response.data.url;
+
+    meal.image = response.data.ufsUrl;
   } catch(e) {
      console.error("UTApi file upload failed", e);
      return { message: "Failed to upload image." }

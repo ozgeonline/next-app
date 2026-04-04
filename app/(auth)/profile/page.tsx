@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/auth/AuthProvider";
+import { updateUserNameAction } from "@/lib/actions/auth";
 import styles from "./profile.module.css";
 
 export default function ProfilePage() {
@@ -18,24 +19,16 @@ export default function ProfilePage() {
     setSaving(true);
 
     try {
-      const res = await fetch("/api/auth/user", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ name: newName }),
-      });
+      const result = await updateUserNameAction(newName);
 
-      if (res.ok) {
+      if (result.success) {
         mutateUser();
         setShowInput(false);
         setNewName("");
       } else {
-        const errorData = await res.json();
-        setError(errorData.error || "Update failed.");
+        setError(result.error || "Update failed.");
       }
-    } catch (err) {
+    } catch (err: unknown) {
       setError("Network error. Please try again.");
     } finally {
       setSaving(false);

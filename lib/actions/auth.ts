@@ -5,6 +5,7 @@ import User from "@/app/models/User";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { getAuthCookieOptions } from "@/lib/auth";
+import { getUserFromCookies } from "@/lib/getUserFromCookies";
 
 interface AuthResult {
   success: boolean;
@@ -79,6 +80,36 @@ export async function signupAction(name: string, email: string, password: string
     return { success: true };
   } catch (error) {
     console.error("signupAction error:", error);
+    return { success: false, error: "Internal server error" };
+  }
+}
+
+export async function updateUserNameAction(newName: string): Promise<AuthResult> {
+  try {
+    await connect();
+
+    const decoded = await getUserFromCookies();
+    if (!decoded) {
+      return { success: false, error: "Invalid token or user not authenticated" };
+    }
+
+    if (!newName || typeof newName !== "string" || !newName.trim()) {
+      return { success: false, error: "Name is required" };
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      decoded.userId,
+      { name: newName.trim() },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return { success: false, error: "User not found" };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("updateUserNameAction error:", error);
     return { success: false, error: "Internal server error" };
   }
 }
