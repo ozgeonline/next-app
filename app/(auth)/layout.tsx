@@ -30,12 +30,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
   const handleSignout = async () => {
     try {
       await logout();
-      router.push("/profile");
     } catch (err) {
-      logout();
-      router.push("/profile");
+      console.error("Logout failed", err);
     } finally {
-      logout();
       router.push("/profile");
     }
   };
@@ -49,10 +46,10 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className={styles.containerWrapper + " " + "mainBackground"}>
-      <div className={styles.containerTopNavbar + " " + "menuNavbar"} />
+    <div className={`${styles.containerWrapper} mainBackground`}>
+      <div className={`${styles.containerTopNavbar} menuNavbar`} />
       <div className={styles.card}>
-        <div className={styles.avatar + " " + "background-gradient"}>
+        <div className={`${styles.avatar} background-gradient`}>
           {user?.name ? user.name.slice(0, 2).toUpperCase() : "G"}
         </div>
         <div className={styles.userCard}>
@@ -86,7 +83,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         </div>
       </div>
 
-      <div className={styles.card + " " + (isAuthenticated ? styles.authCard : styles.nonauthCard)}>
+      <div className={`${styles.card} ${isAuthenticated ? styles.authCard : styles.nonauthCard}`}>
         {children}
       </div>
 

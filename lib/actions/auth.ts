@@ -32,7 +32,7 @@ export async function loginAction(email: string, password: string): Promise<Auth
     }
 
     const token = jwt.sign(
-      { userId: user._id, name: user.name, email: user.email },
+      { userId: user._id.toString(), name: user.name, email: user.email },
       process.env.JWT_SECRET!,
       { expiresIn: "7d" }
     );
@@ -48,11 +48,12 @@ export async function loginAction(email: string, password: string): Promise<Auth
 }
 
 export async function signupAction(name: string, email: string, password: string): Promise<AuthResult> {
-  if (!process.env.JWT_SECRET) {
-    throw new Error("JWT_SECRET is not defined in environment variables.");
-  }
-
   try {
+    if (!process.env.JWT_SECRET) {
+      console.error("JWT_SECRET is not defined in environment variables.");
+      return { success: false, error: "Internal server configuration error." };
+    }
+
     await connect();
 
     if (!name || !email || !password) {
@@ -69,7 +70,7 @@ export async function signupAction(name: string, email: string, password: string
     const user = await User.create({ name, email: lowerCaseEmail, password });
 
     const token = jwt.sign(
-      { userId: user._id, name: user.name, email: user.email },
+      { userId: user._id.toString(), name: user.name, email: user.email },
       process.env.JWT_SECRET!,
       { expiresIn: "7d" }
     );
