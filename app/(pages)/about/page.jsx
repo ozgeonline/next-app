@@ -1,15 +1,19 @@
 import styles from "./about.module.css";
 
 export const metadata = {
-  title: "About Us",
+  title: "About Us | TasteShare",
   description:
-    "Learn more about TasteShare and our mission to bring people together through food.",
-  keywords: "TasteShare, food, recipes, community"
+    "Learn more about TasteShare and our mission to bring people together through cooking. Discover original recipes and join our passionate food community.",
+  keywords: ["TasteShare", "food community", "original recipes", "cooking together", "food lovers"],
+  openGraph: {
+    title: "About Us | TasteShare",
+    description: "Join our passionate community built around food, flavor, and inspiration. We bring people together through original recipes.",
+  }
 };
 
 export default function AboutPage() {
   return (
-    <main className={styles["about-container"] + ' ' + "mainBackground"}>
+    <main className={`${styles["about-container"]} mainBackground`}>
       <div className="containerTopNavbarColor"/>
       <section className={styles["about-content"]}>
         <h1 className={styles["about-title"]}>About Us</h1>
