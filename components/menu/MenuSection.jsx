@@ -26,19 +26,19 @@ export function MenuPreview({
           placeholder="blur"
           blurDataURL="/logo.png"
           onError={() => setImgSrc("/logo.png")}
-        />    
+        />
       </div>
       <div className={styles.info}>
         <h3>
           {isNew && (
-            <span className={styles.new + ' ' + "highlight-gradient-text"}>(NEW) </span>
+            <span className={`${styles.new} highlight-text`}>(NEW) </span>
           )}
           {title}:
         </h3>
         <p>{description}</p>
       </div>
       <div className={styles.price}>
-        {price} 
+        {price}
         <span>$</span>
       </div>
     </div>

@@ -13,11 +13,11 @@ export const metadata = {
 
 export default function CommunityPage() {
   return (
-    <div className={styles.container + ' ' + "mainBackground"}>
+    <div className={`${styles.container} mainBackground`}>
       <div className="containerTopNavbarColor" />
       <header className={styles.header}>
         <h1>
-          One shared passion: <span className="highlight-gradient-text">Food</span>
+          One shared passion: <span className="highlight-text">Food</span>
         </h1>
         <p>Join our community and share your favorite recipes!</p>
       </header>

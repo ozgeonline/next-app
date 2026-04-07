@@ -28,7 +28,7 @@ export default function PositionedImage({ isCommunityInfoVisible }: PositionedIm
           className={styles.imageContent}
           animationClass={styles.animateInRight}
         >
-          <h1 className='highlight-gradient-text'>Nourish your body, energize your mind</h1>
+          <h1 className='highlight-text'>Nourish your body, energize your mind</h1>
           <h2>Brew Focus. Eat Clean. Change Everything.</h2>
         </AnimatedOnScroll>
       )}

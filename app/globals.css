@@ -457,33 +457,23 @@ body {
 
 /* ---------------------------- Gold Theme ---------------------------- */
 
-.highlight-gradient-text {
+.highlight-text {
   font-family: 'Montserrat', sans-serif;
-  /* background: linear-gradient(90deg, #0c355f ,#0b589d); */
-  background: var(--monza-700);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--monza-700);
 }
 
-h1.highlight-gradient-text {
+h1.highlight-text {
   font-size: 2rem;
 }
 
 @media screen and (min-width: 768px) {
-  h1.highlight-gradient-text {
+  h1.highlight-text {
     font-size: 3rem;
   }
 }
 
-[data-theme="dark"] .highlight-gradient-text {
-  background-image:
-    repeating-linear-gradient(to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%,
-      #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%);
-  background-size: 150%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+[data-theme="dark"] .highlight-text {
+  color: var(--pale-prim-800);
 }
 
 .gradient-full-gold-text {

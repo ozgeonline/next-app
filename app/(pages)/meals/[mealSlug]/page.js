@@ -35,7 +35,7 @@ export default async function MealDetailsPage({params}) {
         </div>
         <div className={styles.headerText}>
           <div className={styles["headerText-items"]}>
-            <h1 className="highlight-gradient-text">{meal.title}</h1>
+            <h1 className="highlight-text">{meal.title}</h1>
             <p className={styles.creator}>
               by <a href={`mailto:${meal.creator_email}`}>{meal.creator}</a>
             </p>

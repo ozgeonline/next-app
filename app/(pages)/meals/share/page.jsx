@@ -34,7 +34,7 @@ export default function ShareMealPage() {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1>
-          Share your <span className="highlight-gradient-text">favorite meal</span>
+          Share your <span className="highlight-text">favorite meal</span>
         </h1>
         <p>Or any other meal you feel needs sharing!</p>
       </header>

@@ -22,7 +22,7 @@ export default function MealsPage() {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1>Delicious meals, created 
-          <span className="highlight-gradient-text"> by you</span>
+          <span className="highlight-text"> by you</span>
         </h1>
         <p>Choose your favorite recipe and cook it yourself. It is easy and fun!</p>
         <p className={styles.cta}>
