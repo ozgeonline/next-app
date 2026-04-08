@@ -129,7 +129,7 @@ export default async function RecipesCard({ spotlight }: RecipesCardProps) {
 
                     <Link
                       href={`/meals/${meal.slug}`}
-                      className={`${styles["spotlight-button"]} text-gold-on-dark`}
+                      className={`${styles["spotlight-button"]} accent-link-button`}
                     >
                       See Recipe
                     </Link>

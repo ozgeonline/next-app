@@ -11,8 +11,7 @@
 }
 
 .header {
-  gap: 3rem;
-  margin: 1rem auto;
+  margin: 1.5rem auto;
   width: 90%;
   max-width: 75rem;
   color: var(--shark-800);
@@ -77,24 +76,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.meals a {
-  text-decoration: none;
-  background: linear-gradient(90deg, #f9572a, #ff8a05);
-  padding: .5em;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.2rem;
-  font-weight: bold;
-  width: fit-content;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  color: #f4f4f4;
-}
-
-.meals a:hover {
-  filter: brightness(1.2);
 }
 
 .section {

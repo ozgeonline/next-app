@@ -6,7 +6,7 @@ export default function NotFound() {
       <div className="containerTopNavbarColor" />
       <h1>Not Found</h1>
       <p>Could not find requested resource.</p>
-      <Link href="/" className="text-gold-on-dark">
+      <Link href="/" className="accent-link-button">
         Return Home
       </Link>
     </main>

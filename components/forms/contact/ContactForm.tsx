@@ -1,15 +1,27 @@
 "use client";
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useAuth } from '@/context/auth/AuthProvider';
 import { sendContactEmail } from '@/lib/actions/contact';
 import styles from './contact-form.module.css';
 
 export default function ContactForm() {
+  const { user } = useAuth();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
   const [formStatus, setFormStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.name || '',
+        email: user.email || '',
+      }));
+    }
+  }, [user]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -26,7 +38,7 @@ export default function ContactForm() {
 
       if (result.success) {
         setFormStatus('Thank you! We will get back to you soon...');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: user?.name || '', email: user?.email || '', message: '' });
         setTouchedFields({});
         setTimeout(() => setFormStatus(''), 5000);
       } else {
@@ -48,16 +60,17 @@ export default function ContactForm() {
 
   const isFormValid = formData.name.length >= 2 && emailIsValid && formData.message.length >= 10;
 
-  const getInputClassName = (fieldName: string, isValid: boolean, value: string) => {
+  const getInputClassName = (fieldName: string, isValid: boolean, value: string, readOnly: boolean) => {
+    if (readOnly) return styles.defaultValueColor;
     if (value && isValid) return styles.validValueColor;
     if ((!value || !isValid) && touchedFields[fieldName]) return styles.invalidValueColor;
     return styles.defaultValueColor;
   };
 
   const formFields = [
-    { name: 'name', type: 'text', label: 'Name', placeholder: 'Your Name', isValid: formData.name.length >= 2 },
-    { name: 'email', type: 'email', label: 'Email', placeholder: 'Your Email', isValid: emailIsValid },
-    { name: 'message', type: 'textarea', label: 'Message', placeholder: 'Your Message...', isValid: formData.message.length >= 10 },
+    { name: 'name', type: 'text', label: 'Name', placeholder: 'Your Name', isValid: formData.name.length >= 2, readOnly: !!user },
+    { name: 'email', type: 'email', label: 'Email', placeholder: 'Your Email', isValid: emailIsValid, readOnly: !!user },
+    { name: 'message', type: 'textarea', label: 'Message', placeholder: 'Your Message...', isValid: formData.message.length >= 10, readOnly: false },
   ];
 
   return (
@@ -76,7 +89,7 @@ export default function ContactForm() {
                 value={formData[field.name as keyof typeof formData]}
                 onChange={handleInputChange}
                 onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
-                className={getInputClassName(field.name, field.isValid, formData[field.name as keyof typeof formData])}
+                className={getInputClassName(field.name, field.isValid, formData[field.name as keyof typeof formData], field.readOnly)}
                 required
                 placeholder={field.placeholder}
                 rows={4}
@@ -89,9 +102,10 @@ export default function ContactForm() {
                 value={formData[field.name as keyof typeof formData]}
                 onChange={handleInputChange}
                 onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
-                className={getInputClassName(field.name, field.isValid, formData[field.name as keyof typeof formData])}
+                className={getInputClassName(field.name, field.isValid, formData[field.name as keyof typeof formData], field.readOnly)}
                 required
                 placeholder={field.placeholder}
+                readOnly={field.readOnly}
               />
             )}
           </div>
@@ -99,7 +113,7 @@ export default function ContactForm() {
 
         <button
           type="submit"
-          className={styles.submitButton}
+          className="accent-link-button"
           disabled={isSubmitting || !isFormValid}
         >
           {isSubmitting ? 'Sending...' : 'Send Message'}

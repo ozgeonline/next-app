@@ -26,7 +26,7 @@ export default function MealsPage() {
         </h1>
         <p>Choose your favorite recipe and cook it yourself. It is easy and fun!</p>
         <p className={styles.cta}>
-          <Link href="/meals/share" className="text-gold-on-dark">
+          <Link href="/meals/share" className="accent-link-button">
             Share Your Favorite Recipe
           </Link>
         </p>

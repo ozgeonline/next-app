@@ -11,17 +11,17 @@ export default function SocialMedia() {
       <UseAnimations
         animation={facebook}
         size="100%"
-        strokeColor='#E5E5E5'
+        strokeColor='var(--shark-900)'
       />
       <UseAnimations
         animation={twitter}
         size="100%"
-        strokeColor='#E5E5E5'
+        strokeColor='var(--shark-900)'
       />
       <UseAnimations
         animation={instagram}
         size="100%"
-        strokeColor='#E5E5E5'
+        strokeColor='var(--shark-900)'
       />
     </div>
   )

@@ -46,13 +46,22 @@
   color: var(--shark-800);
   font-size: 1rem;
   outline: none;
-  transition: background 0.3s ease, border-color 0.3s ease; 
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .formGroup input:focus,
 .formGroup textarea:focus {
   outline: none;
   background: none;
+}
+
+.formGroup input[readonly] {
+  border: none;
+  cursor: default;
+}
+
+.formGroup input[readonly]:focus {
+  background: var(--background-opacity);
 }
 
 .formGroup input:autofill {
@@ -69,34 +78,12 @@
   resize: none;
 }
 
-.formGroup input::selection{
+.formGroup input::selection {
   color: var(--science-blue-500) !important;
 }
 
-.formGroup input:focus::details-content{
+.formGroup input:focus::details-content {
   color: var(--science-blue-500) !important;
-}
-
-
-.submitButton {
-  padding: 0.75rem 1.5rem;
-  background: var(--background);
-  color: var(--shark-800);
-  border: 1px solid var(--shark-200);
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  filter: brightness(0.8);
-  transition: all 0.3s ease-in-out;
-}
-
-.submitButton:hover {
-  filter: brightness(1);
-}
-
-[data-theme="dark"] .submitButton {
-   color: var(--pale-prim-900);
-   border: none;
 }
 
 .formStatus {

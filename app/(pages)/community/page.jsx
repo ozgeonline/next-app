@@ -34,7 +34,7 @@ export default function CommunityPage() {
 
         <div className={styles.meals}>
           <h2>Meals Shared</h2>
-          <Link href="/meals" className='text-gold-on-dark'>Browse Meals</Link>
+          <Link href="/meals" className='accent-link-button'>Browse Meals</Link>
         </div>
 
         <section className={styles.section}>
