@@ -61,15 +61,15 @@ const renderStars = (averageRating: number) => {
   const hasHalfStar = averageRating % 1 >= 0.5;
 
   for (let i = 0; i < fullStars; i++) {
-    stars.push(<Star key={`full-${i}`} fill="#111" strokeWidth={1} stroke="#111" />);
+    stars.push(<Star key={`full-${i}`} fill="var(--neutral-950)" strokeWidth={1} stroke="var(--neutral-950)" />);
   }
 
   if (hasHalfStar) {
-    stars.push(<StarHalf key="half" fill="#111" strokeWidth={1} stroke="#111" />);
+    stars.push(<StarHalf key="half" fill="var(--neutral-950)" strokeWidth={1} stroke="var(--neutral-950)" />);
   }
 
   for (let i = stars.length; i < 5; i++) {
-    stars.push(<Star key={`empty-${i}`} strokeWidth={1} stroke="#111" />);
+    stars.push(<Star key={`empty-${i}`} strokeWidth={1} stroke="var(--neutral-950)" />);
   }
 
   return stars;
@@ -89,7 +89,7 @@ export default async function RecipesCard({ spotlight }: RecipesCardProps) {
         <div key={meal.id} className={styles.container}>
           <div className={styles.card}>
             <div className={styles["recipe-card"]}>
-              <div className={spotlight ? styles["spotlight-image"] : styles["recipe-image"]}>
+              <div className={spotlight ? styles["cardDetailed-image"] : styles["cardCompact-image"]}>
                 <Image
                   src={meal.image || "/logo.png"}
                   alt={meal.title}
@@ -102,15 +102,15 @@ export default async function RecipesCard({ spotlight }: RecipesCardProps) {
                   style={{ objectFit: 'cover' }}
                 />
                 {!spotlight && (
-                  <Link className={styles["recipe-link"]} href={`/meals/${meal.slug}`}>
+                  <Link className={styles["cardCompact-link"]} href={`/meals/${meal.slug}`}>
                     View Details
                   </Link>
                 )}
               </div>
 
               {spotlight && (
-                <div className={styles["recipe-overlay"]}>
-                  <div className={styles["spotlight-info"]}>
+                <div className={styles["cardDetailed-overlay"]}>
+                  <div className={styles["cardDetailed-info"]}>
                     <h3>{meal.title}</h3>
                     <p>by <span>{meal.creator}</span></p>
 
@@ -129,7 +129,7 @@ export default async function RecipesCard({ spotlight }: RecipesCardProps) {
 
                     <Link
                       href={`/meals/${meal.slug}`}
-                      className={`${styles["spotlight-button"]} accent-link-button`}
+                      className="accent-link-button"
                     >
                       See Recipe
                     </Link>

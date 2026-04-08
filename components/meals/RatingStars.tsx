@@ -5,7 +5,7 @@ import { Star } from "lucide-react";
 import styles from "./rating.module.css";
 
 interface RatingStarsProps {
-  mealId: any;
+  mealId: string;
   initialRating: number;
 }
 
@@ -44,9 +44,9 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
         const data = await response.json();
         //console.log('API response:', data.rating, data.userName);
         setRating(data.rating !== undefined ? data.rating : initialRating);
-      } catch (err: any) {
+      } catch (err: unknown) {
         //console.error('Error fetching user rating:', err.message);
-        setError(`Failed to load rating: ${err.message}`);
+        setError(`Failed to load rating: ${err instanceof Error ? err.message : String(err)}`);
         setRating(initialRating);
       } finally {
         setIsLoading(false);
@@ -100,7 +100,7 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
               <Star
                 key={index}
                 className={styles.star}
-                fill={starValue <= Math.round(displayRating) ? '#111' : 'none'}
+                fill={starValue <= Math.round(displayRating) ? 'var(--neutral-950)' : 'none'}
                 strokeWidth={starValue <= Math.round(displayRating) ? 0 : 1}
                 onMouseEnter={() => setHoverRating(starValue)}
                 onMouseLeave={() => setHoverRating(0)}

@@ -5,7 +5,7 @@ import RecipesCard from "@/components/assets/recipesCard/RecipesCard";
 import { getMealsWithRatings } from "@/lib/meals";
 import styles from "./page.module.css";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 async function MealsList() {
   const meals = await getMealsWithRatings();
@@ -25,11 +25,11 @@ export default function MealsPage() {
           <span className="highlight-text"> by you</span>
         </h1>
         <p>Choose your favorite recipe and cook it yourself. It is easy and fun!</p>
-        <p className={styles.cta}>
+        <div>
           <Link href="/meals/share" className="accent-link-button">
             Share Your Favorite Recipe
           </Link>
-        </p>
+        </div>
       </header>
       <main className={styles.main}>
         <Suspense fallback={<p className="loading">loading meals...</p>}>

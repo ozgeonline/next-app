@@ -34,12 +34,12 @@
   justify-content: center;
   height: 100%;
   font-size: 0.8rem;
-  color: #212529;
+  color: var(--neutral-950);
   margin-left: .5rem;
 }
 
 .error {
-  color: red;
+  color: var(--error);
   opacity: 0.5;
   width: 100%;
   font-size: 0.8rem;
