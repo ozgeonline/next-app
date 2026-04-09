@@ -25,7 +25,7 @@ export default function ImagePicker({ label, name }) {
 
     if (file.size > 2 * 1048576) {
       setError("Please select an image smaller than 2MB.");
-      event.target.value = ""; 
+      event.target.value = "";
       setPickedImage(null);
       return;
     }
@@ -62,14 +62,14 @@ export default function ImagePicker({ label, name }) {
 
         <div className={styles.uploadContainer}>
           <button
-            className="button-gold-blue"
+            className="accent-link-button"
             type="button"
             onClick={handlePickClick}
           >
-            Pick an image
+            pick an image
           </button>
 
-          <Link href="./" className={`button-gold-blue ${styles.backButton}`}>
+          <Link href="./" className={`accent-link-button ${styles.backButton}`}>
             back meals
           </Link>
           {error && <p className={styles.errorText}>{error}</p>}

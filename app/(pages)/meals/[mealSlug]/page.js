@@ -23,10 +23,6 @@ export default async function MealDetailsPage({params}) {
 
   if (!meal) return notFound();
 
-  const formattedInstructions = meal.instructions
-    .replace(/\n/g, "<br>")
-    .replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase());
-  
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -36,10 +32,10 @@ export default async function MealDetailsPage({params}) {
         <div className={styles.headerText}>
           <div className={styles["headerText-items"]}>
             <h1 className="highlight-text">{meal.title}</h1>
-            <p className={styles.creator}>
-              by <a href={`mailto:${meal.creator_email}`}>{meal.creator}</a>
-            </p>
-            <Link href="./" className="button-gold-blue">
+            <div className={styles.creator}>
+              by <span>{meal.creator}</span>
+            </div>
+            <Link href="/meals" className="button-gold-blue">
               Back to Meals
             </Link>
           </div>
@@ -47,12 +43,11 @@ export default async function MealDetailsPage({params}) {
       </header>
       <main className={styles.main}>
         <h2><span>{meal.title}&#39;s</span> instructions</h2>
-        <div 
-          className={styles.instructions}
-          dangerouslySetInnerHTML={{
-            __html: formattedInstructions
-          }}
-        ></div>
+        <ul className={styles.instructions}>
+          {meal.instructions.split('\n').filter(line => line.trim()).map((line, i) => (
+            <li key={i}>{line.trim()}</li>
+          ))}
+        </ul>
       </main>
     </div>
   )

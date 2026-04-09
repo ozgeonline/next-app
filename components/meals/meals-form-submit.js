@@ -12,9 +12,9 @@ export default function MealsFormSubmit() {
     <button 
       type='submit' 
       disabled={pending || !isAuthenticated} 
-      className={`button-gold-blue ${styles.submitButton}`}
+      className={`accent-link-button ${styles.submitButton}`}
     >
-      {pending ? 'Submitting...' : 'Share'}
+      {pending ? 'submitting...' : 'share'}
     </button>
   );
 }

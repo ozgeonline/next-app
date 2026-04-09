@@ -340,11 +340,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--text);
-  font-size: 1.4rem;
   width: 100%;
   text-align: center;
   gap: 1rem;
+  color: var(--text);
+  font-size: 1.4rem;
 }
 
 .loading {
@@ -423,7 +423,7 @@ body {
       rgba(203, 203, 203, 0.02) 50%,
       rgba(24, 24, 24, 0.02) 50%,
       rgba(24, 24, 24, 0.02) 100%),
-    linear-gradient(90deg, #0466c8, #0080fa);
+    linear-gradient(90deg, #0466c8, #ba181b);
 }
 
 [data-theme="dark"] .footer,
@@ -505,7 +505,6 @@ h1.highlight-text {
   text-decoration: none;
   padding: .3em 1em;
   font-size: 1.1rem;
-  font-weight: bold;
   width: fit-content;
   border-radius: 2px;
   border: none;

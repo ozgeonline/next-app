@@ -10,7 +10,7 @@
   padding: 4rem 2rem;
   margin: 5rem 0;
   border-radius: 8px;
-  background: var(--text-low-opacity);
+  background: var(--neutral-100);
 }
 
 @media screen and (min-width: 768px) {
@@ -46,6 +46,11 @@
 .header h1,
 .header p {
   font-family: 'Montserrat', sans-serif;
+}
+
+.header .instructionsNote {
+  font-size: .9rem;
+  font-style: italic;
 }
 
 @media screen and (min-width: 640px) {
