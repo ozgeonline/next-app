@@ -1,3 +1,7 @@
+// Meals page:
+// displays a list of meals with ratings and a link to share a new meal.
+// lists shared dishes
+
 import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";

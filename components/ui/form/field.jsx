@@ -1,3 +1,6 @@
+// Reusable form field component:
+// renders a labeled input or textarea based on the props provided.
+
 export default function FormInput({
   label,
   id,
@@ -9,7 +12,7 @@ export default function FormInput({
   readOnly
 }) {
   return (
-    <p>
+    <div>
       <label htmlFor={id}>{label}</label>
       {rows ? (
         <textarea
@@ -30,6 +33,6 @@ export default function FormInput({
           {...(readOnly ? { value: defaultValue } : { defaultValue })}
         />
       )}
-    </p>
+    </div>
   );
 }

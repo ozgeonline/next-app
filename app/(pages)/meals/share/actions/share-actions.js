@@ -1,3 +1,6 @@
+// Share meal action:
+// handles form submission, validation, image upload, and database saving.
+
 "use server";
 
 import { redirect } from "next/navigation";

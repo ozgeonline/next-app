@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Star } from "lucide-react";
-import styles from "./rating.module.css";
+import styles from "./rating-stars.module.css";
 
 interface RatingStarsProps {
   mealId: string;

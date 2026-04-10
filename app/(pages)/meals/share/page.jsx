@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getUserFromCookies } from '@/lib/getUserFromCookies';
-import ShareMealForm from '@/components/meals/share-meal/form';
+import ShareMealForm from '@/components/meals/share-meal/ShareMealForm';
 import styles from './page.module.css';
 
 export const metadata = {

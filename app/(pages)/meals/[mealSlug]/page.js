@@ -1,3 +1,6 @@
+// Meal detail page:
+// displays a single meal's image, creator info, and step-by-step instructions based on the URL slug.
+
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";

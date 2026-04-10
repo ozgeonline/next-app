@@ -1,3 +1,5 @@
+// Error page: displays an error message and a link to go back to the meals page.
+
 "use client";
 
 import Link from "next/link";

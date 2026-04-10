@@ -1,3 +1,6 @@
+// Image picker component:
+// allows users to select and preview an image for a meal.
+
 "use client";
 
 import { useState, useRef } from "react";

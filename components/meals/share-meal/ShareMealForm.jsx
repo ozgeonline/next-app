@@ -1,11 +1,14 @@
+// Share meal form component:
+// renders the meal sharing form and delegates submission to the "shareMeal" server action.
+
 "use client";
 
 import { useActionState } from 'react';
 import shareMeal from '@/app/(pages)/meals/share/actions/share-actions';
-import ImagePicker from '@/components/meals/image-picker/Image-picker';
-import MealsFormSubmit from '@/components/meals/meals-form-submit';
+import ImagePicker from '@/components/meals/image-picker/ImagePicker';
+import MealsFormSubmit from '@/components/meals/form-submit/FormSubmit';
 import FormInput from '@/components/ui/form/field';
-import styles from './form.module.css';
+import styles from './share-meal.module.css';
 
 export default function ShareMealForm({ user }) {
   const [state, formAction] = useActionState(shareMeal, { message: null });
@@ -29,17 +32,11 @@ export default function ShareMealForm({ user }) {
       </div>
       <FormInput label="Title" id="title" name="title" required />
       <FormInput label="Short Summary" id="summary" name="summary" required />
-      <FormInput
-        label="Instructions"
-        id="instructions"
-        name="instructions"
-        rows="10"
-        required
-      />
+      <FormInput label="Instructions" id="instructions" name="instructions" rows="10" required />
 
       <ImagePicker label="Your Meal Image" name="image" />
 
-      {state?.message && <p>{state.message}</p>}
+      {state?.message && <p className="error">{state.message}</p>}
 
       <div className={styles.actions}>
         <MealsFormSubmit />
