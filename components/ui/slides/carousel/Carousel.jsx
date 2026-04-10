@@ -1,7 +1,8 @@
+// Carousel component:
+// renders a horizontal slider with dot or text navigation and optional auto-slide.
+
 "use client";
-import { useState, useEffect, memo, useRef } from "react";
-import Link from "next/link";
-import { menuLinks } from "@/app/(pages)/menu/menu-items";
+import { useState, useEffect, memo, useRef, useCallback } from "react";
 import styles from "./carousel.module.css";
 
 function Carousel({
@@ -11,10 +12,12 @@ function Carousel({
   textLabels = [],
   carouselWrapper,
   dotsWrapper,
+  renderSlideFooter,
 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
-  const startAutoSlide = () => {
+
+  const startAutoSlide = useCallback(() => {
     if (!autoSlide) return;
     if (intervalRef.current) clearInterval(intervalRef.current);
 
@@ -23,7 +26,7 @@ function Carousel({
         prevIndex < children.length - 1 ? prevIndex + 1 : 0
       );
     }, 10000);
-  };
+  }, [autoSlide, children.length]);
 
   const handleClick = (index) => {
     setCurrentImageIndex(index);
@@ -35,7 +38,7 @@ function Carousel({
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [autoSlide]);
+  }, [startAutoSlide]);
 
   return (
     <div className={carouselWrapper}>
@@ -44,7 +47,7 @@ function Carousel({
           const isActive = index === currentImageIndex;
 
           if (dotType === "text") {
-            const label = textLabels[index] || `Menu ${index + 1}`;
+            const label = textLabels[index] || `Slide ${index + 1}`;
             return (
               <span
                 key={index}
@@ -56,7 +59,6 @@ function Carousel({
             );
           }
 
-          //default
           return (
             <div
               key={index}
@@ -68,34 +70,15 @@ function Carousel({
       </div>
       <div
         className={styles.slider}
-        style={{
-          transform: `translateX(-${currentImageIndex * 100}%)`,
-          transition: "transform 0.5s ease-in-out",
-        }}
+        style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
       >
         {children.map((child, index) => (
           <div
             key={index}
-            className={`
-              ${styles.itemWrapper} 
-              ${dotType === "text" && styles.textWrapper}  
-            `}
+            className={`${styles.itemWrapper} ${dotType === "text" ? styles.textWrapper : ""}`}
           >
             {child}
-            {index === currentImageIndex &&
-              menuLinks.map((item) => {
-                const itemsData = item.desserts || item.drinks || item.meals || item.salads;
-                if (!itemsData) return null;
-
-                const label = textLabels[currentImageIndex];
-                if (itemsData.title !== label) return null;
-
-                return (
-                  <Link key={itemsData.href} href={`menu/${itemsData.href}`} className="button-gold-blue">
-                    View All {itemsData.title}
-                  </Link>
-                );
-              })}
+            {index === currentImageIndex && renderSlideFooter?.(index)}
             <div className={styles.blurOverlay} />
           </div>
         ))}
