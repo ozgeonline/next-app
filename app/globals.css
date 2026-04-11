@@ -487,6 +487,7 @@ body {
 }
 
 [data-theme="dark"] .highlight-text {
+  font-family: 'Montserrat', sans-serif;
   color: var(--pale-prim-800);
 }
 
@@ -506,7 +507,7 @@ h1.highlight-text {
   padding: .3em 1em;
   font-size: 1.1rem;
   width: fit-content;
-  border-radius: 2px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -517,7 +518,7 @@ h1.highlight-text {
 }
 
 [data-theme="light"] .accent-link-button {
-  background: var(--monza-700);
+  background: var(--monza-600);
   color: var(--shark-50);
 }
 

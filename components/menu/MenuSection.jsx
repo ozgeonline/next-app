@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Clock, Flame, Star } from "lucide-react";
 import styles from "./menu.module.css";
 
 export function MenuPreview({
@@ -21,26 +22,42 @@ export function MenuPreview({
           alt={`${title} - Menu Items `}
           sizes="100%"
           fill
-          width={0}
-          height={0}
           placeholder="blur"
           blurDataURL="/logo.png"
           onError={() => setImgSrc("/logo.png")}
         />
+        {isNew && (
+          <span className={styles.newBadge}>NEW</span>
+        )}
       </div>
       <div className={styles.info}>
-        <h3>
-          {isNew && (
-            <span className={`${styles.new} highlight-text`}>(NEW) </span>
-          )}
-          {title}:
-        </h3>
+        <div className={styles.titleRow}>
+          <h3>{title}</h3>
+          <span className={`${styles.price} highlight-text`}>
+            {price}
+            <span> $</span>
+          </span>
+        </div>
         <p>{description}</p>
+
+        <div className={styles.statsRow}>
+          <div className={styles.stars}>
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} size={14} fill="#ffc905" color="#ffc905" />
+            ))}
+          </div>
+          <div className={styles.statItem}>
+            <Clock size={14} />
+            <span>5 min</span>
+          </div>
+          <span className={styles.statDivider}>|</span>
+          <div className={styles.statItem}>
+            <Flame size={14} />
+            <span>335 Cal</span>
+          </div>
+        </div>
       </div>
-      <div className={styles.price}>
-        {price}
-        <span>$</span>
-      </div>
+
     </div>
   )
 }

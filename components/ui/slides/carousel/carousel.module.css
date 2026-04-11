@@ -9,11 +9,11 @@
 .activeText {
   color: var(--text);
   font-weight: 700;
-  border-bottom: 3px solid #fb5607;
+  border-bottom: 3px solid #f34043;
 }
 
 [data-theme="dark"] .activeText {
-  border-bottom: 3px solid var(--pale-prim-800);
+  border-bottom: 3px solid #fffb88;
 }
 
 .slider {

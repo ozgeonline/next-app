@@ -14,7 +14,9 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .rightImageWrapper { top: 0; }
+  .rightImageWrapper {
+    top: 0;
+  }
 }
 
 .rightImageWrapper img {
@@ -25,7 +27,9 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .rightImageWrapper img {  width: 40%; }
+  .rightImageWrapper img {
+    width: 40%;
+  }
 }
 
 .leftImageWrapper {
@@ -41,7 +45,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .leftImageWrapper img {  
+  .leftImageWrapper img {
     width: 30%;
     transform: rotate(-60deg);
   }
@@ -84,11 +88,9 @@
 }
 
 [data-theme="dark"] .container h2 {
-  background-image: 
-    repeating-linear-gradient(
-      to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%, 
-      #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%
-    );
+  background-image:
+    repeating-linear-gradient(to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%,
+      #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%);
   background-size: 150%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -100,25 +102,28 @@
   position: absolute;
   left: 0;
   right: 0;
-  height: 3rem;
+  height: 2.5rem;
   z-index: 10;
   pointer-events: none;
-  mask-image: linear-gradient(to top, transparent,#dee2e6 );
-  -webkit-mask-image: linear-gradient(to top,transparent, #dee2e6);
+  mask-image: linear-gradient(to top, transparent, #dee2e6);
+  -webkit-mask-image: linear-gradient(to top, transparent, #dee2e6);
 }
 
 .blurOverlayTop {
-  top: -2.9rem;
+  top: -2.4rem;
   rotate: 180deg;
-  background: linear-gradient(90deg, #ffc905, #f9572a);
+  background: linear-gradient(90deg, #ffc905, #e02226);
 }
 
 .blurOverlayBottom {
-  bottom: -2.9rem;
-  background: linear-gradient(90deg, #f9572a, #ffc905);
+  bottom: -2.4rem;
+  background: linear-gradient(90deg, #e02226, #ffc905);
 }
 
-[data-theme="dark"] .blurOverlayTop,
+[data-theme="dark"] .blurOverlayTop {
+  background: linear-gradient(90deg, #1a1a1a, #e02226);
+}
+
 [data-theme="dark"] .blurOverlayBottom {
-  background: var(--shark-50);
+  background: linear-gradient(90deg, #e02226, #1a1a1a);
 }

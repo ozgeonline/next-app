@@ -47,7 +47,6 @@ export default function MenuPage() {
 
       <main className={styles.main}>
         <div className={`${styles.menu} mainBackground`}>
-          <h2>Menu</h2>
           <MenuCarousel
             menuLinks={menuLinks}
             textLabels={["Desserts", "Drinks", "Meals", "Salads"]}
