@@ -19,7 +19,6 @@
   min-height: 100vh;
   opacity: 1;
   z-index: 100;
-  color: var(--shark-900);
   padding-bottom: 5rem;
   padding-top: 4rem;
 }
@@ -61,7 +60,6 @@
   margin: 1rem;
   border-radius: 8px;
   width: 98%;
-  background: var(--text-low-opacity);
   border: 1px solid var(--text-low-opacity);
 }
 
@@ -110,6 +108,10 @@
   margin-bottom: 0.5em;
 }
 
+.form button {
+  width: 100%;
+}
+
 .input,
 .textarea {
   padding: 0.5rem;
@@ -128,7 +130,6 @@
 
 .reservationCard {
   background: var(--background-opacity);
-  padding: 2rem;
   border-radius: 6px;
 }
 
@@ -146,4 +147,8 @@
 
 [data-theme="dark"] .reservationCard .infoItem .bold {
   color: var(--shark-300);
+}
+
+.reservationCard button {
+  margin-right: 1rem;
 }

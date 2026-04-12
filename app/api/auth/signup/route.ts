@@ -3,6 +3,7 @@ import connect from "@/lib/db";
 import User from "@/app/models/User";
 import jwt from "jsonwebtoken";
 import { getAuthCookieOptions } from "@/lib/auth";
+import { rateLimit } from "@/lib/rateLimit";
 
 export async function POST(req: Request) {
 
@@ -11,13 +12,26 @@ export async function POST(req: Request) {
   }
 
   try {
-    //console.log("signup: Request successful");
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 3, 60000);
+
+    if (!limitStatus.success) {
+      console.warn(`signup: Rate limit exceeded for IP: ${ip}`);
+      return NextResponse.json(
+        { error: "Too many signup attempts. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     await connect();
     const { name, email, password } = await req.json();
 
-    if (!name || !email || !password) {
-      console.error("signup: Missing name, email, or password");
-      return NextResponse.json({ error: "Name, email, and password are required" }, { status: 400 });
+    if (
+      !name || !email || !password ||
+      typeof name !== "string" || typeof email !== "string" || typeof password !== "string"
+    ) {
+      console.error("signup: Missing or invalid format for name, email, or password");
+      return NextResponse.json({ error: "Name, email, and password are required and must be text" }, { status: 400 });
     }
 
     const lowerCaseEmail = email.toLowerCase();

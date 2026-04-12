@@ -3,17 +3,29 @@ import connect from "@/lib/db";
 import User from "@/app/models/User";
 import jwt from "jsonwebtoken";
 import { getAuthCookieOptions } from "@/lib/auth";
+import { rateLimit } from "@/lib/rateLimit";
 
 export async function POST(req: Request) {
   try {
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 5, 60000);
+
+    if (!limitStatus.success) {
+      console.warn(`login: Rate limit exceeded for IP: ${ip}`);
+      return NextResponse.json(
+        { error: "Too many login attempts. Please try again in a minute." },
+        { status: 429 }
+      );
+    }
+
     await connect();
 
     const body = await req.json();
     const { email, password } = body;
 
-    if (!email || !password) {
-      console.error("login: Email and password are required");
-      return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
+    if (!email || !password || typeof email !== "string" || typeof password !== "string") {
+      console.error("login: Invalid format or missing fields");
+      return NextResponse.json({ error: "Email and password are required and must be text" }, { status: 400 });
     }
 
     const user = await User.findOne({ email: email.toLowerCase() }).select('+password');

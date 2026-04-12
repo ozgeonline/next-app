@@ -227,22 +227,39 @@ export default function ReservationPage() {
     cleanup();
   }, []);
 
+  const formFields = [
+    { label: "Name", type: "text", name: "name", value: user?.name || "", readOnly: true },
+    { label: "Email", type: "email", name: "email", value: user?.email || "", readOnly: true },
+    { label: "Date", type: "date", name: "date", value: reservation.date, required: true },
+    { label: "Time", type: "time", name: "time", value: reservation.time, required: true },
+    { label: "Number of Guests", type: "number", name: "guests", value: reservation.guests, min: 1, max: 20, required: true },
+  ];
+
+  const getInfoItems = (res: SavedReservation, userObj: any) => [
+    { label: "Name", value: userObj?.name || "N/A" },
+    { label: "Email", value: userObj?.email || "N/A" },
+    { label: "Date", value: new Date(res.date).toLocaleDateString() },
+    { label: "Time", value: res.time },
+    { label: "Guests", value: res.guests },
+    { label: "Notes", value: res.notes || "-" },
+  ];
+
   return (
     <>
       {!user ? (
-        <div className={styles.containerWrapper + ' ' + "mainBackground"}>
+        <div className={`mainBackground ${styles.containerWrapper}`}>
           <div className="containerTopNavbarColor" />
           <div className={styles["non-user-message"]}>
 
             <p>
               You must be logged in to make a reservation.
             </p>
-            <Link href="/login" className="button-gold-blue">Login</Link>
+            <Link href="/login" className="accent-link-button">Login</Link>
           </div>
         </div>
       ) : (
 
-        <div className={styles.containerWrapper + ' ' + "mainBackground"}>
+        <div className={`mainBackground ${styles.containerWrapper}`}>
           <div className="containerTopNavbarColor" />
           <div className={styles.formSection}>
             <h2>
@@ -260,65 +277,22 @@ export default function ReservationPage() {
 
             {/* reservation - form area */}
             <form onSubmit={handleSubmit} className={styles.form}>
-              <label>
-                Name:
-                <input
-                  type="text"
-                  name="name"
-                  value={user?.name || ""}
-                  className={`${styles.input}`}
-                  readOnly
-                />
-              </label>
-
-              <label>
-                Email:
-                <input
-                  type="email"
-                  name="email"
-                  value={user?.email || ""}
-                  className={`${styles.input}`}
-                  readOnly
-                />
-              </label>
-
-              <label>
-                Date:
-                <input
-                  type="date"
-                  name="date"
-                  value={reservation.date}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
-              </label>
-
-              <label>
-                Time:
-                <input
-                  type="time"
-                  name="time"
-                  value={reservation.time}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
-              </label>
-
-              <label>
-                Number of Guests:
-                <input
-                  type="number"
-                  name="guests"
-                  min="1"
-                  max="20"
-                  value={reservation.guests}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
-              </label>
+              {formFields.map((field) => (
+                <label key={field.name}>
+                  {field.label}:
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    value={field.value}
+                    onChange={!field.readOnly ? handleChange : undefined}
+                    className={styles.input}
+                    readOnly={field.readOnly}
+                    required={field.required}
+                    min={field.min}
+                    max={field.max}
+                  />
+                </label>
+              ))}
 
               <label>
                 Special Notes:
@@ -333,7 +307,7 @@ export default function ReservationPage() {
 
               <button
                 type="submit"
-                className="button-gold-blue"
+                className="accent-link-button"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Saving..." : editReservationId ? "Save Changes" : "Reserve"}
@@ -348,12 +322,11 @@ export default function ReservationPage() {
             ) : reservations.length > 0 ? (
               reservations.map((res) => (
                 <div key={res._id || `${res.date}-${res.time}`} className={styles.reservationCard}>
-                  <div className={styles.infoItem}><div className={styles.bold}>Name</div>: {user?.name || "N/A"}</div>
-                  <div className={styles.infoItem}><div className={styles.bold}>Email</div>: {user?.email || "N/A"}</div>
-                  <div className={styles.infoItem}><div className={styles.bold}>Date</div>: {new Date(res.date).toLocaleDateString()}</div>
-                  <div className={styles.infoItem}><div className={styles.bold}>Time</div>: {res.time}</div>
-                  <div className={styles.infoItem}><div className={styles.bold}>Guests</div>: {res.guests}</div>
-                  <div className={styles.infoItem}><div className={styles.bold}>Notes</div>: {res.notes || "-"}</div>
+                  {getInfoItems(res, user).map((info, idx) => (
+                    <div key={idx} className={styles.infoItem}>
+                      <div className={styles.bold}>{info.label}</div>: {info.value}
+                    </div>
+                  ))}
                   <button
                     onClick={() => handleEdit(res)}
                     className="button-gold-blue"

@@ -3,6 +3,7 @@ import connect from "@/lib/db";
 import User from "@/app/models/User";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import Rating from "@/app/models/Rating";
+import { rateLimit } from "@/lib/rateLimit";
 
 export async function GET(req: Request) {
 
@@ -70,6 +71,16 @@ export async function GET(req: Request) {
 
 export async function PUT(req: Request) {
   try {
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 10, 60000);
+
+    if (!limitStatus.success) {
+      return NextResponse.json(
+        { error: "Too many profile update attempts." },
+        { status: 429 }
+      );
+    }
+
     await connect();
 
     const decoded = await getUserFromCookies();
@@ -81,7 +92,7 @@ export async function PUT(req: Request) {
     const { name } = body;
 
     if (!name || typeof name !== "string") {
-      return NextResponse.json({ error: "Name is required" }, { status: 400 });
+      return NextResponse.json({ error: "Name is required and must be text" }, { status: 400 });
     }
 
     const updatedUser = await User.findByIdAndUpdate(

@@ -539,15 +539,13 @@ h1.highlight-text {
 
 /* ------------------------------ Button ------------------------------ */
 .button-gold-blue {
-  padding: 0.5rem 3em;
+  padding: 0.3em 0.5em;
   border: none;
   background: var(--science-blue-800);
   color: var(--science-blue-50);
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bolder;
   transition: all 0.3s ease;
-  /* margin-right: 0.5rem; */
   border: none !important;
   text-decoration: none;
   text-transform: lowercase;
