@@ -1,9 +1,17 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import Reservation from "@/app/models/Reservation";
 import connect from "@/lib/db";
+import { rateLimit } from "@/lib/rateLimit";
 
-export async function DELETE() {
+export async function DELETE(req: NextRequest) {
   try {
+    // DDOS Protection
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 5, 60000);
+
+    if (!limitStatus.success) {
+      return NextResponse.json({ error: "Too many requests." }, { status: 429 });
+    }
     await connect();
 
     const now = new Date();

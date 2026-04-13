@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import connect from '@/lib/db';
 import Rating from '@/app/models/Rating';
 import { getUserFromCookies } from '@/lib/getUserFromCookies';
+import { rateLimit } from '@/lib/rateLimit';
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,13 +14,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
     }
 
-    const { mealId, rating } = await req.json();
-    //console.log('POST /api/meals/ratings received:', { mealId, rating, userId: decoded.userId });
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 15, 60000);
 
-    if (!mealId || !rating || rating < 1 || rating > 5) {
-      //console.log('Invalid input defined');
+    if (!limitStatus.success) {
+      return NextResponse.json({ error: "Too many rating attempts. Please wait." }, { status: 429 });
+    }
+
+    const { mealId, rating } = await req.json();
+
+    if (
+      !mealId || !rating ||
+      typeof mealId !== "string" || typeof rating !== "number" ||
+      rating < 1 || rating > 5 ||
+      !mongoose.Types.ObjectId.isValid(mealId)
+    ) {
       return NextResponse.json(
-        { error: 'Invalid input' },
+        { error: 'Invalid input or meal ID format' },
         { status: 400 }
       );
     }

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import Reservation from "@/app/models/Reservation";
 import connect from "@/lib/db";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
+import { rateLimit } from "@/lib/rateLimit";
 
 export async function GET() {
   try {
@@ -27,8 +28,16 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    // IP Spam/Bot Protection
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 5, 60000);
+
+    if (!limitStatus.success) {
+      return NextResponse.json({ error: "Too many reservations. Please wait." }, { status: 429 });
+    }
+
     await connect();
-    
+
     const decoded = await getUserFromCookies();
     if (!decoded) {
       return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
@@ -36,13 +45,18 @@ export async function POST(req: Request) {
 
     const body = await req.json();
 
+    // Type Validation
+    if (!body.date || !body.time || typeof body.guests !== "number") {
+      return NextResponse.json({ error: "Invalid reservation data format" }, { status: 400 });
+    }
+
     const newReservation = new Reservation({
       userId: decoded.userId,
       name: decoded.name,
       date: new Date(body.date),
       time: body.time,
       guests: body.guests,
-      notes: body.notes || null,
+      notes: typeof body.notes === "string" ? body.notes : null,
     });
 
     const saved = await newReservation.save();

@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import connect from '@/lib/db';
 import Meal from '@/app/models/Meal';
 
+// Route Cache (ISR):
+export const revalidate = 3600;
+
 export const GET = async () => {
   try {
     await connect();
@@ -43,7 +46,6 @@ export const GET = async () => {
           },
           summary: { $ifNull: ["$summary", "No summary available"] },
           creator: { $ifNull: ["$creator", "Unknown"] },
-          creator_email: { $ifNull: ["$creator_email", ""] },
           averageRating: 1,
           ratingCount: 1,
         },

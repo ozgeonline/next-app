@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
+import mongoose from "mongoose";
 import connect from "@/lib/db";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import Reservation from "@/app/models/Reservation";
+import { rateLimit } from "@/lib/rateLimit";
 
 export async function PUT(
   req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 15, 60000);
+
+    if (!limitStatus.success) {
+      return NextResponse.json({ error: "Too many requests. Please wait." }, { status: 429 });
+    }
+
     await connect();
     const decoded = await getUserFromCookies();
     if (!decoded) {
@@ -15,6 +24,11 @@ export async function PUT(
     }
 
     const { id } = await context.params;//reservation ID
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid Reservation ID format" }, { status: 400 });
+    }
+
     const body = await req.json();
     //console.log("PUT /api/reservations/[id]: body:", body);
 
@@ -52,6 +66,13 @@ export async function DELETE(
   context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 10, 60000);
+
+    if (!limitStatus.success) {
+      return NextResponse.json({ error: "Too many delete attempts. Please wait." }, { status: 429 });
+    }
+
     await connect();
     const decoded = await getUserFromCookies();
     if (!decoded) {
@@ -59,6 +80,11 @@ export async function DELETE(
     }
 
     const { id } = await context.params;//reservation ID
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid Reservation ID format" }, { status: 400 });
+    }
+
     const reservation = await Reservation.findOne({ _id: id, userId: decoded.userId });
     if (!reservation) {
       return NextResponse.json(
