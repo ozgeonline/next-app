@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { BreakpointSettings } from "@/components/settings/breakpoint/BreakpointSettings";
+import { useBreakpoints } from "@/components/settings/breakpoint/useBreakpoints";
 import styles from "./infinite-slide-loop.module.css";
 import Image from "next/image";
 
@@ -21,7 +21,7 @@ export default function InfiniteSlideLoop({
   const sliderRef = useRef<HTMLDivElement>(null);
 
   // Custom hook to get dynamic width per breakpoint
-  const { sliderWidth, itemsPerView } = BreakpointSettings(sliderRef);
+  const { sliderWidth, itemsPerView } = useBreakpoints(sliderRef);
 
   // Fallback to 0 if we haven't mounted or calculated width yet
   const itemWidth = sliderWidth > 0 && itemsPerView > 0 ? sliderWidth / itemsPerView : 0;
