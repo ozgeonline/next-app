@@ -4,8 +4,8 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import TopScrollButton from "@/components/ui/topScrollButton/TopScrollButton";
 import { homePageitems } from "@/components/sections/cards/card-items";
-import HeroBanner from "@/components/assets/heroBanner/HeroBanner";
-import WavesBackground from "@/components/assets/wavesBackground/WavesBackground";
+import HeroBanner from "@/components/ui/banners/hero-banner/HeroBanner";
+import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 import styles from './page.module.css';
 
 const SlideSection = dynamic(() => import('@/components/ui/slides/sections/slide-section/SlideSection'));

@@ -1,3 +1,4 @@
+// Reservation Banner component: A visually engaging section aimed at encouraging users to book a table.
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./reservation.module.css";
@@ -13,7 +14,7 @@ export default function ReservationBanner() {
           sizes="100%"
         />
       </div>
-       <div className={styles.leftImageWrapper}>
+      <div className={styles.leftImageWrapper}>
         <Image
           src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDBs9bBdxNmQAqG8cge0hkoTSVZRJ3fPUHijlp"
           alt="image"
@@ -25,11 +26,11 @@ export default function ReservationBanner() {
       <h2>for a Wonderful Experience</h2>
       <div className={styles.reservation}>
         <Link href="/reservations">
-          Make Reservation 
+          Make Reservation
         </Link>
       </div>
-      <div className={styles.blurOverlayTop}/>
-      <div className={styles.blurOverlayBottom}/>
+      <div className={styles.blurOverlayTop} />
+      <div className={styles.blurOverlayBottom} />
     </div>
   )
 }

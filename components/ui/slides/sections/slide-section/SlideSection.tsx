@@ -5,7 +5,7 @@ import ImageSlideshow from "@/components/ui/slides/image-slideshow/ImageSlidesho
 import InfiniteSlideLoop from "@/components/ui/slides/loop-slides/InfiniteSlideLoop";
 import styles from "./slide-section.module.css";
 import { MousePointerClick } from "lucide-react";
-import WavesBackground from "@/components/assets/wavesBackground/WavesBackground";
+import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 
 interface SlideSectionProps {
   isCommunityInfoVisible: boolean;

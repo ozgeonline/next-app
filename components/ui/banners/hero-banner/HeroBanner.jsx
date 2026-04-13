@@ -1,10 +1,11 @@
+// Hero Banner component: Displays a dynamic, full-width introduction banner with scroll-based scale and brightness animations.
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import AnimatedOnScroll from '@/components/ui/animation/animated-scroll/AnimatedOnScroll';
-import SocialMedia from '../../ui/social/SocialMedia';
+import SocialMedia from '@/components/ui/social/SocialMedia';
 import { IoLocationSharp } from "react-icons/io5";
 import styles from './heroBanner.module.css';
 

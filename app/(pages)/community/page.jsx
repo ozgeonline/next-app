@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import RecipesCard from '@/components/assets/recipesCard/RecipesCard';
+import RecipesCard from '@/components/ui/cards/recipe-card/RecipeCard';
 import styles from './page.module.css';
 
 export const dynamic = "force-dynamic";

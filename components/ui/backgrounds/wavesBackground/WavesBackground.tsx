@@ -1,3 +1,4 @@
+// Waves Background component: Renders an animated SVG wave pattern for decorative page foundations.
 import styles from "./waves-background.module.css";
 
 export default function WavesBackground() {

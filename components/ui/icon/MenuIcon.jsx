@@ -2,17 +2,21 @@
 
 import { useTheme } from "@/context/theme/ThemeProvider";
 import { useScroll } from "@/context/scroll/ScrollingProvider";
+import { usePathname } from "next/navigation";
 import styles from "./icon.module.css";
-export default function MenuIcon({onClick, open}) {
+
+export default function MenuIcon({ onClick, open }) {
   const { theme } = useTheme();
   const { scrolling } = useScroll();
+  const pathname = usePathname();
+
+  const isSpecialPage = pathname === "/" || pathname === "/menu";
+
+  const useLightIcon = theme === "dark" || (!open && !scrolling && isSpecialPage);
 
   const iconItemStyle = {
-    backgroundColor:
-      theme === "light" && !scrolling
-        ? "#FFFFFF"
-        :  "var(--text)",
-  };
+    backgroundColor: useLightIcon ? "#FFFFFF" : "var(--text)"
+  }
 
   const openMenu = () => {
     return (
@@ -20,7 +24,7 @@ export default function MenuIcon({onClick, open}) {
         {[...Array(3)].map((_, i) => (
           <div
             key={i}
-            className={styles.icon  + " " + styles.iconOpen }
+            className={styles.icon + " " + styles.iconOpen}
             style={iconItemStyle}
           ></div>
         ))}

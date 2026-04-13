@@ -8,9 +8,9 @@ import { menuPageitemsBottom } from "@/components/sections/cards/card-items";
 import MenuCarousel from "./MenuCarousel";
 import styles from "./menu.module.css";
 
-const HeroBanner = dynamic(() => import('@/components/assets/heroBanner/HeroBanner'));
+const HeroBanner = dynamic(() => import('@/components/ui/banners/hero-banner/HeroBanner'));
 const CardsSection = dynamic(() => import('@/components/sections/cards/CardsSection'));
-const ReservationBanner = dynamic(() => import('@/components/assets/reservationBanner/ReservationBanner'));
+const ReservationBanner = dynamic(() => import('@/components/ui/banners/reservation-banner/ReservationBanner'));
 
 export const metadata = {
   title: "Menu | TasteShare",

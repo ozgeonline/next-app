@@ -1,3 +1,4 @@
+// Recipe Card component: Presents individual meal data (image, title, summary) with interactive routing to details.
 import Link from "next/link";
 import Image from "next/image";
 import { cache } from "react";
@@ -5,7 +6,7 @@ import connect from "@/lib/db";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import Meal from "@/app/models/Meal";
 import RatingStars from "@/components/meals/rating-stars/RatingStars";
-import styles from "./recipes.module.css";
+import styles from "./recipe-card.module.css";
 import { Star, StarHalf } from "lucide-react";
 
 interface RecipesCardProps {
@@ -16,7 +17,6 @@ interface RecipesCardProps {
 const getTopRecipes = cache(async () => {
   await connect();
 
-  // Solving the N+1 query problem using an aggregation pipeline.
   const mealsData = await Meal.aggregate([
     { $sort: { createdAt: -1 } },
     { $limit: 5 },

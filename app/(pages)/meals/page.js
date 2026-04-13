@@ -5,7 +5,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import RecipesCard from "@/components/assets/recipesCard/RecipesCard";
+import RecipesCard from "@/components/ui/cards/recipe-card/RecipeCard";
 import { getMealsWithRatings } from "@/lib/meals";
 import styles from "./page.module.css";
 

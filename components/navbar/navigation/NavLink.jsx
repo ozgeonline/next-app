@@ -5,22 +5,25 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useNavigation } from "@/context/navigation/NavigationProvider";
 import { useScroll } from "@/context/scroll/ScrollingProvider";
+import { useTheme } from "@/context/theme/ThemeProvider";
 import styles from "./nav-link.module.css";
 
 export default function NavLink({ href, children }) {
   const path = usePathname();
   const router = useRouter();
   const { scrolling } = useScroll();
-  const { setIsOpen, triggerNavigation, setIsLoading } = useNavigation();
+  const { isOpen, setIsOpen, triggerNavigation, setIsLoading } = useNavigation();
   const [isPending, startTransition] = useTransition();
   const isMountedRef = useRef(true);
+  const { theme } = useTheme();
 
   const isActive = href === "/" ? path === "/" : path.startsWith(href);
+  const isSpecialPage = path === "/" || path === "/menu";
 
-  const isSpecialPage = path === "/" || path.startsWith("/menu") || path.startsWith("/menu/");
+  const useLightLink = theme === "dark" || (!isOpen && !scrolling && isSpecialPage);
 
   const linkStyle = {
-    color: !scrolling && isSpecialPage ? "#FFFFFF" : "var(--shark-800)"
+    color: useLightLink ? "#FFFFFF" : "var(--text)"
   };
 
   const handleClick = (e) => {
