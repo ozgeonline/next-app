@@ -8,10 +8,10 @@ import { MousePointerClick } from "lucide-react";
 import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 
 interface SlideSectionProps {
-  isCommunityInfoVisible: boolean;
+  isExperienceIntroVisible: boolean;
 }
 
-export default function SlideSection({ isCommunityInfoVisible }: SlideSectionProps) {
+export default function SlideSection({ isExperienceIntroVisible }: SlideSectionProps) {
   return (
     <div className={`${styles.slideSection} mainBackground`}>
       <WavesBackground />
@@ -41,7 +41,7 @@ export default function SlideSection({ isCommunityInfoVisible }: SlideSectionPro
       <div
         className={`
           ${styles.infiniteSlideLoopWrapper} 
-          ${isCommunityInfoVisible ? styles.opacity0 : styles.opacity1}
+          ${isExperienceIntroVisible ? styles.opacity0 : styles.opacity1}
         `}
       >
         <InfiniteSlideLoop images={removeBGimages} className={styles.itemWrapper} />

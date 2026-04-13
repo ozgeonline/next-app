@@ -3,13 +3,13 @@ import styles from "./cta.module.css";
 import Link from "next/link";
 
 interface CTAContentProps {
-  isCommunityInfoVisible: boolean;
+  isExperienceIntroVisible: boolean;
 }
 
-export default function CTA({ isCommunityInfoVisible }: CTAContentProps) {
+export default function CTA({ isExperienceIntroVisible }: CTAContentProps) {
   return (
     <>
-      {!isCommunityInfoVisible && (
+      {!isExperienceIntroVisible && (
         <AnimatedOnScroll
           className={styles.communityInvite}
           animationClass={styles.animateInBottom}

@@ -3,19 +3,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { Cards } from "@/types/cardTypes";
 import { ChevronsRight, MousePointerClick, Sun } from "lucide-react";
-import styles from "./cards.module.css";
+import styles from "./highlight-cards.module.css";
 
-interface CardsSectionProps {
+interface HighlightCardsProps {
   data: Cards
   learnMore?: boolean
 }
-export default function CardsSection({
+export default function HighlightCards({
   data,
   learnMore
-}: CardsSectionProps) {
+}: HighlightCardsProps) {
   return (
     <AnimatedOnScroll
-      className={styles.cardsWrapper + ' ' + "mainBackground"}
+      className={`${styles.cardsWrapper} mainBackground`}
       animationClass={styles.animateInRight}
     >
       <div className={styles.cards}>

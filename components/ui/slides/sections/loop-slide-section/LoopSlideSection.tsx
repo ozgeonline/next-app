@@ -7,13 +7,13 @@ import styles from "./loop-slide-section.module.css";
 interface LoopSlideSectionProps {
   //isLoopSlideVisible: boolean;
   setIsLoopSlideVisible: (visible: boolean) => void;
-  isCommunityInfoVisible: boolean;
+  isExperienceIntroVisible: boolean;
 }
 
 export default function LoopSlideSection({
   //isLoopSlideVisible,
   setIsLoopSlideVisible,
-  isCommunityInfoVisible,
+  isExperienceIntroVisible,
 }: LoopSlideSectionProps) {
   return (
     <section className={styles.sectionWrapper}>
@@ -23,7 +23,7 @@ export default function LoopSlideSection({
         onVisibilityChange={setIsLoopSlideVisible}
       >
         {/* Section Title Container */}
-        <div className={`${styles.sectionTitle} ${isCommunityInfoVisible ? styles.sectionTitleActive : ''}`}>
+        <div className={`${styles.sectionTitle} ${isExperienceIntroVisible ? styles.sectionTitleActive : ''}`}>
           <h2 className={styles.titleText}>
             Brew Focus. Eat Clean. Change Everything.
           </h2>
@@ -32,9 +32,9 @@ export default function LoopSlideSection({
         {/* Multi-Styled Infinite Slide Loop */}
         <InfiniteSlideLoop
           images={infoImages}
-          className={`${styles.sliderCard} ${isCommunityInfoVisible ? styles.sliderCardActive : ''}`}
-          itemsWrapperClassName={isCommunityInfoVisible ? styles.itemsWrapperVisible : styles.itemsWrapperHidden}
-          slideTitleStyles={`${styles.itemTitle} ${isCommunityInfoVisible ? styles.itemTitleActive : ''}`}
+          className={`${styles.sliderCard} ${isExperienceIntroVisible ? styles.sliderCardActive : ''}`}
+          itemsWrapperClassName={isExperienceIntroVisible ? styles.itemsWrapperVisible : styles.itemsWrapperHidden}
+          slideTitleStyles={`${styles.itemTitle} ${isExperienceIntroVisible ? styles.itemTitleActive : ''}`}
         />
       </AnimatedOnScroll>
     </section>

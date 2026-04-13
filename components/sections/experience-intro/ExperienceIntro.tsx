@@ -1,16 +1,16 @@
 import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
-import styles from "./community-info.module.css";
+import styles from "./experience-intro.module.css";
 
-interface CommunityInfoSectionProps {
-  setIsCommunityInfoVisible: (visible: boolean) => void;
+interface ExperienceIntroSectionProps {
+  setIsExperienceIntroVisible: (visible: boolean) => void;
 }
 
-export default function CommunityInfo({ setIsCommunityInfoVisible }: CommunityInfoSectionProps) {
+export default function ExperienceIntro({ setIsExperienceIntroVisible }: ExperienceIntroSectionProps) {
   return (
     <AnimatedOnScroll
       className={styles.containerWrapper}
       animationClass={styles.animateInRight}
-      onVisibilityChange={(isVisible) => setIsCommunityInfoVisible(isVisible)}
+      onVisibilityChange={(isVisible) => setIsExperienceIntroVisible(isVisible)}
     >
       <div className={styles.hero}>
         <h2> Create Your Own Recipe! </h2>

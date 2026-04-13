@@ -3,13 +3,13 @@ import Image from 'next/image';
 import styles from "./positioned-image.module.css";
 
 interface PositionedImageProps {
-  isCommunityInfoVisible: boolean;
+  isExperienceIntroVisible: boolean;
 }
 
-export default function PositionedImage({ isCommunityInfoVisible }: PositionedImageProps) {
+export default function PositionedImage({ isExperienceIntroVisible }: PositionedImageProps) {
   return (
     <div className={styles.imgWrapper}>
-      <div className={`${isCommunityInfoVisible ? styles.fixedImage : styles.relativeImage} ${styles.defaultImage}`}>
+      <div className={`${isExperienceIntroVisible ? styles.fixedImage : styles.relativeImage} ${styles.defaultImage}`}>
         <div className={styles.darkPlaceholder}></div>
         <Image
           src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDuHNl2syxsRZPv8rXjBlDd3LWgbnNHmSpeQwJ"
@@ -23,7 +23,7 @@ export default function PositionedImage({ isCommunityInfoVisible }: PositionedIm
       </div>
 
       {/* Focus Section */}
-      {!isCommunityInfoVisible && (
+      {!isExperienceIntroVisible && (
         <AnimatedOnScroll
           className={styles.imageContent}
           animationClass={styles.animateInRight}

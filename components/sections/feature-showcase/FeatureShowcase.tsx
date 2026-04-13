@@ -1,6 +1,6 @@
 import Image from "next/image";
 import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
-import { items } from '@/components/sections/animated_sections/sections-items';
+import { items } from '@/components/sections/feature-showcase/sections-items';
 import styles from "./animated-sections.module.css";
 
 export default function AnimatedSections() {

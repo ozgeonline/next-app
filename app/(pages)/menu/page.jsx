@@ -4,12 +4,12 @@
 import dynamic from "next/dynamic";
 import Carousel from "@/components/ui/slides/carousel/Carousel";
 import { menuSlides, menuLinks } from "./menu-items";
-import { menuPageitemsBottom } from "@/components/sections/cards/card-items";
+import { menuPageitemsBottom } from "@/components/sections/highlight-cards/card-items";
 import MenuCarousel from "./MenuCarousel";
 import styles from "./menu.module.css";
 
 const HeroBanner = dynamic(() => import('@/components/ui/banners/hero-banner/HeroBanner'));
-const CardsSection = dynamic(() => import('@/components/sections/cards/CardsSection'));
+const HighlightCards = dynamic(() => import('@/components/sections/highlight-cards/HighlightCards'));
 const ReservationBanner = dynamic(() => import('@/components/ui/banners/reservation-banner/ReservationBanner'));
 
 export const metadata = {
@@ -60,7 +60,7 @@ export default function MenuPage() {
         </div>
 
         <div className={`${styles.cardsWrapper} mainBackground`}>
-          <CardsSection data={menuPageitemsBottom} learnMore={true} />
+          <HighlightCards data={menuPageitemsBottom} learnMore={true} />
         </div>
 
       </main>

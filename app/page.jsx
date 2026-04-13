@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import TopScrollButton from "@/components/ui/topScrollButton/TopScrollButton";
-import { homePageitems } from "@/components/sections/cards/card-items";
+import { homePageitems } from "@/components/sections/highlight-cards/card-items";
 import HeroBanner from "@/components/ui/banners/hero-banner/HeroBanner";
 import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 import styles from './page.module.css';
@@ -11,15 +11,15 @@ import styles from './page.module.css';
 const SlideSection = dynamic(() => import('@/components/ui/slides/sections/slide-section/SlideSection'));
 const PositionedImage = dynamic(() => import('@/components/sections/positioned-image/PositionedImage'));
 const CTA = dynamic(() => import('@/components/sections/cta/CTA'));
-const CommunityInfo = dynamic(() => import('@/components/sections/community-info/CommunityInfo'));
+const ExperienceIntro = dynamic(() => import('@/components/sections/experience-intro/ExperienceIntro'));
 const LoopSlideSection = dynamic(() => import('@/components/ui/slides/sections/loop-slide-section/LoopSlideSection'));
-const CardsSection = dynamic(() => import('@/components/sections/cards/CardsSection'));
-const AnimatedSections = dynamic(() => import('@/components/sections/animated_sections/AnimatedSections'));
+const HighlightCards = dynamic(() => import('@/components/sections/highlight-cards/HighlightCards'));
+const FeatureShowcase = dynamic(() => import('@/components/sections/feature-showcase/FeatureShowcase'));
 
 
 export default function Home() {
   const [isLoopSlideVisible, setIsLoopSlideVisible] = useState(false);
-  const [isCommunityInfoVisible, setIsCommunityInfoVisible] = useState(false);
+  const [isExperienceIntroVisible, setIsExperienceIntroVisible] = useState(false);
 
   return (
     <>
@@ -36,29 +36,29 @@ export default function Home() {
 
         <>
           {/* Slide show & Loop slide section */}
-          <SlideSection isCommunityInfoVisible={isCommunityInfoVisible} />
+          <SlideSection isExperienceIntroVisible={isExperienceIntroVisible} />
 
           <main className={styles.main + ' ' + "mainBackground"}>
             {/* Background Image & CTA Links Section*/}
             <section className={styles.mainContent + ' ' + "mainBackground"}>
               <WavesBackground />
-              <PositionedImage isCommunityInfoVisible={isCommunityInfoVisible} />
-              <CTA isCommunityInfoVisible={isCommunityInfoVisible} />
+              <PositionedImage isExperienceIntroVisible={isExperienceIntroVisible} />
+              <CTA isExperienceIntroVisible={isExperienceIntroVisible} />
             </section>
 
             {/*** Community Info Text & Visible-Invisible Section */}
-            <CommunityInfo setIsCommunityInfoVisible={setIsCommunityInfoVisible} />
+            <ExperienceIntro setIsExperienceIntroVisible={setIsExperienceIntroVisible} />
 
             {/*Scroll Trigger - Loop Slide Section */}
             <LoopSlideSection
-              isCommunityInfoVisible={isCommunityInfoVisible}
+              isExperienceIntroVisible={isExperienceIntroVisible}
               isLoopSlideVisible={isLoopSlideVisible}
               setIsLoopSlideVisible={setIsLoopSlideVisible}
             />
 
             {/* Hover Cards Section */}
             <section>
-              <CardsSection data={homePageitems} learnMore={true} />
+              <HighlightCards data={homePageitems} learnMore={true} />
             </section>
 
             {/* Scroll Trigger - Animated Image Sections & Image Info */}
@@ -68,7 +68,7 @@ export default function Home() {
                 className="animatedSections mainBackground"
               >
                 <WavesBackground />
-                <AnimatedSections />
+                <FeatureShowcase />
               </div>
             </section>
           </main>
