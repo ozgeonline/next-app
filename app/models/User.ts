@@ -4,12 +4,13 @@ import bcrypt from "bcryptjs";
 
 const userSchema = new Schema<User>(
   {
-    name: String,
+    name: { type: String, maxlength: 50 },
     email: {
       type: String,
       required: true,
       unique: true,
-      lowercase: true
+      lowercase: true,
+      match: /^\S+@\S+\.\S+$/
     },
     password: {
       type: String,
