@@ -78,18 +78,13 @@
 
 .desktopNav a:hover,
 .mobileNav a:hover {
-  color: var(--monza-700) !important;
+  color: #0466c8 !important;
   transition: color 0.3s ease;
 }
 
-/* .desktopNav a.active:hover,
-.mobileNav a.active:hover {
-  background: none;
-} */
-
 [data-theme="dark"] .desktopNav a:hover,
 [data-theme="dark"] .mobileNav a:hover {
-  color: var(--shark-600) !important;
+  color: #fffb88 !important;
   transition: color 0.3s ease;
 }
 

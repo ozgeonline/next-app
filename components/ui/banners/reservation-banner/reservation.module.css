@@ -112,12 +112,12 @@
 .blurOverlayTop {
   top: -2.4rem;
   rotate: 180deg;
-  background: linear-gradient(90deg, #ffc905, #e02226);
+  background: linear-gradient(90deg, #ffc905, #0466c8, #0466c8);
 }
 
 .blurOverlayBottom {
   bottom: -2.4rem;
-  background: linear-gradient(90deg, #e02226, #ffc905);
+  background: linear-gradient(90deg, #0466c8, #0466c8, #ffc905);
 }
 
 [data-theme="dark"] .blurOverlayTop {

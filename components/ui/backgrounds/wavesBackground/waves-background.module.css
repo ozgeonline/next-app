@@ -1,56 +1,75 @@
-.wavesOverlay {
+.container {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2vh;
+  user-select: none;
 }
 
-.wavesSvg {
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: var(--background) !important;
-  stroke-width: 0.15;
-  opacity: 0.4;
+/* Base Typographic Outline Specs */
+.watermark1,
+.watermark2,
+.watermark3,
+.watermark4 {
+  font-family: inherit;
+  font-size: 22vw;
+  font-weight: 800;
+  white-space: nowrap;
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.1);
+  transition: -webkit-text-stroke 0.8s ease;
+  animation: slowPan 40s linear infinite;
 }
 
-:global([data-theme='dark']) .wavesSvg {
-  stroke: var(--pale-prim-900) !important;
-  opacity: 0.1 !important;
+/* Alternating directions and initial offsets to create abstract parallax */
+.watermark1 {
+  margin-left: -5vw;
+  animation-duration: 25s;
+  animation-direction: alternate;
 }
 
-.waveGroup1 {
-  animation: panRight 25s ease-in-out infinite alternate;
+.watermark2 {
+  margin-left: -20vw;
+  text-align: right;
+  animation-duration: 20s;
+  animation-direction: alternate-reverse;
 }
 
-.waveGroup2 {
-  animation: panLeft 30s ease-in-out infinite alternate;
+.watermark3 {
+  margin-left: 5vw;
+  animation-duration: 30s;
+  animation-direction: alternate;
 }
 
-.waveGroup3 {
-  animation: panRight 35s ease-in-out infinite alternate;
+.watermark4 {
+  margin-left: -15vw;
+  text-align: right;
+  animation-duration: 22s;
+  animation-direction: alternate-reverse;
 }
 
-@keyframes panRight {
+:global([data-theme='dark']) .watermark1,
+:global([data-theme='dark']) .watermark2,
+:global([data-theme='dark']) .watermark3,
+:global([data-theme='dark']) .watermark4 {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.07);
+}
+
+@keyframes slowPan {
   0% {
-    transform: translateX(-5%) translateY(-2%);
+    transform: translateX(0);
   }
 
   100% {
-    transform: translateX(5%) translateY(2%);
-  }
-}
-
-@keyframes panLeft {
-  0% {
-    transform: translateX(5%) translateY(2%);
-  }
-
-  100% {
-    transform: translateX(-5%) translateY(-2%);
+    transform: translateX(-8%);
   }
 }

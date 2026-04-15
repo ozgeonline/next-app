@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { links } from "./navlinks.constant";
 import { ScrollProvider } from '@/context/scroll/ScrollingProvider';
-import DarkLightToogle from "../settings/theme/DarkLightToogle";
+import DarkLightToggle from "@/components/settings/theme/DarkLightToggle";
 import Logo from "@/components/ui/branding/logo/Logo"
 import styles from "./navbar.module.css";
 
@@ -46,7 +46,7 @@ export default function Navbar() {
             </div>
           </nav>
 
-          <DarkLightToogle />
+          <DarkLightToggle />
         </header>
       </div>
     </ScrollProvider>

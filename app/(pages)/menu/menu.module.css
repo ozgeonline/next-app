@@ -47,7 +47,7 @@
 
 .containerBadge {
   position: relative;
-  background: linear-gradient(90deg, #e02226, #ffc905);
+  background: linear-gradient(90deg, #0466c8, #0466c8, #ffc905);
   display: flex;
   flex-direction: column;
   align-items: center;

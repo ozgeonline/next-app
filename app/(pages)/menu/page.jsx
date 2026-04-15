@@ -10,7 +10,7 @@ import styles from "./menu.module.css";
 
 const HeroBanner = dynamic(() => import('@/components/ui/banners/hero-banner/HeroBanner'));
 const HighlightCards = dynamic(() => import('@/components/sections/highlight-cards/HighlightCards'));
-const ReservationBanner = dynamic(() => import('@/components/ui/banners/reservation-banner/ReservationBanner'));
+const MainPageReservationBanner = dynamic(() => import('@/components/ui/banners/reservation-banner/MainPageReservationBanner'));
 
 export const metadata = {
   title: "Menu | TasteShare",
@@ -55,7 +55,7 @@ export default function MenuPage() {
 
         <div className={`${styles.contactBadgeWrapper} mainBackground`}>
           <div className={styles.containerBadge}>
-            <ReservationBanner />
+            <MainPageReservationBanner />
           </div>
         </div>
 

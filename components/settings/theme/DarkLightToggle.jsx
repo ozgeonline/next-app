@@ -1,33 +1,23 @@
 "use client";
 
 import { useTheme } from "@/context/theme/ThemeProvider";
-// import { useScroll } from "@/components/providers/ScrollingContext";
 import { CiStar } from "react-icons/ci";
-import { IoMdMoon,IoIosCloudy } from "react-icons/io";
+import { IoMdMoon, IoIosCloudy } from "react-icons/io";
 import { IoSunny } from "react-icons/io5";
-import styles from "./DarkLightToggle.module.css";
+import styles from "./dark-light-toggle.module.css";
 
-export default function DarkLightToogle() {
+export default function DarkLightToggle() {
   const { theme, toggleTheme, isMounted } = useTheme();
-  // const { scrolling } = useScroll();
- 
+
   if (!isMounted) {
-    return <div className={styles.modeButton + " " + styles.nonMounted} />
+    return <div className={`${styles.modeButton} ${styles.nonMounted}`} />
   } //to pre.hydration mismatch
 
   const isLight = theme === "light" || !theme;
 
-  // const boxShadow = {
-  //   boxShadow:
-  //     theme === "light" && !scrolling
-  //       ? "inset 0 0 0 2px var(--text-opacity)"
-  //       : "inset 0 0 0 15px var(--text-opacity)",
-  // };
-
   return (
     <button
-      onClick={toggleTheme} 
-      // style={boxShadow}
+      onClick={toggleTheme}
       className={`
         ${styles.modeButton}
         ${isLight ? styles.light : styles.dark}
@@ -49,9 +39,9 @@ export default function DarkLightToogle() {
         ))}
       </div>
 
-      {isLight 
-        ? <IoSunny className={styles.sun}/> 
-        : <IoMdMoon className={styles.moon}/>
+      {isLight
+        ? <IoSunny className={styles.sun} />
+        : <IoMdMoon className={styles.moon} />
       }
     </button>
   )

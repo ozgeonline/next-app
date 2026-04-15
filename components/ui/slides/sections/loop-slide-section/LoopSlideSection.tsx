@@ -1,17 +1,14 @@
-//import ScrollToSection from "@/components/ui/animation/trigger-scroll/ScrollToSection";
 import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
 import InfiniteSlideLoop from "@/components/ui/slides/loop-slides/InfiniteSlideLoop";
 import { infoImages } from "@/components/ui/slides/slideshow-items";
 import styles from "./loop-slide-section.module.css";
 
 interface LoopSlideSectionProps {
-  //isLoopSlideVisible: boolean;
   setIsLoopSlideVisible: (visible: boolean) => void;
   isExperienceIntroVisible: boolean;
 }
 
 export default function LoopSlideSection({
-  //isLoopSlideVisible,
   setIsLoopSlideVisible,
   isExperienceIntroVisible,
 }: LoopSlideSectionProps) {
