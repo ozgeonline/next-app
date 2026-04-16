@@ -9,11 +9,7 @@
   justify-content: center;
   transition: filter 0.3s ease-out;
   z-index: 1000;
-  background: #1a1a1a20;
-}
-
-[data-theme="dark"] .containerBottom {
-  background: #80011f;
+  background: #95959550;
 }
 
 .containerBottom:hover {

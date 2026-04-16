@@ -9,7 +9,10 @@ interface PositionedImageProps {
 export default function PositionedImage({ isExperienceIntroVisible }: PositionedImageProps) {
   return (
     <div className={styles.imgWrapper}>
-      <div className={`${isExperienceIntroVisible ? styles.fixedImage : styles.relativeImage} ${styles.defaultImage}`}>
+      <div className={`
+        ${isExperienceIntroVisible ? styles.fixedImage : styles.relativeImage} 
+        ${styles.defaultImage}`}
+      >
         <div className={styles.darkPlaceholder}></div>
         <Image
           src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDuHNl2syxsRZPv8rXjBlDd3LWgbnNHmSpeQwJ"

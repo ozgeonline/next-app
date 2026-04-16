@@ -97,10 +97,8 @@
   .relativeImage {
     width: 40%;
     height: 40vh;
-  }
-
-  .relativeImage img {
     border-radius: 0 2rem 2rem 0;
+    overflow: hidden;
   }
 }
 
@@ -142,39 +140,6 @@
   transition: all 0.5s ease-out;
 }
 
-.imageContent h1 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  font-family: 'Kaushan Script', cursive;
-  letter-spacing: 0.15rem;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, #ffffc2, #d3b15f);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.imageContent h2 {
-  font-size: 1.3rem;
-  text-shadow: 0 1px 0 var(--text-low-opacity);
-  color: #f4f6f7;
-}
-
-.imageContent h1,
-.imageContent h2 {
-  padding: 0.5rem 2rem;
-}
-
-@media screen and (min-width: 768px) {
-  .imageContent h1 {
-    font-size: 1.4rem;
-  }
-
-  .imageContent h2 {
-    font-size: 1.3rem;
-  }
-}
-
 @media screen and (min-width: 1024px) {
   .imageContent {
     position: relative;
@@ -182,24 +147,28 @@
     width: 60%;
     height: 40vh;
   }
+}
+
+.imageContent h1 {
+  font-family: 'Pinyon Script', 'Great Vibes', cursive;
+}
+
+.imageContent h2 {
+  color: var(--shark-900);
+  opacity: .8;
+}
+
+.imageContent h1,
+.imageContent h2 {
+  padding: 0.5rem 2rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .imageContent h2 {
+    color: #e3e7ea !important;
+  }
 
   .imageContent h1 {
-    font-size: 1.75rem;
-  }
-
-  .imageContent h2 {
-    text-shadow: none;
-  }
-
-  [data-theme="light"] .imageContent h2 {
-    color: var(--shark-900) !important;
-    opacity: 0.9;
-  }
-
-  [data-theme="light"] .imageContent h1 {
-    background: var(--monza-700);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #ffffc2 !important;
   }
 }

@@ -12,7 +12,7 @@
   user-select: none;
 }
 
-/* Base Typographic Outline Specs */
+/* 3D Volumetric Typographic Specs */
 .watermark1,
 .watermark2,
 .watermark3,
@@ -24,9 +24,18 @@
   line-height: 0.8;
   letter-spacing: -0.02em;
   text-transform: uppercase;
+
+  /* 3D Smooth Gradient Triggers - Light Mode Base */
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.1);
-  transition: -webkit-text-stroke 0.8s ease;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.01) 45%, rgba(0, 0, 0, 0.05) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 0px;
+
+  /* 3D Physical Drop Shadow (Simulates distance from background) */
+  filter: drop-shadow(0px 25px 35px rgba(0, 0, 0, 0.04));
+
+  transition: all 0.8s ease;
   animation: slowPan 40s linear infinite;
 }
 
@@ -57,11 +66,15 @@
   animation-direction: alternate-reverse;
 }
 
+/* Dark Theme - Luminous 3D Glass / Metallic Bevel Effect */
 :global([data-theme='dark']) .watermark1,
 :global([data-theme='dark']) .watermark2,
 :global([data-theme='dark']) .watermark3,
 :global([data-theme='dark']) .watermark4 {
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.07);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.0) 40%, rgba(255, 255, 255, 0.03) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0px 30px 45px rgba(0, 0, 0, 0.15));
 }
 
 @keyframes slowPan {

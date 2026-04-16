@@ -83,17 +83,17 @@
 .titleText {
   font-size: 1rem;
   font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.15rem;
   padding: 0.7rem;
   text-align: center;
 
   /* Default Solid Color */
-  background: #212529;
+  background: #0299ff;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin: 3rem 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -110,6 +110,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  margin-top: 0;
 }
 
 
@@ -118,8 +119,8 @@
 ----------------------------------- */
 .sliderCard {
   color: var(--shark-500);
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,9 +171,6 @@
 ----------------------------------- */
 .itemTitle {
   color: var(--shark-700);
-  border-top: 2px solid var(--shark-700);
-  border-radius: 50%;
-  padding: 0.7em;
   font-size: small;
   letter-spacing: 0.1rem;
   transition: all 0.3s ease;
