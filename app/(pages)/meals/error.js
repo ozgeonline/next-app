@@ -10,7 +10,7 @@ export default function ErrorPage() {
       <div className="containerTopNavbarColor" />
       <h1 className="highlight-text">Failed to fetch meals data. </h1>
       <p>Please try again later or contact support.</p>
-      <Link href="/meals" className="button-gold-blue">Back to Meals</Link>
+      <Link href="/meals" className="theme-accent-gold-blue">Back to Meals</Link>
     </main>
   )
 }

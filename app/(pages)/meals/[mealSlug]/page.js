@@ -38,7 +38,7 @@ export default async function MealDetailsPage({params}) {
             <div className={styles.creator}>
               by <span>{meal.creator}</span>
             </div>
-            <Link href="/meals" className="button-gold-blue">
+            <Link href="/meals" className="theme-accent-gold-blue">
               Back to Meals
             </Link>
           </div>

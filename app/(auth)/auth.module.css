@@ -39,7 +39,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  background: var(--shark-50);
+  background: var(--text-low-opacity);
   border-radius: 8px;
   margin: .5rem;
 }
@@ -73,7 +73,6 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  z-index: 10;
   width: 7rem;
   height: 7rem;
   border-radius: 50%;
@@ -81,10 +80,10 @@
   text-transform: uppercase;
   font-size: 2em;
   overflow: hidden;
+  z-index: 10;
 }
 
 [data-theme="dark"] .avatar {
-  background: #faf0a0;
   z-index: 10;
 }
 
@@ -97,7 +96,7 @@
 }
 
 .userCard {
-  background: var(--shark-50);
+  background: var(--text-low-opacity);
   color: var(--shark-800);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(9.3px);
@@ -122,6 +121,12 @@
   justify-content: center;
   align-items: center;
   position: relative;
+}
+
+.userCard .bottom button,
+.userCard .bottom a {
+  width: 80%;
+  text-align: center;
 }
 
 .userCard .top .name {

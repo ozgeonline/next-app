@@ -331,14 +331,14 @@ export default function ReservationPage() {
                   ))}
                   <button
                     onClick={() => handleEdit(res)}
-                    className="button-gold-blue"
+                    className="theme-accent-gold-blue"
                     disabled={editReservationId === res._id}
                   >
                     Update
                   </button>
                   <button
                     type="button"
-                    className="button-gold-blue"
+                    className="theme-accent-gold-blue"
                     onClick={() => handleDelete(res._id || "")}
                   >
                     {isDeleting ? "Deleting..." : "Delete Reservation"}

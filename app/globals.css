@@ -535,9 +535,9 @@ h1.highlight-text {
 }
 
 /* ------------------------------ Button ------------------------------ */
-.button-gold-blue {
-  padding: 0.3em 0.5em;
-  border: none;
+.theme-accent-gold-blue {
+  padding: .5em 1em;
+  font-size: 1.2rem;
   background: var(--science-blue-800);
   color: var(--science-blue-50);
   border-radius: 8px;
@@ -549,7 +549,7 @@ h1.highlight-text {
   font-size: medium;
 }
 
-[data-theme="dark"] .button-gold-blue {
+[data-theme="dark"] .theme-accent-gold-blue {
   color: var(--pale-prim-900);
   background: var(--shark-200);
 }
@@ -559,7 +559,7 @@ h1.highlight-text {
   background: var(--science-blue-800);
 }
 
-.button-gold-blue:hover {
+.theme-accent-gold-blue:hover {
   filter: brightness(1.1);
 }
 

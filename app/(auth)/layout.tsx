@@ -4,6 +4,7 @@ import { ReactNode, useEffect } from 'react';
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth/AuthProvider";
+import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 import styles from "./auth.module.css";
 import TopScrollButton from '@/components/ui/topScrollButton/TopScrollButton';
 
@@ -49,7 +50,8 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <div className={`${styles.containerWrapper} mainBackground`}>
       <div className={`${styles.containerTopNavbar} menuNavbar`} />
       <div className={styles.card}>
-        <div className={`${styles.avatar} background-gradient`}>
+        <WavesBackground />
+        <div className={`${styles.avatar} theme-accent-gold-blue`}>
           {user?.name ? user.name.slice(0, 2).toUpperCase() : "G"}
         </div>
         <div className={styles.userCard}>
@@ -63,14 +65,14 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             <div className={styles.bottom}>
               <button
                 type="button"
-                className="button-gold-blue"
+                className="theme-accent-gold-blue"
                 onClick={handleSignout}
               >
                 logout
               </button>
               <Link
                 href="/reservations"
-                className="button-gold-blue"
+                className="theme-accent-gold-blue"
               >
                 my reservations
               </Link>
@@ -83,7 +85,12 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         </div>
       </div>
 
-      <div className={`${styles.card} ${isAuthenticated ? styles.authCard : styles.nonauthCard}`}>
+      <div className={`
+        ${styles.card} 
+        ${isAuthenticated ? styles.authCard : styles.nonauthCard}
+        `}
+      >
+        <WavesBackground />
         {children}
       </div>
 
