@@ -5,6 +5,7 @@ import { useAuth } from "@/context/auth/AuthProvider";
 import { useReservations } from "@/hooks/useReservation";
 import { cleanupExpiredReservations } from "@/utils/reservations/cleanupExpiredReservations";
 import { SavedReservation } from "@/types/reservationTypes";
+import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 import styles from "./reservation.module.css";
 import Link from "next/link";
 
@@ -262,6 +263,7 @@ export default function ReservationPage() {
         <div className={`mainBackground ${styles.containerWrapper}`}>
           <div className="containerTopNavbarColor" />
           <div className={styles.formSection}>
+            <WavesBackground />
             <h2>
               {editReservationId ? "Update Reservation" : "Make a Reservation"}
             </h2>

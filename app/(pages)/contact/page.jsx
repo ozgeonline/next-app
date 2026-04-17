@@ -1,4 +1,5 @@
 import ContactForm from "@/components/forms/contact/ContactForm";
+import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 import styles from "./contact.module.css";
 import SocialMedia from "@/components/ui/social/SocialMedia";
 
@@ -12,6 +13,7 @@ export default function ContactUs() {
   return (
     <div className={`${styles.container} mainBackground`}>
       <div className="containerTopNavbarColor" />
+      <WavesBackground />
       <header className={styles.header}>
         <h1 className="highlight-text">Contact Us</h1>
         <p>
@@ -42,7 +44,9 @@ export default function ContactUs() {
                 </div>
               </div>
               <div className={styles.infoWrapper}>
-                <SocialMedia />
+                <div className={styles.socialMedia}>
+                  <SocialMedia strokeColor='var(--shark-900)' />
+                </div>
               </div>
               <div className={styles.infoWrapper}>
                 <div className={styles.info}>

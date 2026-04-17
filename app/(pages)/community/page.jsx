@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import RecipesCard from '@/components/ui/cards/recipe-card/RecipeCard';
+import WavesBackground from '@/components/ui/backgrounds/wavesBackground/WavesBackground';
 import styles from './page.module.css';
 
 export const dynamic = "force-dynamic";
@@ -14,6 +15,7 @@ export const metadata = {
 export default function CommunityPage() {
   return (
     <div className={`${styles.container} mainBackground`}>
+      <WavesBackground />
       <div className="containerTopNavbarColor" />
       <header className={styles.header}>
         <h1>

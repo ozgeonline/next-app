@@ -5,23 +5,28 @@ import facebook from 'react-useanimations/lib/facebook';
 import twitter from 'react-useanimations/lib/twitter';
 import instagram from 'react-useanimations/lib/instagram';
 import styles from './socialmedya.module.css';
-export default function SocialMedia() {
+
+interface SocialMediaProps {
+  strokeColor?: string
+}
+
+export default function SocialMedia({ strokeColor }: SocialMediaProps) {
   return (
     <div className={styles.socialMedia}>
       <UseAnimations
         animation={facebook}
-        size="100%"
-        strokeColor='#fcfcfc'
+        size={30}
+        strokeColor={strokeColor}
       />
       <UseAnimations
         animation={twitter}
-        size="100%"
-        strokeColor='#fcfcfc'
+        size={30}
+        strokeColor={strokeColor}
       />
       <UseAnimations
         animation={instagram}
-        size="100%"
-        strokeColor='#fcfcfc'
+        size={30}
+        strokeColor={strokeColor}
       />
     </div>
   )

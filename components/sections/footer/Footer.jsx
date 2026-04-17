@@ -1,4 +1,4 @@
-import {links} from "./link-items";
+import { links } from "./link-items";
 import Link from "next/link";
 import ContactForm from "@/components/forms/contact/ContactForm";
 import SocialMedia from "../../ui/social/SocialMedia";
@@ -15,10 +15,10 @@ export default function Footer() {
               <h3>Explore</h3>
               <ul>
                 {links.map((link) => (
-                    <li key={link.id}>
-                      <Link href={link.href}>{link.name}</Link>
-                    </li>
-                  ))
+                  <li key={link.id}>
+                    <Link href={link.href}>{link.name}</Link>
+                  </li>
+                ))
                 }
               </ul>
             </div>
@@ -33,7 +33,7 @@ export default function Footer() {
             </div>
           </div>
           <div className={styles.socialMediaWrapper}>
-            <SocialMedia />
+            <SocialMedia strokeColor='#fcfcfc' />
           </div>
         </div>
         <div className={styles.formWrapper}>
