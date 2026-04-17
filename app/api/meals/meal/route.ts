@@ -46,6 +46,7 @@ export const GET = async () => {
           },
           summary: { $ifNull: ["$summary", "No summary available"] },
           creator: { $ifNull: ["$creator", "Unknown"] },
+          creator_email: 1,
           averageRating: 1,
           ratingCount: 1,
         },

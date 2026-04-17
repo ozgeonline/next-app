@@ -1,48 +1,21 @@
 .containerWrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  opacity: 1;
+  position: relative;
   z-index: 100;
-  position: relative;
-  gap: 2rem;
-  border-radius: 8px;
-}
-
-.card {
-  width: 100%;
-  height: 32rem;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-@media screen and (min-width: 1024px) {
-  .card {
-    height: 36rem;
-  }
+  padding: 1rem;
 }
 
 .profileWrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  height: 100%;
-  border-radius: 8px;
-}
-
-.profileWrapper h3 {
-  font-size: 1.2rem;
-  color: var(--shark-800);
-  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 2.5rem;
+  padding: 2rem 0;
 }
 
 /* ---------------------------------------- authProfile ---------------------------------------- */
@@ -50,102 +23,232 @@
 .authProfile {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  height: 100%;
-  background: var(--text-low-opacity);
-  border-radius: 8px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(9.3px);
-  padding: 1rem 2rem;
-  gap: 1rem;
+  gap: 2rem;
 }
 
-.profileInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  width: 90%;
-  background: var(--shark-100);
-  border-radius: 8px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(9.3px);
-  padding: 1rem;
-}
-
-.updateSection input,
-.updateSection button {
-  width: 90%;
-  border: none;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(9.3px);
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: lowercase;
-  text-align: center;
-  font-size: medium;
-  cursor: pointer;
-  transition: all 0.1s ease;
+/* Glass Details Grid */
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
 
 @media screen and (min-width: 640px) {
-
-  .profileInfo,
-  .updateSection input,
-  .updateSection button {
-    width: 50%;
+  .detailsGrid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-@media screen and (min-width: 1024px) {
-
-  .profileInfo,
-  .updateSection input,
-  .updateSection button {
-    width: 70%;
-  }
+.glassBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
 }
 
-.mailInfo,
-.nameInfo {
-  color: var(--shark-800);
+[data-theme='light'] .glassBlock {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.mailInfo span,
-.nameInfo span {
-  display: inline-block;
-  font-size: medium;
-  color: var(--shark-800);
-  width: 3rem;
-  font-weight: bolder;
+.glassBlock:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-2px);
+}
+
+[data-theme='light'] .glassBlock:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.blockLabel {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--shark-400);
+  margin-bottom: 0.5rem;
+}
+
+.blockValue {
+  font-size: 1.25rem;
+  color: var(--text);
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.statValue {
+  font-size: 2.5rem;
+  font-weight: 200;
+  color: var(--text);
+  line-height: 1;
+}
+
+/* Interactive Theme Toggle inside Glass Block */
+.themeToggleRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.themeButton {
+  background: var(--text-low-opacity);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: all 0.2s ease;
+  text-transform: capitalize;
+}
+
+[data-theme='light'] .themeButton {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.themeButton:hover {
+  background: var(--background-opacity);
+}
+
+/* Name Update Section (Ghost Input & Button) */
+.updateSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.updateHeader {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--shark-400);
+  margin-bottom: -0.5rem;
+  text-align: left;
+}
+
+.ghostInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text);
+  font-size: 1.5rem;
+  padding: 0.5rem 0;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+[data-theme='light'] .ghostInput {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.ghostInput:focus {
+  border-bottom: 1px solid var(--science-blue-500);
+}
+
+.actionRow {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.ghostButton {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--science-blue-700);
+  color: var(--science-blue-700);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.ghostButton:hover {
+  background: var(--science-blue-700);
+  color: var(--shark-100);
+}
+
+.cancelButton {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--shark-400);
+  color: var(--shark-400);
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancelButton:hover {
+  background: var(--shark-800);
+  color: var(--shark-50);
 }
 
 .errorMessage {
   color: var(--international-orange-500);
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
-
-.updateSection {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-
 
 /* ---------------------------------------- nonAuthProfile ---------------------------------------- */
 
 .nonAuthProfile {
-  gap: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.5rem;
+  height: 100%;
+  padding: 3rem 1rem;
+}
+
+.nonAuthProfile h3 {
+  font-weight: 400;
+  color: var(--shark-400);
+}
+
+.primaryAuthButton {
+  background: var(--science-blue-600);
+  color: white;
+  padding: 1rem 3rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(4, 102, 200, 0.3);
+}
+
+.primaryAuthButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(4, 102, 200, 0.5);
+}
+
+.secondaryAuthButton {
+  background: transparent;
+  color: var(--text);
+  padding: 1rem 3rem;
+  border-radius: 30px;
+  text-decoration: none;
+  border: 1px solid var(--text-low-opacity);
+  transition: all 0.3s ease;
+}
+
+.secondaryAuthButton:hover {
+  background: var(--text-low-opacity);
 }

@@ -538,7 +538,7 @@ h1.highlight-text {
 .theme-accent-gold-blue {
   padding: .5em 1em;
   font-size: 1.2rem;
-  background: var(--science-blue-800);
+  background: var(--science-blue-700);
   color: var(--science-blue-50);
   border-radius: 8px;
   cursor: pointer;
