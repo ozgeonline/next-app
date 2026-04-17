@@ -1,7 +1,6 @@
 .active {
   color: #0466c8 !important;
   font-weight: bolder;
-  cursor: default;
 }
 
 [data-theme="dark"] .active {

@@ -423,7 +423,7 @@ body {
       rgba(203, 203, 203, 0.02) 50%,
       rgba(24, 24, 24, 0.02) 50%,
       rgba(24, 24, 24, 0.02) 100%),
-    linear-gradient(90deg, #0466c8, #ba181b);
+    linear-gradient(90deg, #0080fa, #b4eeff);
 }
 
 [data-theme="dark"] .footer,
@@ -482,7 +482,7 @@ body {
 /* ----------------------------  highlight text & accent link button ---------------------------- */
 
 .highlight-text {
-  color: var(--science-blue-700);
+  color: var(--science-blue-800);
 }
 
 [data-theme="dark"] .highlight-text {
@@ -500,7 +500,6 @@ h1.highlight-text {
 }
 
 .accent-link-button {
-  font-family: 'Montserrat', sans-serif;
   text-decoration: none;
   padding: .3em 1em;
   font-size: 1.1rem;
@@ -516,7 +515,7 @@ h1.highlight-text {
 }
 
 [data-theme="light"] .accent-link-button {
-  background: var(--monza-600);
+  background: var(--science-blue-800);
   color: var(--shark-50);
 }
 

@@ -19,6 +19,7 @@
 }
 
 .menu {
+  position: relative;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -76,11 +77,13 @@
 
 /* MenuPage - Cards Section */
 .cardsWrapper {
+  position: relative;
   height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
 }
 
 /***** Menu Carousel Slide *****/
@@ -139,7 +142,7 @@
 
 @media screen and (min-width: 1024px) {
   .viewAllLink {
-    width: 35%;
+    width: 20%;
   }
 }
 

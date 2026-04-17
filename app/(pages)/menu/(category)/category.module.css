@@ -1,4 +1,5 @@
 .categoryWrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -26,33 +27,27 @@
 .linkWrapper button {
   text-decoration: none;
   font-size: large;
-  font-weight: bold;
-  background: var(--shark-800);
+  font-weight: 500;
+  background: var(--shark-900);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   border: none;
   cursor: pointer;
   transition: all 0.2s linear;
+  opacity: 0.5;
 }
 
 .linkWrapper button:hover {
-  background: #ff6e0e;
+  background: var(--shark-900);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .linkWrapper button.active {
-  background: #ff6e0e;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-[data-theme="dark"] .linkWrapper button.active,
-[data-theme="dark"] .linkWrapper button:hover {
-  background: #ffffc2;
+  background: var(--shark-900);
+  opacity: 1;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

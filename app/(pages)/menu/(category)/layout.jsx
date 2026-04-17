@@ -19,20 +19,20 @@ export default function RootLayout({ children }) {
 
   const animationPortal = isPending
     ? createPortal(
-        <div className={styles.overlay}>
-          <FoodsIcon stroke="white" className={styles.icon} width="50%" />
-        </div>,
-        document.body
-      )
+      <div className={styles.overlay}>
+        <FoodsIcon stroke="white" className={styles.icon} width="50%" />
+      </div>,
+      document.body
+    )
     : null;
 
   return (
     <>
-    <div className={styles.categoryWrapper + ' ' + "mainBackground"}>
-      <div className="containerTopNavbarColor"/>
+      <div className={styles.categoryWrapper + ' ' + "mainBackground"}>
+        <div className="containerTopNavbarColor" />
         <div className={styles.linkWrapper}>
-          {menuLinks.map((item,index) => {
-            const itemsData = item.desserts || item.drinks  || item.meals || item.salads;
+          {menuLinks.map((item, index) => {
+            const itemsData = item.desserts || item.drinks || item.meals || item.salads;
             if (!itemsData) return null;
             const currentCategory = pathname.split("/").pop();
             //console.log("currentCategory:", currentCategory);
@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
         </div>
         {animationPortal}
         {children}
-    </div>
+      </div>
     </>
   );
 }

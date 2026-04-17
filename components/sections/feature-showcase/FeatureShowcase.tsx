@@ -13,11 +13,12 @@ export default function AnimatedSections() {
 
         return (
           <div key={index} className={styles.containerWrapper}>
-            <div className={styles.heroDefault}>
-              <h2 className="highlight-text">{title}</h2>
-            </div>
+            <h2 className="highlight-text">{title}</h2>
 
-            <div className={`${styles.definitionDefault} ${reverse ? `${styles.reverseDefinition} ${styles.reverseRowDefinition}` : ""}`}>
+            <div className={`
+              ${styles.definitionDefault} 
+              ${reverse ? `${styles.reverseDefinition} ${styles.reverseRowDefinition}` : ""}`}
+            >
               {images && (
                 <AnimatedOnScroll
                   animationClass={styles.animateinView}
@@ -41,7 +42,11 @@ export default function AnimatedSections() {
                     width={50}
                     height={150}
                   />
-                  <div className={styles.colorsBackground} />
+                  <div className={styles.bubblesContainer}>
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <div key={i} className={`${styles.bubble} ${styles[`bubble${i + 1}`]}`} />
+                    ))}
+                  </div>
                 </AnimatedOnScroll>
               )}
 

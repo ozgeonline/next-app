@@ -6,6 +6,7 @@ import Carousel from "@/components/ui/slides/carousel/Carousel";
 import { menuSlides, menuLinks } from "./menu-items";
 import { menuPageitemsBottom } from "@/components/sections/highlight-cards/card-items";
 import MenuCarousel from "./MenuCarousel";
+import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 import styles from "./menu.module.css";
 
 const HeroBanner = dynamic(() => import('@/components/ui/banners/hero-banner/HeroBanner'));
@@ -47,6 +48,7 @@ export default function MenuPage() {
 
       <main className={styles.main}>
         <div className={`${styles.menu} mainBackground`}>
+          <WavesBackground />
           <MenuCarousel
             menuLinks={menuLinks}
             textLabels={["Desserts", "Drinks", "Meals", "Salads"]}
@@ -56,6 +58,7 @@ export default function MenuPage() {
         <div className={`${styles.contactBadgeWrapper} mainBackground`}>
           <div className={styles.containerBadge}>
             <MainPageReservationBanner />
+            <WavesBackground />
           </div>
         </div>
 

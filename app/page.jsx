@@ -59,6 +59,7 @@ export default function Home() {
             {/* Hover Cards Section */}
             <section>
               <HighlightCards data={homePageitems} learnMore={true} />
+              <WavesBackground />
             </section>
 
             {/* Scroll Trigger - Animated Image Sections & Image Info */}
@@ -67,7 +68,6 @@ export default function Home() {
                 style={{ position: 'relative', width: '100%', paddingBottom: '5rem' }}
                 className="animatedSections mainBackground"
               >
-                <WavesBackground />
                 <FeatureShowcase />
               </div>
             </section>

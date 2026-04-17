@@ -33,7 +33,7 @@ export function MenuPreview({
       <div className={styles.info}>
         <div className={styles.titleRow}>
           <h3>{title}</h3>
-          <span className={`${styles.price} highlight-text`}>
+          <span className={`${styles.price}`}>
             {price}
             <span> $</span>
           </span>
@@ -43,7 +43,7 @@ export function MenuPreview({
         <div className={styles.statsRow}>
           <div className={styles.stars}>
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={14} fill="#ffc905" color="#ffc905" />
+              <Star key={i} size={14} fill="#6e737d90" color="#6e737d90" />
             ))}
           </div>
           <div className={styles.statItem}>

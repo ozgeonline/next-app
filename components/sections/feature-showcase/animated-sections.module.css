@@ -1,67 +1,3 @@
-.definitionImage.animateinView .imageFirst {
-  animation: animateFirst 0.75s ease-out forwards;
-}
-
-.definitionImage.animateinView .imageSecond {
-  animation: animateSecond 0.75s ease-out forwards;
-}
-
-@keyframes animateFirst {
-  from {
-    left: -35%;
-    scale: 0.5;
-  }
-  to {
-    left: 30%;
-    scale: 1;
-  }
-}
-
-@keyframes animateSecond {
-  from {
-    left: 35%;
-    scale: 0.5;
-  }
-  to {
-    left: -30%;
-    scale: 1;
-  }
-}
-
-@media screen and (min-width: 640px) {
-  @keyframes animateFirst {
-    from {
-      top: -35%;
-      left: -35%;
-      scale: 0.5;
-    }
-    to {
-      top: 15%;
-      left: 15%;
-      scale: 1;
-    }
-  }
-
-  @keyframes animateSecond {
-    from {
-      top: 35%;
-      left: 35%;
-      scale: 0.5;
-    }
-    to {
-      top: -15%;
-      left: -15%;
-      scale: 1;
-    }
-  }
-    
-  }
-
-  @keyframes colorsBackground {
-    from { scale: 0.5;}
-    to { scale: 1; }
-}
-
 .containerWrapper {
   z-index: 100;
   display: flex;
@@ -71,34 +7,6 @@
   justify-content: center;
   will-change: transform, opacity;
   transition: all 0.5s ease-out;
-}
-
-.heroDefault {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 90%;
-  height: 1rem;
-  margin-top: 1.2rem;
-}
-
-.heroDefault h2,
-.heroDefault h1 {
-  font-size: 1rem;
-  font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.15rem;
-  padding: 0.7rem;
-  text-align: center;
-}
-
-
-
-@media screen and (min-width: 768px) {
-  .heroDefault h1 { font-size: 1.5rem; }
-  .heroDefault h2 { font-size: 1.3rem; }
 }
 
 .definitionDefault {
@@ -139,15 +47,78 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width:45vw;
+  width: 45vw;
   height: 15vh;
   box-sizing: border-box;
   border-radius: 2rem;
 }
 
+@media screen and (max-width: 768px) {
+  .definitionDefault p {
+    text-align: justify;
+  }
+
+  .definitionDefault {
+    flex-direction: column;
+  }
+
+  .definitionDefault.reverseDefinition {
+    flex-direction: column-reverse;
+  }
+
+  .definitionDefault.reverseRowDefinition {
+    flex-direction: inherit;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .definitionDefault.reverseRowDefinition {
+    flex-direction: row-reverse;
+  }
+
+  .definitionDefault p {
+    padding: 0 3rem;
+    width: 70%;
+  }
+
+  .definitionDefault {
+    align-items: start;
+  }
+
+  .definitionImage {
+    width: 20vw;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+
+  .definitionHero p,
+  .definitionDefault p {
+    padding: 0 5rem;
+    width: 50%;
+    font-size: medium;
+  }
+
+  .definitionImage {
+    width: 17vw;
+    height: 20vh;
+  }
+}
+
+.definitionImage.animateinView .imageFirst {
+  animation: animateFirst 0.75s ease-out forwards;
+}
+
+.definitionImage.animateinView .imageSecond {
+  animation: animateSecond 0.75s ease-out forwards;
+}
+
+.imageVisible {
+  opacity: 1;
+}
+
 .imageFirst,
-.imageSecond,
-.colorsBackground {
+.imageSecond {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -165,68 +136,171 @@
   opacity: 0.5;
 }
 
-.colorsBackground {
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background: linear-gradient(45deg, var(--background), var(--text-opacity));
-  opacity: 0.9;
-  box-sizing: border-box;
+/* ══════ GLASS BUBBLES SYSTEM ══════ */
+.bubblesContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
   animation: colorsBackground 0.75s ease-out forwards;
 }
 
-@media screen and (max-width: 768px) {
-  .definitionDefault p {
-    text-align: justify;
+/* Base Bubble — Glassmorphism Foundation */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%,
+      rgba(26, 26, 26, 0.376),
+      rgba(255, 251, 136, 0.376),
+      rgba(26, 26, 26, 0.251));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 0 20px rgba(255, 255, 255, 0.05),
+    0 8px 32px rgba(16, 185, 129, 0.1);
+  animation: floatBubble 6s ease-in-out infinite alternate;
+}
+
+/* Each bubble gets unique size, position, and timing */
+.bubble1 {
+  width: 55%;
+  height: 70%;
+  top: 10%;
+  left: -15%;
+  opacity: 0.7;
+  animation-duration: 7s;
+}
+
+.bubble2 {
+  width: 40%;
+  height: 55%;
+  top: -10%;
+  right: -10%;
+  left: auto;
+  opacity: 0.5;
+  animation-duration: 5s;
+  animation-delay: -2s;
+  background: radial-gradient(circle at 40% 25%, rgba(6, 182, 212, 0.2), rgba(16, 185, 129, 0.1));
+}
+
+.bubble3 {
+  width: 30%;
+  height: 40%;
+  bottom: -55%;
+  left: 25%;
+  top: auto;
+  opacity: 0.6;
+  animation-duration: 8s;
+  animation-delay: -4s;
+  background: radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.3), rgba(26, 26, 26, 0.314));
+}
+
+.bubble4 {
+  width: 20%;
+  height: 28%;
+  top: 50%;
+  right: -30%;
+  left: auto;
+  opacity: 0.45;
+  animation-duration: 6s;
+  animation-delay: -1s;
+}
+
+.bubble5 {
+  width: 15%;
+  height: 20%;
+  top: 5%;
+  left: -50%;
+  opacity: 0.4;
+  animation-duration: 9s;
+  animation-delay: -3s;
+  background: radial-gradient(circle at 35% 35%, rgba(1, 23, 27, 0.2), rgba(255, 255, 255, 0.05));
+}
+
+@keyframes floatBubble {
+  0% {
+    transform: translateY(0) scale(1);
   }
 
-  .definitionDefault {
-    flex-direction: column;
-  }
-
-  .definitionDefault.reverseDefinition {
-    flex-direction: column-reverse;
-  }
-  .definitionDefault.reverseRowDefinition {
-    flex-direction: inherit;
+  100% {
+    transform: translateY(-12%) scale(1.08);
   }
 }
 
-@media screen and (min-width: 768px) {
-  .definitionDefault.reverseRowDefinition {
-    flex-direction: row-reverse;
-  }
-  .definitionDefault p {
-    padding: 0 3rem;
-    width: 70%;
+
+
+
+
+
+
+
+
+
+
+
+@keyframes animateFirst {
+  from {
+    left: -35%;
+    scale: 0.5;
   }
 
-  .definitionDefault {
-    align-items: start;
-  }
-  .definitionImage {
-    width:20vw;
+  to {
+    left: 30%;
+    scale: 1;
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .definitionHero p,
-  .definitionDefault p {
-    padding: 0 5rem;
-    width: 50%;
-    font-size: medium;
+@keyframes animateSecond {
+  from {
+    left: 35%;
+    scale: 0.5;
   }
 
-  .definitionImage {
-    width:17vw;
-    height: 20vh;
+  to {
+    left: -30%;
+    scale: 1;
   }
 }
 
-.imageHidden {
-  opacity: 0;
-  pointer-events: none;
-  display: none;
+@media screen and (min-width: 640px) {
+  @keyframes animateFirst {
+    from {
+      top: -35%;
+      left: -35%;
+      scale: 0.5;
+    }
+
+    to {
+      top: 15%;
+      left: 15%;
+      scale: 1;
+    }
+  }
+
+  @keyframes animateSecond {
+    from {
+      top: 35%;
+      left: 35%;
+      scale: 0.5;
+    }
+
+    to {
+      top: -5%;
+      left: -5%;
+      scale: 1;
+    }
+  }
+
 }
 
-.imageVisible {  opacity: 1;} 
+@keyframes colorsBackground {
+  from {
+    scale: 0.5;
+  }
+
+  to {
+    scale: 1;
+  }
+}
