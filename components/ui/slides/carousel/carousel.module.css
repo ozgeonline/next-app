@@ -9,7 +9,7 @@
 .activeText {
   color: var(--text);
   font-weight: 700;
-  border-bottom: 3px solid #f34043;
+  border-bottom: 3px solid #0080fa;
 }
 
 [data-theme="dark"] .activeText {

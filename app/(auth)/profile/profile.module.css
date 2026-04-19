@@ -11,11 +11,15 @@
 .profileWrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  height: 100%;
   max-width: 600px;
   margin: 0 auto;
   gap: 2.5rem;
   padding: 2rem 0;
+  text-align: center;
 }
 
 /* ---------------------------------------- authProfile ---------------------------------------- */
@@ -45,7 +49,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--text-low-opacity);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 1.5rem;
@@ -55,7 +59,6 @@
 }
 
 [data-theme='light'] .glassBlock {
-  background: rgba(0, 0, 0, 0.02);
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -72,13 +75,13 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--shark-400);
+  color: var(--shark-600);
   margin-bottom: 0.5rem;
 }
 
 .blockValue {
   font-size: 1.25rem;
-  color: var(--text);
+  color: var(--neutral-700);
   font-weight: 500;
   word-break: break-all;
 }
@@ -95,13 +98,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   width: 100%;
   gap: 1rem;
 }
 
 .themeButton {
-  background: var(--text-low-opacity);
+  background: var(--neutral-100);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text);
   padding: 0.4rem 1rem;
@@ -144,7 +147,7 @@
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--text);
+  color: var(--neutral-700);
   font-size: 1.5rem;
   padding: 0.5rem 0;
   outline: none;
@@ -156,7 +159,7 @@
 }
 
 .ghostInput:focus {
-  border-bottom: 1px solid var(--science-blue-500);
+  border-bottom: 1px solid var(--science-blue-800);
 }
 
 .actionRow {
@@ -168,19 +171,30 @@
 .ghostButton {
   flex: 1;
   background: transparent;
-  border: 1px solid var(--science-blue-700);
-  color: var(--science-blue-700);
+  border: 1px solid var(--science-blue-500);
+  color: var(--science-blue-500);
   padding: 0.5rem 0.75rem;
-  border-radius: 8px;
+  border-radius: 30px;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-weight: 500;
+}
+
+[data-theme="light"] .ghostButton {
+  border: 1px solid var(--science-blue-800);
+  color: var(--science-blue-800);
 }
 
 .ghostButton:hover {
-  background: var(--science-blue-700);
-  color: var(--shark-100);
+  background: var(--science-blue-500);
+  color: var(--science-blue-50);
+  border-color: rgba(4, 102, 200, 0.05);
+}
+
+[data-theme="light"] .ghostButton:hover {
+  background: var(--science-blue-800);
+  color: var(--science-blue-100);
+  border-color: rgba(4, 102, 200, 0.05);
 }
 
 .cancelButton {
@@ -219,11 +233,11 @@
 
 .nonAuthProfile h3 {
   font-weight: 400;
-  color: var(--shark-400);
+  color: var(--neutral-500);
 }
 
 .primaryAuthButton {
-  background: var(--science-blue-600);
+  background: var(--science-blue-800);
   color: white;
   padding: 1rem 3rem;
   border-radius: 30px;
@@ -232,6 +246,12 @@
   letter-spacing: 0.05em;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(4, 102, 200, 0.3);
+}
+
+[data-theme="dark"] .primaryAuthButton {
+  background: transparent;
+  border: 1px solid var(--science-blue-500);
+  color: var(--science-blue-500);
 }
 
 .primaryAuthButton:hover {
@@ -245,7 +265,7 @@
   padding: 1rem 3rem;
   border-radius: 30px;
   text-decoration: none;
-  border: 1px solid var(--text-low-opacity);
+  border: 1px solid var(--neutral-600);
   transition: all 0.3s ease;
 }
 

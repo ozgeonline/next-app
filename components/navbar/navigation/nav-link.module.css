@@ -1,6 +1,6 @@
 .active {
   color: #0466c8 !important;
-  font-weight: bolder;
+  font-weight: 800 !important;
 }
 
 [data-theme="dark"] .active {

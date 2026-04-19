@@ -139,7 +139,7 @@ export default function AuthForm({
 
             <button
               type="submit"
-              className={styles.submitButton}
+              className={`${styles.submitButton} accent-link-button`}
               disabled={isSubmitting || !isFormValid}
             >
               {isSubmitting
@@ -158,7 +158,7 @@ export default function AuthForm({
 
             <Link
               href={referencePath}
-              className={styles.referencePath}
+              className={`${styles.referencePath} accent-link-button`}
             >
               {referencePath}
             </Link>

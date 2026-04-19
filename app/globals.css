@@ -500,6 +500,9 @@ h1.highlight-text {
 }
 
 .accent-link-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   padding: .3em 1em;
   font-size: 1.1rem;
@@ -520,7 +523,7 @@ h1.highlight-text {
 }
 
 [data-theme="dark"] .accent-link-button {
-  color: var(--pale-prim-900);
+  color: var(--shark-800);
   background: var(--shark-50);
 }
 

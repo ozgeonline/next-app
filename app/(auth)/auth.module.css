@@ -34,26 +34,26 @@
 
 .card {
   width: 90%;
+  min-height: max-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  background: var(--text-low-opacity);
-  border-radius: 8px;
-  margin: .5rem;
-}
-
-.card:nth-child(2) {
+  /* Glassmorphism Specs */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin: 0.5rem;
+  overflow: hidden;
   height: 24rem;
 }
 
-.authCard {
-  height: 24rem;
-}
-
-.nonauthCard {
-  height: 36rem;
+[data-theme='light'] .card {
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.05);
 }
 
 @media screen and (min-width: 1024px) {
@@ -61,8 +61,7 @@
     width: 40%;
   }
 
-  .authCard,
-  .card:nth-child(2) {
+  .card {
     height: 36rem;
   }
 
@@ -73,18 +72,24 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 7rem;
-  height: 7rem;
+  top: 35%;
+  width: 6rem;
+  height: 6rem;
   border-radius: 50%;
-  color: var(--shark-50);
+  /* Frosted Glass Orb */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(0, 128, 250, 0.2), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #F5F5F5;
+  box-sizing: border-box;
   text-transform: uppercase;
   font-size: 2em;
   overflow: hidden;
   z-index: 10;
 }
 
-[data-theme="dark"] .avatar {
-  z-index: 10;
+[data-theme="light"] .avatar {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 }
 
 @media screen and (min-width: 1024px) {
@@ -96,28 +101,24 @@
 }
 
 .userCard {
-  background: var(--text-low-opacity);
-  color: var(--shark-800);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(9.3px);
+  background: transparent;
+  color: var(--text);
   display: flex;
   height: 100%;
   width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  overflow: hidden;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 
 .userCard .top,
 .userCard .bottom {
-  width: 100%;
+  width: 70%;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding-top: 1rem;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -131,15 +132,66 @@
 
 .userCard .top .name {
   text-transform: capitalize;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--neutral-700);
 }
 
 .userCard .bottom .nonauth {
   font-style: oblique;
+  color: var(--shark-400);
 }
 
 @media screen and (min-width: 1024px) {
   .userCard .top .name {
     font-size: 1.5rem;
-    font-weight: bold;
   }
+}
+
+/* Auth Actions (Ghost Buttons) */
+.ghostButton {
+  background: transparent;
+  border: 1px solid var(--science-blue-500);
+  color: var(--science-blue-500);
+  padding: 0.75rem 2rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.ghostButton:hover {
+  border-color: var(--science-blue-500);
+  color: var(--science-blue-500);
+  background: rgba(4, 102, 200, 0.05);
+}
+
+[data-theme="light"] .ghostButton {
+  background: transparent;
+  border: 1px solid var(--science-blue-800);
+  color: var(--science-blue-800);
+}
+
+[data-theme="light"] .ghostButton:hover {
+  background: rgba(4, 102, 200, 0.1);
+}
+
+.logoutButton {
+  background: transparent;
+  border: 1px solid var(--neutral-600);
+  color: var(--neutral-600);
+  padding: 0.75rem 2rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.logoutButton:hover {
+  background: var(--neutral-600);
+  color: var(--neutral-100);
+  filter: brightness(1.3);
 }

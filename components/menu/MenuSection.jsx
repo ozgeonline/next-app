@@ -33,7 +33,7 @@ export function MenuPreview({
       <div className={styles.info}>
         <div className={styles.titleRow}>
           <h3>{title}</h3>
-          <span className={`${styles.price}`}>
+          <span className={styles.price}>
             {price}
             <span> $</span>
           </span>
