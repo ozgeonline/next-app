@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Meal from './app/models/Meal.js';
+import Meal from './models/Meal.js';
 
 export const dummyMeals = [
   {

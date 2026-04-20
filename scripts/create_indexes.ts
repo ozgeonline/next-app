@@ -1,6 +1,6 @@
 import connect from '../lib/db.js';
-import Rating from '../app/models/Rating.js';
-import Meal from '../app/models/Meal.js';
+import Rating from '../models/Rating.js';
+import Meal from '../models/Meal.js';
 import mongoose from 'mongoose';
 import process from 'process';
 

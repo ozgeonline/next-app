@@ -4,7 +4,7 @@ import Image from "next/image";
 import { cache } from "react";
 import connect from "@/lib/db";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
-import Meal from "@/app/models/Meal";
+import Meal from "@/models/Meal";
 import RatingStars from "@/components/meals/rating-stars/RatingStars";
 import styles from "./recipe-card.module.css";
 import { Star, StarHalf } from "lucide-react";

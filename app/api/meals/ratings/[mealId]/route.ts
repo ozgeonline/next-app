@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import connect from '@/lib/db';
-import Rating from '@/app/models/Rating';
+import Rating from '@/models/Rating';
 import { getUserFromCookies } from '@/lib/getUserFromCookies';
 import { rateLimit } from '@/lib/rateLimit';
 

@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import connect from "@/lib/db";
-import User from "@/app/models/User";
+import User from "@/models/User";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
-import Rating from "@/app/models/Rating";
+import Rating from "@/models/Rating";
 import { rateLimit } from "@/lib/rateLimit";
 
 export async function GET(req: Request) {

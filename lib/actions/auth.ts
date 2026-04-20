@@ -1,7 +1,7 @@
 'use server';
 
 import connect from "@/lib/db";
-import User from "@/app/models/User";
+import User from "@/models/User";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { getAuthCookieOptions } from "@/lib/auth";

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
 import connect from "@/lib/db";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
-import Reservation from "@/app/models/Reservation";
+import Reservation from "@/models/Reservation";
 import { rateLimit } from "@/lib/rateLimit";
 
 export async function PUT(
@@ -24,7 +24,7 @@ export async function PUT(
     }
 
     const { id } = await context.params;//reservation ID
-    
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json({ error: "Invalid Reservation ID format" }, { status: 400 });
     }
@@ -80,7 +80,7 @@ export async function DELETE(
     }
 
     const { id } = await context.params;//reservation ID
-    
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json({ error: "Invalid Reservation ID format" }, { status: 400 });
     }

@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import Reservation from "@/app/models/Reservation";
+import Reservation from "@/models/Reservation";
 import connect from "@/lib/db";
 import { rateLimit } from "@/lib/rateLimit";
 

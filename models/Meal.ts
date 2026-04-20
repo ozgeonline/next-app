@@ -10,7 +10,7 @@ const mealSchema = new Schema({
   creator_email: { type: String, required: true, match: /^\S+@\S+\.\S+$/ },
   createdAt: { type: Date, default: Date.now },
   averageRating: { type: Number, default: 0 },
-},{ timestamps: true });
+}, { timestamps: true });
 mealSchema.index({ createdAt: -1 });
 
 const Meal = mongoose.models.Meal || mongoose.model('Meal', mealSchema);

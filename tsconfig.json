@@ -38,7 +38,7 @@
     "lib/db.js",
     "app/api/auth/signup/route.ts",
     "app/api/auth/login/route.ts",
-    "app/models/User.ts",
+    "models/User.ts",
     "env.d.ts",
     "env.local.d.ts",
     "components/ui/topScrollButton/TopScrollButton.tsx",

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connect from '@/lib/db';
-import Meal from '@/app/models/Meal';
+import Meal from '@/models/Meal';
 import { rateLimit } from '@/lib/rateLimit';
 
 // Route Cache (ISR):
