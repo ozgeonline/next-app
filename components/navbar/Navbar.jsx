@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { links } from "./navlinks.constant";
-import DarkLightToggle from "@/components/settings/theme/DarkLightToggle";
+import DarkLightToggle from "@/components/theme/DarkLightToggle";
 import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import Logo from "@/components/ui/branding/logo/Logo"
 import styles from "./navbar.module.css";

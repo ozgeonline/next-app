@@ -19,7 +19,7 @@ export default function MenuCarousel({ menuLinks, textLabels }) {
   function getMenuCategory(index) {
     const item = menuLinks[index];
     if (!item) return null;
-    return item.desserts || item.drinks || item.meals || item.salads;
+    return Object.values(item)[0];
   }
 
   function handleViewAll(e, href) {
@@ -56,7 +56,7 @@ export default function MenuCarousel({ menuLinks, textLabels }) {
       }}
     >
       {menuLinks.map((item, index) => {
-        const itemsData = item.desserts || item.drinks || item.meals || item.salads;
+        const itemsData = Object.values(item)[0];
         if (!itemsData) return null;
         return (
           <div key={index} className={styles.menuItemsWrapper}>

@@ -33,7 +33,7 @@ export default function MenuPage() {
         dotsWrapper={styles.dotsWrapper}
       >
         {menuSlides.map((item, index) => {
-          const itemsData = item.cake || item.order || item.salads || item.meals;
+          const itemsData = Object.values(item)[0];
           if (!itemsData) return null;
           return (
             <HeroBanner

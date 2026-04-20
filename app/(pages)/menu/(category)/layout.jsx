@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
         <div className="containerTopNavbarColor" />
         <div className={styles.linkWrapper}>
           {menuLinks.map((item, index) => {
-            const itemsData = item.desserts || item.drinks || item.meals || item.salads;
+            const itemsData = Object.values(item)[0];
             if (!itemsData) return null;
             const currentCategory = pathname.split("/").pop();
             //console.log("currentCategory:", currentCategory);
