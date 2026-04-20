@@ -4,14 +4,14 @@ import { useEffect, useTransition, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useNavigation } from "@/context/navigation/NavigationProvider";
-import { useScroll } from "@/context/scroll/ScrollingProvider";
+import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { useTheme } from "@/context/theme/ThemeProvider";
 import styles from "./nav-link.module.css";
 
 export default function NavLink({ href, children }) {
   const path = usePathname();
   const router = useRouter();
-  const { scrolling } = useScroll();
+  const scrolling = useNavbarScroll();
   const { isOpen, setIsOpen, triggerNavigation, setIsLoading } = useNavigation();
   const [isPending, startTransition] = useTransition();
   const isMountedRef = useRef(true);

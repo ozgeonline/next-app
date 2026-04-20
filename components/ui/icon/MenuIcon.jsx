@@ -1,13 +1,13 @@
 "use client";
 
 import { useTheme } from "@/context/theme/ThemeProvider";
-import { useScroll } from "@/context/scroll/ScrollingProvider";
+import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { usePathname } from "next/navigation";
 import styles from "./icon.module.css";
 
 export default function MenuIcon({ onClick, open }) {
   const { theme } = useTheme();
-  const { scrolling } = useScroll();
+  const scrolling = useNavbarScroll();
   const pathname = usePathname();
 
   const isSpecialPage = pathname === "/" || pathname === "/menu";

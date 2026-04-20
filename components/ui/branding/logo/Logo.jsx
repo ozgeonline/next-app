@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { useTheme } from "@/context/theme/ThemeProvider";
-import { useScroll } from "@/context/scroll/ScrollingProvider";
+import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { usePathname } from "next/navigation";
 import { useNavigation } from "@/context/navigation/NavigationProvider";
 import styles from "./logo.module.css";
 
 export default function Logo() {
   const { theme } = useTheme();
-  const { scrolling } = useScroll();
+  const scrolling = useNavbarScroll();
   const path = usePathname();
   const { isOpen } = useNavigation();
 

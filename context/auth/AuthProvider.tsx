@@ -1,3 +1,9 @@
+/*
+ * It uses SWR to dynamically fetch and cache the user's authentication state from the backend (`/api/auth/user`).
+ * It handles the user's login state, loading state, and logout functionality, while also supporting
+ * initial Server-Side Rendering (SSR) data injection via the `initialUser` prop.
+*/
+
 "use client";
 
 import { createContext, useContext, ReactNode } from "react";

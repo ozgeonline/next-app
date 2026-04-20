@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { useBreakpoints } from "@/components/settings/breakpoint/useBreakpoints";
+import { useBreakpoints } from "@/hooks/useBreakpoints";
 import styles from "./infinite-slide-loop.module.css";
 import Image from "next/image";
 

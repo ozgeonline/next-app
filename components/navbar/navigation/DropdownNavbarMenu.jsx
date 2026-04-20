@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useTheme } from "@/context/theme/ThemeProvider";
-import { useScroll } from "@/context/scroll/ScrollingProvider";
+import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { useNavigation } from "@/context/navigation/NavigationProvider";
 import { usePathname } from "next/navigation";
 import MenuIcon from "@/components/ui/icon/MenuIcon";
@@ -12,7 +12,7 @@ import styles from "./dropdown.module.css";
 export default function DropdownNavbarMenu({ children }) {
   const dropdownRef = useRef(null);
   const { theme } = useTheme();
-  const { scrolling } = useScroll();
+  const scrolling = useNavbarScroll();
   const { isOpen, setIsOpen } = useNavigation();
   const pathname = usePathname();
 
