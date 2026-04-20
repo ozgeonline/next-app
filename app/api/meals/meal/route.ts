@@ -1,12 +1,23 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connect from '@/lib/db';
 import Meal from '@/app/models/Meal';
+import { rateLimit } from '@/lib/rateLimit';
 
 // Route Cache (ISR):
 export const revalidate = 3600;
 
-export const GET = async () => {
+export const GET = async (req: NextRequest) => {
   try {
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 10, 60000);
+
+    if (!limitStatus.success) {
+      return NextResponse.json(
+        { error: "Too many requests. Please wait." },
+        { status: 429 }
+      );
+    }
+
     await connect();
 
     const mealsWithRatings = await Meal.aggregate([

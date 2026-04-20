@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import connect from '@/lib/db';
 import Rating from '@/app/models/Rating';
 import { getUserFromCookies } from '@/lib/getUserFromCookies';
+import { rateLimit } from '@/lib/rateLimit';
 
 interface RatingDocument {
   mealId: mongoose.Types.ObjectId;
@@ -14,6 +15,16 @@ interface RatingDocument {
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ mealId: string }> }) {
   try {
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 10, 60000);
+
+    if (!limitStatus.success) {
+      return NextResponse.json(
+        { error: "Too many requests. Please wait." },
+        { status: 429 }
+      );
+    }
+
     await connect();
 
     const decoded = await getUserFromCookies();

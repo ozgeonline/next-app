@@ -22,6 +22,16 @@ export async function GET(req: Request) {
   };
 
   try {
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    const limitStatus = rateLimit(ip, 20, 60000);
+
+    if (!limitStatus.success) {
+      return NextResponse.json(
+        { error: "Too many requests. Please wait." },
+        { status: 429 }
+      );
+    }
+
     await connect();
 
     const decoded = await getUserFromCookies();
