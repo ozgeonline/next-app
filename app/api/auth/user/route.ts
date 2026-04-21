@@ -45,7 +45,20 @@ export async function GET(req: Request) {
     }
 
     const url = new URL(req.url);
+    const basicOnly = url.searchParams.get('basic') === 'true';
     const ratingsOnly = url.searchParams.get('ratings') === 'true';
+
+    // AuthProvider only needs user info — skip ratings query
+    if (basicOnly) {
+      return NextResponse.json({
+        message: "User data fetched successfully",
+        user: {
+          name: user.name,
+          email: user.email,
+          userId: user._id.toString()
+        },
+      });
+    }
 
     const ratingsQuery = Rating.find({ userId: decoded.userId })
       .populate({ path: 'mealId', select: 'title slug' })

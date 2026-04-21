@@ -7,6 +7,7 @@
   height: 40px;
   transition: transform 0.3s ease;
   background: transparent;
+  z-index: 1000;
 }
 
 .logoContainer:hover {

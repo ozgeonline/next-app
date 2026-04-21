@@ -6,7 +6,7 @@
 
 "use client";
 
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, useCallback, useMemo, ReactNode } from "react";
 import useSWR from "swr";
 import type { ClientUser } from "@/types/userTypes";
 
@@ -23,7 +23,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const fetcher = async (url: string) => {
   const res = await fetch(url, { credentials: "include" });
   if (!res.ok) return null;
-  const data = await res.json();
+
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    return null;
+  }
+
   if (!data?.user) return null;
 
   return {
@@ -41,21 +48,21 @@ export function AuthProvider({
   initialUser?: ClientUser | null;
 }) {
   const { data: user, isLoading, mutate } = useSWR<ClientUser | null>(
-    "/api/auth/user",
+    "/api/auth/user?basic=true",
     fetcher,
     {
       fallbackData: initialUser || null, // User from SSR
       revalidateOnFocus: true,
-      revalidateOnMount: true, // component is first loaded: SWR's req to pull data
+      revalidateOnMount: !initialUser, // SSR verisi varsa mount'ta tekrar çekme
       dedupingInterval: 10000,
       onError: (error) => {
         // for 500 Internal Server Error 
-        console.error("AuthProvider: Kimlik doğrulama verisi çekilemedi:", error);
+        console.error("AuthProvider: Failed to fetch authentication data:", error);
       },
     }
   );
 
-  const contextMutateUser = (newUser?: ClientUser | null) => {
+  const contextMutateUser = useCallback((newUser?: ClientUser | null) => {
     if (newUser === null) {
       mutate(null, { revalidate: false });
     } else if (newUser) {
@@ -63,31 +70,35 @@ export function AuthProvider({
     } else {
       mutate();
     }
-  };
+  }, [mutate]);
 
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     try {
-      await fetch("/api/auth/logout", {
+      const res = await fetch("/api/auth/logout", {
         method: "POST",
         credentials: "include"
       });
+
+      if (!res.ok) {
+        console.warn("AuthProvider: Logout API returned", res.status);
+      }
     } catch (error) {
       console.error("AuthProvider: Failed to fetch authentication data:", error);
     } finally {
       contextMutateUser(null);
     }
-  };
+  }, [contextMutateUser]);
+
+  const contextValue = useMemo(() => ({
+    user: user ?? null,
+    isAuthenticated: !!user,
+    loading: isLoading,
+    mutateUser: contextMutateUser,
+    logout: handleLogout,
+  }), [user, isLoading, contextMutateUser, handleLogout]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        user: user ?? null,
-        isAuthenticated: !!user,
-        loading: isLoading,
-        mutateUser: contextMutateUser,
-        logout: handleLogout
-      }}
-    >
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );
