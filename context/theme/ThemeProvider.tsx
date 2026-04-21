@@ -71,6 +71,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     isMounted
   }), [theme, toggleTheme, isMounted]);
 
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <ThemeContext.Provider value={value}>
       {children}

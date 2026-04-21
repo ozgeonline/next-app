@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import useSWR from "swr";
 import { useAuth } from "@/context/auth/AuthProvider";
 import { SavedReservation } from "@/types/reservationTypes";
 
@@ -11,65 +11,48 @@ interface ReservationState {
   refetchReservations: () => Promise<void>;
 }
 
+const fetcher = async (url: string) => {
+  const res = await fetch(url, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    // Hata durumunda da json parse hatasini yakalamak icin try/catch benzeri yaklasim
+    const data = await res.json().catch(() => ({})); 
+    throw new Error(data.error || "Failed to fetch reservations");
+  }
+
+  const data = await res.json();
+
+  return data.reservations.map((reservation: any) => ({
+    _id: reservation._id,
+    userId: reservation.userId,
+    date: reservation.date,
+    time: reservation.time,
+    guests: reservation.guests,
+    notes: reservation.notes || null,
+  })) as SavedReservation[];
+};
+
 export const useReservations = (): ReservationState => {
   const { user, isAuthenticated, loading: authLoading } = useAuth();
-  const [reservations, setReservations] = useState<SavedReservation[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  console.log("Reservations:", reservations);
+  // Yalnızca kullanıcı doğrulama işlemi bittiyse ve kullanıcı giriş yaptıysa istek at (Conditional Fetching)
+  const shouldFetch = !authLoading && isAuthenticated && user;
 
-  const fetchReservations = useCallback(async () => {
+  const { data, error, isLoading, mutate } = useSWR<SavedReservation[]>(
+    shouldFetch ? "/api/reservations" : null,
+    fetcher
+  );
 
-    if (authLoading) return setLoading(true);
-
-    if (!isAuthenticated || !user) {
-      setReservations([]);
-      setLoading(false);
-      return;
-    }
-
-    try {
-      setLoading(true);
-      setError(null);
-
-      const res = await fetch("/api/reservations", {
-        method: "GET",
-        credentials: "include",
-      });
-
-      if (!res.ok) {
-        const data = await res.json(); //?
-        throw new Error(data.error || "Failed to fetch reservations");
-      }
-
-      const data = await res.json();
-      //console.log("useReservations, API response:", data);
-
-      const fetchedReservations: SavedReservation[] = data.reservations.map(
-        (reservation: any) => ({
-          _id: reservation._id,
-          userId: reservation.userId,
-          date: reservation.date,
-          time: reservation.time,
-          guests: reservation.guests,
-          notes: reservation.notes || null,
-        })
-      );
-
-      setReservations(fetchedReservations);
-
-    } catch (err: any) {
-      setError(err.message);
-      setReservations([]);
-    } finally {
-      setLoading(false);
-    }
-  }, [isAuthenticated, user]);
-
-  useEffect(() => {
-    fetchReservations();
-  }, [fetchReservations]);
-
-  return { reservations, loading, error, refetchReservations: fetchReservations };
+  return {
+    reservations: data || [],
+    // Eğer auth işlemi sürüyorsa veya api isteği sürüyorsa sistemi loading say
+    loading: authLoading || isLoading, 
+    error: error ? error.message : null,
+    refetchReservations: async () => {
+      await mutate();
+    },
+  };
 };
