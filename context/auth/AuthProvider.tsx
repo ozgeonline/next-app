@@ -51,9 +51,9 @@ export function AuthProvider({
     "/api/auth/user?basic=true",
     fetcher,
     {
-      fallbackData: initialUser || null, // User from SSR
+      fallbackData: initialUser, // if undefined, stays loading. if null, means server checked and user is logged out.
       revalidateOnFocus: true,
-      revalidateOnMount: !initialUser, // SSR verisi varsa mount'ta tekrar çekme
+      revalidateOnMount: initialUser === undefined, // if undefined, we must fetch on mount
       dedupingInterval: 10000,
       onError: (error) => {
         // for 500 Internal Server Error 
@@ -89,13 +89,20 @@ export function AuthProvider({
     }
   }, [contextMutateUser]);
 
-  const contextValue = useMemo(() => ({
-    user: user ?? null,
-    isAuthenticated: !!user,
-    loading: isLoading,
-    mutateUser: contextMutateUser,
-    logout: handleLogout,
-  }), [user, isLoading, contextMutateUser, handleLogout]);
+  const contextValue = useMemo(() => {
+    // SWR bazen fallbackData undefined olsa bile isLoading = false dönebiliyor.
+    // Kullanıcı verisi henüz 'null' olarak netleşmediyse (yani API tamamlanmadıysa) 
+    // sistem hala yükleniyordur.
+    const isActuallyLoading = user === undefined || isLoading;
+
+    return {
+      user: user ?? null,
+      isAuthenticated: !!user,
+      loading: isActuallyLoading,
+      mutateUser: contextMutateUser,
+      logout: handleLogout,
+    };
+  }, [user, isLoading, contextMutateUser, handleLogout]);
 
   return (
     <AuthContext.Provider value={contextValue}>

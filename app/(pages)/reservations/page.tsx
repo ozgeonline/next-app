@@ -10,7 +10,7 @@ import styles from "./reservation.module.css";
 import Link from "next/link";
 
 export default function ReservationPage() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const {
     reservations,
     loading: reservationsLoading,
@@ -247,7 +247,14 @@ export default function ReservationPage() {
 
   return (
     <>
-      {!user ? (
+      {authLoading ? (
+        <div className={`mainBackground ${styles.containerWrapper}`}>
+          <div className="containerTopNavbarColor" />
+          <div className={styles["non-user-message"]}>
+            <p>Loading...</p>
+          </div>
+        </div>
+      ) : !user ? (
         <div className={`mainBackground ${styles.containerWrapper}`}>
           <div className="containerTopNavbarColor" />
           <div className={styles["non-user-message"]}>

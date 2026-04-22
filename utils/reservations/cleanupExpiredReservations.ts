@@ -10,7 +10,9 @@ export const cleanupExpiredReservations = async (
     });
 
     if (!res.ok) {
-      console.error("Cleanup API error:", res.status);
+      if (res.status !== 429) {
+        console.error("Cleanup API error:", res.status);
+      }
       return;
     }
 
