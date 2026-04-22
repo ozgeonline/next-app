@@ -12,12 +12,50 @@ interface ContactResult {
 export async function sendContactEmail(
   name: string,
   email: string,
-  message: string
+  message: string,
+  captchaToken: string
 ): Promise<ContactResult> {
-  if (!name || !email || !message) {
-    return { success: false, error: "All fields are required" };
+  if (!name || !email || !message || !captchaToken) {
+    return { success: false, error: "All fields and CAPTCHA verification are required" };
+  }
+  if (name.trim().length < 2 || name.trim().length > 50) {
+    return { success: false, error: "Name must be between 2 and 50 characters" };
   }
 
+  if (message.trim().length < 10 || message.trim().length > 2000) {
+    return { success: false, error: "Message must be between 10 and 2000 characters" };
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return { success: false, error: "Invalid email format" };
+  }
+
+  // Google reCAPTCHA Verification
+  try {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    if (!secretKey) {
+      console.error("RECAPTCHA_SECRET_KEY is missing in .env");
+      return { success: false, error: "Server configuration error" };
+    }
+
+    const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `secret=${secretKey}&response=${captchaToken}`,
+    });
+
+    const verifyData = await verifyRes.json();
+
+    if (!verifyData.success || verifyData.score < 0.5) {
+      return { success: false, error: "CAPTCHA verification failed. Are you a bot?" };
+    }
+  } catch (error) {
+    console.error("Captcha verification error:", error);
+    return { success: false, error: "Failed to verify CAPTCHA" };
+  }
+
+  // Send the Email if everything is safe
   try {
     const { error } = await resend.emails.send({
       from: 'Contact Form <onboarding@resend.dev>',

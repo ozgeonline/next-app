@@ -3,10 +3,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAuth } from '@/context/auth/AuthProvider';
 import { sendContactEmail } from '@/lib/actions/contact';
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import styles from './contact-form.module.css';
 
-export default function ContactForm() {
+function ContactFormInner() {
   const { user } = useAuth();
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
   const [formStatus, setFormStatus] = useState('');
@@ -33,8 +35,21 @@ export default function ContactForm() {
     setIsSubmitting(true);
     setError('');
 
+    if (!executeRecaptcha) {
+      setError('reCAPTCHA is not loaded yet');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      const result = await sendContactEmail(formData.name, formData.email, formData.message);
+      const token = await executeRecaptcha('contact_submit');
+
+      const result = await sendContactEmail(
+        formData.name,
+        formData.email,
+        formData.message,
+        token
+      );
 
       if (result.success) {
         setFormStatus('Thank you! We will get back to you soon...');
@@ -122,5 +137,15 @@ export default function ContactForm() {
         {formStatus && <p className={styles.formStatus}>{formStatus}</p>}
       </form>
     </div>
+  );
+}
+
+export default function ContactForm() {
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
+
+  return (
+    <GoogleReCaptchaProvider reCaptchaKey={siteKey}>
+      <ContactFormInner />
+    </GoogleReCaptchaProvider>
   );
 }

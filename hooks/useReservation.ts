@@ -18,8 +18,7 @@ const fetcher = async (url: string) => {
   });
 
   if (!res.ok) {
-    // Hata durumunda da json parse hatasini yakalamak icin try/catch benzeri yaklasim
-    const data = await res.json().catch(() => ({})); 
+    const data = await res.json().catch(() => ({}));
     throw new Error(data.error || "Failed to fetch reservations");
   }
 
@@ -38,7 +37,7 @@ const fetcher = async (url: string) => {
 export const useReservations = (): ReservationState => {
   const { user, isAuthenticated, loading: authLoading } = useAuth();
 
-  // Yalnızca kullanıcı doğrulama işlemi bittiyse ve kullanıcı giriş yaptıysa istek at (Conditional Fetching)
+  // Conditional Fetching
   const shouldFetch = !authLoading && isAuthenticated && user;
 
   const { data, error, isLoading, mutate } = useSWR<SavedReservation[]>(
@@ -48,8 +47,7 @@ export const useReservations = (): ReservationState => {
 
   return {
     reservations: data || [],
-    // Eğer auth işlemi sürüyorsa veya api isteği sürüyorsa sistemi loading say
-    loading: authLoading || isLoading, 
+    loading: authLoading || isLoading,
     error: error ? error.message : null,
     refetchReservations: async () => {
       await mutate();

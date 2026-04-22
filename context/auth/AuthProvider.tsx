@@ -90,9 +90,6 @@ export function AuthProvider({
   }, [contextMutateUser]);
 
   const contextValue = useMemo(() => {
-    // SWR bazen fallbackData undefined olsa bile isLoading = false dönebiliyor.
-    // Kullanıcı verisi henüz 'null' olarak netleşmediyse (yani API tamamlanmadıysa) 
-    // sistem hala yükleniyordur.
     const isActuallyLoading = user === undefined || isLoading;
 
     return {
