@@ -94,7 +94,7 @@ export default function HeroBanner({
       {socialLocation && (
         <div className={styles.bottomSection}>
           <div className={`${styles.content} ${styles['tracking-in-expand-fwd-top']}`}>
-            <SocialMedia strokeColor='#fcfcfc' />
+            <SocialMedia strokeColor='#3d4148' />
             <div className={styles.location}>
               <IoLocationSharp className={styles.iconLocation} />
               <span>Coding Str., Canggu, Bali</span>

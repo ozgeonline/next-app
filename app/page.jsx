@@ -27,7 +27,7 @@ export default function Home() {
 
         {/* first view area */}
         <HeroBanner
-          srcImage="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDwVyPtw4YqlTOprZ9Ac2Vvs1uHfUgS0GEoeBY"
+          srcImage="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDXQCuYQHpFhv4Ib25fzmxotrdSguMEB7yl0VL"
           introductionTitle=""
           introduction=""
           reservationLink={true}

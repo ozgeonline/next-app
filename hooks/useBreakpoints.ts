@@ -23,12 +23,19 @@ export const useBreakpoints = (wrapperRef: React.RefObject<HTMLDivElement | null
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    /**
+     * EN: Cache the ref value in a local variable. During the cleanup phase, 
+     * `wrapperRef.current` might already be mutated to `null` by React before 
+     * the cleanup function executes, leading to memory leaks if unobserved improperly.
+     */
+    const currentWrapper = wrapperRef.current;
     let observer: ResizeObserver | null = null;
-    if (wrapperRef.current) {
+
+    if (currentWrapper) {
       observer = new ResizeObserver(() => {
         requestAnimationFrame(() => updateWidth());
       });
-      observer.observe(wrapperRef.current);
+      observer.observe(currentWrapper);
     }
 
     const mediaQueries = {
@@ -61,9 +68,10 @@ export const useBreakpoints = (wrapperRef: React.RefObject<HTMLDivElement | null
     handleMediaChange();
     updateWidth();
 
-    // for Memory Leak
+    // for Memory Leak Fix
     return () => {
-      if (observer && wrapperRef.current) observer.unobserve(wrapperRef.current);
+      if (observer) observer.disconnect();
+
       Object.values(mediaQueries).forEach((mq) => {
         if (mq.removeEventListener) {
           mq.removeEventListener("change", handleMediaChange);
