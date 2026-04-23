@@ -78,7 +78,7 @@
 
 .desktopNav a:hover,
 .mobileNav a:hover {
-  color: #0466c8 !important;
+  color: var(--razzmatazz-500) !important;
   transition: color 0.3s ease;
 }
 
@@ -103,7 +103,6 @@
 
 .mobileNav ul li a {
   display: flex;
-  flex-direction: column;
   padding-bottom: 1.5em;
 }
 

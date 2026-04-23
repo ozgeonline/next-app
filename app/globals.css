@@ -482,7 +482,7 @@ body {
 /* ----------------------------  highlight text & accent link button ---------------------------- */
 
 .highlight-text {
-  color: var(--science-blue-800);
+  color: var(--science-blue-950);
 }
 
 [data-theme="dark"] .highlight-text {

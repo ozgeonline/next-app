@@ -1,8 +1,24 @@
 .active {
-  color: #0466c8 !important;
+  position: relative;
   font-weight: 800 !important;
 }
 
-[data-theme="dark"] .active {
-  color: #fffb88 !important;
+.active::after {
+  content: "";
+  display: inline-block;
+  margin: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--razzmatazz-500);
+}
+
+[data-theme="dark"] .active::after {
+  content: "";
+  display: inline-block;
+  margin: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pale-prim-900);
 }

@@ -149,8 +149,8 @@
   }
 }
 
-.imageContent h1 {
-  font-family: 'Pinyon Script', 'Great Vibes', cursive;
+.imageContent h1,
+.imageContent h2 {
   font-weight: 500;
 }
 

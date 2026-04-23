@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.container + ' ' + "mainBackground"}>
 
         {/* first view area */}
         <HeroBanner
@@ -36,11 +36,11 @@ export default function Home() {
 
         <>
           {/* Slide show & Loop slide section */}
-          <SlideSection isExperienceIntroVisible={isExperienceIntroVisible} />
+          <SlideSection />
 
-          <main className={styles.main + ' ' + "mainBackground"}>
+          <main className={styles.main}>
             {/* Background Image & CTA Links Section*/}
-            <section className={styles.mainContent + ' ' + "mainBackground"}>
+            <section className={styles.mainContent}>
               <WavesBackground />
               <PositionedImage isExperienceIntroVisible={isExperienceIntroVisible} />
               <CTA isExperienceIntroVisible={isExperienceIntroVisible} />
@@ -66,7 +66,7 @@ export default function Home() {
             <section>
               <div
                 style={{ position: 'relative', width: '100%', paddingBottom: '5rem' }}
-                className="animatedSections mainBackground"
+                className="animatedSections"
               >
                 <FeatureShowcase />
               </div>

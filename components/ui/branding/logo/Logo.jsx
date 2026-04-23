@@ -17,6 +17,7 @@ export default function Logo() {
   const useLightLogo = theme === "dark" || (!isOpen && !scrolling && isSpecialPage);
 
   const vectorColor = useLightLogo ? "#ffffff" : "#1a1a1a";
+  const circleColor = theme === "dark" ? "#ffffc2" : "#f3418a";
 
   return (
     <Link href="/" className={styles.logoContainer} style={{ color: vectorColor }}>
@@ -65,7 +66,7 @@ export default function Logo() {
           online
         </text>
 
-        <circle cx="107" cy="28" r="3.5" fill="#f3418a" />
+        <circle cx="107" cy="28" r="3.5" fill={circleColor} />
       </svg>
     </Link>
   );

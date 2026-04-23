@@ -7,11 +7,7 @@ import styles from "./slide-section.module.css";
 import { MousePointerClick } from "lucide-react";
 import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 
-interface SlideSectionProps {
-  isExperienceIntroVisible: boolean;
-}
-
-export default function SlideSection({ isExperienceIntroVisible }: SlideSectionProps) {
+export default function SlideSection() {
   return (
     <div className={`${styles.slideSection} mainBackground`}>
       <WavesBackground />
@@ -38,12 +34,7 @@ export default function SlideSection({ isExperienceIntroVisible }: SlideSectionP
           </div>
         </AnimatedOnScroll>
       </div>
-      <div
-        className={`
-          ${styles.infiniteSlideLoopWrapper} 
-          ${isExperienceIntroVisible ? styles.opacity0 : styles.opacity1}
-        `}
-      >
+      <div className={styles.infiniteSlideLoopWrapper}>
         <InfiniteSlideLoop images={removeBGimages} className={styles.itemWrapper} />
       </div>
     </div>
