@@ -2,6 +2,7 @@ import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/Animated
 import InfiniteSlideLoop from "@/components/ui/slides/loop-slides/InfiniteSlideLoop";
 import { infoImages } from "@/components/ui/slides/slideshow-items";
 import styles from "./loop-slide-section.module.css";
+import OliveBranch from "@/components/ui/decorations/olive-branch/OliveBranch";
 
 interface LoopSlideSectionProps {
   setIsLoopSlideVisible: (visible: boolean) => void;
@@ -14,6 +15,7 @@ export default function LoopSlideSection({
 }: LoopSlideSectionProps) {
   return (
     <section className={styles.sectionWrapper}>
+      <OliveBranch />
       <AnimatedOnScroll
         className={styles.contentContainer}
         animationClass={styles.animateInRight}

@@ -25,10 +25,12 @@
 .mainContent {
   position: relative;
   overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 5vh 0;
+  background: var(--background);
+  z-index: 2;
 }

@@ -1,0 +1,40 @@
+.oliveBranch {
+  position: absolute;
+  top: 100%;
+  right: -10%;
+  width: 250px;
+  height: 350px;
+  transform: translateY(-50%) rotate(15deg);
+  background-color: var(--fuego-700);
+  -webkit-mask-image: url('/olive.svg');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url('/olive.svg');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  z-index: 0;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: floatLeaf 8s ease-in-out infinite;
+  transform-origin: bottom right;
+}
+
+@keyframes floatLeaf {
+  0%,
+  100% {
+    transform: translateY(-50%) rotate(15deg);
+  }
+
+  50% {
+    transform: translateY(-50%) rotate(5deg);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .oliveBranch {
+    right: 0;
+    width: 350px;
+    height: 450px;
+    opacity: 0.3;
+  }
+}

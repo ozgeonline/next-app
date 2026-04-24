@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Montserrat:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Ink:wght@100..900&family=Dancing+Script:wght@400..700&family=Kaushan+Script&family=Pacifico&family=Playwrite+NZ+Basic+Guides&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap');
 
 :root {
   /* Shark Palette */
@@ -106,6 +107,32 @@
   --monza-800: #9c181a;
   --monza-900: #811b1d;
   --monza-950: #46090a;
+
+  /* Lavender Magenta Palette */
+  --lavender-magenta-50: #fdf4ff;
+  --lavender-magenta-100: #fbe8ff;
+  --lavender-magenta-200: #f7d0fe;
+  --lavender-magenta-300: #f093fb;
+  --lavender-magenta-400: #ed79f9;
+  --lavender-magenta-500: #e046ef;
+  --lavender-magenta-600: #c726d3;
+  --lavender-magenta-700: #a81caf;
+  --lavender-magenta-800: #8b198f;
+  --lavender-magenta-900: #741a75;
+  --lavender-magenta-950: #4d044e;
+
+  /* Wild Watermelon Palette */
+  --wild-watermelon-50: #fff1f1;
+  --wild-watermelon-100: #ffe4e5;
+  --wild-watermelon-200: #fecdd1;
+  --wild-watermelon-300: #fda4ac;
+  --wild-watermelon-400: #fb7180;
+  --wild-watermelon-500: #f5576c;
+  --wild-watermelon-600: #e11d40;
+  --wild-watermelon-700: #be1235;
+  --wild-watermelon-800: #9f1234;
+  --wild-watermelon-900: #881333;
+  --wild-watermelon-950: #4c0516;
 
   /************************* Main Colors *********************/
   --background: #F5F5F5;
@@ -236,6 +263,32 @@
   --monza-200: #9c181a;
   --monza-100: #811b1d;
   --monza-50: #46090a;
+
+  /* Lavender Magenta Palette */
+  --lavender-magenta-950: #fdf4ff;
+  --lavender-magenta-900: #fbe8ff;
+  --lavender-magenta-800: #f7d0fe;
+  --lavender-magenta-700: #f093fb;
+  --lavender-magenta-600: #ed79f9;
+  --lavender-magenta-500: #e046ef;
+  --lavender-magenta-400: #c726d3;
+  --lavender-magenta-300: #a81caf;
+  --lavender-magenta-200: #8b198f;
+  --lavender-magenta-100: #741a75;
+  --lavender-magenta-50: #4d044e;
+
+  /* Wild Watermelon Palette */
+  --wild-watermelon-950: #fff1f1;
+  --wild-watermelon-900: #ffe4e5;
+  --wild-watermelon-800: #fecdd1;
+  --wild-watermelon-700: #fda4ac;
+  --wild-watermelon-600: #fb7180;
+  --wild-watermelon-500: #f5576c;
+  --wild-watermelon-400: #e11d40;
+  --wild-watermelon-300: #be1235;
+  --wild-watermelon-200: #9f1234;
+  --wild-watermelon-100: #881333;
+  --wild-watermelon-50: #4c0516;
 
   /* Main Colors*/
   --background: #1a1a1a;
@@ -481,22 +534,170 @@ body {
 
 /* ----------------------------  highlight text & accent link button ---------------------------- */
 
-.highlight-text {
-  color: var(--science-blue-950);
+.highlight-text-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  gap: 1rem;
 }
 
-[data-theme="dark"] .highlight-text {
+@media screen and (min-width: 1024px) {
+  .highlight-text-wrapper {
+    align-items: flex-start;
+    text-align: left;
+    width: 75%;
+  }
+}
+
+.highlight-text {
+  color: var(--neutral-800);
+  font-family: 'Fraunces', serif;
+
+  font-weight: 500;
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+
+  /* Smooth rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Optical tweaks */
+  text-wrap: balance;
+}
+
+[data-theme="dark"] h1.highlight-text {
   color: var(--pale-prim-800);
 }
 
 h1.highlight-text {
   font-size: 2rem;
+  text-align: inherit;
 }
 
-@media screen and (min-width: 768px) {
+h2.highlight-text,
+p.highlight-text {
+  font-size: 1.2rem;
+  color: var(--razzmatazz-500);
+  opacity: 0.6;
+}
+
+[data-theme="dark"] h2.highlight-text,
+[data-theme="dark"] p.highlight-text {
+  color: var(--neutral-800);
+}
+
+@media screen and (min-width: 1024px) {
   h1.highlight-text {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
   }
+}
+
+.highlight-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  width: 80%;
+  z-index: 100;
+}
+
+@media (min-width: 640px) {
+  .highlight-buttons {
+    width: 70%;
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .highlight-buttons {
+    justify-content: flex-start;
+    padding-right: 1rem;
+    width: 50%;
+  }
+}
+
+.highlight-first-button,
+.highlight-second-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  position: relative;
+  padding: 0.6rem 2rem;
+  width: 100%;
+  min-width: 11rem;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 1rem;
+}
+
+.highlight-first-button svg,
+.highlight-second-button svg {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+
+  .highlight-first-button,
+  .highlight-second-button {
+    font-size: 1rem;
+    min-width: 16rem;
+    width: auto;
+  }
+
+  .highlight-first-button svg,
+  .highlight-second-button svg {
+    display: block;
+  }
+}
+
+.highlight-first-button {
+  background: var(--razzmatazz-500);
+  color: var(--background);
+  border: transparent;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--razzmatazz-500);
+}
+
+[data-theme="dark"] .highlight-first-button {
+  border: 1px solid var(--pale-prim-900);
+  color: var(--pale-prim-900);
+  background: transparent;
+}
+
+.highlight-second-button {
+  position: relative;
+  letter-spacing: 0.03rem;
+  border: 1px solid var(--science-blue-950);
+  color: var(--science-blue-950);
+}
+
+[data-theme='dark'] .highlight-second-button {
+  background: var(--text-low-opacity);
+  color: var(--pale-prim-900);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.highlight-first-button:hover,
+.highlight-first-button:active,
+.highlight-second-button:hover,
+.highlight-second-button:active {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .accent-link-button {

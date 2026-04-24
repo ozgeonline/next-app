@@ -1,11 +1,10 @@
 import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
-import Link from "next/link";
 import { removeBGimages } from '@/components/ui/slides/slideshow-items';
 import ImageSlideshow from "@/components/ui/slides/image-slideshow/ImageSlideshow";
 import InfiniteSlideLoop from "@/components/ui/slides/loop-slides/InfiniteSlideLoop";
 import styles from "./slide-section.module.css";
-import { MousePointerClick } from "lucide-react";
 import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
+import CTA from "@/components/sections/cta/CTA";
 
 export default function SlideSection() {
   return (
@@ -20,18 +19,13 @@ export default function SlideSection() {
           className={styles.containerWrapper}
           animationClass={styles.animateInRight}
         >
-          <div className={styles.hero}>
+          <div className="highlight-text-wrapper">
             <h1 className="highlight-text">Taste & share food from all over the world.</h1>
           </div>
-          <div className={styles.cta}>
-            <Link href="/community">
-              Join the Community
-              <span>
-                <MousePointerClick />
-              </span>
-            </Link>
-            <Link href="/meals">Explore Meals</Link>
-          </div>
+          <CTA
+            primaryButton={{ label: 'Join the Community', href: '/community' }}
+            secondaryButton={{ label: 'Explore Meals', href: '/meals', chevronCount: 3 }}
+          />
         </AnimatedOnScroll>
       </div>
       <div className={styles.infiniteSlideLoopWrapper}>
@@ -39,4 +33,4 @@ export default function SlideSection() {
       </div>
     </div>
   )
-}
+}

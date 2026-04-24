@@ -10,7 +10,6 @@ import styles from './page.module.css';
 
 const SlideSection = dynamic(() => import('@/components/ui/slides/sections/slide-section/SlideSection'));
 const PositionedImage = dynamic(() => import('@/components/sections/positioned-image/PositionedImage'));
-const CTA = dynamic(() => import('@/components/sections/cta/CTA'));
 const ExperienceIntro = dynamic(() => import('@/components/sections/experience-intro/ExperienceIntro'));
 const LoopSlideSection = dynamic(() => import('@/components/ui/slides/sections/loop-slide-section/LoopSlideSection'));
 const HighlightCards = dynamic(() => import('@/components/sections/highlight-cards/HighlightCards'));
@@ -43,7 +42,6 @@ export default function Home() {
             <section className={styles.mainContent}>
               <WavesBackground />
               <PositionedImage isExperienceIntroVisible={isExperienceIntroVisible} />
-              <CTA isExperienceIntroVisible={isExperienceIntroVisible} />
             </section>
 
             {/*** Community Info Text & Visible-Invisible Section */}

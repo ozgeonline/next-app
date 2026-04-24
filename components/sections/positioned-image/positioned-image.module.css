@@ -22,6 +22,7 @@
   min-height: max-content;
   overflow: hidden;
   margin-top: -10vh;
+  gap: 4rem;
 }
 
 @media screen and (min-width: 1024px) {
@@ -33,7 +34,6 @@
 .defaultImage {
   will-change: position;
   backface-visibility: hidden;
-  background-color: #1A1A1A;
 }
 
 .defaultImage img {
@@ -59,23 +59,26 @@
   backface-visibility: hidden;
 }
 
-.darkPlaceholder {
+.relativeImage::before {
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #1a1a1a;
+  top: -5px;
+  left: -25px;
+  width: 20rem;
+  height: 20rem;
+  border: 1.5px solid rgba(255, 77, 136, 0.6);
+  border-radius: 100%;
   z-index: -1;
-  border-radius: inherit;
 }
 
 .relativeImage {
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: 80vh;
+  border-radius: 30% 70% 50% 50% / 50% 30% 70% 100%;
   animation: animateInLeft 1s ease-out forwards;
 }
+
 
 @keyframes animateInLeft {
   from {
@@ -95,81 +98,97 @@
 
 @media screen and (min-width: 1024px) {
   .relativeImage {
-    width: 40%;
-    height: 40vh;
-    border-radius: 0 2rem 2rem 0;
-    overflow: hidden;
+    margin-left: 10%;
+    width: 75%;
+    height: 55vh;
+    border-radius: 0% 70% 50% -10% / 50% 30% 70% 100%;
   }
-}
 
-@media screen and (max-width: 1024px) {
-  .imageShadow {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .relativeImage img {
     width: 100%;
     height: 100%;
-    box-shadow: inset 100px 100vh var(--background-low-opacity);
-    backdrop-filter: brightness(0.5);
-    pointer-events: none;
-    z-index: 1;
+    object-fit: cover;
+    border-radius: inherit !important;
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .relativeImage .imageShadow {
-    display: none;
-    transition: all 0.5s ease-out;
-  }
-}
-
-.imageContent {
-  opacity: 0;
+/* Floating White Card for relative image */
+.floatingCard {
   position: absolute;
-  top: 0;
-  left: 0;
+  bottom: 10px;
+  left: 20px;
+  background: var(--background);
+  border-radius: 24px;
+  padding: 16px 24px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: floatIn 0.8s ease-out forwards;
+  will-change: opacity, transform;
+}
+
+/* Mobile: card above image */
+@media (max-width: 1023px) {
+  .floatingCard {
+    bottom: -1.5rem;
+    right: auto;
+    transform: translateY(0);
+    opacity: 0;
+    height: 4rem;
+  }
+}
+
+.iconCircle {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--lavender-magenta-700) 0%, var(--wild-watermelon-400) 100%);
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 60vh;
-  z-index: 1;
-  text-align: center;
-  color: #f4f6f7;
-  transition: all 0.5s ease-out;
+  color: white;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cardText strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.cardText p {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Smooth fade-in for mobile */
+@keyframes floatIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media screen and (min-width: 1024px) {
-  .imageContent {
-    position: relative;
-    right: 0;
-    width: 60%;
-    height: 40vh;
+  .featuresStripWrapper {
+    display: none;
   }
 }
 
-.imageContent h1,
-.imageContent h2 {
-  font-weight: 500;
-}
-
-.imageContent h2 {
-  color: var(--shark-900);
-  opacity: .8;
-}
-
-.imageContent h1,
-.imageContent h2 {
-  padding: 0.5rem 2rem;
-}
-
-@media screen and (max-width: 1024px) {
-  .imageContent h2 {
-    color: #e3e7ea !important;
-  }
-
-  .imageContent h1 {
-    color: #ffffc2 !important;
+@media (min-width: 1024px) {
+  .featuresStripWrapper {
+    display: block;
+    margin-top: 5rem;
   }
 }
