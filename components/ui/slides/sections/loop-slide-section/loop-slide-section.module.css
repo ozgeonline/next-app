@@ -55,7 +55,7 @@
 /* ---------------------------------
    Section Title 
 ----------------------------------- */
-/* Semantic BEM: Base Class */
+
 .sectionTitle {
   display: flex;
   flex-direction: column;
@@ -64,7 +64,6 @@
   max-width: 90%;
   height: 1rem;
   margin-top: 4rem;
-  /* Default closed state margin */
   transition: margin-top 0.3s ease;
 }
 
@@ -74,37 +73,11 @@
   }
 }
 
-/* Semantic BEM: Active Modifier */
 .sectionTitleActive {
   margin-top: 1.2rem;
 }
 
-/* Base Title Text Style */
 .titleText {
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.15rem;
-  padding: 0.7rem;
-  text-align: center;
-
-  /* Default Solid Color */
-  background: #0299ff;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 3rem 0 2rem;
-}
-
-@media screen and (min-width: 768px) {
-  .titleText {
-    font-size: 1.3rem;
-  }
-}
-
-/* Reusable gradient applied on Active state or Dark theme */
-.sectionTitleActive .titleText,
-[data-theme="dark"] .titleText {
   background-image: repeating-linear-gradient(to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%, #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%);
   background-size: 150%;
   -webkit-background-clip: text;
@@ -119,17 +92,20 @@
 ----------------------------------- */
 .sliderCard {
   color: var(--shark-500);
-  width: 4rem;
-  height: 4rem;
+  width: 1rem;
+  height: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
 }
 
 .sliderCard svg {
+  width: 1rem;
+  height: 1rem;
   stroke-width: 1;
 }
 
@@ -179,7 +155,6 @@
 @media screen and (min-width: 640px) {
   .itemTitle {
     font-size: medium;
-    margin-top: -1rem;
   }
 }
 
@@ -200,12 +175,49 @@
 /* ---------------------------------
    Dynamic Padding Controls 
 ----------------------------------- */
-.itemsWrapperHidden {
-  padding: 0;
-}
 
 @media screen and (min-width: 480px) {
   .itemsWrapperVisible {
     padding: 1rem 2rem;
   }
+}
+
+.containerItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .containerItems {
+    padding: 0;
+  }
+}
+
+.containerItemsClosed {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border: 1px solid var(--shark-200);
+  border-radius: 50px;
+  background-color: var(--white);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .containerItemsClosed {
+  background-color: var(--neutral-100);
+  border-color: var(--neutral-600);
+}
+
+.containerItemsClosed:hover {
+  border-color: var(--neutral-500);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
 }

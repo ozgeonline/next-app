@@ -29,8 +29,8 @@ export default function SlideSection() {
         </AnimatedOnScroll>
       </div>
       <div className={styles.infiniteSlideLoopWrapper}>
-        <InfiniteSlideLoop images={removeBGimages} className={styles.itemWrapper} />
+        <InfiniteSlideLoop images={removeBGimages} itemClassName={styles.itemWrapper} />
       </div>
     </div>
   )
-}
+}

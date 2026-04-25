@@ -1,11 +1,14 @@
 .oliveBranch {
+  --rotate-from: 15deg;
+  --rotate-to: 5deg;
+  --olive-color: var(--fuego-700);
   position: absolute;
   top: 100%;
   right: -10%;
   width: 250px;
   height: 350px;
-  transform: translateY(-50%) rotate(15deg);
-  background-color: var(--fuego-700);
+  transform: translateY(-50%) rotate(var(--rotate-from));
+  background-color: var(--olive-color);
   -webkit-mask-image: url('/olive.svg');
   -webkit-mask-size: contain;
   -webkit-mask-repeat: no-repeat;
@@ -22,11 +25,11 @@
 @keyframes floatLeaf {
   0%,
   100% {
-    transform: translateY(-50%) rotate(15deg);
+    transform: translateY(-50%) rotate(var(--rotate-from));
   }
 
   50% {
-    transform: translateY(-50%) rotate(5deg);
+    transform: translateY(-50%) rotate(var(--rotate-to));
   }
 }
 

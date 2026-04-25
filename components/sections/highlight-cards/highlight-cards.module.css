@@ -339,3 +339,12 @@
     font-size: x-large;
   }
 }
+
+.customOlive {
+  top: 40% !important;
+  right: -35% !important;
+  opacity: 0.2 !important;
+  --rotate-from: 10deg;
+  --rotate-to: -30deg;
+  --olive-color: var(--science-blue-100);
+}

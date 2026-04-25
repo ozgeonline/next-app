@@ -180,10 +180,8 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .featuresStripWrapper {
-    display: none;
-  }
+.featuresStripWrapper {
+  display: none;
 }
 
 @media (min-width: 1024px) {

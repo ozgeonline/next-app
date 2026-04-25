@@ -34,3 +34,24 @@
   background: var(--background);
   z-index: 2;
 }
+
+.oliveBranchContainer {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  margin-top: -100px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.customOlive {
+  top: 50% !important;
+  right: -5% !important;
+  width: 300px !important;
+  height: 400px !important;
+  opacity: 0.2 !important;
+  --rotate-from: -15deg;
+  --rotate-to: -25deg;
+  --olive-color: var(--neutral-700);
+}

@@ -63,7 +63,7 @@ export default function PositionedImage({ isExperienceIntroVisible }: Positioned
           >
             <p className='highlight-text'>Good food. Good mood. Great Life. —</p>
             <h1 className='highlight-text'>Nourish your body, energize your mind</h1>
-            <h2 className='highlight-text'>Brew Focus. Eat Clean. Change Everything.</h2>
+            <p className='highlight-text'>Brew Focus. Eat Clean. Change Everything.</p>
             <CTA
               primaryButton={{ label: 'Join the Community', href: '/community' }}
               secondaryButton={{ label: 'Explore Meals', href: '/meals', chevronCount: 3 }}

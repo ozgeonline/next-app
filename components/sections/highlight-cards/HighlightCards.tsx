@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Cards } from "@/types/cardTypes";
 import { ChevronsRight, MousePointerClick, Sun } from "lucide-react";
 import styles from "./highlight-cards.module.css";
+import OliveBranch from "@/components/ui/decorations/olive-branch/OliveBranch";
 
 interface HighlightCardsProps {
   data: Cards
@@ -20,6 +21,7 @@ export default function HighlightCards({
     >
       <div className={styles.cards}>
         <div className={styles.card}>
+          <OliveBranch className={styles.customOlive} />
           <div className={styles.cardTextLeft}>
             <h2>{data.infoCard.title}</h2>
             <p>{data.infoCard.description}</p>

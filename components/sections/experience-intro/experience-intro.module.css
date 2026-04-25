@@ -1,9 +1,13 @@
-.animateInRight { animation: animateInRight 1s ease-out forwards; }
+.animateInRight {
+  animation: animateInRight 1s ease-out forwards;
+}
+
 @keyframes animateInRight {
   from {
     opacity: 0;
     transform: translateX(20%);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -16,8 +20,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  transform: translateX(20%);
   will-change: transform, opacity;
-  transition: all 0.5s ease-out;
+  margin-top: 3rem;
 }
 
 .definitionHero {
@@ -29,7 +35,7 @@
 }
 
 .definitionHero p {
-  color:#f4f6f7;
+  color: #f4f6f7;
   font-size: 1rem;
   text-align: center;
   transition: opacity 0.5s ease-out;
@@ -77,11 +83,9 @@
 }
 
 .hero h2 {
-  background-image: 
-    repeating-linear-gradient(
-      to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%, 
-      #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%
-    );
+  background-image:
+    repeating-linear-gradient(to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%,
+      #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%);
   background-size: 150%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -89,5 +93,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .hero h2 { font-size: 1.3rem; }
+  .hero h2 {
+    font-size: 1.3rem;
+  }
 }

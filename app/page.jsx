@@ -6,6 +6,7 @@ import TopScrollButton from "@/components/ui/topScrollButton/TopScrollButton";
 import { homePageitems } from "@/components/sections/highlight-cards/card-items";
 import HeroBanner from "@/components/ui/banners/hero-banner/HeroBanner";
 import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
+import OliveBranch from "@/components/ui/decorations/olive-branch/OliveBranch";
 import styles from './page.module.css';
 
 const SlideSection = dynamic(() => import('@/components/ui/slides/sections/slide-section/SlideSection'));
@@ -58,6 +59,9 @@ export default function Home() {
             <section>
               <HighlightCards data={homePageitems} learnMore={true} />
               <WavesBackground />
+              <div className={styles.oliveBranchContainer}>
+                <OliveBranch className={styles.customOlive} />
+              </div>
             </section>
 
             {/* Scroll Trigger - Animated Image Sections & Image Info */}

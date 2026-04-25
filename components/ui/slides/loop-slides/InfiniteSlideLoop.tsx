@@ -7,14 +7,16 @@ import Image from "next/image";
 
 interface InfiniteSlideLoopProps {
   images: Array<{ image: React.ReactNode | string; alt?: string; title?: string }>;
-  className?: string;
+  itemClassName?: string;
+  containerItemsWrapper?: string;
   itemsWrapperClassName?: string;
   slideTitleStyles?: string;
 }
 
 export default function InfiniteSlideLoop({
   images,
-  className,
+  itemClassName,
+  containerItemsWrapper,
   itemsWrapperClassName,
   slideTitleStyles
 }: InfiniteSlideLoopProps) {
@@ -55,29 +57,31 @@ export default function InfiniteSlideLoop({
               const isComponent = React.isValidElement(item.image);
 
               return (
-                <div key={`${groupIndex}-${index}`} className={styles.containerItems}>
-                  <div
-                    className={`${styles.itemsWrapper} ${itemsWrapperClassName || ""}`}
-                    style={{ width: `${itemWidth}px` }}
-                  >
-                    <div className={`${styles.item} ${className || ""}`}>
-                      {isComponent ? (
-                        item.image
-                      ) : (
-                        <Image
-                          src={item.image as string}
-                          alt={item.alt ?? ""}
-                          width={0}
-                          height={0}
-                          sizes="100%"
-                          loading="eager"
-                        />
-                      )}
+                <div
+                  key={`${groupIndex}-${index}`}
+                  style={{ width: `${itemWidth}px`, padding: '0 0.4rem', boxSizing: 'border-box' }}
+                >
+                  <div className={containerItemsWrapper}>
+                    <div className={`${styles.itemsWrapper} ${itemsWrapperClassName || ""}`}>
+                      <div className={`${styles.item} ${itemClassName || ""}`}>
+                        {isComponent ? (
+                          item.image
+                        ) : (
+                          <Image
+                            src={item.image as string}
+                            alt={item.alt ?? ""}
+                            width={0}
+                            height={0}
+                            sizes="100%"
+                            loading="eager"
+                          />
+                        )}
+                      </div>
                     </div>
+                    <p className={slideTitleStyles}>
+                      {item?.title}
+                    </p>
                   </div>
-                  <p className={slideTitleStyles}>
-                    {item?.title}
-                  </p>
                 </div>
               );
             })}

@@ -95,6 +95,19 @@
   --razzmatazz-900: #881338;
   --razzmatazz-950: #80011f;
 
+  /* Lunar Green Palette */
+  --lunar-green-50: #f5f8f6;
+  --lunar-green-100: #ddeae2;
+  --lunar-green-200: #bbd4c5;
+  --lunar-green-300: #92b6a1;
+  --lunar-green-400: #6b967e;
+  --lunar-green-500: #517b65;
+  --lunar-green-600: #3f6250;
+  --lunar-green-700: #344e41;
+  --lunar-green-800: #2e4138;
+  --lunar-green-900: #293831;
+  --lunar-green-950: #141f1a;
+
   /* Monza Palette */
   --monza-50: #fef2f2;
   --monza-100: #ffe1e2;
@@ -263,6 +276,19 @@
   --monza-200: #9c181a;
   --monza-100: #811b1d;
   --monza-50: #46090a;
+
+  /* Lunar Green Palette */
+  --lunar-green-50: #141f1a;
+  --lunar-green-100: #293831;
+  --lunar-green-200: #2e4138;
+  --lunar-green-300: #344e41;
+  --lunar-green-400: #3f6250;
+  --lunar-green-500: #517b65;
+  --lunar-green-600: #6b967e;
+  --lunar-green-700: #92b6a1;
+  --lunar-green-800: #bbd4c5;
+  --lunar-green-900: #ddeae2;
+  --lunar-green-950: #f5f8f6;
 
   /* Lavender Magenta Palette */
   --lavender-magenta-950: #fdf4ff;
@@ -534,6 +560,40 @@ body {
 
 /* ----------------------------  highlight text & accent link button ---------------------------- */
 
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+@media screen and (min-width: 1024px) {
+  h1 {
+    font-size: 3.3rem;
+  }
+
+  h2 {
+    font-size: 2.8rem;
+  }
+
+  h3 {
+    font-size: 2.2rem;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+}
+
 .highlight-text-wrapper {
   display: flex;
   align-items: center;
@@ -548,7 +608,7 @@ body {
   .highlight-text-wrapper {
     align-items: flex-start;
     text-align: left;
-    width: 75%;
+    width: 60%;
   }
 }
 
@@ -557,7 +617,7 @@ body {
   font-family: 'Fraunces', serif;
 
   font-weight: 500;
-  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  /* font-size: clamp(2.8rem, 4.5vw, 4.2rem); */
 
   line-height: 1.1;
   letter-spacing: -0.015em;
@@ -570,32 +630,41 @@ body {
   text-wrap: balance;
 }
 
-[data-theme="dark"] h1.highlight-text {
-  color: var(--pale-prim-800);
-}
-
 h1.highlight-text {
-  font-size: 2rem;
   text-align: inherit;
 }
 
+[data-theme="dark"] h1.highlight-text {
+  color: var(--pale-prim-800);
+  opacity: .8;
+}
+
+
 h2.highlight-text,
-p.highlight-text {
-  font-size: 1.2rem;
-  color: var(--razzmatazz-500);
-  opacity: 0.6;
+h3.highlight-text {
+  color: var(--lunar-green-700);
 }
 
 [data-theme="dark"] h2.highlight-text,
+[data-theme="dark"] h3.highlight-text,
 [data-theme="dark"] p.highlight-text {
-  color: var(--neutral-800);
+  color: var(--neutral-700);
 }
 
-@media screen and (min-width: 1024px) {
-  h1.highlight-text {
-    font-size: 3.5rem;
-  }
+p.highlight-text {
+  letter-spacing: normal;
+  line-height: 1.5;
+  color: var(--razzmatazz-500);
 }
+
+.highlight-text span {
+  color: var(--razzmatazz-500);
+}
+
+[data-theme="dark"] .highlight-text span {
+  color: var(--pale-prim-800);
+}
+
 
 .highlight-buttons {
   display: flex;
@@ -603,23 +672,17 @@ p.highlight-text {
   justify-content: center;
   flex-direction: column;
   position: relative;
-  width: 80%;
+  width: 60%;
   z-index: 100;
 }
 
-@media (min-width: 640px) {
-  .highlight-buttons {
-    width: 70%;
-    flex-direction: row;
-    gap: 1rem;
-  }
-}
 
 @media screen and (min-width: 1024px) {
   .highlight-buttons {
     justify-content: flex-start;
+    flex-direction: row;
     padding-right: 1rem;
-    width: 50%;
+    gap: 1rem;
   }
 }
 
@@ -630,7 +693,7 @@ p.highlight-text {
   justify-content: center;
   text-decoration: none;
   position: relative;
-  padding: 0.6rem 2rem;
+  padding: 0.6rem 1.5rem;
   width: 100%;
   min-width: 11rem;
   border-radius: 50px;
@@ -653,7 +716,6 @@ p.highlight-text {
   .highlight-second-button {
     font-size: 1rem;
     min-width: 16rem;
-    width: auto;
   }
 
   .highlight-first-button svg,

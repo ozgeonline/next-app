@@ -2,7 +2,6 @@ import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/Animated
 import InfiniteSlideLoop from "@/components/ui/slides/loop-slides/InfiniteSlideLoop";
 import { infoImages } from "@/components/ui/slides/slideshow-items";
 import styles from "./loop-slide-section.module.css";
-import OliveBranch from "@/components/ui/decorations/olive-branch/OliveBranch";
 
 interface LoopSlideSectionProps {
   setIsLoopSlideVisible: (visible: boolean) => void;
@@ -15,7 +14,6 @@ export default function LoopSlideSection({
 }: LoopSlideSectionProps) {
   return (
     <section className={styles.sectionWrapper}>
-      <OliveBranch />
       <AnimatedOnScroll
         className={styles.contentContainer}
         animationClass={styles.animateInRight}
@@ -26,17 +24,30 @@ export default function LoopSlideSection({
           ${styles.sectionTitle} 
           ${isExperienceIntroVisible ? styles.sectionTitleActive : ''}`}
         >
-          <h2 className={styles.titleText}>
-            Brew Focus. Eat Clean. Change Everything.
+          <h2 className={`${isExperienceIntroVisible ? styles.titleText : "highlight-text"} `}>
+            Brew Focus. <span>Eat Clean.</span> Change Everything.
           </h2>
         </div>
 
         {/* Multi-Styled Infinite Slide Loop */}
         <InfiniteSlideLoop
           images={infoImages}
-          className={`${styles.sliderCard} ${isExperienceIntroVisible ? styles.sliderCardActive : ''}`}
-          itemsWrapperClassName={isExperienceIntroVisible ? styles.itemsWrapperVisible : styles.itemsWrapperHidden}
-          slideTitleStyles={`${styles.itemTitle} ${isExperienceIntroVisible ? styles.itemTitleActive : ''}`}
+          itemClassName={`
+            ${styles.sliderCard}
+            ${isExperienceIntroVisible ? styles.sliderCardActive : ''}
+          `}
+          itemsWrapperClassName={`
+            ${styles.itemsWrapper}
+            ${isExperienceIntroVisible ? styles.itemsWrapperVisible : ''}
+          `}
+          containerItemsWrapper={`
+            ${styles.containerItems}
+            ${isExperienceIntroVisible ? styles.containerItemsActive : styles.containerItemsClosed}
+          `}
+          slideTitleStyles={`
+            ${styles.itemTitle}
+            ${isExperienceIntroVisible ? styles.itemTitleActive : ''}
+          `}
         />
       </AnimatedOnScroll>
     </section>
