@@ -91,7 +91,7 @@
    Slider Card Containers 
 ----------------------------------- */
 .sliderCard {
-  color: var(--shark-500);
+  color: var(--lunar-green-800);
   width: 1rem;
   height: 1rem;
   display: flex;
@@ -203,10 +203,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 0.5rem 0;
-  border: 1px solid var(--shark-200);
+  padding: 1rem 0;
   border-radius: 50px;
-  background-color: var(--white);
+  background-color: #344e4105;
   transition: all 0.3s ease;
   white-space: nowrap;
 }

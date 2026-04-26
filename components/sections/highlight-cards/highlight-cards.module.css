@@ -21,7 +21,6 @@
   justify-content: center;
   height: 70vh;
   opacity: 0;
-  margin-top: 1rem;
   padding: 0.5rem;
 }
 
@@ -48,12 +47,10 @@
   overflow: hidden;
   transition: all 0.3s ease-in-out;
   color: #ddd6cb;
-  background: linear-gradient(45deg, var(--science-blue-950), var(--science-blue-400));
+  background: linear-gradient(45deg, var(--lunar-green-300), var(--lunar-green-100));
 }
 
-[data-theme="dark"] .card {
-  background: var(--background);
-}
+[data-theme="dark"] .card {}
 
 .card .cardTextLeft {
   padding: 2rem;
@@ -63,12 +60,20 @@
 .cardTextLeft p {
   max-width: 90%;
   font-size: .85rem;
-  color: #ddd6cb;
+  color: var(--lunar-green-600);
+}
+
+[data-theme="dark"] .cardTextLeft p {
+  color: var(--neutral-600);
 }
 
 .cardTextLeft h2 {
   font-size: 1.3rem;
-  color: #ffffc2;
+  color: var(--lunar-green-700);
+}
+
+[data-theme="dark"] .cardTextLeft h2 {
+  color: var(--neutral-700);
 }
 
 @media screen and (min-width: 1024px) {
@@ -77,7 +82,7 @@
   }
 
   .cardTextLeft h2 {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     margin-bottom: .5rem;
     padding: 1rem 0;
   }
@@ -92,22 +97,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 0.4rem;
-  width: 20vh;
-  height: 5vh;
-  border: 1px solid #ffffc2;
+  border-radius: 50px;
+  width: 40%;
+  height: 25%;
+  background-color: var(--lunar-green-700);
   margin-top: 1rem;
   transition: transform 0.5s ease-out;
 }
 
+[data-theme="dark"] .learnMoreLeft {
+  background-color: var(--neutral-600);
+
+}
+
 .learnMoreLeft a {
+  padding: 0 0.5rem;
   text-decoration: none;
-  color: #ffffc2;
+  color: var(--lunar-green-200);
   font-size: large;
 }
 
 [data-theme="dark"] .learnMoreLeft a {
-  color: var(--pale-prim-900);
+  color: var(--neutral-100);
 }
 
 .learnMoreLeft:hover a {
@@ -115,6 +126,7 @@
   justify-content: center;
   align-items: center;
   animation: slideLeft 0.3s ease-out forwards;
+  filter: brightness(1.2);
 }
 
 @keyframes slideLeft {
@@ -145,10 +157,10 @@
 
 .sun {
   position: absolute;
-  bottom: -10%;
-  right: -10%;
-  width: 25%;
-  height: 50%;
+  bottom: 0;
+  right: 0;
+  width: 20%;
+  height: 40%;
   stroke-width: 1;
   filter: brightness(0.8);
   transform: scale(0.7);
@@ -160,7 +172,7 @@
   right: 10%;
   filter: brightness(1);
   transform: scale(1);
-  stroke: #e1b453;
+  stroke: var(--lunar-green-500);
   stroke-width: 0.5;
 }
 
@@ -346,5 +358,5 @@
   opacity: 0.2 !important;
   --rotate-from: 10deg;
   --rotate-to: -30deg;
-  --olive-color: var(--science-blue-100);
+  --olive-color: var(--lunar-green-400);
 }

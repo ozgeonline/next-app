@@ -20,7 +20,7 @@ export default function SlideSection() {
           animationClass={styles.animateInRight}
         >
           <div className="highlight-text-wrapper">
-            <h1 className="highlight-text">Taste & share food from all over the world.</h1>
+            <h1>Taste & share food from all over <span className="highlight-text">the world.</span></h1>
           </div>
           <CTA
             primaryButton={{ label: 'Join the Community', href: '/community' }}

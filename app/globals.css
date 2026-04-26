@@ -82,6 +82,19 @@
   --fuego-900: #445116;
   --fuego-950: #232d06;
 
+  /* Lunar Green Palette */
+  --lunar-green-50: #f5f8f6;
+  --lunar-green-100: #ddeae2;
+  --lunar-green-200: #bbd4c5;
+  --lunar-green-300: #92b6a1;
+  --lunar-green-400: #6b967e;
+  --lunar-green-500: #517b65;
+  --lunar-green-600: #3f6250;
+  --lunar-green-700: #344e41;
+  --lunar-green-800: #2e4138;
+  --lunar-green-900: #293831;
+  --lunar-green-950: #141f1a;
+
   /* Razzmatazz Palette */
   --razzmatazz-50: #fef1f7;
   --razzmatazz-100: #fde6f1;
@@ -95,18 +108,6 @@
   --razzmatazz-900: #881338;
   --razzmatazz-950: #80011f;
 
-  /* Lunar Green Palette */
-  --lunar-green-50: #f5f8f6;
-  --lunar-green-100: #ddeae2;
-  --lunar-green-200: #bbd4c5;
-  --lunar-green-300: #92b6a1;
-  --lunar-green-400: #6b967e;
-  --lunar-green-500: #517b65;
-  --lunar-green-600: #3f6250;
-  --lunar-green-700: #344e41;
-  --lunar-green-800: #2e4138;
-  --lunar-green-900: #293831;
-  --lunar-green-950: #141f1a;
 
   /* Monza Palette */
   --monza-50: #fef2f2;
@@ -153,10 +154,10 @@
   --background-opacity: #f5f5f550;
   --background-low-opacity: #f5f5f510;
 
-  --text: #1a1a1a;
-  --text-high: #1a1a1a95;
-  --text-opacity: #1a1a1a90;
-  --text-low-opacity: #1a1a1a10;
+  --text: #08090c;
+  --text-high: #08090c95;
+  --text-opacity: #08090c90;
+  --text-low-opacity: #08090c10;
 
   --border: #D3D3D3;
 
@@ -317,10 +318,10 @@
   --wild-watermelon-50: #4c0516;
 
   /* Main Colors*/
-  --background: #1a1a1a;
-  --background-high: #1A1A1A70;
-  --background-opacity: #1A1A1A50;
-  --background-low-opacity: #1A1A1A10;
+  --background: #08090c;
+  --background-high: #08090c70;
+  --background-opacity: #08090c50;
+  --background-low-opacity: #08090c10;
 
   --text: #e0e0e0;
   --text-opacity: #f4f4f950;
@@ -347,7 +348,9 @@ html {
 body {
   margin: 0;
   background: var(--background);
+  color: var(--neutral-600);
   overflow-x: hidden;
+  font-weight: 500;
 }
 
 .containerTopNavbarColor {
@@ -543,7 +546,7 @@ body {
 
 
 [data-theme="dark"] .mainBackground {
-  background: #1A1A1A;
+  background: #08090c;
 }
 
 [data-theme="light"] .mainBackground {
@@ -578,7 +581,7 @@ p {
 
 @media screen and (min-width: 1024px) {
   h1 {
-    font-size: 3.3rem;
+    font-size: 3rem;
   }
 
   h2 {
@@ -602,21 +605,21 @@ p {
   width: 100%;
   text-align: center;
   gap: 1rem;
+  font-family: 'Fraunces', serif;
 }
 
 @media screen and (min-width: 1024px) {
   .highlight-text-wrapper {
     align-items: flex-start;
     text-align: left;
-    width: 60%;
+    width: 70%;
   }
 }
 
 .highlight-text {
-  color: var(--neutral-800);
-  font-family: 'Fraunces', serif;
+  color: var(--lunar-green-500);
 
-  font-weight: 500;
+  font-weight: inherit;
   /* font-size: clamp(2.8rem, 4.5vw, 4.2rem); */
 
   line-height: 1.1;
@@ -632,11 +635,6 @@ p {
 
 h1.highlight-text {
   text-align: inherit;
-}
-
-[data-theme="dark"] h1.highlight-text {
-  color: var(--pale-prim-800);
-  opacity: .8;
 }
 
 
@@ -657,12 +655,12 @@ p.highlight-text {
   color: var(--razzmatazz-500);
 }
 
-.highlight-text span {
+span.highlight-text {
   color: var(--razzmatazz-500);
 }
 
-[data-theme="dark"] .highlight-text span {
-  color: var(--pale-prim-800);
+[data-theme="dark"] span.highlight-text {
+  color: var(--lunar-green-700);
 }
 
 
@@ -683,6 +681,7 @@ p.highlight-text {
     flex-direction: row;
     padding-right: 1rem;
     gap: 1rem;
+    width: 70%;
   }
 }
 
@@ -697,7 +696,7 @@ p.highlight-text {
   width: 100%;
   min-width: 11rem;
   border-radius: 50px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
   transition: all 0.3s ease;
   overflow: hidden;
@@ -726,30 +725,23 @@ p.highlight-text {
 
 .highlight-first-button {
   background: var(--razzmatazz-500);
-  color: var(--background);
+  color: var(--razzmatazz-100);
   border: transparent;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--razzmatazz-500);
 }
 
 [data-theme="dark"] .highlight-first-button {
-  border: 1px solid var(--pale-prim-900);
-  color: var(--pale-prim-900);
-  background: transparent;
+  border: 1px solid var(--lunar-green-500);
+  color: var(--lunar-green-800);
+  background: var(--lunar-green-500);
 }
 
 .highlight-second-button {
   position: relative;
   letter-spacing: 0.03rem;
-  border: 1px solid var(--science-blue-950);
-  color: var(--science-blue-950);
-}
-
-[data-theme='dark'] .highlight-second-button {
-  background: var(--text-low-opacity);
-  color: var(--pale-prim-900);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--lunar-green-500);
+  color: var(--lunar-green-500);
 }
 
 .highlight-first-button:hover,
@@ -760,6 +752,7 @@ p.highlight-text {
   box-shadow:
     0 6px 20px rgba(0, 0, 0, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  filter: brightness(1.2);
 }
 
 .accent-link-button {

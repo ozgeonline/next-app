@@ -58,10 +58,6 @@ export default function Home() {
             {/* Hover Cards Section */}
             <section>
               <HighlightCards data={homePageitems} learnMore={true} />
-              <WavesBackground />
-              <div className={styles.oliveBranchContainer}>
-                <OliveBranch className={styles.customOlive} />
-              </div>
             </section>
 
             {/* Scroll Trigger - Animated Image Sections & Image Info */}
