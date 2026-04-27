@@ -4,7 +4,7 @@
   max-width: 1400px;
   height: 600px;
   margin: 0 auto;
-  background: #EFEAE3;
+  background: var(--merino-100);
   border-radius: 32px;
   overflow: hidden;
   display: flex;
@@ -67,7 +67,7 @@
   align-items: center;
   gap: 1.5rem;
   margin-bottom: 1.5rem;
-  color: #517b65;
+  color: var(--lunar-green-500);
 }
 
 .line {
@@ -90,28 +90,28 @@
   font-size: 4rem;
   font-weight: 400;
   line-height: 1.1;
-  color: #1a1a1a;
+  color: var(--neutral-900);
   margin-bottom: 1.5rem;
 }
 
 [data-theme="dark"] .title {
-  color: #ffffff;
+  color: var(--neutral-950);
 }
 
 .highlight {
   font-style: italic;
-  color: #517b65;
+  color: var(--lunar-green-500);
+}
+
+[data-theme="dark"] .highlight {
+  color: var(--lunar-green-400);
 }
 
 .description {
   font-size: 1.1rem;
-  color: #718096;
+  color: var(--neutral-600);
   line-height: 1.6;
   margin-bottom: 2.5rem;
-}
-
-[data-theme="dark"] .description {
-  color: #a0aec0;
 }
 
 /* CTA Button */
@@ -121,8 +121,8 @@
   gap: 0.75rem;
   padding: 1rem 2.5rem;
   background: transparent;
-  border: 1px solid rgba(81, 123, 101, 0.4);
-  color: #517b65;
+  border: 1px solid var(--lunar-green-300);
+  color: var(--lunar-green-600);
   border-radius: 999px;
   font-weight: 600;
   font-size: 1rem;
@@ -131,19 +131,19 @@
 }
 
 .ctaButton:hover {
-  background: #517b65;
+  background: var(--lunar-green-500);
   color: white;
   box-shadow: 0 0 20px rgba(81, 123, 101, 0.3);
 }
 
 [data-theme="dark"] .ctaButton {
-  color: #92b6a1;
-  border-color: rgba(146, 182, 161, 0.4);
+  color: var(--lunar-green-400);
+  border-color: var(--lunar-green-500);
 }
 
 [data-theme="dark"] .ctaButton:hover {
-  background: #92b6a1;
-  color: #111111;
+  background: var(--lunar-green-500);
+  color: var(--neutral-50);
   box-shadow: 0 0 20px rgba(146, 182, 161, 0.4);
 }
 

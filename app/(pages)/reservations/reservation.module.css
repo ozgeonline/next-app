@@ -1,155 +1,413 @@
-.non-user-message {
+.pageWrapper {
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--text);
-  font-size: 1.4rem;
+  position: relative;
+  padding: 6rem 0 3rem;
+  background: var(--background);
+  overflow-x: hidden;
+  z-index: 2;
+}
+
+.mainContainer {
+  z-index: 5;
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .mainContainer {
+    flex-direction: row;
+    align-items: flex-start;
+    width: 70%
+  }
+}
+
+/* Auth Message */
+.authMessage {
   width: 100%;
   text-align: center;
-  gap: 1rem;
+  padding: 4rem;
+  background: var(--merino-100);
+  border-radius: 40px;
+  border: 1px solid var(--merino-200);
 }
 
-.containerWrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 100vh;
-  opacity: 1;
-  z-index: 100;
-  padding-bottom: 5rem;
-  padding-top: 4rem;
+.loginBtn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+  background: var(--lunar-green-500);
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-@media screen and (min-width: 1024px) {
-  .containerWrapper {
-    flex-direction: row;
-  }
+/* CARD STYLES */
+.formCard,
+.summaryCard {
+  background: transparent !important;
+  border: 1px solid var(--lunar-green-500) !important;
+  border-radius: 40px;
+  padding: 3rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+  flex: 1.2;
 }
 
-@media screen and (min-width: 1280px) {
-  .containerWrapper {
-    padding-top: 0;
-  }
-
-}
-
-[data-theme="dark"] .containerWrapper,
-.loading {
-  background: var(--background);
-}
-
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffc2;
-  height: 100vh;
-  width: 100%;
-  z-index: 10;
-  position: relative;
-}
-
-.formSection,
-.infoSection {
+.summarySection {
   flex: 1;
-  color: var(--shark-900);
-  background-color: var(--text-low-opacity);
-  padding: 1.5rem;
-  margin: 1rem;
-  border-radius: 8px;
-  width: 98%;
-  border: 1px solid var(--text-low-opacity);
 }
 
-@media screen and (min-width: 768px) {
-
-  .formSection,
-  .infoSection {
-    margin: 3rem;
-    width: 70%;
-  }
+/* HEADER STYLES */
+.cardHeader {
+  margin-bottom: 2.5rem;
 }
 
-@media screen and (min-width: 1280px) {
-
-  .formSection,
-  .infoSection {
-    margin: 6rem;
-  }
-}
-
-.formSection h2,
-.infoSection h2 {
-  margin-bottom: 1rem;
-}
-
-[data-theme="dark"] .formSection,
-[data-theme="dark"] .infoSection {
-  color: var(--pale-prim-900);
-}
-
-.formSection .error {
-  color: var(--error);
-}
-
-.form {
+.titleWrapper {
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.titleSmall {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1;
+}
+
+.titleLarge {
+  font-family: 'Fraunces', serif;
+  font-size: 3.1rem;
+  font-weight: 600;
+  color: var(--lunar-green-500);
+  line-height: 1;
+  display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
-.form label {
+.headerLeaf {
+  color: var(--lunar-green-500);
+  opacity: 0.6;
+}
+
+/* FORM STYLES */
+.reservationForm {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup label {
   font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 0.5em;
+  font-weight: 600;
+  color: var(--neutral-600);
+  padding-left: 0.5rem;
 }
 
-.form button {
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1.2rem;
+  color: var(--lunar-green-500);
+  opacity: 0.7;
+}
+
+.inputWrapper:has(textarea) .inputIcon {
+  top: 0.8rem;
+  transform: none;
+}
+
+.reservationForm input,
+.reservationForm select,
+.reservationForm textarea {
   width: 100%;
+  padding: 0.8rem 1rem 0.8rem 3.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--merino-200);
+  background: var(--merino-100);
+  color: var(--text);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
-.input,
-.textarea {
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+.reservationForm select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23517b65' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  background-size: 1.2rem;
+  padding-right: 3rem;
+  cursor: pointer;
 }
 
-.input:focus,
-.textarea:focus {
-  outline: none;
+.readOnlyInput {
+  background: var(--merino-50) !important;
+  border-color: transparent !important;
+  padding-left: 3.5rem !important;
+  color: var(--neutral-600) !important;
 }
 
-.textarea {
+.row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.row>div {
+  flex: 1;
+}
+
+.reservationForm textarea {
+  min-height: 120px;
   resize: none;
 }
 
-.reservationCard {
-  background: var(--background-opacity);
-  border-radius: 6px;
+.reservationForm input:focus,
+.reservationForm select:focus,
+.reservationForm textarea:focus {
+  outline: none;
+  border-color: var(--lunar-green-500);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(81, 123, 101, 0.1);
 }
 
-.reservationCard .infoItem {
-  margin: 0.5rem 0;
-  font-size: medium;
+/* BUTTONS */
+.reserveBtn {
+  margin-top: 1rem;
+  background: linear-gradient(135deg, var(--lunar-green-300), var(--lunar-green-500));
+  color: white;
+  padding: 1.1rem 2.5rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.reservationCard .infoItem .bold {
-  width: 5rem;
-  display: inline-block;
-  font-weight: bolder;
-  letter-spacing: 0.05rem;
+.reserveBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(81, 123, 101, 0.4);
+  filter: brightness(1.1);
 }
 
-[data-theme="dark"] .reservationCard .infoItem .bold {
-  color: var(--shark-300);
+.reserveBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
-.reservationCard button {
-  margin-right: 1rem;
+/* SUMMARY CARD DETAILS */
+.summaryHeader {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--merino-200);
+  padding-bottom: 1.5rem;
+}
+
+.summaryTitle {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+}
+
+.highlight {
+  color: var(--lunar-green-600);
+  font-style: italic;
+}
+
+.headerIcon {
+  background: var(--merino-100);
+  padding: 0.5rem;
+  border-radius: 16px;
+  color: var(--lunar-green-600);
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--merino-100);
+  border: 1px solid var(--merino-200);
+  border-radius: 16px;
+}
+
+.detailLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--lunar-green-600);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.detailValue {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.editBtn,
+.deleteBtn {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.editBtn {
+  background: transparent;
+  border: 1px solid var(--lunar-green-500);
+  color: var(--lunar-green-600);
+}
+
+.editBtn:hover {
+  background: var(--lunar-green-50);
+}
+
+.deleteBtn {
+  background: transparent;
+  border: 1px solid var(--monza-300);
+  color: var(--monza-600);
+}
+
+.deleteBtn:hover {
+  background: var(--monza-50);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  color: var(--neutral-600);
+}
+
+.statusMessage {
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.success {
+  background: var(--lunar-green-50);
+  color: var(--lunar-green-700);
+  border: 1px solid var(--lunar-green-200);
+}
+
+.error {
+  background: var(--monza-50);
+  color: var(--monza-700);
+  border: 1px solid var(--monza-200);
+}
+
+/* DARK MODE ADJUSTMENTS */
+[data-theme="dark"] .formCard,
+[data-theme="dark"] .summaryCard {
+  background: rgba(20, 31, 26, 0.8);
+  backdrop-filter: blur(20px);
+  border-color: rgba(146, 182, 161, 0.1);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .reservationForm input,
+[data-theme="dark"] .reservationForm select,
+[data-theme="dark"] .reservationForm textarea,
+[data-theme="dark"] .detailItem,
+[data-theme="dark"] .headerIcon {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .reservationForm input:focus,
+[data-theme="dark"] .reservationForm select:focus,
+[data-theme="dark"] .reservationForm textarea:focus {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--lunar-green-500);
+}
+
+.reservationForm select option {
+  background-color: var(--merino-100);
+  color: var(--lunar-green-700);
+}
+
+[data-theme="dark"] .reservationForm select option {
+  background-color: var(--merino-100);
+  color: var(--lunar-green-700);
+}
+
+[data-theme="dark"] .editBtn {
+  border-color: var(--lunar-green-700);
+}
+
+[data-theme="dark"] .editBtn:hover {
+  background: rgba(146, 182, 161, 0.1);
+}
+
+@media (max-width: 768px) {
+
+  .formCard,
+  .summaryCard {
+    padding: 1.5rem;
+    border-radius: 30px;
+  }
+
+  .titleLarge {
+    font-size: 2.5rem;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+  }
 }
