@@ -1,9 +1,14 @@
+import { Leaf, Coffee, Utensils, Cake } from 'lucide-react';
+
 export const menuSlides = [
   { 
     cake: {
       src: 'https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDwA8M8hYqlTOprZ9Ac2Vvs1uHfUgS0GEoeBYX',
       title : "A Blue Dream in Every Bite",
       description : "Creamy, smooth cheesecake perfectly balanced with the tartness of fresh blueberries.",
+      label: "SWEET INDULGENCE",
+      icon: Cake,
+      highlightWord: "Dream"
     }
   },
   { 
@@ -11,13 +16,19 @@ export const menuSlides = [
       src: 'https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFD2Io0Zjv0CF7LqJdzheYtnvP8NWi3BRE15IlX',
       title : "A Harmony of Flavors",
       description : "A refined taste experience in every bite.",
+      label: "EXPERTLY CRAFTED",
+      icon: Coffee,
+      highlightWord: "Harmony"
     }
   },
   { 
     salads: {
       src: "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDHYHJDhGaeR9wJIvptc3oBjZSnXOuV5ANkrFU",
-      title : "The Power of Freshness",
+      title : "The Power of \nFreshness",
       description : "Crisp lettuce, sun-ripened tomatoes, natural olives, and soft cheese come together in perfect harmony.",     
+      label: "MADE WITH FRESH INGREDIENTS",
+      icon: Leaf,
+      highlightWord: "Freshness"
     }
   },
   { 
@@ -25,6 +36,9 @@ export const menuSlides = [
       src: "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDOFK8wf62Mm1Oej967Rgn30AC4GDqhS5yZxWr",
       title : "Nature Served on Your Plate",
       description : "Our meats are sourced from local producers and delivered to your table with their natural quality preserved.",     
+      label: "HEARTY MEALS",
+      icon: Utensils,
+      highlightWord: "Nature"
     }
   },
 ]

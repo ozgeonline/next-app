@@ -80,3 +80,29 @@
     background-color: var(--lunar-green-500);
   }
 }
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .strip {
+  background: rgba(20, 31, 26, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .icon {
+  background-color: rgba(107, 150, 126, 0.1);
+  color: var(--lunar-green-400);
+  border: 1px solid rgba(107, 150, 126, 0.2);
+}
+
+[data-theme="dark"] .text h4 {
+  color: #fff;
+}
+
+[data-theme="dark"] .text p {
+  color: #a6b4ba;
+}
+
+[data-theme="dark"] .divider {
+  background-color: rgba(255, 255, 255, 0.1);
+}

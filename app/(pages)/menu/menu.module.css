@@ -29,6 +29,22 @@
   padding-bottom: 5vh;
 }
 
+/* MenuPage - Hero Banner & Features Overlay */
+.heroSectionWrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.featuresOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  z-index: 100;
+}
+
 /* MenuPage - Reservation Banner section */
 .contactBadgeWrapper {
   position: relative;
@@ -124,13 +140,18 @@
 
 .dotsWrapper {
   display: flex;
-  justify-content: center;
+  align-items: center;
   position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 20%;
+  left: 5%;
   gap: 10px;
   z-index: 10;
+}
+
+@media screen and (min-width: 1024px) {
+  .dotsWrapper {
+    left: 10%;
+  }
 }
 
 /* View All Link Button */

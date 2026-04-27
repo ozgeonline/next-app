@@ -1,0 +1,139 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.backgroundWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.backgroundImage {
+  object-fit: cover;
+}
+
+/* Gradient overlay for text readability, dark green/black mix */
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      rgba(15, 18, 16, 0.95) 0%,
+      rgba(15, 18, 16, 0.5) 40%,
+      rgba(15, 18, 16, 0.1) 100%);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 5%;
+  max-width: 600px;
+  z-index: 2;
+  margin-top: -10vh;
+  /* Adjust for vertical centering */
+}
+
+@media screen and (min-width: 1024px) {
+  .content {
+    padding: 0 10%;
+    max-width: 800px;
+  }
+}
+
+.labelWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.iconCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid #6b967e;
+  color: #517b65;
+  background: transparent;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6b967e;
+}
+
+.title {
+  font-size: 3rem;
+  line-height: 1.1;
+  font-weight: 500;
+  color: #d3d5d9;
+  margin-bottom: 1.5rem;
+  font-family: 'Fraunces', serif;
+  white-space: pre-wrap;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .title {
+    font-size: 5rem;
+  }
+}
+
+.highlight {
+  color: #517b65;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #a6b4ba;
+  /* Shark palette light or similar */
+  margin-bottom: 2.5rem;
+  max-width: 90%;
+}
+
+@media screen and (min-width: 1024px) {
+  .description {
+    font-size: 1.1rem;
+  }
+}
+
+.exploreButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  background-color: #517b65;
+  color: #141f1a;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.exploreButton:hover {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+}
