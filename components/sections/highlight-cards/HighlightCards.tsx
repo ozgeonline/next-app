@@ -53,12 +53,15 @@ export default function HighlightCards({
             click me
             <MousePointerClick />
           </span>
-          <div className={styles.cardText}>
+          <div className={styles.cardTextRight}>
             <h2>{data.imgCard.title}</h2>
             <p>{data.imgCard.description}</p>
             {learnMore && (
               <Link href="/meals" className={styles.learnMore}>
                 Learn More
+                <span className={styles.arrow}>
+                  <ChevronsRight size={20} />
+                </span>
               </Link>
             )}
           </div>

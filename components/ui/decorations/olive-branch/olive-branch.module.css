@@ -1,7 +1,7 @@
 .oliveBranch {
   --rotate-from: 15deg;
   --rotate-to: 5deg;
-  --olive-color: var(--fuego-700);
+  --olive-color: var(--lunar-green-500);
   position: absolute;
   top: 100%;
   right: -10%;
@@ -23,6 +23,7 @@
 }
 
 @keyframes floatLeaf {
+
   0%,
   100% {
     transform: translateY(-50%) rotate(var(--rotate-from));

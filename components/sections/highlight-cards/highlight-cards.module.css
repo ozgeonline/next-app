@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. Animations
+   ========================================================================== */
 .animateInRight {
   animation: animateInRight 1s ease-out forwards;
 }
@@ -14,6 +17,19 @@
   }
 }
 
+@keyframes slideLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-5px);
+  }
+}
+
+/* ==========================================================================
+   2. Layout & Wrappers
+   ========================================================================== */
 .cardsWrapper {
   width: 100%;
   display: flex;
@@ -33,6 +49,16 @@
   align-items: center;
 }
 
+@media screen and (min-width: 768px) {
+  .cards {
+    flex-direction: row;
+    height: 90%;
+  }
+}
+
+/* ==========================================================================
+   3. Base Card Elements
+   ========================================================================== */
 .card {
   display: flex;
   flex-direction: column;
@@ -50,109 +76,81 @@
   background: linear-gradient(45deg, var(--lunar-green-300), var(--lunar-green-100));
 }
 
-[data-theme="dark"] .card {}
-
-.card .cardTextLeft {
-  padding: 2rem;
-  z-index: 10;
-}
-
-.cardTextLeft p {
-  max-width: 90%;
-  font-size: .85rem;
-  color: var(--lunar-green-600);
-}
-
-[data-theme="dark"] .cardTextLeft p {
-  color: var(--neutral-600);
-}
-
-.cardTextLeft h2 {
-  font-size: 1.3rem;
-  color: var(--lunar-green-700);
-}
-
-[data-theme="dark"] .cardTextLeft h2 {
-  color: var(--neutral-700);
-}
-
-@media screen and (min-width: 1024px) {
-  .cardTextLeft p {
-    font-size: medium;
-  }
-
-  .cardTextLeft h2 {
-    font-size: 1.7rem;
-    margin-bottom: .5rem;
-    padding: 1rem 0;
-  }
-}
-
 .card:nth-child(1):hover {
-  /* filter: hue-rotate(-180deg); */
   cursor: pointer;
 }
 
-.learnMoreLeft {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  width: 40%;
-  height: 25%;
-  background-color: var(--lunar-green-700);
-  margin-top: 1rem;
-  transition: transform 0.5s ease-out;
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
 }
 
-[data-theme="dark"] .learnMoreLeft {
-  background-color: var(--neutral-600);
-
+.card:hover img {
+  filter: brightness(0.3);
+  cursor: pointer;
 }
 
-.learnMoreLeft a {
-  padding: 0 0.5rem;
-  text-decoration: none;
-  color: var(--lunar-green-200);
-  font-size: large;
-}
-
-[data-theme="dark"] .learnMoreLeft a {
-  color: var(--neutral-100);
-}
-
-.learnMoreLeft:hover a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: slideLeft 0.3s ease-out forwards;
-  filter: brightness(1.2);
-}
-
-@keyframes slideLeft {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-5px);
-    /* Yazıyı sola kaydır */
+@media screen and (min-width: 768px) {
+  .card {
+    width: 40vw;
+    margin-inline: 2rem;
+    height: 90%;
   }
 }
 
-.arrow {
+@media screen and (min-width: 1024px) {
+  .card {
+    width: 30vw;
+  }
+}
+
+/* ==========================================================================
+   4. Interactive Overlays & Graphics
+   ========================================================================== */
+.cardClick {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  z-index: 2;
+  transition: all 0.3s ease-in-out;
+  background: var(--background-opacity);
+  color: var(--text);
+}
+
+.cardClick svg {
+  padding-left: 0.5rem;
+}
+
+.card:hover .cardClick {
   display: none;
 }
 
-.learnMoreLeft:hover .arrow {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  animation: animateInRight 1s ease-out forwards;
+@media screen and (min-width: 768px) {
+  .cardClick {
+    display: none;
+  }
 }
 
+/* Sun Graphic */
 .sunWrapper {
   display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .sunWrapper {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 50%;
+    width: 100%;
+  }
 }
 
 .sun {
@@ -176,46 +174,61 @@
   stroke-width: 0.5;
 }
 
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  transition: all 0.3s ease-in-out;
+@media screen and (min-width: 768px) {
+  .card:hover .sun {
+    bottom: 15%;
+    right: 5%;
+  }
 }
 
-.cardClick {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  font-weight: bold;
-  z-index: 2;
-  transition: all 0.3s ease-in-out;
-  background: var(--background-opacity);
-  color: var(--text);
+/* ==========================================================================
+   5. Card Content: Left Text Card
+   ========================================================================== */
+.card .cardTextLeft {
+  padding: 2rem;
+  z-index: 10;
 }
 
-.card:hover .cardClick {
-  display: none;
+.cardTextLeft h2 {
+  font-size: 1.3rem;
+  color: var(--lunar-green-700);
 }
 
-.cardClick svg {
-  padding-left: .5rem;
+[data-theme="dark"] .cardTextLeft h2 {
+  color: var(--neutral-700);
 }
 
-.card:hover img {
-  filter: brightness(0.3);
-  cursor: pointer;
+.cardTextLeft p {
+  max-width: 90%;
+  font-size: 0.85rem;
+  color: var(--lunar-green-600);
 }
 
-.card .cardText {
+[data-theme="dark"] .cardTextLeft p {
+  color: var(--neutral-600);
+}
+
+@media screen and (min-width: 1024px) {
+  .cardTextLeft h2 {
+    font-size: 1.7rem;
+    margin-bottom: 0.5rem;
+    padding: 1rem 0;
+  }
+
+  .cardTextLeft p {
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================================================
+   6. Card Content: Right Text Card
+   ========================================================================== */
+.card .cardTextRight {
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   left: 0;
   top: 0;
   opacity: 0;
@@ -223,135 +236,138 @@
   padding: 1rem;
 }
 
-.cardText p {
-  padding-bottom: 1rem;
-}
-
-@media screen and (min-width: 1024px) {
-  .card .cardText {
-    padding: 2rem;
-    top: 10%;
-  }
-}
-
-.card:hover .cardText {
+.card:hover .cardTextRight {
   opacity: 1;
   z-index: 10;
-  animation: animateInBottom .5s ease-out forwards;
+  animation: animateInBottom 0.5s ease-out forwards;
   cursor: pointer;
 }
 
-.cardText h2 {
+.cardTextRight h2 {
   padding-bottom: 1vh;
-  font-size: medium;
   font-size: 1.3rem;
-  color: #ffffc2;
+  color: #92b6a1;
+}
+
+.cardTextRight p {
+  padding-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #bbd4c5;
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 768px) {
+  .card .cardTextRight {
+    bottom: 0;
+    top: auto;
+  }
+
+  .cardTextRight h2 {
+    font-size: 1.3rem;
+  }
+
+  .cardTextRight p {
+    font-size: 1rem;
+  }
 }
 
 @media screen and (min-width: 1024px) {
-  .cardText h2 {
+  .card .cardTextRight {
+    padding: 2rem;
+    top: 10%;
+    bottom: 30%;
+  }
+
+  .cardTextRight h2 {
     font-size: 1.5rem;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cardTextRight p {
+    font-size: 1rem;
   }
 }
 
-.cardText p {
-  font-size: .85rem;
-}
-
-@media screen and (min-width: 1024px) {
-  .cardText p {
-    font-size: medium;
-  }
-
-}
-
-.cardText .learnMore {
+/* ==========================================================================
+   7. Buttons / Links
+   ========================================================================== */
+/* Left Card Link Button */
+.learnMoreLeft {
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 2rem;
-  bottom: -20%;
+  border-radius: 50px;
+  width: 40%;
+  height: 25%;
+  background-color: var(--lunar-green-700);
+  margin-top: 1rem;
+  transition: transform 0.5s ease-out;
+}
+
+[data-theme="dark"] .learnMoreLeft {
+  background-color: var(--neutral-600);
+}
+
+.learnMoreLeft a {
+  padding: 0 0.5rem;
+  text-decoration: none;
+  color: var(--lunar-green-200);
+  font-size: 1rem;
+}
+
+[data-theme="dark"] .learnMoreLeft a {
+  color: var(--neutral-100);
+}
+
+.learnMoreLeft:hover a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideLeft 0.3s ease-out forwards;
+  filter: brightness(1.2);
+}
+
+/* Right Card Link Button */
+.cardTextRight .learnMore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
   text-decoration: none;
   padding: 0 1rem;
-  border-radius: 0.4rem;
-  width: 20vh;
-  height: 5vh;
-  border: 1px solid #ffffc2;
-  color: #ffffc2;
+  border-radius: 50px;
+  width: 12rem;
+  height: 2.5rem;
+  border: 1px solid #92b6a1;
+  color: #92b6a1;
   transition: all 0.3s ease-in-out;
   filter: brightness(0.8);
 }
 
-[data-theme="dark"] .cardText .learnMore {
-  border: 1px solid var(--pale-prim-900);
-  color: var(--pale-prim-900);
-}
-
-.cardText .learnMore:hover {
+.cardTextRight .learnMore:hover {
   filter: brightness(1);
 }
 
-@media screen and (min-width: 768px) {
-  .cards {
-    flex-direction: row;
-    width: 100%;
-    height: 90%;
-  }
-
-  .card {
-    width: 40vw;
-    margin-inline: 2rem;
-    height: 90%;
-  }
-
-  .card .cardText {
-    left: 0;
-    bottom: 0;
-  }
-
-  .cardText p {
-    font-size: 1rem;
-  }
-
-  .cardText h2 {
-    font-size: large;
-  }
-
-  .sunWrapper {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 50%;
-    width: 100%;
-  }
-
-  .card:hover .sun {
-    bottom: 15%;
-    right: 5%;
-  }
-
-  .cardClick {
-    display: none;
-  }
+/* Shared Arrow Animation */
+.arrow {
+  display: none;
 }
 
-@media screen and (min-width: 1024px) {
-  .card {
-    width: 30vw;
-  }
-
-  .cardText {
-    left: 0;
-    bottom: 30%;
-  }
-
-  .cardText h2 {
-    font-size: x-large;
-  }
+.learnMoreLeft:hover .arrow,
+.learnMore:hover .arrow {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  animation: animateInRight 1s ease-out forwards;
 }
 
+.learnMore:hover .arrow {
+  filter: brightness(1.2);
+}
+
+/* ==========================================================================
+   8. Custom Decorations
+   ========================================================================== */
 .customOlive {
   top: 40% !important;
   right: -35% !important;

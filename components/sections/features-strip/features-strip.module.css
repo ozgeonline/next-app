@@ -26,7 +26,7 @@
 .icon {
   width: 3.5rem;
   height: 3.5rem;
-  background-color: rgba(179, 170, 153, 0.4);
+  background-color: rgba(81, 123, 101, 0.25);
   color: var(--shark-900, #1a1a1a);
   border-radius: 50%;
   display: flex;
@@ -77,6 +77,6 @@
     transform: translateY(-50%);
     width: 1px;
     height: 3rem;
-    background-color: var(--text-low-opacity);
+    background-color: var(--lunar-green-500);
   }
 }

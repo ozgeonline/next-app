@@ -9,12 +9,10 @@ export default function AnimatedSections() {
       {items.map((item, index) => {
         const sectionData = item.savor || item.desserts || item.energy;
         if (!sectionData) return null;
-        const { title, description, images, reverse } = sectionData;
+        const { title, description, images, reverse, label, icon: Icon } = sectionData;
 
         return (
           <div key={index} className={styles.containerWrapper}>
-            <h2 className="highlight-text">{title}</h2>
-
             <div className={`
               ${styles.definitionDefault} 
               ${reverse ? `${styles.reverseDefinition} ${styles.reverseRowDefinition}` : ""}`}
@@ -24,6 +22,16 @@ export default function AnimatedSections() {
                   animationClass={styles.animateinView}
                   className={`${styles.definitionImage} ${styles.imageVisible}`}
                 >
+                  {/* Decorative Elements */}
+                  <div className={`${styles.dotPattern} ${reverse ? styles.dotPatternRight : styles.dotPatternLeft}`} />
+                  <div className={`${styles.iconRing} ${reverse ? styles.iconRingRight : styles.iconRingLeft}`} />
+                  
+                  {/* Icon Badge */}
+                  {Icon && (
+                    <div className={`${styles.iconBadge} ${reverse ? styles.badgeRight : styles.badgeLeft}`}>
+                      <Icon size={20} />
+                    </div>
+                  )}
                   <Image
                     className={styles.imageFirst}
                     src={images.src1}
@@ -49,8 +57,19 @@ export default function AnimatedSections() {
                   </div>
                 </AnimatedOnScroll>
               )}
-
-              <p>{description}</p>
+              <div className={styles.textContainer}>
+                {/* Subtitle Label with decorative lines */}
+                {label && (
+                  <span className={styles.sectionLabel}>
+                    <span className={styles.labelLine} />
+                    {label}
+                    <span className={styles.labelLine} />
+                  </span>
+                )}
+                <h2 className="highlight-text">{title}</h2>
+                <div className={styles.titleSeparator} />
+                <p>{description}</p>
+              </div>
             </div>
           </div>
         );

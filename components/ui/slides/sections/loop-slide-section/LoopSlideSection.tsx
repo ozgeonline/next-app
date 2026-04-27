@@ -24,9 +24,9 @@ export default function LoopSlideSection({
           ${styles.sectionTitle} 
           ${isExperienceIntroVisible ? styles.sectionTitleActive : ''}`}
         >
-          <h2 className={`${isExperienceIntroVisible ? styles.titleText : "highlight-text"} `}>
-            Brew Focus. <span>Eat Clean.</span> Change Everything.
-          </h2>
+          <h3 className={`${isExperienceIntroVisible ? "gradient-full-gold-text" : "highlight-text"} `}>
+            Brew Focus. <span className="highlight-text">Eat Clean.</span> Change Everything.
+          </h3>
         </div>
 
         {/* Multi-Styled Infinite Slide Loop */}

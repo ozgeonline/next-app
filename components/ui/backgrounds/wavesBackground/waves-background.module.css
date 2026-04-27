@@ -12,60 +12,6 @@
   user-select: none;
 }
 
-/* Magical Golden Glows - Extremely Soft */
-/* .glowTopLeft,
-.glowBottomRight {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(150px);
-  /* Massive blur for extreme softness 
-  pointer-events: none;
-  z-index: 1;
-
-  mix-blend-mode: screen;
-}
-
-
-/*.glowTopLeft {
-  top: -10%;
-  left: -5%;
-  width: 40vw;
-  height: 40vw;
-
-  background: radial-gradient(circle at 30% 30%,
-      rgba(255, 220, 140, 0.15) 0%,
-      rgba(212, 175, 55, 0.12) 25%,
-      rgba(184, 134, 11, 0.06) 45%,
-      rgba(0, 0, 0, 0) 70%);
-
-  filter: blur(120px);
-  animation: floatGlow 12s ease-in-out infinite alternate;
-}
-
-@keyframes floatGlow {
-  0% {
-    transform: translate(0, 0);
-  }
-
-  100% {
-    transform: translate(20px, 30px);
-  }
-}
-
-.glowBottomRight {
-  bottom: -15%;
-  right: -5%;
-  width: 45vw;
-  height: 45vw;
-  background: radial-gradient(circle, rgba(234, 192, 105, 0.04) 0%, transparent 60%);
-}
-
-/* Light Mode Adaptations */
-/* :global([data-theme='light']) .glowTopLeft,
-:global([data-theme='light']) .glowBottomRight {
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.02) 0%, transparent 60%);
-} */
-
 /* 3D Volumetric Typographic Specs */
 .watermark1,
 .watermark2,
