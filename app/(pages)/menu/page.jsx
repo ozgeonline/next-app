@@ -9,9 +9,9 @@ import { menuPageitemsBottom } from "@/components/sections/highlight-cards/card-
 import MenuCarousel from "./MenuCarousel";
 import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 import styles from "./menu.module.css";
-import MenuHeroBanner from "./MenuHeroBanner";
 import FeaturesStrip from "@/components/sections/features-strip/FeaturesStrip";
 
+const HeroBanner = dynamic(() => import('@/components/ui/banners/hero-banner/HeroBanner'));
 const HighlightCards = dynamic(() => import('@/components/sections/highlight-cards/HighlightCards'));
 const MainPageReservationBanner = dynamic(() => import('@/components/ui/banners/reservation-banner/MainPageReservationBanner'));
 
@@ -46,11 +46,12 @@ export default function MenuPage() {
             const itemsData = Object.values(item)[0];
             if (!itemsData) return null;
             return (
-              <MenuHeroBanner
+              <HeroBanner
                 key={index}
                 srcImage={itemsData.src}
-                title={itemsData.title}
-                description={itemsData.description}
+                introductionTitle={itemsData.title}
+                introduction={itemsData.description}
+                variant="menu"
                 label={itemsData.label}
                 icon={itemsData.icon}
                 highlightWord={itemsData.highlightWord}

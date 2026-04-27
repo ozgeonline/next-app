@@ -1,5 +1,3 @@
-import { Leaf, Coffee, Utensils, Cake } from 'lucide-react';
-
 export const menuSlides = [
   { 
     cake: {
@@ -7,7 +5,7 @@ export const menuSlides = [
       title : "A Blue Dream in Every Bite",
       description : "Creamy, smooth cheesecake perfectly balanced with the tartness of fresh blueberries.",
       label: "SWEET INDULGENCE",
-      icon: Cake,
+      icon: 'Cake',
       highlightWord: "Dream"
     }
   },
@@ -17,7 +15,7 @@ export const menuSlides = [
       title : "A Harmony of Flavors",
       description : "A refined taste experience in every bite.",
       label: "EXPERTLY CRAFTED",
-      icon: Coffee,
+      icon: 'Coffee',
       highlightWord: "Harmony"
     }
   },
@@ -27,7 +25,7 @@ export const menuSlides = [
       title : "The Power of \nFreshness",
       description : "Crisp lettuce, sun-ripened tomatoes, natural olives, and soft cheese come together in perfect harmony.",     
       label: "MADE WITH FRESH INGREDIENTS",
-      icon: Leaf,
+      icon: 'Leaf',
       highlightWord: "Freshness"
     }
   },
@@ -37,7 +35,7 @@ export const menuSlides = [
       title : "Nature Served on Your Plate",
       description : "Our meats are sourced from local producers and delivered to your table with their natural quality preserved.",     
       label: "HEARTY MEALS",
-      icon: Utensils,
+      icon: 'Utensils',
       highlightWord: "Nature"
     }
   },

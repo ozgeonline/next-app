@@ -1,3 +1,10 @@
+/* ==========================================================================
+   HERO BANNER COMPONENT STYLES
+   ========================================================================== */
+
+/* 1. Base Layout & Containers
+   ========================================================================== */
+
 .container {
   width: 100%;
   height: 100%;
@@ -14,15 +21,6 @@
   background: #1a1a1a;
 }
 
-.imgBrightness {
-  position: absolute;
-  right: 30%;
-  top: 0;
-  width: 40%;
-  height: 100%;
-  background: #23100695;
-}
-
 .mainBackground {
   width: 100%;
   height: 100vh;
@@ -31,10 +29,14 @@
   transition: transform filter 0.1s ease-out;
 }
 
+/* 2. Content Introduction (Common)
+   ========================================================================== */
+
 .introduction {
   opacity: 0;
   position: absolute;
   top: 0;
+  left: 0;
   right: 0;
   width: 100%;
   height: 100vh;
@@ -44,6 +46,9 @@
   justify-content: center;
   padding: 0 10vw;
 }
+
+/* 3. Default Variant Styles (Centered)
+   ========================================================================== */
 
 .introduction h1,
 .introduction p {
@@ -71,21 +76,30 @@
   text-shadow: 2px 2px 5px #1a1a1a;
 }
 
+@media (min-width: 1024px) {
+  .introduction h1 {
+    font-size: 1.6rem;
+  }
+  .introduction p {
+    font-size: 1.1rem;
+  }
+}
+
+/* 4. Reservation Button (Aurora Style)
+   ========================================================================== */
+
 .reservation {
   display: flex;
   align-items: center;
   justify-content: center;
   width: max-content;
   margin-top: 2rem;
-
-  /* Aurora Base Architecture */
   background: #0f0f11;
   position: relative;
   overflow: hidden;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -133,7 +147,6 @@
 .reservation:hover::before {
   opacity: 0.9;
   animation-duration: 6s;
-  /* Speeds up the spin when hovered */
 }
 
 .reservation:hover a {
@@ -141,33 +154,143 @@
   text-shadow: 0 0 15px rgba(215, 175, 95, 0.6);
 }
 
-@keyframes rotateMesh {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-
-  50% {
-    transform: rotate(180deg) scale(1.1);
-  }
-
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
-}
-
 @media (min-width: 1024px) {
-  .introduction h1 {
-    font-size: 1.6rem;
-  }
-
-  .introduction p {
-    font-size: 1.1rem;
-  }
-
   .reservation a {
     font-size: 1rem;
     padding: 1.2rem 3rem;
   }
+}
+
+/* 5. Menu Variant Styles (Left Aligned)
+   ========================================================================== */
+
+.menuContent {
+  align-items: flex-start !important;
+  justify-content: center;
+  padding: 0 5vw !important;
+  max-width: 1000px;
+  margin-top: -10vh;
+  text-align: left !important;
+  z-index: 100;
+}
+
+@media (min-width: 1024px) {
+  .menuContent {
+    padding: 0 10vw !important;
+  }
+}
+
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      rgba(15, 18, 16, 0.95) 0%,
+      rgba(15, 18, 16, 0.4) 40%,
+      rgba(15, 18, 16, 0) 100%);
+  z-index: 1;
+}
+
+/* 5a. Menu Decorations (Label & Icon) */
+.labelWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.iconCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid #6b967e;
+  color: #517b65;
+  background: transparent;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6b967e;
+}
+
+/* 5b. Menu Typography */
+.menuTitle {
+  font-size: 2rem !important;
+  line-height: 1.1 !important;
+  font-weight: 500 !important;
+  color: #d3d5d9 !important;
+  margin-bottom: 1.5rem !important;
+  text-align: left !important;
+  text-shadow: none !important;
+  font-family: 'Fraunces', serif !important;
+  font-style: normal !important;
+}
+
+@media (min-width: 768px) {
+  .menuTitle { font-size: 3rem !important; }
+}
+
+@media (min-width: 1024px) {
+  .menuTitle { font-size: 4rem !important; }
+}
+
+.highlight {
+  color: #6b967e;
+  font-weight: 600;
+  text-shadow: 2px 2px 5px #1a1a1a;
+}
+
+.menuDescription {
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  color: #a6b4ba !important;
+  margin-bottom: 2.5rem !important;
+  text-align: left !important;
+  text-shadow: none !important;
+  max-width: 90% !important;
+  font-style: normal !important;
+}
+
+@media (min-width: 1024px) {
+  .menuDescription { font-size: 1.1rem !important; }
+}
+
+/* 5c. Menu Explore Button */
+.exploreButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  background-color: #517b65;
+  color: #bbd4c5;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.exploreButton:hover {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+}
+
+/* 6. Social & Location Section (Bottom Bar)
+   ========================================================================== */
+
+.bottomSection {
+  position: absolute;
+  bottom: 2rem;
+  padding: 0 2rem;
+  width: 100%;
+  z-index: 10000;
 }
 
 .content {
@@ -179,9 +302,7 @@
 }
 
 @media (min-width: 1024px) {
-  .content {
-    padding: 0 2rem;
-  }
+  .content { padding: 0 2rem; }
 }
 
 .location {
@@ -213,7 +334,6 @@
     width: 1.2rem;
     height: 1.2rem;
   }
-
   .location span {
     font-size: 0.8rem;
     letter-spacing: 0.1rem;
@@ -221,13 +341,8 @@
   }
 }
 
-.bottomSection {
-  position: absolute;
-  bottom: 2rem;
-  padding: 0 2rem;
-  width: 100%;
-  z-index: 10000;
-}
+/* 7. Keyframes & Animation Utilities
+   ========================================================================== */
 
 .animateInRight {
   animation: animateInRight 0.8s ease-out forwards;
@@ -238,16 +353,20 @@
     opacity: 0;
     transform: translateX(-10%);
   }
-
   to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
+@keyframes rotateMesh {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
 .tracking-in-expand-fwd-top {
-  -webkit-animation: tracking-in-expand-fwd-top 1s cubic-bezier(.215, .61, .355, 1.000) both;
-  animation: tracking-in-expand-fwd-top 1s cubic-bezier(.215, .61, .355, 1.000) both
+  animation: tracking-in-expand-fwd-top 1s cubic-bezier(.215, .61, .355, 1.000) both;
 }
 
 .tracking-in-expand-fwd-top img {
@@ -256,46 +375,22 @@
   filter: brightness(0.8) opacity(0.5);
 }
 
-@-webkit-keyframes tracking-in-expand-fwd-top {
-  0% {
-    -webkit-transform: translateZ(-700px) translateY(-700px);
-    transform: translateZ(-700px) translateY(-700px);
-    opacity: 0
-  }
-
-  40% {
-    opacity: .6
-  }
-
-  100% {
-    -webkit-transform: translateZ(0) translateY(0);
-    transform: translateZ(0) translateY(0);
-    opacity: 1
+@media (min-width: 1024px) {
+  .tracking-in-expand-fwd-top img {
+    width: 10rem;
+    height: 6rem;
   }
 }
 
 @keyframes tracking-in-expand-fwd-top {
   0% {
     letter-spacing: -.5em;
-    -webkit-transform: translateZ(-700px) translateY(-700px);
     transform: translateZ(-700px) translateY(-700px);
-    opacity: 0
+    opacity: 0;
   }
-
-  40% {
-    opacity: .6
-  }
-
+  40% { opacity: .6; }
   100% {
-    -webkit-transform: translateZ(0) translateY(0);
     transform: translateZ(0) translateY(0);
-    opacity: 1
-  }
-}
-
-@media (min-width: 1024px) {
-  .tracking-in-expand-fwd-top img {
-    width: 10rem;
-    height: 6rem;
+    opacity: 1;
   }
 }

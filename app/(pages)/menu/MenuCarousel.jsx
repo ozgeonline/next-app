@@ -9,7 +9,15 @@ import Link from "next/link";
 import Carousel from "@/components/ui/slides/carousel/Carousel";
 import { MenuPreview } from "@/components/menu/MenuSection";
 import { useNavigation } from "@/context/navigation/NavigationProvider";
+import { Leaf, Coffee, Utensils, ArrowRight } from 'lucide-react';
 import styles from "./menu.module.css";
+
+const CATEGORY_ICONS = {
+  "Desserts": Leaf,
+  "Drinks": Coffee,
+  "Meals": Utensils,
+  "Salads": Leaf,
+};
 
 export default function MenuCarousel({ menuLinks, textLabels }) {
   const router = useRouter();
@@ -37,21 +45,46 @@ export default function MenuCarousel({ menuLinks, textLabels }) {
   return (
     <Carousel
       autoSlide={false}
-      dotType="text"
-      textLabels={textLabels}
       carouselWrapper={styles.carouselLinksWrapper}
       dotsWrapper={styles.linksWrapper}
+      customDot={(index, isActive, onClick) => {
+        const label = textLabels[index] || `Category ${index + 1}`;
+        const Icon = CATEGORY_ICONS[label] || Leaf;
+
+        return (
+          <button
+            key={index}
+            onClick={onClick}
+            className={`${styles.categoryPill} ${isActive ? styles.activePill : ""}`}
+          >
+            <Icon size={16} className={styles.categoryIcon} />
+            {label}
+          </button>
+        );
+      }}
       renderSlideFooter={(index) => {
         const category = getMenuCategory(index);
         if (!category) return null;
         return (
-          <Link
-            href={`menu/${category.href}`}
-            onClick={(e) => handleViewAll(e, `menu/${category.href}`)}
-            className={`accent-link-button ${styles.viewAllLink}`}
-          >
-            View All {category.title}
-          </Link>
+          <div className={styles.footerContainer}>
+            <Link
+              href={`menu/${category.href}`}
+              onClick={(e) => handleViewAll(e, `menu/${category.href}`)}
+              className={`highlight-first-button ${styles.viewAllLink}`}
+            >
+              View All {category.title}
+              <ArrowRight size={18} className={styles.btnArrow} />
+            </Link>
+
+            <div className={styles.discoverMore}>
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className={styles.curvedArrow}>
+                <path d="M5 10C5 10 15 5 25 15C35 25 25 35 25 35M25 35L20 30M25 35L30 30" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span className={styles.discoverText}>
+                Discover more {category.title.toLowerCase()}
+              </span>
+            </div>
+          </div>
         );
       }}
     >
@@ -68,6 +101,7 @@ export default function MenuCarousel({ menuLinks, textLabels }) {
                 price={menuItem.price}
                 title={menuItem.name}
                 isNew={menuItem.isNew}
+                variant={i === 2 ? "horizontal" : "vertical"}
               />
             ))}
           </div>

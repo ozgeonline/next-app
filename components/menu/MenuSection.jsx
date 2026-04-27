@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Clock, Flame, Star } from "lucide-react";
+import { Clock, Flame, Star, Heart } from "lucide-react";
 import styles from "./menu.module.css";
 
 export function MenuPreview({
@@ -10,42 +10,52 @@ export function MenuPreview({
   title,
   description,
   price,
-  isNew
+  isNew,
+  variant = "vertical"
 }) {
   const [imgSrc, setImgSrc] = useState(src);
+  const isHorizontal = variant === "horizontal";
 
   return (
-    <div className={styles.previewWrapper}>
+    <div className={`${styles.previewWrapper} ${isHorizontal ? styles.horizontal : ""}`}>
       <div className={styles.imgWrapper}>
-        <Image
-          src={imgSrc}
-          alt={`${title} - Menu Items `}
-          sizes="100%"
-          fill
-          placeholder="blur"
-          blurDataURL="/logo.png"
-          onError={() => setImgSrc("/logo.png")}
-        />
+        <div className={styles.imgContainer}>
+          <Image
+            src={imgSrc}
+            alt={`${title} - Menu Items `}
+            sizes="100%"
+            fill
+            placeholder="blur"
+            blurDataURL="/logo.png"
+            onError={() => setImgSrc("/logo.png")}
+          />
+        </div>
         {isNew && (
           <span className={styles.newBadge}>NEW</span>
         )}
+        <button className={styles.heartButton} aria-label="Add to favorites">
+          <Heart size={20} strokeWidth={1.5} />
+        </button>
+        <div className={styles.pricePill}>
+          {price} $
+        </div>
       </div>
       <div className={styles.info}>
-        <div className={styles.titleRow}>
-          <h3>{title}</h3>
-          <span className={styles.price}>
-            {price}
-            <span> $</span>
-          </span>
-        </div>
-        <p>{description}</p>
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.description}>{description}</p>
 
         <div className={styles.statsRow}>
           <div className={styles.stars}>
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={14} fill="#6e737d90" color="#6e737d90" />
+              <Star
+                key={i}
+                size={14}
+                fill="var(--lunar-green-400, #517b65)"
+                color="var(--lunar-green-400, #517b65)"
+              />
             ))}
           </div>
+          <span className={styles.statDivider}>|</span>
           <div className={styles.statItem}>
             <Clock size={14} />
             <span>5 min</span>
@@ -57,7 +67,6 @@ export function MenuPreview({
           </div>
         </div>
       </div>
-
     </div>
   )
 }

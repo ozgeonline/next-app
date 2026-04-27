@@ -1,4 +1,9 @@
-/************** MenuPage Styles **************/
+/* ==========================================================================
+   MENU PAGE GLOBAL STYLES
+   ========================================================================== */
+
+/* 1. Main Page Layout
+   ========================================================================== */
 
 .container {
   display: flex;
@@ -29,23 +34,245 @@
   padding-bottom: 5vh;
 }
 
-/* MenuPage - Hero Banner & Features Overlay */
+/* 2. Hero Section & Carousel Overlays
+   ========================================================================== */
+
 .heroSectionWrapper {
   position: relative;
   width: 100%;
   height: 100vh;
 }
 
+/* 2a. Features Strip Overlay */
 .featuresOverlay {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70%;
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .featuresOverlay {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    z-index: 100;
+  }
+}
+
+/* 2b. Carousel Navigation (Dots) */
+.carouselSlideWrapper {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
   z-index: 100;
 }
 
-/* MenuPage - Reservation Banner section */
+.dotsWrapper {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 20%;
+  left: 5%;
+  gap: 10px;
+  z-index: 10;
+}
+
+@media screen and (min-width: 1024px) {
+  .dotsWrapper {
+    left: 10%;
+  }
+}
+
+/* 3. Category Carousel Section (Middle of Page)
+   ========================================================================== */
+
+.carouselLinksWrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 100;
+  margin: 0 2rem 10rem;
+  padding: 1rem 0;
+}
+
+.linksWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  z-index: 10;
+}
+
+@media screen and (min-width: 1024px) {
+  .linksWrapper {
+    gap: 2rem;
+  }
+}
+
+.categoryPill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #4a5568;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.categoryPill:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+}
+
+.categoryIcon {
+  color: #718096;
+  transition: all 0.3s ease;
+}
+
+/* Light Theme Active State (Pinkish) */
+.activePill {
+  background: rgba(255, 75, 114, 0.01) !important;
+  border: 1px solid rgba(255, 75, 114, 0.5) !important;
+  color: #ff4b72 !important;
+}
+
+.activePill .categoryIcon {
+  color: #ff4b72 !important;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .categoryPill {
+  background: rgba(26, 26, 26, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .categoryPill:hover {
+  filter: brightness(1.2);
+}
+
+[data-theme="dark"] .categoryIcon {
+  color: #718096;
+}
+
+[data-theme="dark"] .activePill {
+  background: rgba(107, 150, 126, 0.1) !important;
+  border: 1px solid var(--lunar-green-600, #3f6250) !important;
+  color: var(--lunar-green-700, #92b6a1) !important;
+}
+
+[data-theme="dark"] .activePill .categoryIcon {
+  color: var(--lunar-green-700, #92b6a1) !important;
+}
+
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.viewAllLink {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .viewAllLink {
+    width: 300px;
+  }
+}
+
+.discoverMore {
+  display: none;
+}
+
+@media screen and (min-width: 1024px) {
+  .discoverMore {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--razzmatazz-500);
+    font-family: 'Caveat', cursive, sans-serif;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+    margin-left: 15rem;
+    position: relative;
+  }
+
+  :global([data-theme="dark"]) .discoverMore {
+    color: var(--lunar-green-500);
+  }
+}
+
+.btnArrow {
+  transition: transform 0.3s ease;
+}
+
+.viewAllLink:hover .btnArrow {
+  transform: translateX(4px);
+}
+
+.curvedArrow {
+  width: 40px;
+  height: 40px;
+  color: currentColor;
+  transform: rotate(-110deg) scaleX(-1);
+  /* Points up and left towards button */
+}
+
+.discoverText {
+  white-space: nowrap;
+}
+
+/* 4. Menu Items Grid
+   ========================================================================== */
+
+.menuItemsWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 90%;
+  margin: 1rem auto;
+}
+
+@media screen and (min-width: 768px) {
+  .menuItemsWrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .menuItemsWrapper>*:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .menuItemsWrapper {
+    width: 70%;
+  }
+}
+
+/* 5. Reservation Banner Section
+   ========================================================================== */
+
 .contactBadgeWrapper {
   position: relative;
   display: flex;
@@ -91,7 +318,9 @@
   text-align: center;
 }
 
-/* MenuPage - Cards Section */
+/* 6. Highlight Cards Section (Bottom of Page)
+   ========================================================================== */
+
 .cardsWrapper {
   position: relative;
   height: 100vh;
@@ -100,94 +329,4 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-}
-
-/***** Menu Carousel Slide *****/
-.carouselLinksWrapper {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  z-index: 100;
-  margin: 0 2rem 10rem;
-  padding: 1rem 0;
-}
-
-/* linksWrapper */
-.linksWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  z-index: 10;
-}
-
-@media screen and (min-width: 1024px) {
-  .linksWrapper {
-    gap: 4rem;
-  }
-}
-
-/* Carousel Slide Wrapper */
-.carouselSlideWrapper {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  z-index: 100;
-}
-
-.dotsWrapper {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  bottom: 20%;
-  left: 5%;
-  gap: 10px;
-  z-index: 10;
-}
-
-@media screen and (min-width: 1024px) {
-  .dotsWrapper {
-    left: 10%;
-  }
-}
-
-/* View All Link Button */
-.viewAllLink {
-  margin-top: 1rem;
-  width: 80%;
-  text-align: center;
-}
-
-@media screen and (min-width: 1024px) {
-  .viewAllLink {
-    width: 20%;
-  }
-}
-
-/* Menu Items Wrapper Carousel */
-.menuItemsWrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  width: 80%;
-}
-
-@media screen and (min-width: 768px) {
-  .menuItemsWrapper {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .menuItemsWrapper>*:last-child {
-    grid-column: 1 / -1;
-    flex-direction: row;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .menuItemsWrapper {
-    width: 60%;
-  }
 }

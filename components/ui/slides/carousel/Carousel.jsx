@@ -13,6 +13,7 @@ function Carousel({
   carouselWrapper,
   dotsWrapper,
   renderSlideFooter,
+  customDot,
 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
@@ -45,6 +46,10 @@ function Carousel({
       <div className={dotsWrapper}>
         {children.map((_, index) => {
           const isActive = index === currentImageIndex;
+
+          if (customDot) {
+            return customDot(index, isActive, () => handleClick(index));
+          }
 
           if (dotType === "text") {
             const label = textLabels[index] || `Slide ${index + 1}`;

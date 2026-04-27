@@ -4,17 +4,25 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowRight, Leaf, Coffee, Utensils, Cake } from 'lucide-react';
 import AnimatedOnScroll from '@/components/ui/animation/animated-scroll/AnimatedOnScroll';
 import SocialMedia from '@/components/ui/social/SocialMedia';
 import { IoLocationSharp } from "react-icons/io5";
 import styles from './heroBanner.module.css';
 
+const ICON_MAP = {
+  Leaf,
+  Coffee,
+  Utensils,
+  Cake
+};
+
 const SCROLL_CONFIG = {
   maxScroll: 500,
-  maxScale: 2,
+  maxScale: 1.5,
   minScale: 1,
-  maxBrightness: 0.9,
-  minBrightness: 0.1
+  maxBrightness: 1,
+  minBrightness: 0.3
 };
 
 export default function HeroBanner({
@@ -22,11 +30,19 @@ export default function HeroBanner({
   introductionTitle,
   introduction,
   reservationLink,
-  socialLocation
+  socialLocation,
+  variant = 'default', // 'default' or 'menu'
+  label,
+  icon,
+  highlightWord,
+  actionLink = '/menu/desserts',
+  actionText = 'Explore Our Menu'
 }) {
+  const Icon = typeof icon === 'string' ? ICON_MAP[icon] : icon;
+
   const [loaded, setLoaded] = useState(false);
   const [scale, setScale] = useState(1);
-  const [brightness, setBrightness] = useState(SCROLL_CONFIG.maxBrightness);
+  const [brightness, setBrightness] = useState(1);
   const rafId = useRef(null);
 
   useEffect(() => {
@@ -52,9 +68,25 @@ export default function HeroBanner({
     };
   }, []);
 
+  const renderTitle = () => {
+    if (!highlightWord || !introductionTitle) return introductionTitle;
+    const parts = introductionTitle.split(highlightWord);
+    if (parts.length < 2) return introductionTitle;
+
+    return (
+      <>
+        {parts[0]}
+        <span className={styles.highlight}>{highlightWord}</span>
+        {parts[1]}
+      </>
+    );
+  };
+
+  const isMenu = variant === 'menu';
+
   return (
     <div
-      className={styles.container}
+      className={`${styles.container}`}
       style={{ backgroundColor: loaded ? 'transparent' : 'var(--background)' }}
     >
       <div className={styles.backgroundWrapper}>
@@ -76,22 +108,44 @@ export default function HeroBanner({
           priority
           onLoad={() => setLoaded(true)}
         />
+        {isMenu && <div className={styles.gradientOverlay} />}
       </div>
 
-      <AnimatedOnScroll animationClass={styles.animateInRight} className={styles.introduction}>
-        <h1>{introductionTitle} </h1>
-        <p> {introduction}</p>
-
-        {reservationLink && (
-          <div className={styles.reservation}>
-            <Link href="/reservations">
-              Make Reservation
-            </Link>
+      <AnimatedOnScroll
+        animationClass={styles.animateInRight}
+        className={`${styles.introduction} ${isMenu ? styles.menuContent : ''}`}
+      >
+        {isMenu && label && (
+          <div className={styles.labelWrapper}>
+            {Icon && (
+              <div className={styles.iconCircle}>
+                <Icon size={16} />
+              </div>
+            )}
+            <span className={styles.label}>{label}</span>
           </div>
+        )}
+
+        <h1 className={isMenu ? styles.menuTitle : ''}>{isMenu ? renderTitle() : introductionTitle} </h1>
+        <p className={isMenu ? styles.menuDescription : ''}> {introduction}</p>
+
+        {isMenu ? (
+          <Link href={actionLink} className={styles.exploreButton}>
+            {actionText}
+            <ArrowRight size={18} />
+          </Link>
+        ) : (
+          reservationLink && (
+            <div className={styles.reservation}>
+              <Link href="/reservations">
+                Make Reservation
+              </Link>
+            </div>
+          )
         )}
       </AnimatedOnScroll>
 
-      {socialLocation && (
+      {socialLocation && !isMenu && (
         <div className={styles.bottomSection}>
           <div className={`${styles.content} ${styles['tracking-in-expand-fwd-top']}`}>
             <SocialMedia strokeColor='#3d4148' />
