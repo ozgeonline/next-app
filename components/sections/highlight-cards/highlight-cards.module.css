@@ -313,6 +313,7 @@
   text-decoration: none;
   color: var(--lunar-green-200);
   font-size: 1rem;
+  text-wrap: nowrap;
 }
 
 [data-theme="dark"] .learnMoreLeft a {
@@ -334,7 +335,7 @@
   align-items: center;
   margin-top: 1rem;
   text-decoration: none;
-  padding: 0 1rem;
+  padding: 0.9rem 1rem;
   border-radius: 50px;
   width: 12rem;
   height: 2.5rem;

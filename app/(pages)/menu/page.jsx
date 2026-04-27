@@ -59,7 +59,7 @@ export default function MenuPage() {
             );
           })}
         </Carousel>
-        
+
         <div className={styles.featuresOverlay} data-theme="dark">
           <FeaturesStrip items={features} />
         </div>
@@ -75,10 +75,7 @@ export default function MenuPage() {
         </div>
 
         <div className={`${styles.contactBadgeWrapper} mainBackground`}>
-          <div className={styles.containerBadge}>
-            <MainPageReservationBanner />
-            <WavesBackground />
-          </div>
+          <MainPageReservationBanner />
         </div>
 
         <div className={`${styles.cardsWrapper} mainBackground`}>
