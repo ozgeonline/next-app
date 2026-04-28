@@ -1,53 +1,66 @@
 import Link from 'next/link';
 import RecipesCard from '@/components/ui/cards/recipe-card/RecipeCard';
-import WavesBackground from '@/components/ui/backgrounds/wavesBackground/WavesBackground';
 import styles from './page.module.css';
-
-export const dynamic = "force-dynamic";
-
-export const metadata = {
-  title: "Community",
-  description:
-    "Join the community! Share your original recipes, discover others' dishes, and connect with food lovers around the world.",
-  keywords: "Meals Share, food, recipes, community"
-};
+import { ArrowRight, Leaf, Users } from 'lucide-react';
 
 export default function CommunityPage() {
   return (
-    <div className={`${styles.container} mainBackground`}>
-      <WavesBackground />
+    <div className={styles.pageWrapper}>
       <div className="containerTopNavbarColor" />
-      <header className={styles.header}>
-        <h1>
-          One shared passion: <span className="highlight-text">Food</span>
-        </h1>
-        <p>Join our community and share your favorite recipes!</p>
-      </header>
 
-      <main className={styles.main}>
-        <section className={styles.section}>
-          <h2 className={styles['section-title']}>
-            Latest Recipes
-          </h2>
-          <div className="grid-cols-2-to-5">
-            <RecipesCard spotlight={false} />
+      {/* HERO SECTION */}
+      <section className={styles.heroSection}>
+        <div className={styles.watermarkText}>SHARE</div>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>
+            One shared passion: <span className={styles.highlight}>Food</span>
+          </h1>
+          <p className={styles.heroSubtext}>
+            Join our community and share your favorite recipes!
+          </p>
+          <div className={styles.decorativeDivider}>
+            <div className={styles.line} />
+            <Leaf className={styles.dividerLeaf} size={24} />
+            <div className={styles.line} />
           </div>
-        </section>
+        </div>
+      </section>
 
-        <div className={styles.meals}>
-          <h2>Meals Shared</h2>
-          <Link href="/meals" className='accent-link-button'>Browse Meals</Link>
+      {/* LATEST RECIPES SECTION */}
+      <section className={styles.recipesSection}>
+        <div className={styles.sectionHeader}>
+          <div className={styles.sectionTitleWrapper}>
+            <div className={styles.iconCircle}>
+              <Leaf className={styles.dividerLeaf} size={20} />
+            </div>
+            <h2 className={styles.sectionTitle}>Latest Recipes</h2>
+          </div>
+          <Link href="/recipes" className={styles.viewAllBtn}>
+            View All <ArrowRight size={18} />
+          </Link>
         </div>
 
-        <section className={styles.section}>
-          <h2 className={styles['section-title']}>
-            User Spotlights
-          </h2>
-          <div className="grid-cols-1-to-5">
-            <RecipesCard spotlight={true} />
+        <div className={styles.recipeGrid}>
+          <RecipesCard />
+        </div>
+      </section>
+
+      {/* MEALS SHARED BOTTOM SECTION */}
+      <section className={styles.mealsSharedSection}>
+        <div className={styles.mealsCard}>
+          <div className={styles.mealsIconWrapper}>
+            <Users size={28} />
           </div>
-        </section>
-      </main>
+          <h2 className={styles.mealsTitle}>Meals Shared</h2>
+          <p className={styles.mealsSubtext}>
+            Discover meals shared by our community and get inspired.
+          </p>
+          <Link href="/meals" className={styles.browseBtn}>
+            Browse Meals <ArrowRight size={20} />
+          </Link>
+        </div>
+        <div className={styles.bottomWatermark}>SHARE</div>
+      </section>
     </div>
   );
 }

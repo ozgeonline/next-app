@@ -1,3 +1,8 @@
+.main {
+  width: 100%;
+  padding: 1rem;
+}
+
 .container {
   position: relative;
   display: flex;
@@ -11,6 +16,48 @@
   padding: 4rem 1rem;
 }
 
+.watermarkText {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  font-size: 15rem;
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  color: var(--lunar-green-500);
+  opacity: 0.03;
+  letter-spacing: 2rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.watermarkText {
+  font-size: 8rem;
+}
+
+.heroTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 3rem;
+  font-weight: 500;
+  color: var(--lunar-green-950);
+  line-height: 1.1;
+  margin: 1.5rem auto 0;
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: 4.5rem;
+  }
+}
+
+.heroTitle .highlight {
+  font-style: italic;
+  color: var(--razzmatazz-600);
+}
+
+[data-theme="dark"] .heroTitle .highlight {
+  color: var(--lunar-green-600);
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -18,9 +65,9 @@
   justify-content: center;
   margin: 1rem auto;
   width: 100%;
+  height: 85vh;
   max-width: 75rem;
   font-size: 1rem;
-  color: var(--text);
 }
 
 .header h1,
@@ -29,24 +76,58 @@
 }
 
 .header p {
-  margin: 0;
-  padding: .75rem 0;
+  font-size: 1.3rem;
+  color: var(--neutral-600);
+  margin-bottom: 2.5rem;
 }
 
-@media screen and (min-width: 640px) {
-  .header {
-    font-size: 1.2rem;
-  }
+.shareRecipeBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 999px;
+  color: var(--neutral-600);
+  background: rgba(158, 163, 173, 0.2);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-@media screen and (min-width: 1280px) {
-  .header {
-    font-size: 1.4rem;
-    margin: 2rem auto;
-  }
+.shareRecipeBtn:hover {
+  filter: brightness(1.2);
+  background: rgba(158, 163, 173, 0.7);
 }
 
-.main {
-  width: 100%;
-  padding: 1rem;
+[data-theme="dark"] .shareRecipeBtn {
+  background: rgba(146, 182, 161, 0.8);
+  color: var(--lunar-green-900);
+}
+
+[data-theme="dark"] .shareRecipeBtn:hover {
+  background: var(--lunar-green-600);
+  filter: brightness(1.2);
+}
+
+.decorativeDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.line {
+  height: 1px;
+  width: 100px;
+  background: linear-gradient(to right, transparent, var(--neutral-500), transparent);
+}
+
+.dividerLeaf {
+  color: var(--neutral-700);
+  opacity: 0.8;
+}
+
+[data-theme="dark"] .dividerLeaf {
+  color: var(--lunar-green-600);
 }

@@ -231,7 +231,7 @@
   padding: 3rem 1rem;
 }
 
-.nonAuthProfile h3 {
+.nonAuthProfile h4 {
   font-weight: 400;
   color: var(--neutral-500);
 }

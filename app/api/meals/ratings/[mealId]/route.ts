@@ -16,7 +16,8 @@ interface RatingDocument {
 export async function GET(req: NextRequest, { params }: { params: Promise<{ mealId: string }> }) {
   try {
     const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
-    const limitStatus = rateLimit(ip, 10, 60000);
+    // Increased limit for GET requests from 10 to 100 to support pages with multiple cards
+    const limitStatus = rateLimit(ip, 100, 60000);
 
     if (!limitStatus.success) {
       return NextResponse.json(

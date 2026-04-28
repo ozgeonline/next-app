@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative;
   padding: 6rem 0 3rem;
   background: var(--background);
@@ -38,6 +39,11 @@
   background: var(--merino-100);
   border-radius: 40px;
   border: 1px solid var(--merino-200);
+}
+
+[data-theme="dark"] .authMessage {
+  background: var(--lunar-green-100);
+  border: 1px solid var(--lunar-green-500);
 }
 
 .loginBtn {

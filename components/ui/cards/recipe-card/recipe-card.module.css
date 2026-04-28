@@ -1,148 +1,174 @@
-.container {
+.cardContainer {
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid var(--merino-100);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  overflow: hidden;
 }
 
-.card {
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 1 / 1.1;
-  overflow: hidden;
-  box-sizing: border-box;
-  cursor: pointer;
+.cardContainer:hover {
+  box-shadow: 0 25px 50px rgba(81, 123, 101, 0.1);
+  border-color: var(--lunar-green-200);
 }
 
-.recipe-card {
+.cardHeader {
   position: relative;
   width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  box-sizing: border-box;
+  height: 9em;
   overflow: hidden;
 }
 
-/* Non-spotlight: image fills the entire card */
-.cardCompact-image {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: all 0.3s ease;
-  transform-origin: top;
-  overflow: hidden;
-}
-
-.cardCompact-image .cardCompact-link {
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  text-decoration: none;
-  color: #f4f4f4;
-  font-size: 1.2rem;
-  font-weight: 700;
-  z-index: 2;
+.categoryTag {
   position: absolute;
-  inset: 0;
-  backdrop-filter: brightness(0.6);
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  background: var(--neutral-700);
+  backdrop-filter: blur(8px);
+  color: var(--neutral-200);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
 }
 
-@media screen and (min-width: 1024px) {
-  .cardCompact-image .cardCompact-link {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  .cardCompact-image:hover .cardCompact-link {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-.cardCompact-image .image-inner,
-.cardDetailed-image .image-inner {
+.recipeImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform-origin: top;
-  object-position: top;
+  transition: transform 0.6s ease;
 }
 
-/* Spotlight: image fills top half, overlay fills bottom half */
-.cardDetailed-image {
-  position: relative;
-  width: 100%;
-  height: 50%;
-  transition: transform 0.3s ease;
-  transform-origin: top;
+.cardContainer:hover .recipeImage {
+  transform: scale(1.1);
+}
+
+.cardBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.chefRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.chefInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   overflow: hidden;
-  z-index: 1;
-}
-
-.cardDetailed-image .image-inner:hover {
-  transition: transform 0.5s ease;
-  transform: scale(1.2);
-}
-
-.cardDetailed-overlay {
+  border: 1px solid var(--neutral-200);
   display: flex;
-  flex-direction: column;
-  height: 50%;
-  width: 100%;
-  padding: .5rem;
-  gap: .5rem;
+  align-items: center;
+  justify-content: center;
   background: var(--neutral-100);
-  /* background: #edede9; */
-  color: var(--science-blue-950);
+  color: var(--lunar-green-600);
 }
 
-.cardDetailed-info {
+.username {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neutral-600);
+}
+
+.likes {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--neutral-500);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.heartIcon {
+  color: var(--razzmatazz-500);
+}
+
+.recipeTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--lunar-green-950);
+  line-height: 1.3;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.stars {
+  display: flex;
+  gap: 0.1rem;
+}
+
+.ratingText {
+  font-size: 0.75rem;
+  color: var(--neutral-500);
+  font-weight: 600;
+}
+
+.seeRecipeBtn {
+  margin-top: 0.5rem;
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
-  gap: .2rem;
-}
-
-.cardDetailed-info p {
+  gap: 0.8rem;
+  padding: 0.8rem;
+  border: 1.5px solid var(--merino-200);
+  border-radius: 999px;
+  color: var(--lunar-green-700);
+  font-weight: 700;
   font-size: 0.9rem;
-  letter-spacing: 0.05rem;
-  font-style: italic;
-  font-weight: thin;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-.cardDetailed-info p span {
-  font-weight: bold;
+.seeRecipeBtn:hover {
+  background: var(--lunar-green-50);
+  border-color: var(--lunar-green-500);
+  color: var(--lunar-green-800);
 }
 
-.cardDetailed-info .stars {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding-top: 0.5rem;
+/* DARK MODE */
+[data-theme="dark"] .cardContainer {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
-.ratingCountWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+[data-theme="dark"] .recipeTitle {
+  color: var(--text);
 }
 
-.ratingCount {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  font-size: 0.8rem;
-  color: var(--neutral-950);
-  margin-left: .5rem;
+[data-theme="dark"] .username,
+[data-theme="dark"] .likes,
+[data-theme="dark"] .ratingText {
+  color: var(--neutral-400);
+}
+
+[data-theme="dark"] .seeRecipeBtn {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+
+[data-theme="dark"] .seeRecipeBtn:hover {
+  background: rgba(146, 182, 161, 0.1);
 }

@@ -140,7 +140,7 @@ export default function ProfilePage() {
         ) : (
           // Not Authenticated Profile
           <div className={styles.nonAuthProfile}>
-            <h3>Join our community or login to continue</h3>
+            <h4>Join our community or login to continue</h4>
             <Link href="/signup" className={styles.primaryAuthButton}>
               Create Account
             </Link>

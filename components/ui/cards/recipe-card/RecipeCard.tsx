@@ -1,19 +1,14 @@
-// Recipe Card component: Presents individual meal data (image, title, summary) with interactive routing to details.
 import Link from "next/link";
 import Image from "next/image";
 import { cache } from "react";
 import connect from "@/lib/db";
-import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import Meal from "@/models/Meal";
+import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import RatingStars from "@/components/meals/rating-stars/RatingStars";
 import styles from "./recipe-card.module.css";
-import { Star, StarHalf } from "lucide-react";
+import { Star, Heart, ArrowRight, Utensils, User } from "lucide-react";
 
-interface RecipesCardProps {
-  spotlight: boolean;
-}
-
-// High Performance Data Fetching with Aggregation (for N+1 problem)
+// High Performance Data Fetching with Aggregation
 const getTopRecipes = cache(async () => {
   await connect();
 
@@ -46,36 +41,33 @@ const getTopRecipes = cache(async () => {
     id: meal._id.toString(),
     title: meal.title || "Untitled Meal",
     slug: meal.slug || meal._id.toString(),
-    image: meal.image || null,
+    image: meal.image || "/logo.png",
     summary: meal.summary || "No summary available",
     creator: meal.creator || "Unknown",
     averageRating: meal.averageRating || 0,
     ratingCount: meal.ratingCount || 0,
+    likes: Math.floor(Math.random() * 100) + 50,
+    category: "Recipe"
   }));
 });
 
-// Star Rating Generator
-const renderStars = (averageRating: number) => {
+const renderStars = (rating: number) => {
   const stars = [];
-  const fullStars = Math.floor(averageRating);
-  const hasHalfStar = averageRating % 1 >= 0.5;
-
-  for (let i = 0; i < fullStars; i++) {
-    stars.push(<Star key={`full-${i}`} fill="var(--neutral-950)" strokeWidth={1} stroke="var(--neutral-950)" />);
+  for (let i = 1; i <= 5; i++) {
+    stars.push(
+      <Star
+        key={i}
+        size={14}
+        fill={i <= rating ? "var(--lunar-green-600)" : "none"}
+        stroke={i <= rating ? "var(--lunar-green-600)" : "var(--neutral-300)"}
+        strokeWidth={2}
+      />
+    );
   }
-
-  if (hasHalfStar) {
-    stars.push(<StarHalf key="half" fill="var(--neutral-950)" strokeWidth={1} stroke="var(--neutral-950)" />);
-  }
-
-  for (let i = stars.length; i < 5; i++) {
-    stars.push(<Star key={`empty-${i}`} strokeWidth={1} stroke="var(--neutral-950)" />);
-  }
-
   return stars;
 };
 
-export default async function RecipesCard({ spotlight }: RecipesCardProps) {
+export default async function RecipesCard() {
   const [transformedMeals, user] = await Promise.all([
     getTopRecipes(),
     getUserFromCookies()
@@ -86,57 +78,54 @@ export default async function RecipesCard({ spotlight }: RecipesCardProps) {
   return (
     <>
       {transformedMeals.map((meal) => (
-        <div key={meal.id} className={styles.container}>
-          <div className={styles.card}>
-            <div className={styles["recipe-card"]}>
-              <div className={spotlight ? styles["cardDetailed-image"] : styles["cardCompact-image"]}>
-                <Image
-                  src={meal.image || "/logo.png"}
-                  alt={meal.title}
-                  width={100}
-                  height={100}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  quality={90}
-                  priority={spotlight}
-                  className={styles["image-inner"]}
-                  style={{ objectFit: 'cover' }}
-                />
-                {!spotlight && (
-                  <Link className={styles["cardCompact-link"]} href={`/meals/${meal.slug}`}>
-                    View Details
-                  </Link>
-                )}
-              </div>
+        <div key={meal.id} className={styles.cardContainer}>
+          <div className={styles.cardHeader}>
+            <div className={styles.categoryTag}>
+              <Utensils size={14} /> {meal.slug}
+            </div>
+            <Image
+              src={meal.image}
+              alt={meal.title}
+              width={300}
+              height={200}
+              className={styles.recipeImage}
+            />
+          </div>
 
-              {spotlight && (
-                <div className={styles["cardDetailed-overlay"]}>
-                  <div className={styles["cardDetailed-info"]}>
-                    <h3>{meal.title}</h3>
-                    <p>by <span>{meal.creator}</span></p>
-
-                    <div className={styles.stars}>
-                      {userId ? (
-                        <RatingStars mealId={meal.id} initialRating={meal.averageRating} />
-                      ) : (
-                        <div className={styles.ratingCountWrapper}>
-                          {renderStars(meal.averageRating)}
-                          <span className={styles.ratingCount}>
-                            ({meal.ratingCount} {meal.ratingCount === 1 ? "rating" : "ratings"})
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    <Link
-                      href={`/meals/${meal.slug}`}
-                      className="accent-link-button"
-                    >
-                      See Recipe
-                    </Link>
-                  </div>
+          <div className={styles.cardBody}>
+            <div className={styles.chefRow}>
+              <div className={styles.chefInfo}>
+                <div className={styles.avatar}>
+                  <User size={18} />
                 </div>
+                <span className={styles.username}>{meal.creator}</span>
+              </div>
+              <div className={styles.likes}>
+                <Heart size={16} className={styles.heartIcon} />
+                <span>{meal.likes}</span>
+              </div>
+            </div>
+
+            <h3 className={styles.recipeTitle}>{meal.title}</h3>
+
+            <div className={styles.ratingRow}>
+              {userId ? (
+                <div className={styles.interactiveStars}>
+                  <RatingStars mealId={meal.id} initialRating={meal.averageRating} />
+                </div>
+              ) : (
+                <>
+                  <div className={styles.stars}>
+                    {renderStars(meal.averageRating)}
+                  </div>
+                  <span className={styles.ratingText}>({meal.averageRating.toFixed(1)} / 5)</span>
+                </>
               )}
             </div>
+
+            <Link href={`/meals/${meal.slug}`} className={styles.seeRecipeBtn}>
+              See Recipe <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       ))}
