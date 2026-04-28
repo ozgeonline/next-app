@@ -1,201 +1,256 @@
-.containerTopNavbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 4rem;
-  width: 100%;
-}
-
-.containerWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
+.pageWrapper {
   min-height: 100vh;
-  opacity: 1;
-  z-index: 100;
-  position: relative;
-  padding: 5rem 0;
-}
-
-.containerWrapper .loading {
-  color: #ffffc2;
-}
-
-@media screen and (min-width: 1024px) {
-  .containerWrapper {
-    flex-direction: row;
-    gap: 2rem;
-    min-height: 100vh;
-    padding: 5rem;
-  }
-}
-
-.card {
-  width: 90%;
-  min-height: max-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  /* Glassmorphism Specs */
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  margin: 0.5rem;
-  overflow: hidden;
-  height: 24rem;
-}
-
-[data-theme='light'] .card {
-  background: rgba(0, 0, 0, 0.1);
-  border: 2px solid rgba(0, 0, 0, 0.05);
-}
-
-@media screen and (min-width: 1024px) {
-  .card {
-    width: 40%;
-  }
-
-  .card {
-    height: 36rem;
-  }
-
-}
-
-.avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 35%;
-  width: 6rem;
-  height: 6rem;
-  border-radius: 50%;
-  /* Frosted Glass Orb */
-  background: var(--neutral-100);
-  border: 1px solid var(--science-blue-500);
-  box-shadow: 0 4px 15px rgba(4, 102, 200, .3);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  color: var(--neutral-600);
-  box-sizing: border-box;
-  text-transform: uppercase;
-  font-size: 2em;
-  overflow: hidden;
-  z-index: 10;
-  opacity: .7;
-}
-
-[data-theme="light"] .avatar {
-  border: 1px solid var(--neutral-800);
-  box-shadow: none;
-}
-
-@media screen and (min-width: 1024px) {
-  .avatar {
-    width: 10rem;
-    height: 10rem;
-    left: auto;
-  }
-}
-
-.userCard {
-  background: transparent;
-  color: var(--text);
-  display: flex;
-  height: 100%;
   width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 16px;
-}
-
-.userCard .top,
-.userCard .bottom {
-  width: 70%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
   position: relative;
+  background: var(--merino-50);
+  overflow-x: hidden;
+  padding-bottom: 5rem;
+  z-index: 2;
 }
 
-.userCard .bottom button,
-.userCard .bottom a {
-  width: 80%;
+/* HERO SECTION */
+.heroSection {
+  position: relative;
+  min-height: 35vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 6rem;
+}
+
+.watermarkText {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  font-size: 15rem;
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  color: var(--lunar-green-500);
+  opacity: 0.03;
+  letter-spacing: 2rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  width: 90%;
+}
+
+.heroTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 4.5rem;
+  font-weight: 500;
+  color: var(--lunar-green-950);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.decorativeDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.line {
+  height: 1px;
+  width: 100px;
+  background: linear-gradient(to right, transparent, var(--merino-300), transparent);
+}
+
+.dividerLeaf {
+  color: var(--lunar-green-500);
+  opacity: 0.6;
+}
+
+/* MAIN CONTENT */
+.mainContent {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  z-index: 10;
+}
+
+@media (min-width: 1024px) {
+  .mainContent {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+/* IDENTITY CARD (LEFT) */
+.identityCard {
+  flex: 0.8;
+  background: white;
+  border-radius: 40px;
+  padding: 3rem 2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  border: 1px solid var(--merino-100);
   text-align: center;
 }
 
-.userCard .top .name {
-  text-transform: capitalize;
-  font-weight: 300;
-  letter-spacing: 0.05em;
-  color: var(--neutral-700);
+.avatarCircle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--merino-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-family: 'Fraunces', serif;
+  color: var(--lunar-green-600);
+  border: 4px solid white;
+  box-shadow: 0 10px 25px rgba(81, 123, 101, 0.1);
 }
 
-.userCard .bottom .nonauth {
-  font-style: oblique;
-  color: var(--shark-400);
+.userName {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  color: var(--lunar-green-950);
+  margin-bottom: 0.5rem;
 }
 
-@media screen and (min-width: 1024px) {
-  .userCard .top .name {
-    font-size: 1.5rem;
-  }
+.userSub {
+  font-size: 0.95rem;
+  color: var(--neutral-500);
+  font-style: italic;
 }
 
-/* Auth Actions (Ghost Buttons) */
-.ghostButton {
-  background: transparent;
-  border: 1px solid var(--science-blue-500);
-  color: var(--science-blue-500);
-  padding: 0.75rem 2rem;
-  border-radius: 30px;
-  font-size: 1rem;
+.actionStack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-radius: 18px;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
   text-decoration: none;
-}
-
-.ghostButton:hover {
-  border-color: var(--science-blue-500);
-  color: var(--science-blue-500);
-  background: rgba(4, 102, 200, 0.05);
-}
-
-[data-theme="light"] .ghostButton {
-  background: transparent;
-  border: 1px solid var(--science-blue-800);
-  color: var(--science-blue-800);
-}
-
-[data-theme="light"] .ghostButton:hover {
-  background: rgba(4, 102, 200, 0.1);
-}
-
-.logoutButton {
-  background: transparent;
-  border: 1px solid var(--neutral-600);
-  color: var(--neutral-600);
-  padding: 0.75rem 2rem;
-  border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
   transition: all 0.3s ease;
-  font-weight: 600;
+  border: 1px solid var(--merino-200);
 }
 
-.logoutButton:hover {
-  background: var(--neutral-600);
-  color: var(--neutral-100);
-  filter: brightness(1.3);
+.primaryAction {
+  background: var(--lunar-green-600);
+  color: white;
+  border: none;
+}
+
+.primaryAction:hover {
+  background: var(--lunar-green-700);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(81, 123, 101, 0.2);
+}
+
+.secondaryAction {
+  background: transparent;
+  color: var(--neutral-600);
+}
+
+.secondaryAction:hover {
+  background: var(--merino-50);
+  border-color: var(--lunar-green-300);
+  color: var(--lunar-green-700);
+}
+
+.logoutBtn {
+  margin-top: 1rem;
+  background: transparent;
+  border: none;
+  color: #e53e3e;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.logoutBtn:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* CONTENT CARD (RIGHT) */
+.contentCard {
+  flex: 1.2;
+  background: white;
+  border-radius: 40px;
+  padding: 3rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--merino-100);
+}
+
+/* LOADING */
+.loadingWrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--merino-50);
+}
+
+.loadingText {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  color: var(--lunar-green-600);
+  font-style: italic;
+}
+
+/* DARK MODE */
+[data-theme="dark"] .pageWrapper,
+[data-theme="dark"] .loadingWrapper {
+  background: var(--background);
+}
+
+[data-theme="dark"] .identityCard,
+[data-theme="dark"] .contentCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .heroTitle,
+[data-theme="dark"] .userName {
+  color: var(--text);
+}
+
+[data-theme="dark"] .avatarCircle {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 3rem;
+  }
+  
+  .watermarkText {
+    font-size: 8rem;
+  }
+  
+  .contentCard {
+    padding: 2rem;
+  }
 }

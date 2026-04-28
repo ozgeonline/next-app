@@ -4,26 +4,18 @@ import { ReactNode, useEffect } from 'react';
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth/AuthProvider";
-import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
 import styles from "./auth.module.css";
 import TopScrollButton from '@/components/ui/topScrollButton/TopScrollButton';
+import { Leaf, LogOut, Calendar, User as UserIcon } from 'lucide-react';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   const { user, isAuthenticated, loading, logout } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
-  // console.log("AuthLayout state:", {
-  //   user,
-  //   isAuthenticated,
-  //   loading,
-  //   pathname
-  // });
 
-  // Redirect to /profile if auth
   useEffect(() => {
     if (loading) return;
     if (isAuthenticated && (pathname === "/login" || pathname === "/signup")) {
-      //console.log("AuthLayout: auth user, redirecting to /profile");
       router.push("/profile");
     }
   }, [isAuthenticated, pathname, router, loading]);
@@ -40,53 +32,70 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 
   if (loading || (isAuthenticated && (pathname === "/login" || pathname === "/signup"))) {
     return (
-      <div className={`${styles.containerWrapper} background-gradient`}>
-        <h3 className={styles.loading}>Loading...</h3>
+      <div className={styles.loadingWrapper}>
+        <h3 className={styles.loadingText}>Loading...</h3>
       </div>
     );
   }
 
   return (
-    <div className={`${styles.containerWrapper} mainBackground`}>
-      <div className={`${styles.containerTopNavbar} menuNavbar`} />
-      <div className={styles.card}>
-        <div className={styles.avatar}>
-          {user?.name ? user.name.slice(0, 2).toUpperCase() : "G"}
+    <div className={styles.pageWrapper}>
+      <div className="containerTopNavbarColor" />
+
+      {/* HERO SECTION */}
+      <section className={styles.heroSection}>
+        <div className={styles.watermarkText}>ACCOUNT</div>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>Your Account</h1>
+          <div className={styles.decorativeDivider}>
+            <div className={styles.line} />
+            <Leaf className={styles.dividerLeaf} size={24} />
+            <div className={styles.line} />
+          </div>
         </div>
-        <div className={styles.userCard}>
-          <div className={styles.top}>
-            <div className={styles.name}>
-              Hello, {user?.name || "Guest"}
-            </div>
+      </section>
+
+      {/* MAIN CONTENT */}
+      <main className={styles.mainContent}>
+        {/* IDENTITY CARD (LEFT) */}
+        <div className={styles.identityCard}>
+          <div className={styles.avatarCircle}>
+            {user?.name ? user.name.slice(0, 2).toUpperCase() : <UserIcon size={40} />}
           </div>
 
-          {isAuthenticated ? (
-            <div className={styles.bottom}>
-              <button
-                type="button"
-                className={styles.logoutButton}
-                onClick={handleSignout}
-              >
-                Logout
-              </button>
-              <Link
-                href="/reservations"
-                className={styles.ghostButton}
-              >
-                My Reservations
-              </Link>
-            </div>
-          ) : (
-            <div className={styles.bottom}>
-              <span className={styles.nonauth}>Login for account information</span>
-            </div>
-          )}
-        </div>
-      </div>
+          <div className={styles.userInfo}>
+            <h2 className={styles.userName}>{user?.name || "Guest"}</h2>
+            <p className={styles.userSub}>{user?.email || "Join our community"}</p>
+          </div>
 
-      <div className={styles.card}>
-        {children}
-      </div>
+          <div className={styles.actionStack}>
+            {isAuthenticated ? (
+              <>
+                <Link href="/reservations" className={`${styles.actionBtn} ${styles.primaryAction}`}>
+                  <Calendar size={18} /> My Reservations
+                </Link>
+                <button onClick={handleSignout} className={styles.logoutBtn}>
+                  <LogOut size={16} /> Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className={`${styles.actionBtn} ${styles.primaryAction}`}>
+                  Login
+                </Link>
+                <Link href="/signup" className={`${styles.actionBtn} ${styles.secondaryAction}`}>
+                  Create Account
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* CONTENT CARD (RIGHT) */}
+        <div className={styles.contentCard}>
+          {children}
+        </div>
+      </main>
 
       <TopScrollButton />
     </div>

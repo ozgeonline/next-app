@@ -7,6 +7,7 @@ import { useAuth } from "@/context/auth/AuthProvider";
 import { useTheme } from "@/context/theme/ThemeProvider";
 import { updateUserNameAction } from "@/lib/actions/auth";
 import styles from "./profile.module.css";
+import { Mail, User as UserIcon, Settings, Moon, Sun, Utensils, Edit3, X, Check } from "lucide-react";
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
@@ -55,98 +56,107 @@ export default function ProfilePage() {
     setNewName(user?.name || "");
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className={styles.nonAuthProfile}>
+        <h2 className={styles.nonAuthTitle}>Join our community</h2>
+        <p className={styles.profileSub}>Create an account to save your recipes and manage reservations.</p>
+        <div className={styles.authBtnStack}>
+          <Link href="/signup" className={`${styles.authBtn} ${styles.primaryAuth}`}>
+            Create Account
+          </Link>
+          <Link href="/login" className={`${styles.authBtn} ${styles.secondaryAuth}`}>
+            Login
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={styles.containerWrapper}>
-      <div className={styles.profileWrapper}>
-        {isAuthenticated ? (
-          // Authenticated Profile
-          <div className={styles.authProfile}>
-            <div className={styles.detailsGrid}>
+    <div className={styles.profileContainer}>
+      <div className={styles.profileHeader}>
+        <h1 className={styles.profileTitle}>Profile Details</h1>
+        <p className={styles.profileSub}>Manage your account information and app preferences.</p>
+      </div>
 
-              {/* Email Block */}
-              <div className={styles.glassBlock}>
-                <div className={styles.blockLabel}>Email Address</div>
-                <div className={styles.blockValue}>{user?.email}</div>
-              </div>
-
-              {/* Name Block */}
-              <div className={styles.glassBlock}>
-                <div className={styles.blockLabel}>Account Name</div>
-                <div className={styles.blockValue}>{user?.name || "Not set"}</div>
-              </div>
-
-              {/* Theme Settings Block */}
-              <div className={styles.glassBlock}>
-                <div className={styles.blockLabel}>App Theme</div>
-                <div className={styles.themeToggleRow}>
-                  <div className={styles.blockValue}>Current: {theme}</div>
-                  <button onClick={toggleTheme} className={styles.themeButton}>
-                    Toggle Theme
-                  </button>
-                </div>
-              </div>
-
-              {/* Recipes Metric Block */}
-              <div className={styles.glassBlock}>
-                <div className={styles.blockLabel}>Recipes Created</div>
-                <div className={styles.statValue}>{recipesCount}</div>
-              </div>
-
-            </div>
-
-            {/* Account Settings / Edit Name */}
-            <div className={styles.updateSection}>
-              <div className={styles.updateHeader}>Update Settings</div>
-
-              {error && <p className={styles.errorMessage}>Error: {error}</p>}
-
-              {!showInput ? (
-                <button
-                  onClick={handleShowInput}
-                  className={styles.ghostButton}
-                  style={{ width: "max-content", marginTop: "0.5rem" }}
-                >
-                  Edit Account Name
-                </button>
-              ) : (
-                <>
-                  <input
-                    type="text"
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    placeholder="Enter new name"
-                    className={styles.ghostInput}
-                    autoFocus
-                  />
-                  <div className={styles.actionRow}>
-                    <button
-                      onClick={() => setShowInput(false)}
-                      className={styles.cancelButton}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      onClick={handleUpdate}
-                      disabled={saving}
-                      className={styles.ghostButton}
-                    >
-                      {saving ? "Saving..." : "Save Changes"}
-                    </button>
-                  </div>
-                </>
-              )}
-            </div>
+      <div className={styles.detailsGrid}>
+        {/* Email Block */}
+        <div className={styles.detailBlock}>
+          <div className={styles.blockLabelRow}>
+            <Mail size={16} />
+            <span className={styles.blockLabel}>Email Address</span>
           </div>
+          <div className={styles.blockValue}>{user?.email}</div>
+        </div>
+
+        {/* Name Block */}
+        <div className={styles.detailBlock}>
+          <div className={styles.blockLabelRow}>
+            <UserIcon size={16} />
+            <span className={styles.blockLabel}>Account Name</span>
+          </div>
+          <div className={styles.blockValue}>{user?.name || "Not set"}</div>
+        </div>
+
+        {/* Theme Settings Block */}
+        <div className={styles.detailBlock}>
+          <div className={styles.blockLabelRow}>
+            <Settings size={16} />
+            <span className={styles.blockLabel}>App Theme</span>
+          </div>
+          <div className={styles.themeToggle}>
+            <div className={styles.blockValue}>
+              {theme === 'dark' ? <Moon size={18} /> : <Sun size={18} />}
+              <span style={{ marginLeft: '0.5rem', textTransform: 'capitalize' }}>{theme} Mode</span>
+            </div>
+            <button onClick={toggleTheme} className={styles.toggleBtn}>
+              Switch
+            </button>
+          </div>
+        </div>
+
+        {/* Recipes Metric Block */}
+        <div className={styles.detailBlock}>
+          <div className={styles.blockLabelRow}>
+            <Utensils size={16} />
+            <span className={styles.blockLabel}>Recipes Shared</span>
+          </div>
+          <div className={styles.metricValue}>{recipesCount}</div>
+        </div>
+      </div>
+
+      {/* Account Settings / Edit Name */}
+      <div className={styles.updateSection}>
+        <h3 className={styles.updateTitle}>Account Settings</h3>
+
+        {error && <div className={styles.errorMessage}>{error}</div>}
+
+        {!showInput ? (
+          <button onClick={handleShowInput} className={styles.editBtn}>
+            <Edit3 size={18} /> Edit Account Name
+          </button>
         ) : (
-          // Not Authenticated Profile
-          <div className={styles.nonAuthProfile}>
-            <h4>Join our community or login to continue</h4>
-            <Link href="/signup" className={styles.primaryAuthButton}>
-              Create Account
-            </Link>
-            <Link href="/login" className={styles.secondaryAuthButton}>
-              Login securely
-            </Link>
+          <div className={styles.editForm}>
+            <div className={styles.inputWrapper}>
+              <UserIcon className={styles.inputIcon} size={20} />
+              <input
+                type="text"
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+                placeholder="Enter new name"
+                className={styles.ghostInput}
+                autoFocus
+              />
+            </div>
+            <div className={styles.actionRow}>
+              <button onClick={() => setShowInput(false)} className={styles.cancelBtn}>
+                <X size={18} /> <span className={styles.btnText}>Cancel</span>
+              </button>
+              <button onClick={handleUpdate} disabled={saving} className={styles.saveBtn}>
+                {saving ? "Saving..." : <><Check size={18} /> <span className={styles.btnText}>Save Changes</span></>}
+              </button>
+            </div>
           </div>
         )}
       </div>
