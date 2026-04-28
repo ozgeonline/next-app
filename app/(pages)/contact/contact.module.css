@@ -1,180 +1,228 @@
-.container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+.pageWrapper {
   min-height: 100vh;
-  z-index: 100;
-}
-
-.header {
-  padding: 2rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+  background: var(--merino-50);
+  overflow-x: hidden;
+  padding-bottom: 5rem;
+  z-index: 2;
+}
+
+/* HERO SECTION */
+.heroSection {
+  position: relative;
+  min-height: 40vh;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 3rem;
+  text-align: center;
+  padding-top: 6rem;
+}
+
+.watermarkText {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  font-size: 15rem;
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  color: var(--lunar-green-500);
+  opacity: 0.03;
+  letter-spacing: 2rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
   width: 90%;
-  max-width: 75rem;
-  color: var(--shark-800)
 }
 
-.header h1 {
-  font-weight: 600;
-  font-size: 1.5rem;
-  text-align: center;
-  letter-spacing: 0.05rem;
+.heroTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 4.5rem;
+  font-weight: 500;
+  color: var(--lunar-green-950);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
 }
 
-.header p {
-  font-size: 1rem;
-  text-align: center;
-  color: var(--text);
+.heroSubtext {
+  font-size: 1.2rem;
+  color: var(--neutral-600);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-@media screen and (min-width: 1024px) {
-  .header {
-    margin: 1rem auto;
-  }
-
-  .header h1 {
-    font-size: 2rem;
-  }
-
-  .header p {
-    font-size: 1.2rem;
-  }
-}
-
-.main {
+.decorativeDivider {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  gap: 1rem;
-  padding-bottom: 1rem;
-  z-index: 1000;
+  gap: 2rem;
 }
 
-.contactWrapper {
+.line {
+  height: 1px;
+  width: 100px;
+  background: linear-gradient(to right, transparent, var(--merino-300), transparent);
+}
+
+.dividerLeaf {
+  color: var(--lunar-green-500);
+  opacity: 0.6;
+}
+
+/* MAIN CONTENT */
+.mainContent {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  gap: 1rem;
-  padding: 0 1rem 3rem;
+  gap: 2rem;
+  z-index: 10;
 }
 
-@media screen and (min-width: 1024px) {
-  .contactWrapper {
-    padding: 0 5rem;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .contactWrapper {
+@media (min-width: 1024px) {
+  .mainContent {
     flex-direction: row;
+    align-items: stretch;
+    max-width: 80%;
   }
 }
 
-.formWrapper {
+/* LEFT CARD (MAP & INFO) */
+.leftCard {
+  flex: 1.2;
+  background: white;
+  border-radius: 40px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  border-radius: 18px;
-  color: var(--shark-800);
+  gap: 2rem;
+  border: 1px solid var(--merino-100);
 }
 
-@media screen and (min-width: 1024px) {
-  .formWrapper {
-    height: 100%;
-  }
-}
-
-.leftArea {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  flex: 1;
-  border-radius: 24px;
-  color: var(--shark-800);
-}
-
-.mapWrapper {
-  height: 100%;
-  border-radius: 16px;
-  padding-bottom: .5rem;
-  flex: 1;
+.mapContainer {
   width: 100%;
+  height: 400px;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
 }
 
-.mapWrapper iframe {
-  height: 100%;
+.mapContainer iframe {
   width: 100%;
-  border-radius: 8px;
+  height: 100%;
   border: none;
 }
 
-.contactInfo {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 30%;
-  width: 100%;
-  border-radius: 8px;
-  padding: .5rem 1rem;
-  gap: .5rem;
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  padding: 0 1rem 1rem;
 }
 
-@media screen and (min-width: 640px) {
-  .contactInfo {
-    flex-direction: row;
+@media (min-width: 640px) {
+  .contactGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
-
 }
 
-.contactInfo .infoWrapper {
+.infoItem {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  width: auto;
-  color: var(--shark-800);
-  gap: .5rem;
+  align-items: flex-start;
+  gap: 1.2rem;
 }
 
-.contactInfo .infoWrapper .info {
+.iconCircle {
+  background: var(--merino-100);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: start;
+  color: var(--lunar-green-600);
+  flex-shrink: 0;
 }
 
-.info h3 {
+.infoContent h3 {
   font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.05rem;
+  color: var(--lunar-green-900);
+  margin-bottom: 0.3rem;
 }
 
-.info p {
-  font-size: .8em;
-  letter-spacing: 0.05rem;
+.infoContent p {
+  font-size: 0.95rem;
+  color: var(--neutral-600);
+  line-height: 1.4;
 }
 
-@media screen and (min-width: 1024px) {
-  .info h3 {
-    font-size: 1.1rem;
+.socialRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* RIGHT CARD (FORM) */
+.rightCard {
+  flex: 1;
+  background: white;
+  border-radius: 40px;
+  padding: 3rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--merino-100);
+}
+
+/* DARK MODE SUPPORT */
+[data-theme="dark"] .pageWrapper {
+  background: var(--background);
+}
+
+[data-theme="dark"] .leftCard,
+[data-theme="dark"] .rightCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .heroTitle {
+  color: var(--text);
+}
+
+[data-theme="dark"] .infoContent h3 {
+  color: var(--lunar-green-400);
+}
+
+[data-theme="dark"] .infoContent p {
+  color: var(--neutral-400);
+}
+
+[data-theme="dark"] .iconCircle {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--lunar-green-400);
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 3rem;
   }
 
-  .info p {
-    font-size: .9rem;
+  .watermarkText {
+    font-size: 8rem;
+  }
+
+  .rightCard {
+    padding: 2rem;
   }
 }

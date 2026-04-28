@@ -6,6 +6,8 @@ import { sendContactEmail } from '@/lib/actions/contact';
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import styles from './contact-form.module.css';
 
+import { User as UserIcon, Mail, MessageSquare, ArrowRight } from 'lucide-react';
+
 function ContactFormInner() {
   const { user } = useAuth();
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -72,69 +74,62 @@ function ContactFormInner() {
   }, []);
 
   const emailIsValid = useMemo(() => validateEmail(formData.email), [formData.email, validateEmail]);
-
   const isFormValid = formData.name.length >= 2 && emailIsValid && formData.message.length >= 10;
 
-  const getInputClassName = (fieldName: string, isValid: boolean, value: string, readOnly: boolean) => {
-    if (readOnly) return styles.defaultValueColor;
-    if (value && isValid) return styles.validValueColor;
-    if ((!value || !isValid) && touchedFields[fieldName]) return styles.invalidValueColor;
-    return styles.defaultValueColor;
-  };
-
   const formFields = [
-    { name: 'name', type: 'text', label: 'Name', placeholder: 'Your Name', isValid: formData.name.length >= 2, readOnly: !!user },
-    { name: 'email', type: 'email', label: 'Email', placeholder: 'Your Email', isValid: emailIsValid, readOnly: !!user },
-    { name: 'message', type: 'textarea', label: 'Message', placeholder: 'Your Message...', isValid: formData.message.length >= 10, readOnly: false },
+    { name: 'name', type: 'text', label: 'Name', placeholder: 'Your name', icon: <UserIcon size={20} />, isValid: formData.name.length >= 2, readOnly: !!user },
+    { name: 'email', type: 'email', label: 'Email', placeholder: 'Your email', icon: <Mail size={20} />, isValid: emailIsValid, readOnly: !!user },
+    { name: 'message', type: 'textarea', label: 'Message', placeholder: 'Write your message here...', icon: <MessageSquare size={20} />, isValid: formData.message.length >= 10, readOnly: false },
   ];
 
   return (
     <div className={styles.formWrapper}>
-      <h3>Reach Out</h3>
-      {error && <p className={styles.error}>{error}</p>}
+      <h3 className={styles.formTitle}>Reach Out</h3>
+      {error && <div className={styles.error}>{error}</div>}
 
       <form onSubmit={handleSubmit} className={styles.contactForm}>
         {formFields.map((field) => (
           <div key={field.name} className={styles.formGroup}>
             <label htmlFor={field.name}>{field.label}</label>
-            {field.type === 'textarea' ? (
-              <textarea
-                id={field.name}
-                name={field.name}
-                value={formData[field.name as keyof typeof formData]}
-                onChange={handleInputChange}
-                onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
-                className={getInputClassName(field.name, field.isValid, formData[field.name as keyof typeof formData], field.readOnly)}
-                required
-                placeholder={field.placeholder}
-                rows={4}
-              />
-            ) : (
-              <input
-                type={field.type}
-                id={field.name}
-                name={field.name}
-                value={formData[field.name as keyof typeof formData]}
-                onChange={handleInputChange}
-                onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
-                className={getInputClassName(field.name, field.isValid, formData[field.name as keyof typeof formData], field.readOnly)}
-                required
-                placeholder={field.placeholder}
-                readOnly={field.readOnly}
-              />
-            )}
+            <div className={styles.inputWrapper}>
+              <div className={styles.inputIcon}>{field.icon}</div>
+              {field.type === 'textarea' ? (
+                <textarea
+                  id={field.name}
+                  name={field.name}
+                  value={formData[field.name as keyof typeof formData]}
+                  onChange={handleInputChange}
+                  onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
+                  required
+                  placeholder={field.placeholder}
+                  rows={4}
+                />
+              ) : (
+                <input
+                  type={field.type}
+                  id={field.name}
+                  name={field.name}
+                  value={formData[field.name as keyof typeof formData]}
+                  onChange={handleInputChange}
+                  onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
+                  required
+                  placeholder={field.placeholder}
+                  readOnly={field.readOnly}
+                />
+              )}
+            </div>
           </div>
         ))}
 
         <button
           type="submit"
-          className="accent-link-button"
+          className={styles.sendBtn}
           disabled={isSubmitting || !isFormValid}
         >
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+          {isSubmitting ? 'Sending...' : 'Send Message'} <ArrowRight size={20} />
         </button>
 
-        {formStatus && <p className={styles.formStatus}>{formStatus}</p>}
+        {formStatus && <div className={styles.formStatus}>{formStatus}</div>}
       </form>
     </div>
   );
