@@ -9,7 +9,9 @@ export default function FormInput({
   required = false,
   rows,
   defaultValue,
-  readOnly
+  readOnly,
+  maxLength,
+  ...rest
 }) {
   return (
     <div>
@@ -22,6 +24,8 @@ export default function FormInput({
           required={required}
           defaultValue={defaultValue}
           readOnly={readOnly}
+          maxLength={maxLength}
+          {...rest}
         ></textarea>
       ) : (
         <input
@@ -30,7 +34,9 @@ export default function FormInput({
           name={name}
           required={required}
           readOnly={readOnly}
+          maxLength={maxLength}
           {...(readOnly ? { value: defaultValue } : { defaultValue })}
+          {...rest}
         />
       )}
     </div>

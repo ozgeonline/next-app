@@ -27,6 +27,7 @@
   left: 1rem;
   z-index: 10;
   background: var(--neutral-700);
+  opacity: 0.7;
   backdrop-filter: blur(8px);
   color: var(--neutral-200);
   padding: 0.4rem 1rem;

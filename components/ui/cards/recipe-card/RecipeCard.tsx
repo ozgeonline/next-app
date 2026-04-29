@@ -81,7 +81,7 @@ export default async function RecipesCard() {
         <div key={meal.id} className={styles.cardContainer}>
           <div className={styles.cardHeader}>
             <div className={styles.categoryTag}>
-              <Utensils size={14} /> {meal.slug}
+              <Utensils size={14} /> {meal.title}
             </div>
             <Image
               src={meal.image}

@@ -1,88 +1,173 @@
-.controls {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
+.picker {
+  width: 100%;
+}
+
+.picker label {
+  display: block;
   margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--neutral-500);
+  font-weight: 600;
 }
 
 .picker .input {
   display: none;
 }
 
-.picker label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  font-family: 'Montserrat', sans-serif;
-  text-transform: uppercase;
-  color: var(--text-opacity);
-  font-weight: bold;
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  border: 1.5px dashed var(--lunar-green-300);
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: rgba(107, 150, 126, 0.03); /* slight green tint */
+  transition: all 0.3s ease;
 }
 
-@media screen and (max-width: 768px) {
-  .picker label {
-    text-align: center;
+[data-theme="dark"] .controls {
+  border-color: var(--lunar-green-700);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.controls:hover,
+.controls.dragging {
+  border-color: var(--lunar-green-500);
+  background: rgba(107, 150, 126, 0.08);
+}
+
+[data-theme="dark"] .controls.dragging {
+  background: rgba(107, 150, 126, 0.15);
+}
+
+@media screen and (min-width: 768px) {
+  .controls {
+    flex-direction: row;
+    align-items: center;
   }
 }
 
-.preview {
-  width: 10rem;
-  height: 10rem;
-  border: 2px solid #a4abb9;
+.uploadBox {
+  flex: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  color: #a4abb9;
-  position: relative;
-  flex-shrink: 0;
+  cursor: pointer;
+  padding: 1rem 0;
 }
 
-.preview p {
-  margin: 0;
-  padding: 1rem;
+.cloudIcon {
+  color: var(--lunar-green-600);
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .cloudIcon {
+  color: var(--lunar-green-400);
+}
+
+.uploadText {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.browseText {
+  color: var(--lunar-green-600);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .browseText {
+  color: var(--lunar-green-400);
+}
+
+.uploadSubtext {
+  color: var(--neutral-400);
+  font-size: 0.75rem;
+}
+
+/* PREVIEW CARD */
+.previewCard {
+  width: 100%;
+  max-width: 200px;
+  background: white;
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid var(--neutral-100);
+}
+
+[data-theme="dark"] .previewCard {
+  background: var(--neutral-800);
+  border-color: var(--neutral-700);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--neutral-100);
 }
 
 .image {
   object-fit: cover;
 }
 
-.uploadContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.uploadContainer a,
-.uploadContainer button {
-  width: 100%;
+.removeButton {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  color: var(--neutral-600);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+  z-index: 10;
 }
 
-.backButton {
-  margin-top: 0.5rem;
+.removeButton:hover {
+  background: var(--error);
+  color: white;
+}
+
+.fileInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.fileName {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fileSize {
+  font-size: 0.7rem;
+  color: var(--neutral-400);
 }
 
 .errorText {
-  font-size: 0.8em;
+  font-size: 0.85em;
   color: var(--error);
   margin-top: 0.5rem;
-}
-
-@media (max-width: 768px) {
-  .controls {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .uploadContainer {
-    width: 70%;
-  }
-
-  .preview {
-    margin-bottom: 0.5rem;
-  }
+  text-align: center;
 }
