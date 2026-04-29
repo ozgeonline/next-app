@@ -98,11 +98,6 @@
   background-color: var(--fuego-400);
 }
 
-.iconWrapper {
-  padding-top: 2rem;
-  opacity: 0.5;
-}
-
 @keyframes moveToBottom {
   0% {
     transform: translateY(-100%);

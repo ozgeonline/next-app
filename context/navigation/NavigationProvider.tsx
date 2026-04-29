@@ -48,7 +48,7 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
   const animationPortal = isLoading && isMounted && typeof document !== "undefined" ? (
     createPortal(
       <div className={`${styles.overlay}`}>
-        <FoodsIcon stroke="white" className={styles.icon} width="50%" />
+        <FoodsIcon stroke="var(--neutral-500)" className={styles.icon} width="50%" />
       </div>,
       document.body
     )

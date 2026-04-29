@@ -67,23 +67,14 @@
   transition: margin-top 0.3s ease;
 }
 
+.sectionTitle .sectionTitleText {
+  color: #cbb9a6;
+}
+
 @media screen and (min-width: 640px) {
   .sectionTitle {
     margin-top: 3rem;
   }
-}
-
-.sectionTitleActive {
-  margin-top: 1.2rem;
-}
-
-.titleText {
-  background-image: repeating-linear-gradient(to right, #a2682a 0%, #ffffc2 8%, #ffffc2 18%, #d3b15f 27%, #faf0a0 35%, #ffffc2 40%, #faf0a0 50%, #d3b15f 58%, #be8c3c 67%, #b17b32 77%, #bb8332 83%, #d4a245 88%, #e1b453 93%, #a4692a 100%);
-  background-size: 150%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-top: 0;
 }
 
 
@@ -116,7 +107,7 @@
   border-radius: 44% 56% 51% 49% / 0% 100% 0% 100%;
   padding: 0.5em;
   margin-top: 1rem;
-  color: #faf0a0;
+  color: #cbb9a6;
 }
 
 .sliderCardActive::before {
@@ -127,7 +118,7 @@
   right: -5px;
   bottom: -5px;
   background: transparent;
-  border: 2px solid #faf0a080;
+  border: 2px solid #cbb9a680;
   border-radius: 46% 58% 53% 51% / 0% 100% 0% 100%;
   filter: opacity(.8);
   z-index: -1;
@@ -160,7 +151,7 @@
 
 /* Active State Modifier */
 .itemTitleActive {
-  color: #faf0a0;
+  color: #cbb9a6;
   border: none;
   padding: 0;
 }

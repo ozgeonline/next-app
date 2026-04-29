@@ -28,7 +28,7 @@ export default function PositionedImage({ isExperienceIntroVisible }: Positioned
           ${styles.defaultImage}`}
         >
           <Image
-            src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDuHNl2syxsRZPv8rXjBlDd3LWgbnNHmSpeQwJ"
+            src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDlLh8Vyqvj7qBtEJaeIm4Mu1klYRxAVTK8FdH"
             alt="Cafe Background"
             fill
             priority

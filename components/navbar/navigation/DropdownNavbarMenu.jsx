@@ -6,18 +6,13 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { links } from "../navlinks.constant";
 import { useNavigation } from "@/context/navigation/NavigationProvider";
-import { useTheme } from "@/context/theme/ThemeProvider";
 import MenuIcon from "@/components/ui/icon/MenuIcon";
-import FoodsIcon from "@/components/ui/icon/FoodsIcon";
 import styles from "./dropdown.module.css";
 
 export default function DropdownNavbarMenu() {
   const dropdownRef = useRef(null);
   const { isOpen, setIsOpen } = useNavigation();
   const pathname = usePathname();
-  const { theme } = useTheme();
-
-  const isLight = theme === "light"
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -45,7 +40,6 @@ export default function DropdownNavbarMenu() {
 
   const background = { background: "var(--background)" };
   const menuIcon = { color: isOpen === true && "var(--text)" }
-  const foodsIcon = isLight ? "var(--razzmatazz-500)" : "var(--fuego-400)";
 
   return (
     <div ref={dropdownRef}>
@@ -81,9 +75,6 @@ export default function DropdownNavbarMenu() {
             })}
           </div>
 
-          <div className={styles.iconWrapper}>
-            <FoodsIcon stroke={foodsIcon} width="100%" />
-          </div>
         </div>
       }
     </div>

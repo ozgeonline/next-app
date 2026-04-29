@@ -73,7 +73,7 @@ export default function Footer() {
 
           {/* COLUMN 4: FORM */}
           <div className={styles.formCol}>
-            <Leaf className={styles.decorativeLeaf} size={40} />
+            <Leaf className={styles.decorativeLeaf} size={40} strokeWidth={1} />
             <ContactForm />
           </div>
         </div>

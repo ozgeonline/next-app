@@ -50,18 +50,13 @@
 .image svg {
   margin-right: 0.7em;
   transition: brightness 0.3s ease-in-out;
-  border: 1px solid var(--razzmatazz-500);
   border-radius: 29% 71% 36% 64% / 28% 40% 60% 72%;
-  width: 2rem;
-  height: 2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   padding-inline: .5rem;
   z-index: 10;
   font-size: 0.5rem;
   cursor: pointer;
-}
-
-[data-theme="dark"] .image svg {
-  border: 1px solid var(--fuego-400);
 }
 
 .image svg:hover {

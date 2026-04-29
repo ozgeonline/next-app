@@ -13,7 +13,7 @@ export default function ExperienceIntro({ setIsExperienceIntroVisible }: Experie
       onVisibilityChange={(isVisible) => setIsExperienceIntroVisible(isVisible)}
     >
       <div className={styles.hero}>
-        <h3 className="gradient-full-gold-text"> Create Your Own Recipe! </h3>
+        <h2> Create Your Own Recipe! </h2>
       </div>
       <div className={styles.definitionHero}>
         <p>
@@ -23,7 +23,7 @@ export default function ExperienceIntro({ setIsExperienceIntroVisible }: Experie
         </p>
       </div>
       <div className={styles.hero}>
-        <h3 className="gradient-full-gold-text">Get Ready for a Tasty Experience</h3>
+        <h2>Get Ready for a Tasty Experience</h2>
       </div>
       <div className={styles.definitionHero}>
         <p>

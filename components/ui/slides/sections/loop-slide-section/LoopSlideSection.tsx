@@ -20,12 +20,9 @@ export default function LoopSlideSection({
         onVisibilityChange={setIsLoopSlideVisible}
       >
         {/* Section Title Container */}
-        <div className={`
-          ${styles.sectionTitle} 
-          ${isExperienceIntroVisible ? styles.sectionTitleActive : ''}`}
-        >
-          <h3 className={`${isExperienceIntroVisible ? "gradient-full-gold-text" : "highlight-text"} `}>
-            Brew Focus. <span className="highlight-text">Eat Clean.</span> Change Everything.
+        <div className={styles.sectionTitle}>
+          <h3 className={isExperienceIntroVisible ? styles.sectionTitleText : "highlight-text"}>
+            Brew Focus. Eat Clean. Change Everything.
           </h3>
         </div>
 
