@@ -18,7 +18,9 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.iconOpen { margin: 0.2rem 0; }
+.iconOpen {
+  margin: 0.2rem 0;
+}
 
 .iconClose {
   margin: 0;
@@ -47,24 +49,21 @@
 
 .image svg {
   margin-right: 0.7em;
-  filter: opacity(0.5);
-  transition: opacity 0.3s ease-in-out;
-  border: 1px solid var(--shark-500);
-  border-radius:29% 71% 36% 64% / 28% 40% 60% 72%  ;
+  transition: brightness 0.3s ease-in-out;
+  border: 1px solid var(--razzmatazz-500);
+  border-radius: 29% 71% 36% 64% / 28% 40% 60% 72%;
   width: 2rem;
   height: 2rem;
   padding-inline: .5rem;
   z-index: 10;
   font-size: 0.5rem;
-  /* stroke: var(--text); */
+  cursor: pointer;
 }
 
-@media screen and (max-width: 1024px) {
-
-  
+[data-theme="dark"] .image svg {
+  border: 1px solid var(--fuego-400);
 }
 
 .image svg:hover {
-  filter: opacity(0.8);
-  cursor: pointer;
+  filter: brightness(1.2);
 }

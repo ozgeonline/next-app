@@ -6,6 +6,7 @@ import { useAuth } from "@/context/auth/AuthProvider";
 import { loginAction, signupAction } from "@/lib/actions/auth";
 import Link from 'next/link';
 import styles from "./auth-form.module.css";
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 
 interface FormData {
   formType: "login" | "signup";
@@ -21,6 +22,8 @@ export default function AuthForm({
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
   const { loading, mutateUser } = useAuth();
   const router = useRouter();
@@ -66,105 +69,157 @@ export default function AuthForm({
     ? emailIsValid && formData.password.length >= 6
     : emailIsValid && formData.name.length >= 2 && formData.password.length >= 6;
 
-  const getInputClassName = (fieldName: string, isValid: boolean, value: string) => {
-    if (value && isValid) return styles.validValueColor;
-    if ((!value || !isValid) && touchedFields[fieldName]) return styles.invalidValueColor;
-    return styles.defaultValueColor;
-  };
-
   const formFields = [
     {
       name: "name",
       type: "text",
-      placeholder: "Name",
+      placeholder: "Enter your name",
       label: "Name",
       condition: formType === "signup",
       isValid: formData.name.length >= 2,
-      errorMessage: "Please enter 2 or more characters",
+      icon: UserIcon,
     },
     {
       name: "email",
       type: "email",
-      placeholder: "Email",
+      placeholder: "Enter your email",
       label: "Email",
       condition: true,
       isValid: emailIsValid,
-      errorMessage: null,
+      icon: Mail,
     },
     {
       name: "password",
-      type: "password",
-      placeholder: "Password",
+      type: showPassword ? "text" : "password",
+      placeholder: "Enter your password",
       label: "Password",
       condition: true,
       isValid: formData.password.length >= 6,
-      errorMessage: "Please enter 6 or more characters",
-      autoComplete: "new-password"
+      autoComplete: formType === "signup" ? "new-password" : "current-password",
+      icon: Lock,
+      isPassword: true,
     }
   ];
 
   return (
-    <div className={styles.formWrapper}>
+    <div className={styles.formContainer}>
       {loading ? (
         <div className={styles.loading}>
-          Loading...
+          <div className={styles.spinner}></div>
+          <span>Loading...</span>
         </div>
       ) : (
-        <>
-          <h2>{formType}</h2>
-          {error && <p className={styles.error}>{error}</p>}
+        <div className={styles.authCard}>
+          <div className={styles.header}>
+            <h2 className={styles.title}>{formType === "login" ? "Login" : "Sign Up"}</h2>
+            <div className={styles.titleUnderline}></div>
+          </div>
+
+          {error && <p className={styles.errorMessage}>{error}</p>}
 
           <form onSubmit={handleSubmit} className={styles.form}>
             {formFields.map((field) => (
               field.condition && (
-                <div key={field.name} className={styles.formGroup}>
+                <div key={field.name} className={styles.inputGroup}>
                   <label htmlFor={field.name}>{field.label}</label>
-                  <input
-                    name={field.name}
-                    type={field.type}
-                    id={field.name}
-                    placeholder={field.placeholder}
-                    autoComplete={field.autoComplete}
-                    onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
-                    onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
-                    required
-                    className={getInputClassName(field.name, field.isValid, formData[field.name as keyof typeof formData])}
-                  />
-                  <span className={styles.error}>
-                    {!field.isValid && touchedFields[field.name] && field.errorMessage}
-                  </span>
+                  <div className={styles.inputWrapper}>
+                    <field.icon className={styles.inputIcon} size={20} />
+                    <input
+                      name={field.name}
+                      type={field.type}
+                      id={field.name}
+                      placeholder={field.placeholder}
+                      value={formData[field.name as keyof typeof formData]}
+                      autoComplete={field.autoComplete}
+                      onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+                      onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
+                      required
+                      className={touchedFields[field.name] && !field.isValid ? styles.invalidInput : ""}
+                    />
+                    {field.isPassword && (
+                      <button
+                        type="button"
+                        className={styles.togglePassword}
+                        onClick={() => setShowPassword(!showPassword)}
+                        aria-label={showPassword ? "Hide password" : "Show password"}
+                      >
+                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                      </button>
+                    )}
+                  </div>
                 </div>
               )
             ))}
 
+            <div className={styles.formOptions}>
+              <label className={styles.checkboxLabel}>
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <span>Remember me</span>
+              </label>
+              <Link href="/forgot-password" className={styles.forgotLink}>
+                Forgot password?
+              </Link>
+            </div>
+
             <button
               type="submit"
-              className={`${styles.submitButton} accent-link-button`}
+              className={styles.submitButton}
               disabled={isSubmitting || !isFormValid}
             >
               {isSubmitting
-                ? "Submitting..."
+                ? "Processing..."
                 : formType === "login"
                   ? "Login"
-                  : "Sign Up"
+                  : "Create Account"
               }
             </button>
-            <h3>
-              {formType === "login"
-                ? "Don't have an account?"
-                : "Already have an account?"
-              }
-            </h3>
 
-            <Link
-              href={referencePath}
-              className={`${styles.referencePath} accent-link-button`}
-            >
-              {referencePath}
-            </Link>
+            <div className={styles.divider}>
+              <div className={styles.dividerLine}></div>
+              <span className={styles.dividerText}>or</span>
+              <div className={styles.dividerLine}></div>
+            </div>
+
+            <div className={styles.footer}>
+              <span>
+                {formType === "login"
+                  ? "Don't have an account?"
+                  : "Already have an account?"
+                }
+              </span>
+              <Link
+                href={referencePath === "signup" ? "/signup" : "/login"}
+                className={styles.switchLink}
+              >
+                {referencePath === "signup" ? "Sign up" : "Login"}
+              </Link>
+            </div>
           </form>
-        </>
+        </div>
       )}
     </div>
+  );
+}
+
+function UserIcon({ className, size }: { className?: string, size?: number }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+    </svg>
   );
 }

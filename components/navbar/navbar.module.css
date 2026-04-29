@@ -84,8 +84,9 @@
 
 [data-theme="dark"] .desktopNav a:hover,
 [data-theme="dark"] .mobileNav a:hover {
-  color: #fffb88 !important;
+  color: var(--fuego-400) !important;
   transition: color 0.3s ease;
+  text-shadow: 0 0 10px var(--background);
 }
 
 /*? mobile screen (default, <1024px) */

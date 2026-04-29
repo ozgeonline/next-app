@@ -2,29 +2,113 @@
   display: flex;
   flex-direction: column;
 }
+
 .dropdown {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: fixed;
-   top: 0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
-  animation: moveToBottom 1s ease-in-out;
+  animation: moveToBottom 0.5s ease-in-out;
+  padding-top: 5rem;
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  gap: 0.5rem;
+  padding: 0 2rem;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.menuItem:last-child {
+  border-bottom: none;
+}
+
+.itemLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.itemIcon {
+  color: var(--text);
+  opacity: 0.7;
+}
+
+.itemName {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.chevron {
+  color: var(--text);
+  opacity: 0.4;
+}
+
+.activeItem {
+  color: var(--text);
+}
+
+.activeItem::after {
+  content: '';
+  position: absolute;
+  right: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 3px;
+  background-color: var(--razzmatazz-500);
+  /* Pink border using theme variable */
+  border-radius: 4px;
+}
+
+[data-theme="dark"] .activeItem::after {
+  background-color: var(--fuego-400);
+  /* Dark theme active color */
+}
+
+.activeDot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--razzmatazz-500);
+  border-radius: 50%;
+  margin-left: 0.5rem;
+}
+
+[data-theme="dark"] .activeDot {
+  background-color: var(--fuego-400);
 }
 
 .iconWrapper {
   padding-top: 2rem;
+  opacity: 0.5;
 }
 
 @keyframes moveToBottom {
   0% {
     transform: translateY(-100%);
   }
+
   100% {
-    transform: translateY(0); 
+    transform: translateY(0);
   }
 }

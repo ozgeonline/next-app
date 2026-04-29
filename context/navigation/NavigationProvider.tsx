@@ -10,13 +10,13 @@ interface ContextType {
   setIsOpen: (open: boolean) => void;
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
-  triggerNavigation: (callback: () => void) => void; 
+  triggerNavigation: (callback: () => void) => void;
 }
 
 const NavigationContext = createContext<ContextType | undefined>(undefined);
 
 export function NavigationProvider({ children }: { children: React.ReactNode }) {
-  const [isOpen, setIsOpen ] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -35,9 +35,9 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
-    
+
     setIsOpen(false);
-    
+
     timeoutRef.current = setTimeout(() => {
       setIsLoading(true);
       callback();
@@ -61,7 +61,7 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
     setIsLoading,
     triggerNavigation,
   }), [isOpen, isLoading, triggerNavigation]);
-    
+
   return (
     <NavigationContext.Provider value={contextValue}>
       {children}

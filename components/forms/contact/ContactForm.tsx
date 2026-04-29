@@ -102,7 +102,7 @@ function ContactFormInner() {
                   onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
                   required
                   placeholder={field.placeholder}
-                  rows={4}
+                  rows={3}
                 />
               ) : (
                 <input

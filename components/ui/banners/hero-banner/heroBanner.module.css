@@ -80,6 +80,7 @@
   .introduction h1 {
     font-size: 1.6rem;
   }
+
   .introduction p {
     font-size: 1.1rem;
   }
@@ -232,11 +233,15 @@
 }
 
 @media (min-width: 768px) {
-  .menuTitle { font-size: 3rem !important; }
+  .menuTitle {
+    font-size: 3rem !important;
+  }
 }
 
 @media (min-width: 1024px) {
-  .menuTitle { font-size: 4rem !important; }
+  .menuTitle {
+    font-size: 4rem !important;
+  }
 }
 
 .highlight {
@@ -257,7 +262,9 @@
 }
 
 @media (min-width: 1024px) {
-  .menuDescription { font-size: 1.1rem !important; }
+  .menuDescription {
+    font-size: 1.1rem !important;
+  }
 }
 
 /* 5c. Menu Explore Button */
@@ -287,7 +294,7 @@
 
 .bottomSection {
   position: absolute;
-  bottom: 2rem;
+  bottom: 1.5rem;
   padding: 0 2rem;
   width: 100%;
   z-index: 10000;
@@ -302,7 +309,9 @@
 }
 
 @media (min-width: 1024px) {
-  .content { padding: 0 2rem; }
+  .content {
+    padding: 0 2rem;
+  }
 }
 
 .location {
@@ -314,6 +323,7 @@
   padding: 8px 12px;
   border-radius: 999px;
   backdrop-filter: blur(8px);
+  margin-right: 1rem;
 }
 
 .location span {
@@ -334,6 +344,7 @@
     width: 1.2rem;
     height: 1.2rem;
   }
+
   .location span {
     font-size: 0.8rem;
     letter-spacing: 0.1rem;
@@ -353,6 +364,7 @@
     opacity: 0;
     transform: translateX(-10%);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -360,9 +372,17 @@
 }
 
 @keyframes rotateMesh {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.1); }
-  100% { transform: rotate(360deg) scale(1); }
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
 }
 
 .tracking-in-expand-fwd-top {
@@ -388,7 +408,11 @@
     transform: translateZ(-700px) translateY(-700px);
     opacity: 0;
   }
-  40% { opacity: .6; }
+
+  40% {
+    opacity: .6;
+  }
+
   100% {
     transform: translateZ(0) translateY(0);
     opacity: 1;

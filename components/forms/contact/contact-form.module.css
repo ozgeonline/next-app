@@ -8,7 +8,7 @@
   font-family: 'Fraunces', serif;
   font-size: 2.5rem;
   font-weight: 500;
-  color: var(--lunar-green-950);
+  color: #c6f6d5;
   margin-bottom: 2rem;
   position: relative;
 }
@@ -27,13 +27,13 @@
 .contactForm {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.3rem;
 }
 
 .formGroup label {
@@ -51,31 +51,33 @@
 
 .inputIcon {
   position: absolute;
-  left: 1.2rem;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--lunar-green-500);
   opacity: 0.7;
 }
 
 .inputWrapper:has(textarea) .inputIcon {
-  top: 1rem;
+  top: 0.8rem;
   transform: none;
 }
 
 .contactForm input,
 .contactForm textarea {
   width: 100%;
-  padding: 1rem 1.2rem 1rem 3.5rem;
-  border-radius: 18px;
+  padding: 0.6rem 1.2rem 0.6rem 2.8rem;
+  border-radius: 12px;
   border: 1px solid var(--merino-200);
   background: var(--merino-50);
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: all 0.3s ease;
   color: var(--neutral-800);
 }
 
 .contactForm textarea {
-  min-height: 150px;
+  min-height: 80px;
   resize: vertical;
 }
 
@@ -88,18 +90,18 @@
 }
 
 .sendBtn {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding: 1.2rem 2rem;
+  gap: 0.8rem;
+  padding: 0.7rem 1rem;
   background: linear-gradient(135deg, var(--lunar-green-600), var(--lunar-green-700));
   color: white;
   border: none;
   border-radius: 999px;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }

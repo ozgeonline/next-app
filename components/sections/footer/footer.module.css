@@ -1,177 +1,362 @@
 .footer {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15vw 5vw 0;
-}
-
-.footerContent {
+  height: 95vh;
+  margin-top: 5vh;
+  background: #0a0c0b;
+  /* Very dark background */
+  color: #fcfcfc;
+  padding: 4rem 0 1rem;
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  width: 100%;
-  height: 100%;
-  padding: 2rem 0;
+  overflow: hidden;
+  z-index: 10;
 }
 
-.leftArea {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: space-around;
-  width: 100%;
-  height: 100%;
+.footerContainer {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.info {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
-  padding: 0 3rem;
+/* TOP GRID */
+.topGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
   gap: 2rem;
+  margin-bottom: 1rem;
 }
 
-.socialMediaWrapper {
-  display: flex;
-  justify-content: start;
-  padding-left: 3rem;
-  width: 100%;
+@media (min-width: 768px) {
+  .topGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.links,
-.address {
+@media (min-width: 1024px) {
+  .topGrid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1281px) {
+  .topGrid {
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  }
+}
+
+/* BRAND COLUMN */
+.brandCol {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  text-align: start;
-  flex: 1;
+  gap: 1rem;
 }
 
-.formWrapper {
-  display: none;
-  color: #f4f6f7;
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 
-.links h3,
-.address h3 {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  color: #f4f6f7;
-  border-bottom: 1px solid var(--text-low-opacity);
+.logoText {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
-.links ul {
-  list-style: none;
-  padding: 0;
+.brandDesc {
+  color: #a0a0a0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  max-width: 300px;
 }
 
-.links li {
+.newsletter {
+  margin-top: 0.5rem;
+}
+
+.newsletterTitle {
+  color: var(--lunar-green-400);
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-.links a {
-  color: #f4f6f7;
-  text-decoration: none;
-  transition: color 0.3s ease-out;
-  font-size: small;
+.newsletterSub {
+  color: #707070;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
 }
 
-.links a:hover {
-  color: var(--international-orange-400); 
+.inputGroup {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+  padding: 0.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 300px;
+}
+
+.inputGroup input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.inputGroup input:focus {
+  outline: none;
+}
+
+.submitBtn {
+  background: var(--lunar-green-600);
+  color: white;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.address p {
-  margin: 0.5rem 0;
-  font-size: small;
-  color: #f4f6f7;
-  transition: color 0.3s ease-out;
+.submitBtn:hover {
+  transform: scale(1.05);
+  background: var(--lunar-green-500);
 }
 
-.address a {
-  color: #cbd3d6;
-  text-decoration: none;
-  transition: color 0.3s ease-out;
+.socialRow {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.address a:hover {
-  text-decoration: underline;
+.socialIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a0a0a0;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.orderHand {
+.socialIcon:hover {
+  background: var(--lunar-green-600);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* LINK COLUMNS */
+.colTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.colTitle::after {
+  content: '';
   position: absolute;
-  top: 5vw;
-  right: 0;
-  width: 12vw;
-  height: 12vw;
-  transform: rotate(-55deg);
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--lunar-green-500);
+  opacity: 0.5;
+}
+
+.linkList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.linkItem {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #a0a0a0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.linkItem:hover {
+  color: white;
+}
+
+.linkIcon {
+  color: var(--lunar-green-500);
+  opacity: 0.6;
+}
+
+/* REACH OUT FORM */
+.formCol {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.decorativeLeaf {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--lunar-green-600);
+  opacity: 0.2;
+}
+
+/* MIDDLE USP SECTION */
+.uspRow {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .uspRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .uspRow {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.uspItem {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0 1rem;
+}
+
+.uspIconCircle {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lunar-green-500);
+  flex-shrink: 0;
+}
+
+.uspContent h4 {
+  color: var(--lunar-green-400);
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.uspContent p {
+  color: #707070;
+  font-size: 0.85rem;
+}
+
+/* BOTTOM BAR */
+.bottomBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .bottomBar {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .copyright {
-  text-align: center;
-  padding: .75rem 0;
-  border-top: 1px solid #f4f6f7;
-  margin-top: 1rem;
-  color: #f4f6f7;
-  font-size: small;
+  color: #707070;
+  font-size: 0.85rem;
 }
 
-@media (max-width: 640px) {
-  .footerContent {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+.dividerContainer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
 
-  .links,
-  .address {
-    min-width: 100%;
+.dividerLine {
+  height: 1px;
+  width: 100px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.leafIcon {
+  color: var(--lunar-green-600);
+  opacity: 0.6;
+}
+
+.legalLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.legalLink {
+  color: #707070;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
+}
+
+.legalLink:hover {
+  color: white;
+}
+
+/* BACKGROUND DECOR */
+.bgLeaf {
+  position: absolute;
+  bottom: -2rem;
+  left: -2rem;
+  color: var(--lunar-green-800);
+  opacity: 0.1;
+  pointer-events: none;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 769px) {
+
+  .brandCol,
+  .uspRow {
+    display: none;
   }
 }
 
-@media screen and (min-width: 640px) {
-  .formWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    width: 50%;
-  }
-
-  .info {
-    flex-direction: row;
-  }
-
-  .leftArea {
-    width: 50%;
-  }
-
-  .links h3,
-  .address h3 {
-    font-size: 1.3rem;
+@media (max-width: 1024px) {
+  .contactCol {
+    display: none;
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .links h3,
-  .address h3 {
-    font-size: 1.5rem;
-  }
+@media (max-width: 1280px) {
 
-  .links a {
-    font-size: 1rem;
-  }
+  .linksCol,
 
-  .address p {
-    font-size: 1rem;
+
+  .bottomBar,
+  .scrollBtn,
+  .bgLeaf {
+    display: none;
   }
 }

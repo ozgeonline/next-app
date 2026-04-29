@@ -1,20 +1,23 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useTheme } from "@/context/theme/ThemeProvider";
-import { useNavbarScroll } from "@/hooks/useNavbarScroll";
-import { useNavigation } from "@/context/navigation/NavigationProvider";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+import { links } from "../navlinks.constant";
+import { useNavigation } from "@/context/navigation/NavigationProvider";
+import { useTheme } from "@/context/theme/ThemeProvider";
 import MenuIcon from "@/components/ui/icon/MenuIcon";
 import FoodsIcon from "@/components/ui/icon/FoodsIcon";
 import styles from "./dropdown.module.css";
 
-export default function DropdownNavbarMenu({ children }) {
+export default function DropdownNavbarMenu() {
   const dropdownRef = useRef(null);
-  const { theme } = useTheme();
-  const scrolling = useNavbarScroll();
   const { isOpen, setIsOpen } = useNavigation();
   const pathname = usePathname();
+  const { theme } = useTheme();
+
+  const isLight = theme === "light"
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -40,14 +43,9 @@ export default function DropdownNavbarMenu({ children }) {
     }
   }, [isOpen]);
 
-  const hasDarkHero = pathname === "/" || pathname === "/menu";
   const background = { background: "var(--background)" };
   const menuIcon = { color: isOpen === true && "var(--text)" }
-
-  const strokeColor =
-    theme === "light" && !scrolling && hasDarkHero
-      ? "#f4f4f9"
-      : "var(--text)";
+  const foodsIcon = isLight ? "var(--razzmatazz-500)" : "var(--fuego-400)";
 
   return (
     <div ref={dropdownRef}>
@@ -62,9 +60,29 @@ export default function DropdownNavbarMenu({ children }) {
           className={styles.dropdown}
           style={background}
         >
-          {children}
+          <div className={styles.menuContainer}>
+            {links.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.id}
+                  href={link.href}
+                  className={`${styles.menuItem} ${isActive ? styles.activeItem : ""}`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <div className={styles.itemLeft}>
+                    <link.icon size={20} className={styles.itemIcon} />
+                    <span className={styles.itemName}>{link.name}</span>
+                    {isActive && <span className={styles.activeDot}></span>}
+                  </div>
+                  <ChevronRight size={18} className={styles.chevron} />
+                </Link>
+              );
+            })}
+          </div>
+
           <div className={styles.iconWrapper}>
-            <FoodsIcon stroke={strokeColor} width="100%" />
+            <FoodsIcon stroke={foodsIcon} width="100%" />
           </div>
         </div>
       }
