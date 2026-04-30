@@ -6,6 +6,12 @@
   padding: 8rem 2rem 4rem;
 }
 
+@media (max-width: 1024px) {
+  .container {
+    padding: 4rem 1rem 2rem;
+  }
+}
+
 .layoutWrapper {
   display: flex;
   flex-direction: column;
@@ -14,7 +20,7 @@
   max-width: 1200px;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .layoutWrapper {
     flex-direction: row;
     gap: 5rem;
@@ -28,6 +34,13 @@
   flex-direction: column;
   gap: 1.5rem;
   flex: 0 0 40%;
+}
+
+@media (max-width: 768px) {
+  .leftColumn {
+    flex: none;
+    width: 100%;
+  }
 }
 
 .backButton {
@@ -88,7 +101,7 @@
   font-size: 3rem;
   line-height: 1.1;
   font-weight: 600;
-  color: var(--charm-950);
+  color: var(--charm-800);
   margin: 0;
 }
 
@@ -117,7 +130,7 @@
 }
 
 .creator span {
-  color: var(--charm-700);
+  color: var(--charm-600);
   font-weight: 700;
 }
 
@@ -132,12 +145,19 @@
   font-style: italic;
   margin: 0;
   padding-left: 1rem;
-  border-left: 3px solid var(--charm-300);
+  border-left: 2px solid var(--charm-700);
 }
 
 [data-theme="dark"] .summary {
   color: var(--neutral-400);
   border-left-color: var(--apple-700);
+}
+
+@media (max-width: 1024px) {
+  .summary {
+    font-size: 1.1rem;
+    padding-left: 0.75rem;
+  }
 }
 
 /* INSTRUCTIONS SECTION */
@@ -209,15 +229,16 @@
   height: 28px;
   min-width: 28px;
   border-radius: 50%;
-  background: var(--charm-100);
-  color: var(--charm-800);
+  background: var(--charm-200);
+  color: var(--charm-900);
   font-weight: 700;
   font-size: 0.9rem;
 }
 
 [data-theme="dark"] .stepNumber {
-  background: var(--apple-900);
-  color: var(--apple-300);
+  border: 1px solid var(--apple-700);
+  background: transparent;
+  color: var(--apple-500);
 }
 
 .instructionsList p {
@@ -228,10 +249,8 @@
   padding-top: 0.15rem;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .title {
     font-size: 2.2rem;
   }
 }
-  min-width: 0;
-  margin-top: 0;

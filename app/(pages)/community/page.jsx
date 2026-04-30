@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import RecipesCard from '@/components/ui/cards/recipe-card/RecipeCard';
+import { Button } from '@/components/ui/button/Button';
 import styles from './page.module.css';
 import { ArrowRight, Leaf, Users } from 'lucide-react';
 
@@ -35,9 +35,14 @@ export default function CommunityPage() {
             </div>
             <h2 className={styles.sectionTitle}>Latest Recipes</h2>
           </div>
-          <Link href="/recipes" className={styles.viewAllBtn}>
-            View All <ArrowRight size={18} />
-          </Link>
+          <Button
+            href="/meals"
+            variant="secondary"
+            className={styles.viewAllBtn}
+            iconRight={<ArrowRight size={18} />}
+          >
+            View All
+          </Button>
         </div>
 
         <div className={styles.recipeGrid}>
@@ -55,9 +60,14 @@ export default function CommunityPage() {
           <p className={styles.mealsSubtext}>
             Discover meals shared by our community and get inspired.
           </p>
-          <Link href="/meals" className={styles.browseBtn}>
-            Browse Meals <ArrowRight size={20} />
-          </Link>
+          <Button
+            href="/meals"
+            variant="primary"
+            className={styles.browseBtn}
+            iconRight={<ArrowRight size={20} />}
+          >
+            Browse Meals
+          </Button>
         </div>
         <div className={styles.bottomWatermark}>SHARE</div>
       </section>
