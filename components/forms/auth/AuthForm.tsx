@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from "@/context/auth/AuthProvider";
 import { loginAction, signupAction } from "@/lib/actions/auth";
 import Link from 'next/link';
+import { Button } from '@/components/ui/button/Button';
 import styles from "./auth-form.module.css";
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, User } from 'lucide-react';
 
 interface FormData {
   formType: "login" | "signup";
@@ -23,7 +24,6 @@ export default function AuthForm({
   const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
   const { loading, mutateUser } = useAuth();
   const router = useRouter();
@@ -77,7 +77,7 @@ export default function AuthForm({
       label: "Name",
       condition: formType === "signup",
       isValid: formData.name.length >= 2,
-      icon: UserIcon,
+      icon: User,
     },
     {
       name: "email",
@@ -137,36 +137,24 @@ export default function AuthForm({
                       className={touchedFields[field.name] && !field.isValid ? styles.invalidInput : ""}
                     />
                     {field.isPassword && (
-                      <button
+                      <Button
                         type="button"
+                        variant="plain"
                         className={styles.togglePassword}
                         onClick={() => setShowPassword(!showPassword)}
                         aria-label={showPassword ? "Hide password" : "Show password"}
                       >
                         {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                      </button>
+                      </Button>
                     )}
                   </div>
                 </div>
               )
             ))}
 
-            <div className={styles.formOptions}>
-              <label className={styles.checkboxLabel}>
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                />
-                <span>Remember me</span>
-              </label>
-              <Link href="/forgot-password" className={styles.forgotLink}>
-                Forgot password?
-              </Link>
-            </div>
-
-            <button
+            <Button
               type="submit"
+              variant="plain"
               className={styles.submitButton}
               disabled={isSubmitting || !isFormValid}
             >
@@ -176,7 +164,7 @@ export default function AuthForm({
                   ? "Login"
                   : "Create Account"
               }
-            </button>
+            </Button>
 
             <div className={styles.divider}>
               <div className={styles.dividerLine}></div>
@@ -202,24 +190,5 @@ export default function AuthForm({
         </div>
       )}
     </div>
-  );
-}
-
-function UserIcon({ className, size }: { className?: string, size?: number }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
-    </svg>
   );
 }

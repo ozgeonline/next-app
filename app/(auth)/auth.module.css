@@ -28,7 +28,7 @@
   font-size: 15rem;
   font-family: 'Fraunces', serif;
   font-weight: 900;
-  color: var(--lunar-green-500);
+  color: var(--charm-500);
   opacity: 0.03;
   letter-spacing: 2rem;
   pointer-events: none;
@@ -46,7 +46,7 @@
   font-family: 'Fraunces', serif;
   font-size: 4.5rem;
   font-weight: 500;
-  color: var(--lunar-green-950);
+  color: var(--neutral-900);
   line-height: 1.1;
   margin-bottom: 1.5rem;
 }
@@ -66,7 +66,7 @@
 }
 
 .dividerLeaf {
-  color: var(--lunar-green-500);
+  color: var(--charm-500);
   opacity: 0.6;
 }
 
@@ -112,15 +112,15 @@
   justify-content: center;
   font-size: 2.5rem;
   font-family: 'Fraunces', serif;
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
   border: 4px solid white;
-  box-shadow: 0 10px 25px rgba(81, 123, 101, 0.1);
+  box-shadow: 0 10px 25px rgba(217, 108, 138, 0.12);
 }
 
 .userName {
   font-family: 'Fraunces', serif;
   font-size: 2rem;
-  color: var(--lunar-green-950);
+  color: var(--neutral-900);
   margin-bottom: 0.5rem;
 }
 
@@ -152,15 +152,15 @@
 }
 
 .primaryAction {
-  background: var(--lunar-green-600);
-  color: white;
+  background: var(--charm-500);
+  color: var(--charm-50);
   border: none;
 }
 
 .primaryAction:hover {
-  background: var(--lunar-green-700);
+  background: var(--charm-600);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(81, 123, 101, 0.2);
+  box-shadow: 0 8px 20px rgba(217, 108, 138, 0.22);
 }
 
 .secondaryAction {
@@ -170,15 +170,15 @@
 
 .secondaryAction:hover {
   background: var(--merino-50);
-  border-color: var(--lunar-green-300);
-  color: var(--lunar-green-700);
+  border-color: var(--charm-300);
+  color: var(--charm-700);
 }
 
 .logoutBtn {
   margin-top: 1rem;
   background: transparent;
   border: none;
-  color: #e53e3e;
+  color: var(--monza-600);
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -214,7 +214,7 @@
 .loadingText {
   font-family: 'Fraunces', serif;
   font-size: 2rem;
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
   font-style: italic;
 }
 
@@ -238,6 +238,30 @@
 [data-theme="dark"] .avatarCircle {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.1);
+  color: var(--apple-500);
+  box-shadow: 0 10px 25px rgba(164, 207, 135, 0.12);
+}
+
+[data-theme="dark"] .watermarkText,
+[data-theme="dark"] .dividerLeaf,
+[data-theme="dark"] .loadingText {
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .primaryAction {
+  background: var(--apple-500);
+  color: var(--apple-950);
+}
+
+[data-theme="dark"] .primaryAction:hover {
+  background: var(--apple-600);
+  box-shadow: 0 8px 20px rgba(164, 207, 135, 0.18);
+}
+
+[data-theme="dark"] .secondaryAction:hover {
+  background: rgba(164, 207, 135, 0.08);
+  border-color: var(--apple-500);
+  color: var(--apple-500);
 }
 
 @media (max-width: 768px) {

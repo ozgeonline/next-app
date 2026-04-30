@@ -30,7 +30,7 @@
 .titleUnderline {
   width: 40px;
   height: 2px;
-  background-color: var(--lunar-green-600);
+  background-color: var(--charm-500);
   border-radius: 2px;
 }
 
@@ -61,7 +61,7 @@
 .inputIcon {
   position: absolute;
   left: 1rem;
-  color: var(--lunar-green-600);
+  color: var(--charm-500);
   opacity: 0.7;
 }
 
@@ -69,9 +69,9 @@
   width: 100%;
   padding: 0.8rem 1rem 0.8rem 2.8rem;
   border-radius: 8px;
-  border: 1px solid var(--lunar-green-300);
-  background: var(--shark-50);
-  color: var(--shark-900);
+  border: 1px solid var(--merino-200);
+  background: var(--merino-50);
+  color: var(--neutral-900);
   font-size: 1rem;
   outline: none;
   transition: all 0.3s ease;
@@ -82,8 +82,8 @@
 }
 
 .inputWrapper input:focus {
-  border-color: var(--lunar-green-500);
-  box-shadow: 0 0 0 3px rgba(81, 123, 101, 0.1);
+  border-color: var(--charm-500);
+  box-shadow: 0 0 0 3px rgba(217, 108, 138, 0.1);
 }
 
 .invalidInput {
@@ -101,47 +101,19 @@
   align-items: center;
   justify-content: center;
   padding: 0;
+  min-width: 0;
 }
 
 .togglePassword:hover {
   color: var(--shark-800);
 }
 
-.formOptions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-}
-
-.checkboxLabel {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--shark-700);
-  cursor: pointer;
-}
-
-.checkboxLabel input[type="checkbox"] {
-  accent-color: var(--lunar-green-600);
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.forgotLink {
-  color: var(--lunar-green-600);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.forgotLink:hover {
-  text-decoration: underline;
-}
-
 .submitButton {
-  background: var(--lunar-green-600);
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--charm-500);
+  color: var(--charm-50);
   border: none;
   border-radius: 12px;
   padding: 0.7rem 0.6rem;
@@ -153,9 +125,9 @@
 }
 
 .submitButton:hover:not(:disabled) {
-  background: var(--lunar-green-700);
+  background: var(--charm-600);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(81, 123, 101, 0.2);
+  box-shadow: 0 4px 12px rgba(217, 108, 138, 0.22);
 }
 
 .submitButton:disabled {
@@ -177,7 +149,7 @@
 }
 
 .dividerText {
-  color: var(--shark-600);
+  color: var(--neutral-600);
   font-size: 0.95rem;
 }
 
@@ -186,11 +158,11 @@
   justify-content: center;
   gap: 0.5rem;
   font-size: 0.95rem;
-  color: var(--shark-700);
+  color: var(--neutral-700);
 }
 
 .switchLink {
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
   font-weight: 600;
   text-decoration: none;
 }
@@ -200,14 +172,14 @@
 }
 
 .errorMessage {
-  background: rgba(229, 62, 62, 0.1);
-  color: var(--error);
+  background: var(--monza-50);
+  color: var(--monza-700);
   padding: 0.8rem;
   border-radius: 8px;
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
   text-align: center;
-  border: 1px solid rgba(229, 62, 62, 0.2);
+  border: 1px solid var(--monza-200);
 }
 
 .loading {
@@ -215,7 +187,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
   font-family: 'Fraunces', serif;
   font-style: italic;
   font-size: 1.2rem;
@@ -225,7 +197,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid var(--merino-200);
-  border-top-color: var(--lunar-green-600);
+  border-top-color: var(--charm-500);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -250,21 +222,45 @@
 }
 
 [data-theme="dark"] .inputWrapper input:focus {
-  border-color: var(--lunar-green-500);
+  border-color: var(--apple-500);
+  box-shadow: 0 0 0 3px rgba(164, 207, 135, 0.1);
 }
 
 [data-theme="dark"] .inputWrapper input::placeholder {
   color: var(--shark-500);
 }
 
-[data-theme="dark"] .checkboxLabel,
 [data-theme="dark"] .dividerText,
 [data-theme="dark"] .footer {
   color: var(--merino-300);
 }
 
 [data-theme="dark"] .dividerLine {
-  background-color: var(--lunar-green-500);
+  background-color: var(--apple-500);
+}
+
+[data-theme="dark"] .spinner {
+  border-top-color: var(--apple-500);
+}
+
+[data-theme="dark"] .titleUnderline {
+  background-color: var(--apple-500);
+}
+
+[data-theme="dark"] .inputIcon,
+[data-theme="dark"] .switchLink,
+[data-theme="dark"] .loading {
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .submitButton {
+  background: var(--apple-500);
+  color: var(--apple-950);
+}
+
+[data-theme="dark"] .submitButton:hover:not(:disabled) {
+  background: var(--apple-600);
+  box-shadow: 0 4px 12px rgba(164, 207, 135, 0.18);
 }
 
 @media (max-width: 600px) {

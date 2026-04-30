@@ -1,9 +1,9 @@
 "use client";
 
 import { ReactNode, useEffect } from 'react';
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth/AuthProvider";
+import { Button } from "@/components/ui/button/Button";
 import styles from "./auth.module.css";
 import TopScrollButton from '@/components/ui/topScrollButton/TopScrollButton';
 import { Leaf, LogOut, Calendar, User as UserIcon } from 'lucide-react';
@@ -21,13 +21,8 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
   }, [isAuthenticated, pathname, router, loading]);
 
   const handleSignout = async () => {
-    try {
-      await logout();
-    } catch (err) {
-      console.error("Logout failed", err);
-    } finally {
-      router.push("/profile");
-    }
+    await logout();
+    router.push("/profile");
   };
 
   if (loading || (isAuthenticated && (pathname === "/login" || pathname === "/signup"))) {
@@ -71,21 +66,31 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           <div className={styles.actionStack}>
             {isAuthenticated ? (
               <>
-                <Link href="/reservations" className={`${styles.actionBtn} ${styles.primaryAction}`}>
-                  <Calendar size={18} /> My Reservations
-                </Link>
-                <button onClick={handleSignout} className={styles.logoutBtn}>
-                  <LogOut size={16} /> Sign Out
-                </button>
+                <Button
+                  href="/reservations"
+                  variant="plain"
+                  className={`${styles.actionBtn} ${styles.primaryAction}`}
+                  iconLeft={<Calendar size={18} />}
+                >
+                  My Reservations
+                </Button>
+                <Button
+                  onClick={handleSignout}
+                  variant="plain"
+                  className={styles.logoutBtn}
+                  iconLeft={<LogOut size={16} />}
+                >
+                  Sign Out
+                </Button>
               </>
             ) : (
               <>
-                <Link href="/login" className={`${styles.actionBtn} ${styles.primaryAction}`}>
+                <Button href="/login" variant="plain" className={`${styles.actionBtn} ${styles.primaryAction}`}>
                   Login
-                </Link>
-                <Link href="/signup" className={`${styles.actionBtn} ${styles.secondaryAction}`}>
+                </Button>
+                <Button href="/signup" variant="plain" className={`${styles.actionBtn} ${styles.secondaryAction}`}>
                   Create Account
-                </Link>
+                </Button>
               </>
             )}
           </div>

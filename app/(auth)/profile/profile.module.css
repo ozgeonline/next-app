@@ -16,7 +16,7 @@
   font-family: 'Fraunces', serif;
   font-size: 2.2rem;
   font-weight: 500;
-  color: var(--lunar-green-950);
+  color: var(--neutral-900);
 }
 
 .profileSub {
@@ -51,15 +51,15 @@
 
 .detailBlock:hover {
   transform: translateY(-5px);
-  border-color: var(--lunar-green-300);
-  box-shadow: 0 10px 25px rgba(81, 123, 101, 0.05);
+  border-color: var(--charm-300);
+  box-shadow: 0 10px 25px rgba(217, 108, 138, 0.08);
 }
 
 .blockLabelRow {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
 }
 
 .blockLabel {
@@ -73,7 +73,7 @@
 .blockValue {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--lunar-green-900);
+  color: var(--neutral-900);
   word-break: break-all;
 }
 
@@ -81,7 +81,7 @@
   font-family: 'Fraunces', serif;
   font-size: 3rem;
   font-weight: 600;
-  color: var(--lunar-green-700);
+  color: var(--charm-700);
   line-height: 1;
 }
 
@@ -100,15 +100,15 @@
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--lunar-green-700);
+  color: var(--charm-700);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .toggleBtn:hover {
-  background: var(--lunar-green-600);
-  color: white;
-  border-color: var(--lunar-green-600);
+  background: var(--charm-500);
+  color: var(--charm-50);
+  border-color: var(--charm-500);
 }
 
 /* UPDATE SECTION */
@@ -126,7 +126,7 @@
   font-family: 'Fraunces', serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--lunar-green-900);
+  color: var(--neutral-900);
 }
 
 .inputWrapper {
@@ -139,7 +139,7 @@
 .inputIcon {
   position: absolute;
   left: 1.2rem;
-  color: var(--lunar-green-500);
+  color: var(--charm-500);
 }
 
 .ghostInput {
@@ -154,9 +154,9 @@
 }
 
 .ghostInput:focus {
-  border-color: var(--lunar-green-500);
+  border-color: var(--charm-500);
   background: white;
-  box-shadow: 0 0 0 4px var(--lunar-green-50);
+  box-shadow: 0 0 0 4px rgba(217, 108, 138, 0.1);
 }
 
 .actionRow {
@@ -194,13 +194,13 @@
 }
 
 .saveBtn {
-  background: var(--lunar-green-600);
-  color: white;
+  background: var(--charm-500);
+  color: var(--charm-50);
   border: none;
 }
 
 .saveBtn:hover:not(:disabled) {
-  background: var(--lunar-green-700);
+  background: var(--charm-600);
   transform: translateY(-2px);
 }
 
@@ -222,7 +222,7 @@
   padding: 0.8rem 2rem;
   border: 1px solid var(--merino-300);
   border-radius: 999px;
-  color: var(--lunar-green-700);
+  color: var(--charm-700);
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -230,19 +230,19 @@
 }
 
 .editBtn:hover {
-  border-color: var(--lunar-green-500);
+  border-color: var(--charm-500);
   background: var(--merino-50);
 }
 
 /* ERROR MESSAGE */
 .errorMessage {
-  color: #e53e3e;
+  color: var(--monza-700);
   font-size: 0.9rem;
   font-weight: 600;
-  background: #fff5f5;
+  background: var(--monza-50);
   padding: 0.8rem;
   border-radius: 12px;
-  border: 1px solid #fed7d7;
+  border: 1px solid var(--monza-200);
 }
 
 /* NON AUTH */
@@ -258,7 +258,7 @@
 .nonAuthTitle {
   font-family: 'Fraunces', serif;
   font-size: 2rem;
-  color: var(--lunar-green-900);
+  color: var(--neutral-900);
 }
 
 .authBtnStack {
@@ -267,6 +267,9 @@
 }
 
 .authBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 1rem 2.5rem;
   border-radius: 999px;
   font-weight: 700;
@@ -275,8 +278,8 @@
 }
 
 .primaryAuth {
-  background: var(--lunar-green-600);
-  color: white;
+  background: var(--charm-500);
+  color: var(--charm-50);
 }
 
 .secondaryAuth {
@@ -315,4 +318,42 @@
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.1);
   color: var(--text);
+}
+
+.themeName {
+  margin-left: 0.5rem;
+  text-transform: capitalize;
+}
+
+[data-theme="dark"] .detailBlock:hover {
+  border-color: var(--apple-500);
+  box-shadow: 0 10px 25px rgba(164, 207, 135, 0.1);
+}
+
+[data-theme="dark"] .blockLabelRow,
+[data-theme="dark"] .inputIcon,
+[data-theme="dark"] .metricValue {
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .ghostInput:focus {
+  border-color: var(--apple-500);
+  box-shadow: 0 0 0 4px rgba(164, 207, 135, 0.1);
+}
+
+[data-theme="dark"] .toggleBtn:hover,
+[data-theme="dark"] .saveBtn,
+[data-theme="dark"] .primaryAuth {
+  background: var(--apple-500);
+  color: var(--apple-950);
+  border-color: var(--apple-500);
+}
+
+[data-theme="dark"] .saveBtn:hover:not(:disabled) {
+  background: var(--apple-600);
+}
+
+[data-theme="dark"] .editBtn:hover {
+  border-color: var(--apple-500);
+  color: var(--apple-500);
 }

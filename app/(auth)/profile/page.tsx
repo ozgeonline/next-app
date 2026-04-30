@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import useSWR from "swr";
 import { useAuth } from "@/context/auth/AuthProvider";
 import { useTheme } from "@/context/theme/ThemeProvider";
+import { Button } from "@/components/ui/button/Button";
 import { updateUserNameAction } from "@/lib/actions/auth";
 import styles from "./profile.module.css";
 import { Mail, User as UserIcon, Settings, Moon, Sun, Utensils, Edit3, X, Check } from "lucide-react";
@@ -15,6 +15,10 @@ const fetcher = async (url: string) => {
   return res.json();
 };
 
+type MealSummary = {
+  creator_email?: string;
+};
+
 export default function ProfilePage() {
   const { user, isAuthenticated, mutateUser } = useAuth();
   const { theme, toggleTheme } = useTheme();
@@ -23,10 +27,10 @@ export default function ProfilePage() {
   const [newName, setNewName] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { data: allMeals } = useSWR(isAuthenticated ? '/api/meals/meal' : null, fetcher);
+  const { data: allMeals } = useSWR<MealSummary[]>(isAuthenticated ? '/api/meals/meal' : null, fetcher);
 
   const recipesCount = allMeals?.filter(
-    (meal: any) => meal.creator_email === user?.email
+    (meal) => meal.creator_email === user?.email
   ).length || 0;
 
   const handleUpdate = async () => {
@@ -62,12 +66,12 @@ export default function ProfilePage() {
         <h2 className={styles.nonAuthTitle}>Join our community</h2>
         <p className={styles.profileSub}>Create an account to save your recipes and manage reservations.</p>
         <div className={styles.authBtnStack}>
-          <Link href="/signup" className={`${styles.authBtn} ${styles.primaryAuth}`}>
+          <Button href="/signup" variant="plain" className={`${styles.authBtn} ${styles.primaryAuth}`}>
             Create Account
-          </Link>
-          <Link href="/login" className={`${styles.authBtn} ${styles.secondaryAuth}`}>
+          </Button>
+          <Button href="/login" variant="plain" className={`${styles.authBtn} ${styles.secondaryAuth}`}>
             Login
-          </Link>
+          </Button>
         </div>
       </div>
     );
@@ -108,11 +112,11 @@ export default function ProfilePage() {
           <div className={styles.themeToggle}>
             <div className={styles.blockValue}>
               {theme === 'dark' ? <Moon size={18} /> : <Sun size={18} />}
-              <span style={{ marginLeft: '0.5rem', textTransform: 'capitalize' }}>{theme} Mode</span>
+              <span className={styles.themeName}>{theme} Mode</span>
             </div>
-            <button onClick={toggleTheme} className={styles.toggleBtn}>
+            <Button onClick={toggleTheme} variant="plain" className={styles.toggleBtn}>
               Switch
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -133,9 +137,14 @@ export default function ProfilePage() {
         {error && <div className={styles.errorMessage}>{error}</div>}
 
         {!showInput ? (
-          <button onClick={handleShowInput} className={styles.editBtn}>
-            <Edit3 size={18} /> Edit Account Name
-          </button>
+          <Button
+            onClick={handleShowInput}
+            variant="plain"
+            className={styles.editBtn}
+            iconLeft={<Edit3 size={18} />}
+          >
+            Edit Account Name
+          </Button>
         ) : (
           <div className={styles.editForm}>
             <div className={styles.inputWrapper}>
@@ -150,12 +159,23 @@ export default function ProfilePage() {
               />
             </div>
             <div className={styles.actionRow}>
-              <button onClick={() => setShowInput(false)} className={styles.cancelBtn}>
-                <X size={18} /> <span className={styles.btnText}>Cancel</span>
-              </button>
-              <button onClick={handleUpdate} disabled={saving} className={styles.saveBtn}>
-                {saving ? "Saving..." : <><Check size={18} /> <span className={styles.btnText}>Save Changes</span></>}
-              </button>
+              <Button
+                onClick={() => setShowInput(false)}
+                variant="plain"
+                className={styles.cancelBtn}
+                iconLeft={<X size={18} />}
+              >
+                <span className={styles.btnText}>Cancel</span>
+              </Button>
+              <Button
+                onClick={handleUpdate}
+                disabled={saving}
+                variant="plain"
+                className={styles.saveBtn}
+                iconLeft={saving ? undefined : <Check size={18} />}
+              >
+                {saving ? "Saving..." : <span className={styles.btnText}>Save Changes</span>}
+              </Button>
             </div>
           </div>
         )}

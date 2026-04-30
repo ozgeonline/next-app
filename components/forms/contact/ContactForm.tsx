@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAuth } from '@/context/auth/AuthProvider';
 import { sendContactEmail } from '@/lib/actions/contact';
+import { Button } from '@/components/ui/button/Button';
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import styles from './contact-form.module.css';
 
@@ -12,7 +13,6 @@ function ContactFormInner() {
   const { user } = useAuth();
   const { executeRecaptcha } = useGoogleReCaptcha();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
   const [formStatus, setFormStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -56,7 +56,6 @@ function ContactFormInner() {
       if (result.success) {
         setFormStatus('Thank you! We will get back to you soon...');
         setFormData({ name: user?.name || '', email: user?.email || '', message: '' });
-        setTouchedFields({});
         setTimeout(() => setFormStatus(''), 5000);
       } else {
         setError(result.error || 'Failed to send message');
@@ -99,7 +98,6 @@ function ContactFormInner() {
                   name={field.name}
                   value={formData[field.name as keyof typeof formData]}
                   onChange={handleInputChange}
-                  onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
                   required
                   placeholder={field.placeholder}
                   rows={3}
@@ -111,7 +109,6 @@ function ContactFormInner() {
                   name={field.name}
                   value={formData[field.name as keyof typeof formData]}
                   onChange={handleInputChange}
-                  onBlur={() => setTouchedFields(prev => ({ ...prev, [field.name]: true }))}
                   required
                   placeholder={field.placeholder}
                   readOnly={field.readOnly}
@@ -121,13 +118,15 @@ function ContactFormInner() {
           </div>
         ))}
 
-        <button
+        <Button
           type="submit"
+          variant="plain"
           className={styles.sendBtn}
           disabled={isSubmitting || !isFormValid}
+          iconRight={<ArrowRight size={20} />}
         >
-          {isSubmitting ? 'Sending...' : 'Send Message'} <ArrowRight size={20} />
-        </button>
+          {isSubmitting ? 'Sending...' : 'Send Message'}
+        </Button>
 
         {formStatus && <div className={styles.formStatus}>{formStatus}</div>}
       </form>
