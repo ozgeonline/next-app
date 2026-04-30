@@ -6,19 +6,19 @@
   position: relative;
   background: var(--merino-50);
   overflow-x: hidden;
-  padding-bottom: 5rem;
+  padding-bottom: 2.5rem;
   z-index: 2;
 }
 
 /* HERO SECTION */
 .heroSection {
   position: relative;
-  min-height: 15vh;
+  min-height: 11vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding-top: 4rem;
+  padding-top: 3rem;
 }
 
 .watermarkText {
@@ -44,19 +44,19 @@
 
 .heroTitle {
   font-family: 'Fraunces', serif;
-  font-size: 4.5rem;
+  font-size: 4rem;
   font-weight: 500;
   color: var(--neutral-900);
   line-height: 1.1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .decorativeDivider {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
-  margin: -1rem auto 1rem;
+  gap: 1.5rem;
+  margin: -0.75rem auto 0.5rem;
 }
 
 .line {
@@ -73,11 +73,11 @@
 /* MAIN CONTENT */
 .mainContent {
   width: 95%;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   z-index: 10;
 }
 
@@ -92,25 +92,25 @@
   flex: 0.8;
   background: white;
   border-radius: 40px;
-  padding: 2.5rem 1.5rem;
+  padding: 1.6rem 1.5rem;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.25rem;
   border: 1px solid var(--merino-100);
   text-align: center;
 }
 
 .avatarCircle {
-  width: 120px;
-  height: 120px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   background: var(--merino-100);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-family: 'Fraunces', serif;
   color: var(--charm-600);
   border: 4px solid white;
@@ -119,9 +119,9 @@
 
 .userName {
   font-family: 'Fraunces', serif;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--neutral-900);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .userSub {
@@ -134,8 +134,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
 }
 
 .actionBtn {
@@ -143,7 +143,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 18px;
   font-weight: 600;
   text-decoration: none;
@@ -175,7 +175,7 @@
 }
 
 .logoutBtn {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   background: transparent;
   border: none;
   color: var(--monza-600);
@@ -197,7 +197,7 @@
   flex: 1.2;
   background: white;
   border-radius: 40px;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 1.75rem;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
   border: 1px solid var(--merino-100);
 }
@@ -274,6 +274,6 @@
   }
 
   .contentCard {
-    padding: 2rem;
+    padding: 1.25rem;
   }
 }

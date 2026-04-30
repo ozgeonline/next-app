@@ -4,6 +4,9 @@ export interface User extends Document {
   email: string;
   password: string;
   name?: string;
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
+  passwordResetRequestedAt?: Date;
   _id: string;
   comparePassword(userPassword: string): Promise<boolean>;
 }

@@ -24,6 +24,7 @@ export default function AuthForm({
   const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
   const { loading, mutateUser } = useAuth();
   const router = useRouter();
@@ -35,7 +36,7 @@ export default function AuthForm({
 
     try {
       const result = formType === "login"
-        ? await loginAction(formData.email, formData.password)
+        ? await loginAction(formData.email, formData.password, rememberMe)
         : await signupAction(formData.name, formData.email, formData.password);
 
       if (result.success) {
@@ -151,6 +152,22 @@ export default function AuthForm({
                 </div>
               )
             ))}
+
+            {formType === "login" && (
+              <div className={styles.formOptions}>
+                <label className={styles.checkboxLabel}>
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                  />
+                  <span>Remember me</span>
+                </label>
+                <Link href="/forgot-password" className={styles.forgotLink}>
+                  Forgot password?
+                </Link>
+              </div>
+            )}
 
             <Button
               type="submit"

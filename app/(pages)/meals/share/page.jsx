@@ -17,7 +17,7 @@ export default async function ShareMealPage() {
     return (
       <div className="non-user-message">
         <p>You must be logged in to share a meal.</p>
-        <Button href="/login" variant="primary">
+        <Button href="/login" variant="primary" style={{ maxWidth: "5rem" }}>
           Login
         </Button>
       </div>

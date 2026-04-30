@@ -108,6 +108,40 @@
   color: var(--shark-800);
 }
 
+.formOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--neutral-700);
+  cursor: pointer;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--charm-500);
+  cursor: pointer;
+}
+
+.forgotLink {
+  color: var(--charm-600);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgotLink:hover,
+.switchLink:hover {
+  text-decoration: underline;
+}
+
 .submitButton {
   display: inline-flex;
   align-items: center;
@@ -167,10 +201,6 @@
   text-decoration: none;
 }
 
-.switchLink:hover {
-  text-decoration: underline;
-}
-
 .errorMessage {
   background: var(--monza-50);
   color: var(--monza-700);
@@ -180,6 +210,17 @@
   margin-bottom: 1.5rem;
   text-align: center;
   border: 1px solid var(--monza-200);
+}
+
+.successMessage {
+  background: var(--apple-50);
+  color: var(--apple-700);
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border: 1px solid var(--apple-200);
 }
 
 .loading {
@@ -230,6 +271,7 @@
   color: var(--shark-500);
 }
 
+[data-theme="dark"] .checkboxLabel,
 [data-theme="dark"] .dividerText,
 [data-theme="dark"] .footer {
   color: var(--merino-300);
@@ -248,9 +290,14 @@
 }
 
 [data-theme="dark"] .inputIcon,
+[data-theme="dark"] .forgotLink,
 [data-theme="dark"] .switchLink,
 [data-theme="dark"] .loading {
   color: var(--apple-500);
+}
+
+[data-theme="dark"] .checkboxLabel input[type="checkbox"] {
+  accent-color: var(--apple-500);
 }
 
 [data-theme="dark"] .submitButton {

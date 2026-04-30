@@ -24,13 +24,15 @@ export function verifyToken(token: string): JwtPayload | string | null {
 }
 
 // for signup and login
-export function getAuthCookieOptions(): CookieOptions {
+export function getAuthCookieOptions(rememberMe = false): CookieOptions {
+  const maxAge = rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 24 * 7;
+
   return {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: SAME_SITE_SETTING,
     path: "/",
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge,
   };
 }
 

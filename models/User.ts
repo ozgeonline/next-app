@@ -16,7 +16,19 @@ const userSchema = new Schema<User>(
       type: String,
       required: true,
       select: false
-    }
+    },
+    passwordResetToken: {
+      type: String,
+      select: false
+    },
+    passwordResetExpires: {
+      type: Date,
+      select: false
+    },
+    passwordResetRequestedAt: {
+      type: Date,
+      select: false
+    },
   },
   { timestamps: true }
 );
