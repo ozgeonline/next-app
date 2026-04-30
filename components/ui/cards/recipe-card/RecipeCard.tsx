@@ -1,14 +1,20 @@
-import Link from "next/link";
 import Image from "next/image";
 import { cache } from "react";
 import connect from "@/lib/db";
 import Meal from "@/models/Meal";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import RatingStars from "@/components/meals/rating-stars/RatingStars";
+import { Button } from "@/components/ui/button/Button";
 import styles from "./recipe-card.module.css";
 import { Star, Heart, ArrowRight, Utensils, User } from "lucide-react";
 
-// High Performance Data Fetching with Aggregation
+const RATING_STARS = 5;
+
+function createStableLikeCount(id: string) {
+  const hash = [...id].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  return 50 + (hash % 100);
+}
+
 const getTopRecipes = cache(async () => {
   await connect();
 
@@ -46,28 +52,29 @@ const getTopRecipes = cache(async () => {
     creator: meal.creator || "Unknown",
     averageRating: meal.averageRating || 0,
     ratingCount: meal.ratingCount || 0,
-    likes: Math.floor(Math.random() * 100) + 50,
+    likes: createStableLikeCount(meal._id.toString()),
     category: "Recipe"
   }));
 });
 
 const renderStars = (rating: number) => {
-  const stars = [];
-  for (let i = 1; i <= 5; i++) {
-    stars.push(
+  return Array.from({ length: RATING_STARS }, (_, index) => {
+    const starValue = index + 1;
+    const isActive = starValue <= rating;
+
+    return (
       <Star
-        key={i}
+        key={starValue}
         size={14}
-        fill={i <= rating ? "var(--apple-600)" : "none"}
-        stroke={i <= rating ? "var(--apple-600)" : "var(--neutral-300)"}
+        className={isActive ? styles.activeStar : styles.inactiveStar}
+        fill={isActive ? "currentColor" : "none"}
         strokeWidth={2}
       />
     );
-  }
-  return stars;
+  });
 };
 
-export default async function RecipesCard() {
+export default async function RecipeCard() {
   const [transformedMeals, user] = await Promise.all([
     getTopRecipes(),
     getUserFromCookies()
@@ -123,9 +130,14 @@ export default async function RecipesCard() {
               )}
             </div>
 
-            <Link href={`/meals/${meal.slug}`} className={styles.seeRecipeBtn}>
-              See Recipe <ArrowRight size={16} />
-            </Link>
+            <Button
+              href={`/meals/${meal.slug}`}
+              variant="plain"
+              className={styles.seeRecipeBtn}
+              iconRight={<ArrowRight size={16} />}
+            >
+              See Recipe
+            </Button>
           </div>
         </div>
       ))}

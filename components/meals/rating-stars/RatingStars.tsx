@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Star } from "lucide-react";
 import styles from "./rating-stars.module.css";
 
+const STAR_COUNT = 5;
+
 interface RatingStarsProps {
   mealId: string;
   initialRating: number;
@@ -16,25 +18,20 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  //console.log('RatingStars props:', { mealId, initialRating });
-
-  //update
   useEffect(() => {
-    //console.log('initialRating updated:', initialRating);
     setAverageRating(initialRating);
   }, [initialRating]);
 
-  //user's rating
   useEffect(() => {
     async function fetchUserRating() {
       try {
         setIsLoading(true);
         setError(null);
-        //console.log('Fetching rating for mealId:', mealId, 'initialRating:', initialRating);
+
         const response = await fetch(`/api/meals/ratings/${mealId}`, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
         });
 
         if (!response.ok) {
@@ -42,10 +39,8 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
         }
 
         const data = await response.json();
-        //console.log('API response:', data.rating, data.userName);
         setRating(data.rating !== undefined ? data.rating : initialRating);
       } catch (err: unknown) {
-        //console.error('Error fetching user rating:', err.message);
         setError(`Failed to load rating: ${err instanceof Error ? err.message : String(err)}`);
         setRating(initialRating);
       } finally {
@@ -60,11 +55,11 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
     try {
       setIsLoading(true);
       setError(null);
-      //console.log('Submitting rating:', { mealId, rating: newRating });
-      const response = await fetch('/api/meals/ratings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+
+      const response = await fetch("/api/meals/ratings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ mealId, rating: newRating }),
       });
 
@@ -73,12 +68,10 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
       }
 
       const data = await response.json();
-      //console.log('Rating submission response:', data);
       setRating(newRating);
       setAverageRating(data.averageRating);
-    } catch (err: any) {
-      //console.error('Error submitting rating:', err.message);
-      setError(`Failed to submit rating: ${err.message}`);
+    } catch (err: unknown) {
+      setError(`Failed to submit rating: ${err instanceof Error ? err.message : String(err)}`);
       setRating(initialRating);
     } finally {
       setIsLoading(false);
@@ -93,20 +86,27 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
     <div className={styles.container}>
       <div className={styles.starContainer}>
         <div className={styles.starWrapper}>
-          {Array.from({ length: 5 }, (_, index) => {
+          {Array.from({ length: STAR_COUNT }, (_, index) => {
             const starValue = index + 1;
             const displayRating = hoverRating || rating;
+            const isActive = starValue <= Math.round(displayRating);
+
             return (
-              <Star
+              <button
                 key={index}
-                className={styles.star}
-                fill={starValue <= Math.round(displayRating) ? 'var(--neutral-950)' : 'none'}
-                strokeWidth={starValue <= Math.round(displayRating) ? 0 : 1}
+                type="button"
+                className={styles.starButton}
                 onMouseEnter={() => setHoverRating(starValue)}
                 onMouseLeave={() => setHoverRating(0)}
                 onClick={() => submitRating(starValue)}
-                style={{ cursor: 'pointer' }}
-              />
+                aria-label={`Rate ${starValue} out of ${STAR_COUNT}`}
+              >
+                <Star
+                  className={styles.star}
+                  fill={isActive ? "currentColor" : "none"}
+                  strokeWidth={isActive ? 0 : 1}
+                />
+              </button>
             );
           })}
         </div>
