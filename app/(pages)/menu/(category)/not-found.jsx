@@ -8,11 +8,10 @@ export default function NotFound() {
       <p>The category you are looking for does not exist or has been moved.</p>
       <Button
         href="/menu"
-        variant="accent"
-        style={{ padding: '0.75rem 2rem', borderRadius: '30px', textDecoration: 'none' }}
+        variant="primary"
       >
         Back to Full Menu
       </Button>
     </main>
-  )
+  );
 }

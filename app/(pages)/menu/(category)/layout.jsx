@@ -3,8 +3,11 @@ import { useRouter, usePathname } from "next/navigation";
 import { useTransition } from "react";
 import { createPortal } from "react-dom";
 import FoodsIcon from "@/components/ui/icon/FoodsIcon";
+import { Button } from "@/components/ui/button/Button";
 import { menuLinks } from "../menu-items";
 import styles from "./category.module.css";
+
+const cx = (...classes) => classes.filter(Boolean).join(" ");
 
 export default function RootLayout({ children }) {
   const router = useRouter();
@@ -28,22 +31,26 @@ export default function RootLayout({ children }) {
 
   return (
     <>
-      <div className={styles.categoryWrapper + ' ' + "mainBackground"}>
+      <div className={cx(styles.categoryWrapper, "mainBackground")}>
         <div className="containerTopNavbarColor" />
         <div className={styles.linkWrapper}>
-          {menuLinks.map((item, index) => {
-            const itemsData = Object.values(item)[0];
+          {menuLinks.map((item) => {
+            const [categoryKey, itemsData] = Object.entries(item)[0] ?? [];
             if (!itemsData) return null;
             const currentCategory = pathname.split("/").pop();
-            //console.log("currentCategory:", currentCategory);
             return (
-              <button
-                key={index}
+              <Button
+                key={categoryKey}
+                type="button"
+                variant="plain"
                 onClick={() => handleLinkClick(`/menu/${itemsData.href}`)}
-                className={currentCategory === itemsData.href ? styles.active : ""}
+                className={cx(
+                  styles.categoryLink,
+                  currentCategory === itemsData.href && styles.active,
+                )}
               >
                 {itemsData.title}
-              </button>
+              </Button>
             );
           })}
         </div>

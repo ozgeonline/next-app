@@ -42,7 +42,7 @@
 
 @media screen and (min-width: 768px) {
   .horizontal {
-    flex-direction: row !important;
+    flex-direction: row;
     align-items: center;
     gap: 2rem;
   }
@@ -105,8 +105,8 @@
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
-  background: var(--razzmatazz-500);
-  color: var(--razzmatazz-50);
+  background: var(--charm-500);
+  color: var(--charm-50);
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
   font-size: 0.7rem;
@@ -117,46 +117,44 @@
 }
 
 [data-theme="dark"] .newBadge {
-  background: var(--lunar-green-500);
-  color: var(--lunar-green-900);
+  background: var(--apple-500);
+  color: var(--apple-950);
 }
 
 .heartButton {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  background: rgba(255, 255, 255, 0.8);
+  min-width: 0;
+  width: 3rem;
+  height: 3rem;
+  margin-top: 0;
+  padding: 0;
+  background: var(--text-low-opacity);
   border: none;
   border-radius: 50%;
-  width: 2.2rem;
-  height: 2.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #4a5568;
+  color: var(--charm-500);
   backdrop-filter: blur(4px);
   transition: all 0.2s ease;
   z-index: 10;
 }
 
-.heartButton:hover {
-  background: #ffffff;
-  color: var(--razzmatazz-600);
+.heartButton svg {
+  display: block;
 }
 
 .heartButton:hover svg {
-  fill: var(--razzmatazz-600);
+  fill: var(--charm-500);
 }
 
-[data-theme="dark"] .heartButton {
-  background: rgba(0, 0, 0, 0.4);
-  color: #a0aec0;
-}
-
-[data-theme="dark"] .heartButton:hover {
-  background: rgba(0, 0, 0, 0.6);
-  color: #ff4b72;
+.heartButton:hover {
+  color: var(--charm-500);
+  fill: var(--charm-500);
+  filter: brightness(1.2);
 }
 
 .pricePill {
@@ -174,9 +172,9 @@
 }
 
 [data-theme="dark"] .pricePill {
-  background: var(--lunar-green-100);
-  color: var(--lunar-green-800);
-  border: 1px solid var(--lunar-green-300);
+  background: rgba(164, 207, 135, 0.14);
+  color: var(--apple-500);
+  border: 1px solid rgba(164, 207, 135, 0.45);
 }
 
 .info {
@@ -229,6 +227,16 @@
   display: flex;
   align-items: center;
   gap: 0.15rem;
+}
+
+.starIcon {
+  color: var(--neutral-400);
+  fill: var(--neutral-400);
+}
+
+[data-theme="dark"] .starIcon {
+  color: var(--apple-500);
+  fill: var(--apple-500);
 }
 
 .statItem {

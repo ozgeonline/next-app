@@ -6,7 +6,6 @@
   opacity: 1;
   z-index: 100;
   background: var(--background);
-  position: relative;
   padding-top: 1rem;
 }
 
@@ -16,41 +15,65 @@
 
 .linkWrapper {
   width: 100%;
-  height: 5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  justify-content: flex-start;
+  gap: 0.75rem;
   margin-top: 2rem;
+  padding: 0 1rem 1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
-.linkWrapper button {
+.linkWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .linkWrapper {
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+.categoryLink {
   text-decoration: none;
-  font-size: large;
+  width: auto;
+  min-width: fit-content;
+  margin-top: 0;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  background: var(--shark-900);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  border: none;
+  color: var(--neutral-600);
+  border: 1px solid var(--neutral-300);
+  border-radius: 999px;
+  background: transparent;
   cursor: pointer;
-  transition: all 0.2s linear;
+  transition: all 0.2s ease;
   opacity: 0.5;
 }
 
-.linkWrapper button:hover {
-  background: var(--shark-900);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.categoryLink:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
 }
 
-.linkWrapper button.active {
-  background: var(--shark-900);
+.categoryLink.active {
   opacity: 1;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--charm-500);
+  border-color: var(--charm-500);
+  background: rgba(255, 75, 114, 0.04);
+}
+
+[data-theme="dark"] .categoryLink {
+  color: var(--neutral-400);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .categoryLink.active {
+  color: var(--apple-500);
+  border-color: var(--apple-500);
+  background: rgba(164, 207, 135, 0.1);
 }
 
 .menuItemsWrapper {

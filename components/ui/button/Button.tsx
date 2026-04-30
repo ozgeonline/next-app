@@ -1,10 +1,10 @@
 import Link from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "accent" | "brand";
+type ButtonVariant = "primary" | "secondary" | "accent" | "brand" | "plain";
 
 type ButtonProps = {
-  children: ReactNode;
+  children?: ReactNode;
   href?: string;
   variant?: ButtonVariant;
   className?: string;
@@ -19,6 +19,7 @@ const variantClassNames: Record<ButtonVariant, string> = {
   secondary: "button-secondary",
   accent: "button-accent",
   brand: "button-brand",
+  plain: "",
 };
 
 function cx(...classNames: Array<string | false | null | undefined>) {
@@ -45,7 +46,7 @@ export function Button({
   const content = (
     <>
       {iconLeft}
-      <span>{children}</span>
+      {children && <span>{children}</span>}
       {iconRight}
     </>
   );

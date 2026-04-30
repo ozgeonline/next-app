@@ -61,10 +61,8 @@
   font-weight: 700;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
-  color: #ffffc2;
   margin-bottom: 0.5rem;
-  text-align: center;
-  text-shadow: 2px 2px 5px #1a1a1a;
+  text-align: start;
 }
 
 .heroContent p {
@@ -72,8 +70,6 @@
   font-weight: 500;
   letter-spacing: 0.1rem;
   color: #f4f6f7;
-  text-align: center;
-  text-shadow: 2px 2px 5px #1a1a1a;
 }
 
 @media (min-width: 1024px) {
@@ -116,7 +112,6 @@
   letter-spacing: 1.5px;
   text-transform: uppercase;
   transition: all 0.3s ease;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .reservation::before {
@@ -152,7 +147,6 @@
 
 .reservation:hover a {
   color: #fff8e7;
-  text-shadow: 0 0 15px rgba(215, 175, 95, 0.6);
 }
 
 @media (min-width: 1024px) {
@@ -185,9 +179,9 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg,
-      rgba(15, 18, 16, 0.95) 0%,
-      rgba(15, 18, 16, 0.4) 40%,
-      rgba(15, 18, 16, 0) 100%);
+      rgba(12, 15, 10, 0.95) 0%,
+      rgba(12, 15, 10, 0.42) 60%,
+      rgba(12, 15, 10, 0) 100%);
   z-index: 1;
 }
 
@@ -206,8 +200,8 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  border: 1px solid #6b967e;
-  color: #517b65;
+  border: 1px solid var(--apple-500);
+  color: var(--apple-500);
   background: transparent;
 }
 
@@ -216,7 +210,7 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #6b967e;
+  color: var(--apple-500);
 }
 
 /* 5b. Menu Typography */
@@ -228,7 +222,6 @@
   margin-bottom: 1.5rem;
   text-align: left;
   text-shadow: none;
-  font-family: 'Fraunces', serif;
   font-style: normal;
 }
 
@@ -245,9 +238,8 @@
 }
 
 .highlight {
-  color: #6b967e;
+  color: var(--apple-500);
   font-weight: 600;
-  text-shadow: 2px 2px 5px #1a1a1a;
 }
 
 .menuDescription {
@@ -274,8 +266,8 @@
   gap: 0.5rem;
   padding: 0.8rem 1.5rem;
   border-radius: 50px;
-  background-color: #517b65;
-  color: #bbd4c5;
+  background-color: var(--apple-500);
+  color: var(--apple-950);
   font-weight: 600;
   font-size: 1rem;
   border: none;
@@ -331,7 +323,6 @@
   font-weight: 700;
   letter-spacing: 0.05rem;
   cursor: pointer;
-  text-shadow: 0px 0px 0px #1a1a1a;
 }
 
 .iconLocation {

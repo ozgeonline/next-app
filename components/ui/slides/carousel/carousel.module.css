@@ -1,19 +1,24 @@
 .textDot {
+  appearance: none;
+  border: 0;
+  background: transparent;
   cursor: pointer;
   margin: 0 8px;
   font-weight: 500;
   color: var(--text);
-  transition: color 0.3s;
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .activeText {
   color: var(--text);
   font-weight: 700;
-  border-bottom: 3px solid #0080fa;
+  border-bottom: 3px solid var(--charm-500);
 }
 
 [data-theme="dark"] .activeText {
-  border-bottom: 3px solid #fffb88;
+  border-bottom-color: var(--apple-500);
 }
 
 .slider {
@@ -45,18 +50,27 @@
 }
 
 .dot {
+  appearance: none;
+  border: 0;
   width: 1rem;
   height: 1rem;
   border-radius: 100%;
-  background: #92b6a1;
+  background: var(--charm-500);
   cursor: pointer;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
-.opacity50 {
+[data-theme="dark"] .dot {
+  background: var(--apple-500);
+}
+
+.inactiveDot {
   opacity: 0.5;
 }
 
-.opacity100 {
+.activeDot {
   opacity: 1;
   transform: scale(1.2);
 }

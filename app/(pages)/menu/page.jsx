@@ -1,8 +1,5 @@
-// Menu page (Server Component):
-// displays the restaurant menu with carousel banners, categorized items, and reservation section.
-
 import dynamic from "next/dynamic";
-import { Leaf, ChefHat, Heart, Users } from 'lucide-react';
+import { ChefHat, Heart, Leaf, Users } from "lucide-react";
 import Carousel from "@/components/ui/slides/carousel/Carousel";
 import { menuSlides, menuLinks } from "./menu-items";
 import { menuPageitemsBottom } from "@/components/sections/highlight-cards/card-items";
@@ -11,13 +8,20 @@ import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBa
 import styles from "./menu.module.css";
 import FeaturesStrip from "@/components/sections/features-strip/FeaturesStrip";
 
-const HeroBanner = dynamic(() => import('@/components/ui/banners/hero-banner/HeroBanner'));
-const HighlightCards = dynamic(() => import('@/components/sections/highlight-cards/HighlightCards'));
-const MainPageReservationBanner = dynamic(() => import('@/components/ui/banners/reservation-banner/MainPageReservationBanner'));
+const HeroBanner = dynamic(() => import("@/components/ui/banners/hero-banner/HeroBanner"));
+const HighlightCards = dynamic(() => import("@/components/sections/highlight-cards/HighlightCards"));
+const MainPageReservationBanner = dynamic(() => import("@/components/ui/banners/reservation-banner/MainPageReservationBanner"));
+
+const menuFeatures = [
+  { icon: Leaf, title: "Fresh Ingredients", description: "Sourced daily, made with care." },
+  { icon: ChefHat, title: "Expertly Crafted", description: "Perfectly prepared by chefs." },
+  { icon: Heart, title: "Healthy & Delicious", description: "Good for your body and soul." },
+  { icon: Users, title: "Made for Sharing", description: "Great food, great moments." },
+];
 
 export const metadata = {
   title: "Menu | TasteShare",
-  description: "Discover our creative menu of original recipes — desserts, drinks, meals, and salads — served fresh in our restaurant.",
+  description: "Discover our creative menu of original recipes - desserts, drinks, meals, and salads - served fresh in our restaurant.",
   keywords: ["menu", "restaurant", "desserts", "drinks", "meals", "salads", "TasteShare"],
   openGraph: {
     title: "Menu | TasteShare",
@@ -27,27 +31,22 @@ export const metadata = {
 };
 
 export default function MenuPage() {
-  const features = [
-    { icon: Leaf, title: 'Fresh Ingredients', description: 'Sourced daily, made with care.' },
-    { icon: ChefHat, title: 'Expertly Crafted', description: 'Perfectly prepared by chefs.' },
-    { icon: Heart, title: 'Healthy & Delicious', description: 'Good for your body and soul.' },
-    { icon: Users, title: 'Made for Sharing', description: 'Great food, great moments.' },
-  ];
-
   return (
     <div className={styles.container}>
       <div className={styles.heroSectionWrapper}>
         <Carousel
+          data-theme="dark"
           autoSlide={true}
           carouselWrapper={styles.carouselSlideWrapper}
           dotsWrapper={styles.dotsWrapper}
         >
-          {menuSlides.map((item, index) => {
-            const itemsData = Object.values(item)[0];
+          {menuSlides.map((item) => {
+            const [slideKey, itemsData] = Object.entries(item)[0] ?? [];
             if (!itemsData) return null;
+
             return (
               <HeroBanner
-                key={index}
+                key={slideKey}
                 srcImage={itemsData.src}
                 introductionTitle={itemsData.title}
                 introduction={itemsData.description}
@@ -61,7 +60,7 @@ export default function MenuPage() {
         </Carousel>
 
         <div className={styles.featuresOverlay} data-theme="dark">
-          <FeaturesStrip items={features} />
+          <FeaturesStrip items={menuFeatures} />
         </div>
       </div>
 
@@ -81,8 +80,7 @@ export default function MenuPage() {
         <div className={`${styles.cardsWrapper} mainBackground`}>
           <HighlightCards data={menuPageitemsBottom} learnMore={true} />
         </div>
-
       </main>
     </div>
-  )
+  );
 }

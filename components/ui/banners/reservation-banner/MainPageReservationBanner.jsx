@@ -1,26 +1,39 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, Leaf } from "lucide-react";
-import styles from "./reservation.module.css";
 import { useTheme } from "@/context/theme/ThemeProvider";
-
+import { Button } from "@/components/ui/button/Button";
 import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
+import styles from "./reservation.module.css";
+
+const LEAF_IMAGE_SRC =
+  "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFD76Nmf5iOMUbcyZrusmv9W6AXFEDzkwg3leLi";
+
+const DECOR_IMAGES = {
+  leftDark: "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDOH2Qagk62Mm1Oej967Rgn30AC4GDqhS5yZxW",
+  leftLight: "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDn06jvhwgCF8pXm6ZvtROEfou3csW7UJnz9Qr",
+  right: "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDwDqEN2YqlTOprZ9Ac2Vvs1uHfUgS0GEoeBYX",
+};
+
+const floatingLeaves = [
+  { className: styles.leaf1, size: 200 },
+  { className: styles.leaf2, size: 150 },
+];
+
+const cx = (...classes) => classes.filter(Boolean).join(" ");
 
 export default function ReservationBanner() {
   const { theme } = useTheme();
 
   const leftImageSrc = theme === "dark"
-    ? "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDOH2Qagk62Mm1Oej967Rgn30AC4GDqhS5yZxW"
-    : "https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDn06jvhwgCF8pXm6ZvtROEfou3csW7UJnz9Qr";
+    ? DECOR_IMAGES.leftDark
+    : DECOR_IMAGES.leftLight;
 
   return (
     <div className={styles.bannerContainer}>
-      {/* Background Component */}
       <WavesBackground />
 
-      {/* Decorative Food Images */}
       <div className={styles.decorLeft}>
         <Image
           src={leftImageSrc}
@@ -33,7 +46,7 @@ export default function ReservationBanner() {
 
       <div className={styles.decorRight}>
         <Image
-          src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDwDqEN2YqlTOprZ9Ac2Vvs1uHfUgS0GEoeBYX"
+          src={DECOR_IMAGES.right}
           alt="Charcuterie Board"
           width={900}
           height={900}
@@ -41,7 +54,6 @@ export default function ReservationBanner() {
         />
       </div>
 
-      {/* Center Content */}
       <div className={styles.content}>
         <div className={styles.subtitleRow}>
           <div className={styles.line} />
@@ -59,30 +71,26 @@ export default function ReservationBanner() {
           we create moments you'll love to share.
         </p>
 
-        <Link href="/reservations" className={styles.ctaButton}>
+        <Button
+          href="/reservations"
+          variant="secondary"
+          className={styles.ctaButton}
+          iconRight={<ArrowRight size={18} className={styles.arrowIcon} />}
+        >
           Make Reservation
-          <ArrowRight size={18} className={styles.arrowIcon} />
-        </Link>
-
+        </Button>
       </div>
 
-      {/* Floating Leaves */}
-      <div className={`${styles.floatingLeaf} ${styles.leaf1}`}>
-        <Image
-          src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFD76Nmf5iOMUbcyZrusmv9W6AXFEDzkwg3leLi"
-          alt="leaf"
-          width={200}
-          height={200}
-        />
-      </div>
-      <div className={`${styles.floatingLeaf} ${styles.leaf2}`}>
-        <Image
-          src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFD76Nmf5iOMUbcyZrusmv9W6AXFEDzkwg3leLi"
-          alt="leaf"
-          width={150}
-          height={150}
-        />
-      </div>
+      {floatingLeaves.map(({ className, size }) => (
+        <div key={className} className={cx(styles.floatingLeaf, className)}>
+          <Image
+            src={LEAF_IMAGE_SRC}
+            alt=""
+            width={size}
+            height={size}
+          />
+        </div>
+      ))}
     </div>
   );
 }

@@ -11,7 +11,7 @@
 
 .cardContainer:hover {
   box-shadow: 0 25px 50px rgba(81, 123, 101, 0.1);
-  border-color: var(--lunar-green-200);
+  border-color: var(--apple-200);
 }
 
 .cardHeader {
@@ -27,7 +27,7 @@
   left: 1rem;
   z-index: 10;
   background: var(--neutral-700);
-  opacity: 0.7;
+  opacity: 0.8;
   backdrop-filter: blur(8px);
   color: var(--neutral-200);
   padding: 0.4rem 1rem;
@@ -80,7 +80,7 @@
   align-items: center;
   justify-content: center;
   background: var(--neutral-100);
-  color: var(--lunar-green-600);
+  color: var(--apple-600);
 }
 
 .username {
@@ -105,8 +105,8 @@
 .recipeTitle {
   font-family: 'Fraunces', serif;
   font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--lunar-green-950);
+  font-weight: 500;
+  color: var(--neutral-700);
   line-height: 1.3;
 }
 
@@ -136,7 +136,7 @@
   padding: 0.8rem;
   border: 1.5px solid var(--merino-200);
   border-radius: 999px;
-  color: var(--lunar-green-700);
+  color: var(--apple-700);
   font-weight: 700;
   font-size: 0.9rem;
   text-decoration: none;
@@ -144,19 +144,15 @@
 }
 
 .seeRecipeBtn:hover {
-  background: var(--lunar-green-50);
-  border-color: var(--lunar-green-500);
-  color: var(--lunar-green-800);
+  background: var(--apple-50);
+  border-color: var(--apple-500);
+  color: var(--apple-800);
 }
 
 /* DARK MODE */
 [data-theme="dark"] .cardContainer {
   background: rgba(255, 255, 255, 0.03);
   border-color: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="dark"] .recipeTitle {
-  color: var(--text);
 }
 
 [data-theme="dark"] .username,

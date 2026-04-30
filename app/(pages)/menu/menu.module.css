@@ -118,6 +118,9 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  width: auto;
+  min-width: fit-content;
+  margin-top: 0;
   padding: 0.75rem 1.5rem;
   border-radius: 999px;
   background: #ffffff;
@@ -129,28 +132,27 @@
   transition: all 0.3s ease;
 }
 
+.categoryPill svg {
+  display: block;
+  color: #718096;
+  transition: color 0.3s ease;
+}
+
 .categoryPill:hover {
   background: #f8fafc;
   transform: translateY(-2px);
 }
 
-.categoryIcon {
-  color: #718096;
-  transition: all 0.3s ease;
-}
-
-/* Light Theme Active State (Pinkish) */
 .activePill {
-  background: rgba(255, 75, 114, 0.01) !important;
-  border: 1px solid rgba(255, 75, 114, 0.5) !important;
-  color: #ff4b72 !important;
+  background: rgba(255, 75, 114, 0.04);
+  border-color: rgba(255, 75, 114, 0.5);
+  color: var(--charm-500);
 }
 
-.activePill .categoryIcon {
-  color: #ff4b72 !important;
+.activePill svg {
+  color: var(--charm-500);
 }
 
-/* Dark Theme Overrides */
 [data-theme="dark"] .categoryPill {
   background: rgba(26, 26, 26, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -161,18 +163,18 @@
   filter: brightness(1.2);
 }
 
-[data-theme="dark"] .categoryIcon {
+[data-theme="dark"] .categoryPill svg {
   color: #718096;
 }
 
 [data-theme="dark"] .activePill {
-  background: rgba(107, 150, 126, 0.1) !important;
-  border: 1px solid var(--lunar-green-600, #3f6250) !important;
-  color: var(--lunar-green-700, #92b6a1) !important;
+  background: rgba(164, 207, 135, 0.1);
+  border-color: var(--apple-500);
+  color: var(--apple-500);
 }
 
-[data-theme="dark"] .activePill .categoryIcon {
-  color: var(--lunar-green-700, #92b6a1) !important;
+[data-theme="dark"] .activePill svg {
+  color: var(--apple-500);
 }
 
 .footerContainer {
@@ -218,7 +220,7 @@
   }
 
   :global([data-theme="dark"]) .discoverMore {
-    color: var(--lunar-green-500);
+    color: var(--apple-500);
   }
 }
 

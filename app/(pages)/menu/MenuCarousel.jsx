@@ -1,6 +1,3 @@
-// Menu carousel wrapper (Client Component):
-// encapsulates the menu carousel with category navigation and "View All" links.
-
 "use client";
 
 import { useTransition } from "react";
@@ -9,25 +6,27 @@ import Carousel from "@/components/ui/slides/carousel/Carousel";
 import { MenuPreview } from "@/components/menu/MenuSection";
 import { useNavigation } from "@/context/navigation/NavigationProvider";
 import { Button } from "@/components/ui/button/Button";
-import { Leaf, Coffee, Utensils, ArrowRight } from 'lucide-react';
+import { ArrowRight, Coffee, Leaf, Utensils } from "lucide-react";
 import styles from "./menu.module.css";
 
 const CATEGORY_ICONS = {
-  "Desserts": Leaf,
-  "Drinks": Coffee,
-  "Meals": Utensils,
-  "Salads": Leaf,
+  Desserts: Leaf,
+  Drinks: Coffee,
+  Meals: Utensils,
+  Salads: Leaf,
 };
+
+const cx = (...classes) => classes.filter(Boolean).join(" ");
 
 export default function MenuCarousel({ menuLinks, textLabels }) {
   const router = useRouter();
   const { triggerNavigation, setIsLoading } = useNavigation();
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   function getMenuCategory(index) {
     const item = menuLinks[index];
     if (!item) return null;
-    return Object.values(item)[0];
+    return Object.entries(item)[0]?.[1] ?? null;
   }
 
   function handleViewAll(e, href) {
@@ -52,24 +51,28 @@ export default function MenuCarousel({ menuLinks, textLabels }) {
         const Icon = CATEGORY_ICONS[label] || Leaf;
 
         return (
-          <button
-            key={index}
+          <Button
+            key={label}
+            type="button"
+            variant="plain"
             onClick={onClick}
-            className={`${styles.categoryPill} ${isActive ? styles.activePill : ""}`}
+            className={cx(styles.categoryPill, isActive && styles.activePill)}
+            iconLeft={<Icon size={16} />}
           >
-            <Icon size={16} className={styles.categoryIcon} />
             {label}
-          </button>
+          </Button>
         );
       }}
       renderSlideFooter={(index) => {
         const category = getMenuCategory(index);
         if (!category) return null;
+        const href = `/menu/${category.href}`;
+
         return (
           <div className={styles.footerContainer}>
             <Button
-              href={`menu/${category.href}`}
-              onClick={(e) => handleViewAll(e, `menu/${category.href}`)}
+              href={href}
+              onClick={(event) => handleViewAll(event, href)}
               variant="primary"
               className={styles.viewAllLink}
               iconRight={<ArrowRight size={18} className={styles.btnArrow} />}
@@ -89,20 +92,20 @@ export default function MenuCarousel({ menuLinks, textLabels }) {
         );
       }}
     >
-      {menuLinks.map((item, index) => {
-        const itemsData = Object.values(item)[0];
+      {menuLinks.map((item) => {
+        const [categoryKey, itemsData] = Object.entries(item)[0] ?? [];
         if (!itemsData) return null;
         return (
-          <div key={index} className={styles.menuItemsWrapper}>
-            {itemsData.menuItems.slice(0, 3).map((menuItem, i) => (
+          <div key={categoryKey} className={styles.menuItemsWrapper}>
+            {itemsData.menuItems.slice(0, 3).map((menuItem, index) => (
               <MenuPreview
-                key={i}
+                key={menuItem.name}
                 src={menuItem.image}
                 description={menuItem.description}
                 price={menuItem.price}
                 title={menuItem.name}
                 isNew={menuItem.isNew}
-                variant={i === 2 ? "horizontal" : "vertical"}
+                variant={index === 2 ? "horizontal" : "vertical"}
               />
             ))}
           </div>

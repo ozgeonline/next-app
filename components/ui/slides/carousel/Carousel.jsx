@@ -1,9 +1,11 @@
-// Carousel component:
-// renders a horizontal slider with dot or text navigation and optional auto-slide.
-
 "use client";
-import { useState, useEffect, memo, useRef, useCallback } from "react";
+
+import { Children, memo, useCallback, useEffect, useRef, useState } from "react";
 import styles from "./carousel.module.css";
+
+const SLIDE_INTERVAL_MS = 10000;
+
+const cx = (...classes) => classes.filter(Boolean).join(" ");
 
 function Carousel({
   children,
@@ -14,20 +16,27 @@ function Carousel({
   dotsWrapper,
   renderSlideFooter,
   customDot,
+  ...props
 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
+  const slides = Children.toArray(children);
+  const slideCount = slides.length;
 
   const startAutoSlide = useCallback(() => {
-    if (!autoSlide) return;
+    if (!autoSlide || slideCount <= 1) return;
     if (intervalRef.current) clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
-        prevIndex < children.length - 1 ? prevIndex + 1 : 0
+        prevIndex < slideCount - 1 ? prevIndex + 1 : 0
       );
-    }, 10000);
-  }, [autoSlide, children.length]);
+    }, SLIDE_INTERVAL_MS);
+  }, [autoSlide, slideCount]);
+
+  const stopAutoSlide = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  }, []);
 
   const handleClick = (index) => {
     setCurrentImageIndex(index);
@@ -36,15 +45,15 @@ function Carousel({
 
   useEffect(() => {
     startAutoSlide();
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [startAutoSlide]);
+    return stopAutoSlide;
+  }, [startAutoSlide, stopAutoSlide]);
+
+  if (slideCount === 0) return null;
 
   return (
-    <div className={carouselWrapper}>
+    <div className={carouselWrapper} {...props}>
       <div className={dotsWrapper}>
-        {children.map((_, index) => {
+        {slides.map((_, index) => {
           const isActive = index === currentImageIndex;
 
           if (customDot) {
@@ -54,21 +63,26 @@ function Carousel({
           if (dotType === "text") {
             const label = textLabels[index] || `Slide ${index + 1}`;
             return (
-              <span
+              <button
                 key={index}
+                type="button"
                 onClick={() => handleClick(index)}
-                className={`${styles.textDot} ${isActive ? styles.activeText : ""}`}
+                className={cx(styles.textDot, isActive && styles.activeText)}
+                aria-current={isActive ? "true" : undefined}
               >
                 {label}
-              </span>
+              </button>
             );
           }
 
           return (
-            <div
+            <button
               key={index}
-              className={`${isActive ? styles.opacity100 : styles.opacity50} ${styles.dot}`}
+              type="button"
+              className={cx(styles.dot, isActive ? styles.activeDot : styles.inactiveDot)}
               onClick={() => handleClick(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={isActive ? "true" : undefined}
             />
           );
         })}
@@ -77,14 +91,13 @@ function Carousel({
         className={styles.slider}
         style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
       >
-        {children.map((child, index) => (
+        {slides.map((child, index) => (
           <div
             key={index}
-            className={`${styles.itemWrapper} ${dotType === "text" ? styles.textWrapper : ""}`}
+            className={cx(styles.itemWrapper, dotType === "text" && styles.textWrapper)}
           >
             {child}
             {index === currentImageIndex && renderSlideFooter?.(index)}
-            <div className={styles.blurOverlay} />
           </div>
         ))}
       </div>

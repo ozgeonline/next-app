@@ -58,8 +58,8 @@ const renderStars = (rating: number) => {
       <Star
         key={i}
         size={14}
-        fill={i <= rating ? "var(--lunar-green-600)" : "none"}
-        stroke={i <= rating ? "var(--lunar-green-600)" : "var(--neutral-300)"}
+        fill={i <= rating ? "var(--apple-600)" : "none"}
+        stroke={i <= rating ? "var(--apple-600)" : "var(--neutral-300)"}
         strokeWidth={2}
       />
     );

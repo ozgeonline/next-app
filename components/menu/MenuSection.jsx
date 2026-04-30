@@ -3,7 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Clock, Flame, Star, Heart } from "lucide-react";
+import { Button } from "@/components/ui/button/Button";
 import styles from "./menu.module.css";
+
+const RATING_STARS = 5;
+
+const cx = (...classes) => classes.filter(Boolean).join(" ");
 
 export function MenuPreview({
   src,
@@ -17,7 +22,7 @@ export function MenuPreview({
   const isHorizontal = variant === "horizontal";
 
   return (
-    <div className={`${styles.previewWrapper} ${isHorizontal ? styles.horizontal : ""}`}>
+    <div className={cx(styles.previewWrapper, isHorizontal && styles.horizontal)}>
       <div className={styles.imgWrapper}>
         <div className={styles.imgContainer}>
           <Image
@@ -33,9 +38,13 @@ export function MenuPreview({
         {isNew && (
           <span className={styles.newBadge}>NEW</span>
         )}
-        <button className={styles.heartButton} aria-label="Add to favorites">
-          <Heart size={20} strokeWidth={1.5} />
-        </button>
+        <Button
+          type="button"
+          variant="plain"
+          className={styles.heartButton}
+          aria-label="Add to favorites"
+          iconLeft={<Heart size={25} strokeWidth={2} />}
+        />
         <div className={styles.pricePill}>
           {price} $
         </div>
@@ -46,12 +55,11 @@ export function MenuPreview({
 
         <div className={styles.statsRow}>
           <div className={styles.stars}>
-            {[...Array(5)].map((_, i) => (
+            {Array.from({ length: RATING_STARS }, (_, i) => (
               <Star
                 key={i}
                 size={14}
-                fill="var(--lunar-green-400, #517b65)"
-                color="var(--lunar-green-400, #517b65)"
+                className={styles.starIcon}
               />
             ))}
           </div>
@@ -74,9 +82,9 @@ export function MenuPreview({
 export function MenuSection({ data }) {
   return (
     <div className={styles.menuItemsWrapper}>
-      {data.menuItems.map((menuItem, i) => (
+      {data.menuItems.map((menuItem) => (
         <MenuPreview
-          key={i}
+          key={menuItem.name}
           src={menuItem.image}
           description={menuItem.description}
           price={menuItem.price}
