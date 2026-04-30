@@ -42,27 +42,22 @@
 }
 
 [data-theme="dark"] .authMessage {
-  background: var(--lunar-green-100);
-  border: 1px solid var(--lunar-green-500);
+  background: var(--neutral-100);
+  border: 1px solid var(--apple-500);
 }
 
 .loginBtn {
-  display: inline-block;
+  width: auto;
+  min-width: 0;
   margin-top: 2rem;
   padding: 1rem 3rem;
-  background: var(--lunar-green-500);
-  color: white;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
 }
 
 /* CARD STYLES */
 .formCard,
 .summaryCard {
-  background: transparent !important;
-  border: 1px solid var(--lunar-green-500) !important;
+  background: transparent;
+  border: 1px solid var(--charm-500);
   border-radius: 40px;
   padding: 3rem;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
@@ -98,7 +93,7 @@
   font-family: 'Fraunces', serif;
   font-size: 3.1rem;
   font-weight: 600;
-  color: var(--lunar-green-500);
+  color: var(--charm-500);
   line-height: 1;
   display: flex;
   align-items: center;
@@ -106,8 +101,17 @@
 }
 
 .headerLeaf {
-  color: var(--lunar-green-500);
+  color: var(--charm-500);
   opacity: 0.6;
+}
+
+[data-theme="dark"] .titleLarge,
+[data-theme="dark"] .headerLeaf,
+[data-theme="dark"] .inputIcon,
+[data-theme="dark"] .highlight,
+[data-theme="dark"] .headerIcon,
+[data-theme="dark"] .detailLabel {
+  color: var(--apple-500);
 }
 
 /* FORM STYLES */
@@ -138,7 +142,7 @@
 .inputIcon {
   position: absolute;
   left: 1.2rem;
-  color: var(--lunar-green-500);
+  color: var(--charm-500);
   opacity: 0.7;
 }
 
@@ -163,7 +167,9 @@
 
 .reservationForm select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23517b65' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23d96c8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1.2rem center;
   background-size: 1.2rem;
@@ -171,11 +177,15 @@
   cursor: pointer;
 }
 
+.reservationForm select::-ms-expand {
+  display: none;
+}
+
 .readOnlyInput {
-  background: var(--merino-50) !important;
-  border-color: transparent !important;
-  padding-left: 3.5rem !important;
-  color: var(--neutral-600) !important;
+  background: var(--merino-50);
+  border-color: transparent;
+  padding-left: 3.5rem;
+  color: var(--neutral-600);
 }
 
 .row {
@@ -196,17 +206,19 @@
 .reservationForm select:focus,
 .reservationForm textarea:focus {
   outline: none;
-  border-color: var(--lunar-green-500);
-  background: white;
-  box-shadow: 0 0 0 4px rgba(81, 123, 101, 0.1);
+  border-color: var(--charm-500);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(217, 108, 138, 0.1);
 }
 
 /* BUTTONS */
 .reserveBtn {
   margin-top: 1rem;
-  background: linear-gradient(135deg, var(--lunar-green-300), var(--lunar-green-500));
-  color: white;
-  padding: 1.1rem 2.5rem;
+  width: 100%;
+  min-width: 0;
+  background: linear-gradient(135deg, var(--charm-400), var(--charm-600));
+  color: var(--charm-50);
+  padding: 0.8rem 2.5rem;
   border-radius: 999px;
   border: none;
   font-size: 1.1rem;
@@ -221,13 +233,21 @@
 
 .reserveBtn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(81, 123, 101, 0.4);
   filter: brightness(1.1);
 }
 
 .reserveBtn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+.reserveBtn svg {
+  display: block;
+}
+
+[data-theme="dark"] .reserveBtn {
+  background: linear-gradient(135deg, var(--apple-600), var(--apple-500));
+  color: var(--apple-950);
 }
 
 /* SUMMARY CARD DETAILS */
@@ -246,7 +266,7 @@
 }
 
 .highlight {
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
   font-style: italic;
 }
 
@@ -254,7 +274,7 @@
   background: var(--merino-100);
   padding: 0.5rem;
   border-radius: 16px;
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
 }
 
 .detailsContainer {
@@ -277,7 +297,7 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -296,6 +316,9 @@
 .editBtn,
 .deleteBtn {
   flex: 1;
+  width: 100%;
+  min-width: 0;
+  margin-top: 0;
   padding: 1rem;
   border-radius: 999px;
   font-weight: 600;
@@ -308,14 +331,19 @@
   font-size: 0.9rem;
 }
 
+.editBtn svg,
+.deleteBtn svg {
+  display: block;
+}
+
 .editBtn {
   background: transparent;
-  border: 1px solid var(--lunar-green-500);
-  color: var(--lunar-green-600);
+  border: 1px solid var(--charm-500);
+  color: var(--charm-600);
 }
 
 .editBtn:hover {
-  background: var(--lunar-green-50);
+  background: var(--charm-50);
 }
 
 .deleteBtn {
@@ -342,9 +370,9 @@
 }
 
 .success {
-  background: var(--lunar-green-50);
-  color: var(--lunar-green-700);
-  border: 1px solid var(--lunar-green-200);
+  background: var(--apple-50);
+  color: var(--apple-700);
+  border: 1px solid var(--apple-200);
 }
 
 .error {
@@ -356,9 +384,9 @@
 /* DARK MODE ADJUSTMENTS */
 [data-theme="dark"] .formCard,
 [data-theme="dark"] .summaryCard {
-  background: rgba(20, 31, 26, 0.8);
+  background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(20px);
-  border-color: rgba(146, 182, 161, 0.1);
+  border-color: rgba(164, 207, 135, 0.18);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
 }
 
@@ -367,33 +395,34 @@
 [data-theme="dark"] .reservationForm textarea,
 [data-theme="dark"] .detailItem,
 [data-theme="dark"] .headerIcon {
-  background: rgba(255, 255, 255, 0.03);
+  background-color: rgba(255, 255, 255, 0.03);
   border-color: rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] .reservationForm input:focus,
 [data-theme="dark"] .reservationForm select:focus,
 [data-theme="dark"] .reservationForm textarea:focus {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: var(--lunar-green-500);
+  background-color: rgba(255, 255, 255, 0.07);
+  border-color: var(--apple-500);
 }
 
 .reservationForm select option {
   background-color: var(--merino-100);
-  color: var(--lunar-green-700);
+  color: var(--charm-700);
 }
 
 [data-theme="dark"] .reservationForm select option {
-  background-color: var(--merino-100);
-  color: var(--lunar-green-700);
+  background-color: var(--neutral-100);
+  color: var(--apple-700);
 }
 
 [data-theme="dark"] .editBtn {
-  border-color: var(--lunar-green-700);
+  border-color: var(--apple-500);
+  color: var(--apple-500);
 }
 
 [data-theme="dark"] .editBtn:hover {
-  background: rgba(146, 182, 161, 0.1);
+  background: rgba(164, 207, 135, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -416,4 +445,8 @@
   .actionButtons {
     flex-direction: column;
   }
+}
+
+[data-theme="dark"] .reservationForm select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236fae4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
