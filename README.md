@@ -21,7 +21,7 @@ A Next.js application for sharing and discovering delicious recipes. This platfo
 
 ## Architecture
 
-![Architecture Diagram](public/architecture.png)
+![Architecture Diagram](public/architecture.jpg)
 
 ## Getting Started
 
