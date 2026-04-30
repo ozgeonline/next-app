@@ -10,9 +10,43 @@ import { Star, Heart, ArrowRight, Utensils, User } from "lucide-react";
 
 const RATING_STARS = 5;
 
+type MealCardData = {
+  _id?: { toString: () => string } | string;
+  id?: string;
+  title?: string;
+  slug?: string;
+  image?: string;
+  summary?: string;
+  creator?: string;
+  averageRating?: number;
+  ratingCount?: number;
+};
+
+type RecipeCardProps = {
+  meals?: MealCardData[];
+  spotlight?: boolean;
+};
+
 function createStableLikeCount(id: string) {
   const hash = [...id].reduce((sum, char) => sum + char.charCodeAt(0), 0);
   return 50 + (hash % 100);
+}
+
+function normalizeMeal(meal: MealCardData) {
+  const id = meal.id || meal._id?.toString() || meal.slug || meal.title || "meal";
+
+  return {
+    id,
+    title: meal.title || "Untitled Meal",
+    slug: meal.slug || id,
+    image: meal.image || "/logo.png",
+    summary: meal.summary || "No summary available",
+    creator: meal.creator || "Unknown",
+    averageRating: meal.averageRating || 0,
+    ratingCount: meal.ratingCount || 0,
+    likes: createStableLikeCount(id),
+    category: "Recipe",
+  };
 }
 
 const getTopRecipes = cache(async () => {
@@ -43,18 +77,7 @@ const getTopRecipes = cache(async () => {
     }
   ]);
 
-  return mealsData.map(meal => ({
-    id: meal._id.toString(),
-    title: meal.title || "Untitled Meal",
-    slug: meal.slug || meal._id.toString(),
-    image: meal.image || "/logo.png",
-    summary: meal.summary || "No summary available",
-    creator: meal.creator || "Unknown",
-    averageRating: meal.averageRating || 0,
-    ratingCount: meal.ratingCount || 0,
-    likes: createStableLikeCount(meal._id.toString()),
-    category: "Recipe"
-  }));
+  return mealsData.map(normalizeMeal);
 });
 
 const renderStars = (rating: number) => {
@@ -74,9 +97,9 @@ const renderStars = (rating: number) => {
   });
 };
 
-export default async function RecipeCard() {
+export default async function RecipeCard({ meals }: RecipeCardProps = {}) {
   const [transformedMeals, user] = await Promise.all([
-    getTopRecipes(),
+    meals ? Promise.resolve(meals.map(normalizeMeal)) : getTopRecipes(),
     getUserFromCookies()
   ]);
 

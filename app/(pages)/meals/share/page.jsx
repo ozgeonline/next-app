@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import { getUserFromCookies } from '@/lib/getUserFromCookies';
-import ShareMealForm from '@/components/meals/share-meal/ShareMealForm';
-import { Button } from '@/components/ui/button/Button';
-import styles from './page.module.css';
+import Image from "next/image";
+import { getUserFromCookies } from "@/lib/getUserFromCookies";
+import ShareMealForm from "@/components/meals/share-meal/ShareMealForm";
+import { Button } from "@/components/ui/button/Button";
+import styles from "./page.module.css";
 
 export const metadata = {
   title: "Share a Meal | TasteShare",
@@ -16,10 +16,8 @@ export default async function ShareMealPage() {
   if (!user) {
     return (
       <div className="non-user-message">
-        <p>
-          You must be logged in to share a meal.
-        </p>
-        <Button href="/login" variant="accent">
+        <p>You must be logged in to share a meal.</p>
+        <Button href="/login" variant="primary">
           Login
         </Button>
       </div>
@@ -32,15 +30,15 @@ export default async function ShareMealPage() {
         <div className={styles.leftColumn}>
           <header className={styles.header}>
             <h1>
-              Share your <br/>
+              Share your <br />
               <span className="highlight-text">favorite meal</span>
             </h1>
             <p className={styles.description}>
-              Inspire others by sharing your recipe.<br/>
-              It's simple, delicious and made with love! 🥬
+              Inspire others by sharing your recipe.<br />
+              It's simple, delicious and made with love!
             </p>
           </header>
-          
+
           <div className={styles.imageContainer}>
             <Image
               src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDlLh8Vyqvj7qBtEJaeIm4Mu1klYRxAVTK8FdH"

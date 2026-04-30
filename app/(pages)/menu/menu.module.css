@@ -94,7 +94,7 @@
   width: 100%;
   overflow: hidden;
   z-index: 100;
-  margin: 0 2rem 5rem;
+  margin: 1rem 2rem 5rem;
   padding: 1rem 0;
 }
 
@@ -144,7 +144,6 @@
 }
 
 .activePill {
-  background: rgba(255, 75, 114, 0.04);
   border-color: rgba(255, 75, 114, 0.5);
   color: var(--charm-500);
 }

@@ -1,18 +1,14 @@
-// Share meal form component:
-// renders the meal sharing form and delegates submission to the "shareMeal" server action.
-
 "use client";
 
-import { useActionState } from 'react';
-import Link from 'next/link';
-import { User, FileText, List, ImageIcon, ArrowLeft } from 'lucide-react';
-import shareMeal from '@/app/(pages)/meals/share/actions/share-actions';
-import ImagePicker from '@/components/meals/image-picker/ImagePicker';
-import MealsFormSubmit from '@/components/meals/form-submit/FormSubmit';
-import FormInput from '@/components/ui/form/field';
-import styles from './share-meal.module.css';
+import { useActionState } from "react";
+import { ArrowLeft, FileText, ImageIcon, List, User } from "lucide-react";
+import shareMeal from "@/app/(pages)/meals/share/actions/share-actions";
+import ImagePicker from "@/components/meals/image-picker/ImagePicker";
+import MealsFormSubmit from "@/components/meals/form-submit/FormSubmit";
+import FormInput from "@/components/ui/form/field";
+import { Button } from "@/components/ui/button/Button";
+import styles from "./share-meal.module.css";
 
-// Reusable structural component for form cards
 function FormCard({ title, icon: Icon, children }) {
   return (
     <div className={styles.formSection}>
@@ -30,8 +26,6 @@ export default function ShareMealForm({ user }) {
 
   return (
     <form className={styles.form} action={formAction}>
-
-      {/* 1. Basic Information */}
       <FormCard title="1. Basic Information" icon={User}>
         <div className={styles.row}>
           {[
@@ -59,7 +53,6 @@ export default function ShareMealForm({ user }) {
       </FormCard>
 
       <div className={styles.middleRow}>
-        {/* 2 & 3. Summary and Instructions */}
         {[
           {
             id: "summary",
@@ -89,7 +82,6 @@ export default function ShareMealForm({ user }) {
         ))}
       </div>
 
-      {/* 4. Add a Photo */}
       <FormCard title="4. Add a Photo of Your Meal" icon={ImageIcon}>
         <ImagePicker name="image" />
       </FormCard>
@@ -97,9 +89,14 @@ export default function ShareMealForm({ user }) {
       {state?.message && <p className="error">{state.message}</p>}
 
       <div className={styles.actionsRow}>
-        <Link href="/meals" className={styles.backButton}>
-          <ArrowLeft size={16} /> Back to meals
-        </Link>
+        <Button
+          href="/meals"
+          variant="plain"
+          className={styles.backButton}
+          iconLeft={<ArrowLeft size={16} />}
+        >
+          Back to meals
+        </Button>
         <MealsFormSubmit />
       </div>
     </form>

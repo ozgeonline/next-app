@@ -1,29 +1,22 @@
-// Form submit button:
-// displays a submit button that disables itself while the form is being submitted.
+"use client";
 
-'use client';
-
-import { useFormStatus } from 'react-dom';
-import { Send } from 'lucide-react';
-import styles from './form-submit.module.css';
+import { useFormStatus } from "react-dom";
+import { Send } from "lucide-react";
+import { Button } from "@/components/ui/button/Button";
+import styles from "./form-submit.module.css";
 
 export default function MealsFormSubmit() {
   const { pending } = useFormStatus();
 
   return (
-    <button 
-      type='submit' 
-      disabled={pending} 
+    <Button
+      type="submit"
+      disabled={pending}
+      variant="plain"
       className={styles.submitButton}
+      iconLeft={!pending && <Send size={16} className={styles.icon} />}
     >
-      {pending ? (
-        'Submitting...'
-      ) : (
-        <>
-          <Send size={16} className={styles.icon} />
-          Share Recipe
-        </>
-      )}
-    </button>
+      {pending ? "Submitting..." : "Share Recipe"}
+    </Button>
   );
 }

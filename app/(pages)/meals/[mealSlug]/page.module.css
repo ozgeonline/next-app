@@ -39,7 +39,7 @@
   background: var(--neutral-50);
   border: 1px solid var(--neutral-200);
   border-radius: 8px;
-  color: var(--razzmatazz-700);
+  color: var(--charm-700);
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -47,7 +47,7 @@
 }
 
 [data-theme="dark"] .backButton {
-  color: var(--fuego-400);
+  color: var(--apple-500);
 }
 
 .backButton:hover {
@@ -88,7 +88,7 @@
   font-size: 3rem;
   line-height: 1.1;
   font-weight: 600;
-  color: var(--razzmatazz-950);
+  color: var(--charm-950);
   margin: 0;
 }
 
@@ -109,20 +109,20 @@
 }
 
 .creatorIcon {
-  color: var(--razzmatazz-600);
+  color: var(--charm-600);
 }
 
 [data-theme="dark"] .creatorIcon {
-  color: var(--fuego-400);
+  color: var(--apple-500);
 }
 
 .creator span {
-  color: var(--razzmatazz-700);
+  color: var(--charm-700);
   font-weight: 700;
 }
 
 [data-theme="dark"] .creator span {
-  color: var(--fuego-400);
+  color: var(--apple-500);
 }
 
 .summary {
@@ -132,12 +132,12 @@
   font-style: italic;
   margin: 0;
   padding-left: 1rem;
-  border-left: 3px solid var(--razzmatazz-300);
+  border-left: 3px solid var(--charm-300);
 }
 
 [data-theme="dark"] .summary {
   color: var(--neutral-400);
-  border-left-color: var(--fuego-700);
+  border-left-color: var(--apple-700);
 }
 
 /* INSTRUCTIONS SECTION */
@@ -172,11 +172,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--razzmatazz-600);
+  color: var(--charm-600);
 }
 
 [data-theme="dark"] .iconCircle {
-  color: var(--fuego-400);
+  color: var(--apple-500);
 }
 
 .sectionHeader h2 {
@@ -209,15 +209,15 @@
   height: 28px;
   min-width: 28px;
   border-radius: 50%;
-  background: var(--razzmatazz-100);
-  color: var(--razzmatazz-800);
+  background: var(--charm-100);
+  color: var(--charm-800);
   font-weight: 700;
   font-size: 0.9rem;
 }
 
 [data-theme="dark"] .stepNumber {
-  background: var(--fuego-900);
-  color: var(--fuego-300);
+  background: var(--apple-900);
+  color: var(--apple-300);
 }
 
 .instructionsList p {
@@ -226,7 +226,6 @@
   line-height: 1.6;
   color: var(--text);
   padding-top: 0.15rem;
-  /* align with the circle center */
 }
 
 @media screen and (max-width: 768px) {
@@ -234,3 +233,5 @@
     font-size: 2.2rem;
   }
 }
+  min-width: 0;
+  margin-top: 0;

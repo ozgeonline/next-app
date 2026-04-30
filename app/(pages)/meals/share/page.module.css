@@ -44,7 +44,7 @@
   font-size: 3rem;
   line-height: 1.1;
   font-weight: 600;
-  color: var(--lunar-green-950);
+  color: var(--neutral-900);
 }
 
 [data-theme="dark"] .header h1 {

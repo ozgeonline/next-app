@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Star } from "lucide-react";
+import { Button } from "@/components/ui/button/Button";
 import styles from "./rating-stars.module.css";
 
 const STAR_COUNT = 5;
@@ -92,9 +93,10 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
             const isActive = starValue <= Math.round(displayRating);
 
             return (
-              <button
+              <Button
                 key={index}
                 type="button"
+                variant="plain"
                 className={styles.starButton}
                 onMouseEnter={() => setHoverRating(starValue)}
                 onMouseLeave={() => setHoverRating(0)}
@@ -106,7 +108,7 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
                   fill={isActive ? "currentColor" : "none"}
                   strokeWidth={isActive ? 0 : 1}
                 />
-              </button>
+              </Button>
             );
           })}
         </div>

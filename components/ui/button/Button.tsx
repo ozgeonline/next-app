@@ -43,10 +43,15 @@ export function Button({
     className
   );
 
+  const label =
+    typeof children === "string" || typeof children === "number"
+      ? <span>{children}</span>
+      : children;
+
   const content = (
     <>
       {iconLeft}
-      {children && <span>{children}</span>}
+      {label}
       {iconRight}
     </>
   );

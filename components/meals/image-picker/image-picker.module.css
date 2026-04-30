@@ -20,26 +20,26 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
-  border: 1.5px dashed var(--lunar-green-300);
+  border: 1.5px dashed var(--charm-300);
   border-radius: 12px;
   padding: 1.5rem;
-  background: rgba(107, 150, 126, 0.03); /* slight green tint */
+  background: rgba(217, 108, 138, 0.03);
   transition: all 0.3s ease;
 }
 
 [data-theme="dark"] .controls {
-  border-color: var(--lunar-green-700);
+  border-color: var(--apple-700);
   background: rgba(255, 255, 255, 0.02);
 }
 
 .controls:hover,
 .controls.dragging {
-  border-color: var(--lunar-green-500);
-  background: rgba(107, 150, 126, 0.08);
+  border-color: var(--charm-500);
+  background: rgba(217, 108, 138, 0.08);
 }
 
 [data-theme="dark"] .controls.dragging {
-  background: rgba(107, 150, 126, 0.15);
+  background: rgba(164, 207, 135, 0.15);
 }
 
 @media screen and (min-width: 768px) {
@@ -57,16 +57,21 @@
   justify-content: center;
   text-align: center;
   cursor: pointer;
+  width: 100%;
+  min-width: 0;
+  margin-top: 0;
   padding: 1rem 0;
+  border: 0;
+  background: transparent;
 }
 
 .cloudIcon {
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
   margin-bottom: 1rem;
 }
 
 [data-theme="dark"] .cloudIcon {
-  color: var(--lunar-green-400);
+  color: var(--apple-500);
 }
 
 .uploadText {
@@ -77,12 +82,12 @@
 }
 
 .browseText {
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
   font-weight: 600;
 }
 
 [data-theme="dark"] .browseText {
-  color: var(--lunar-green-400);
+  color: var(--apple-500);
 }
 
 .uploadSubtext {
@@ -128,6 +133,9 @@
   right: 4px;
   width: 20px;
   height: 20px;
+  min-width: 0;
+  margin-top: 0;
+  padding: 0;
   border-radius: 50%;
   background: white;
   border: none;
@@ -170,4 +178,8 @@
   color: var(--error);
   margin-top: 0.5rem;
   text-align: center;
+}
+
+.removeButton svg {
+  display: block;
 }

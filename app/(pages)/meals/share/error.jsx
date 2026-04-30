@@ -7,9 +7,9 @@ export default function ErrorPage() {
     <main className="error mainBackground">
       <div className="containerTopNavbarColor" />
       <p>Failed to create meal. Please try again later or contact support.</p>
-      <Button href="/meals/share" variant="brand">
+      <Button href="/meals/share" variant="primary">
         Back to Share a Meal
       </Button>
     </main>
-  )
+  );
 }

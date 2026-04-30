@@ -23,22 +23,18 @@
   font-size: 15rem;
   font-family: 'Fraunces', serif;
   font-weight: 900;
-  color: var(--lunar-green-500);
+  color: var(--apple-500);
   opacity: 0.03;
   letter-spacing: 2rem;
   pointer-events: none;
   z-index: 1;
 }
 
-.watermarkText {
-  font-size: 8rem;
-}
-
 .heroTitle {
   font-family: 'Fraunces', serif;
   font-size: 3rem;
   font-weight: 500;
-  color: var(--lunar-green-950);
+  color: var(--neutral-900);
   line-height: 1.1;
   margin: 1.5rem auto 0;
 }
@@ -51,11 +47,11 @@
 
 .heroTitle .highlight {
   font-style: italic;
-  color: var(--razzmatazz-600);
+  color: var(--charm-600);
 }
 
 [data-theme="dark"] .heroTitle .highlight {
-  color: var(--lunar-green-600);
+  color: var(--apple-500);
 }
 
 .header {
@@ -82,31 +78,10 @@
 }
 
 .shareRecipeBtn {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
+  width: auto;
+  min-width: 0;
+  margin-top: 0;
   padding: 0.8rem 1.8rem;
-  border-radius: 999px;
-  color: var(--neutral-600);
-  background: rgba(158, 163, 173, 0.2);
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.shareRecipeBtn:hover {
-  filter: brightness(1.2);
-  background: rgba(158, 163, 173, 0.7);
-}
-
-[data-theme="dark"] .shareRecipeBtn {
-  background: rgba(146, 182, 161, 0.8);
-  color: var(--lunar-green-900);
-}
-
-[data-theme="dark"] .shareRecipeBtn:hover {
-  background: var(--lunar-green-600);
-  filter: brightness(1.2);
 }
 
 .decorativeDivider {
@@ -129,5 +104,5 @@
 }
 
 [data-theme="dark"] .dividerLeaf {
-  color: var(--lunar-green-600);
+  color: var(--apple-500);
 }

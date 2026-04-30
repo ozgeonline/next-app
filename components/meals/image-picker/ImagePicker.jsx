@@ -1,11 +1,9 @@
-// Image picker component:
-// allows users to select and preview an image for a meal.
-
 "use client";
 
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { CloudUpload, X } from "lucide-react";
+import { Button } from "@/components/ui/button/Button";
 import styles from "./image-picker.module.css";
 
 export default function ImagePicker({ label, name }) {
@@ -26,7 +24,7 @@ export default function ImagePicker({ label, name }) {
       return;
     }
 
-    if (file.size > 2 * 1048576) { // 2MB limit
+    if (file.size > 2 * 1048576) {
       setError("Please select an image smaller than 2MB.");
       if (imageInputRef.current) imageInputRef.current.value = "";
       clearImage();
@@ -45,7 +43,6 @@ export default function ImagePicker({ label, name }) {
     };
     fileReader.readAsDataURL(file);
 
-    // Sync file to input for form submission
     if (imageInputRef.current) {
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(file);
@@ -90,22 +87,25 @@ export default function ImagePicker({ label, name }) {
   return (
     <div className={styles.picker}>
       {label && <label htmlFor={name}>{label}</label>}
-      <div 
+      <div
         className={`${styles.controls} ${isDragging ? styles.dragging : ""}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-
-        {/* Upload Box */}
-        <div className={styles.uploadBox} onClick={handlePickClick}>
+        <Button
+          type="button"
+          variant="plain"
+          className={styles.uploadBox}
+          onClick={handlePickClick}
+        >
           <CloudUpload size={36} className={styles.cloudIcon} strokeWidth={1.5} />
           <p className={styles.uploadText}>
             Drag & drop your image here <br />
             or <span className={styles.browseText}>click to browse</span>
           </p>
           <p className={styles.uploadSubtext}>JPG, PNG or WebP (max. 2MB)</p>
-        </div>
+        </Button>
 
         <input
           className={styles.input}
@@ -117,18 +117,18 @@ export default function ImagePicker({ label, name }) {
           onChange={handleImageChange}
         />
 
-        {/* Image Preview (side by side) */}
         {pickedImage && (
           <div className={styles.previewCard}>
             <div className={styles.imageWrapper}>
               <Image src={pickedImage} alt="Picked image" fill className={styles.image} />
-              <button
+              <Button
                 type="button"
+                variant="plain"
                 className={styles.removeButton}
                 onClick={(e) => { e.stopPropagation(); clearImage(); }}
-              >
-                <X size={14} />
-              </button>
+                iconLeft={<X size={14} />}
+                aria-label="Remove selected image"
+              />
             </div>
             {fileDetails && (
               <div className={styles.fileInfo}>

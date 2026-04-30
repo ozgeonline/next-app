@@ -1,5 +1,3 @@
-// Error page: displays an error message and a link to go back to the meals page.
-
 "use client";
 
 import { Button } from "@/components/ui/button/Button";
@@ -10,7 +8,7 @@ export default function ErrorPage() {
       <div className="containerTopNavbarColor" />
       <h1 className="highlight-text">Failed to fetch meals data. </h1>
       <p>Please try again later or contact support.</p>
-      <Button href="/meals" variant="brand">Back to Meals</Button>
+      <Button href="/meals" variant="primary">Back to Meals</Button>
     </main>
-  )
+  );
 }

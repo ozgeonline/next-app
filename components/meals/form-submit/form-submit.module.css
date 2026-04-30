@@ -1,10 +1,11 @@
 .submitButton {
-  display: flex;
-  align-items: center;
+  width: auto;
+  min-width: 0;
+  margin-top: 0;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--lunar-green-700);
-  border: 1px solid var(--lunar-green-700);
+  background: var(--charm-600);
+  border: 1px solid var(--charm-600);
   border-radius: 8px;
   color: white;
   font-weight: 600;
@@ -22,17 +23,18 @@
 }
 
 [data-theme="dark"] .submitButton {
-  background: var(--lunar-green-600);
-  border-color: var(--lunar-green-600);
+  background: var(--apple-500);
+  border-color: var(--apple-500);
+  color: var(--apple-950);
 }
 
 .submitButton:hover:not(:disabled) {
-  background: var(--lunar-green-800);
+  background: var(--charm-700);
   transform: translateY(-1px);
 }
 
 [data-theme="dark"] .submitButton:hover:not(:disabled) {
-  background: var(--lunar-green-500);
+  background: var(--apple-600);
 }
 
 .submitButton:disabled {
