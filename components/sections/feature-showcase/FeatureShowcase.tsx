@@ -1,39 +1,32 @@
 import Image from "next/image";
 import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
-import { items } from '@/components/sections/feature-showcase/sections-items';
+import { items } from "@/components/sections/feature-showcase/sections-items";
 import styles from "./animated-sections.module.css";
 
-export default function AnimatedSections() {
+const BUBBLE_COUNT = 5;
+
+const cx = (...classes: Array<string | false | null | undefined>) =>
+  classes.filter(Boolean).join(" ");
+
+export default function FeatureShowcase() {
   return (
     <>
-      {items.map((item, index) => {
-        const sectionData = item.savor || item.desserts || item.energy;
-        if (!sectionData) return null;
-        const { title, description, images, reverse, label, icon: Icon } = sectionData;
-
+      {items.map(({ title, description, images, reverse, label, icon: Icon }) => {
         return (
-          <div key={index} className={styles.containerWrapper}>
-            <div className={`
-              ${styles.definitionDefault} 
-              ${reverse ? `${styles.reverseDefinition} ${styles.reverseRowDefinition}` : ""}`}
-            >
+          <section key={title} className={styles.section}>
+            <div className={cx(styles.featureLayout, reverse && styles.reversed)}>
               {images && (
                 <AnimatedOnScroll
-                  animationClass={styles.animateinView}
-                  className={`${styles.definitionImage} ${styles.imageVisible}`}
+                  animationClass={styles.animateInView}
+                  className={styles.imageStack}
                 >
-                  {/* Decorative Elements */}
-                  <div className={`${styles.dotPattern} ${reverse ? styles.dotPatternRight : styles.dotPatternLeft}`} />
-                  <div className={`${styles.iconRing} ${reverse ? styles.iconRingRight : styles.iconRingLeft}`} />
-                  
-                  {/* Icon Badge */}
                   {Icon && (
-                    <div className={`${styles.iconBadge} ${reverse ? styles.badgeRight : styles.badgeLeft}`}>
+                    <div className={cx(styles.iconBadge, reverse ? styles.badgeRight : styles.badgeLeft)}>
                       <Icon size={20} />
                     </div>
                   )}
                   <Image
-                    className={styles.imageFirst}
+                    className={styles.primaryImage}
                     src={images.src1}
                     alt={images.alt}
                     sizes="100%"
@@ -42,7 +35,7 @@ export default function AnimatedSections() {
                     height={150}
                   />
                   <Image
-                    className={styles.imageSecond}
+                    className={styles.secondaryImage}
                     src={images.src2}
                     alt={images.alt}
                     sizes="100%"
@@ -50,15 +43,17 @@ export default function AnimatedSections() {
                     width={50}
                     height={150}
                   />
-                  <div className={styles.bubblesContainer}>
-                    {Array.from({ length: 5 }, (_, i) => (
-                      <div key={i} className={`${styles.bubble} ${styles[`bubble${i + 1}`]}`} />
+                  <div className={styles.bubbles}>
+                    {Array.from({ length: BUBBLE_COUNT }, (_, index) => (
+                      <div
+                        key={index}
+                        className={cx(styles.bubble, styles[`bubble${index + 1}`])}
+                      />
                     ))}
                   </div>
                 </AnimatedOnScroll>
               )}
-              <div className={styles.textContainer}>
-                {/* Subtitle Label with decorative lines */}
+              <div className={styles.content}>
                 {label && (
                   <span className={styles.sectionLabel}>
                     <span className={styles.labelLine} />
@@ -71,7 +66,7 @@ export default function AnimatedSections() {
                 <p>{description}</p>
               </div>
             </div>
-          </div>
+          </section>
         );
       })}
     </>

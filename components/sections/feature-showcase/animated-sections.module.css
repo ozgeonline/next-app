@@ -1,29 +1,25 @@
 /* ---------------------------------
    Container & Layout
 ----------------------------------- */
-.containerWrapper {
-  z-index: 100;
+.section {
   display: flex;
   min-height: 40vh;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  will-change: transform, opacity;
-  transition: all 0.5s ease-out;
   padding: 2rem 1rem;
   width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-[data-theme="light"] .containerWrapper {
+[data-theme="light"] .section {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.containerWrapper:last-child {
+.section:last-child {
   border-bottom: none;
 }
 
-.definitionDefault {
+.featureLayout {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -36,24 +32,14 @@
 }
 
 @media screen and (min-width: 768px) {
-  .definitionDefault {
+  .featureLayout {
     flex-direction: row;
     align-items: center;
     gap: 4rem;
   }
 
-  .definitionDefault.reverseRowDefinition {
+  .reversed {
     flex-direction: row-reverse;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .definitionDefault.reverseDefinition {
-    flex-direction: column;
-  }
-
-  .definitionDefault.reverseRowDefinition {
-    flex-direction: column;
   }
 }
 
@@ -61,84 +47,99 @@
 /* ---------------------------------
    Image Container
 ----------------------------------- */
-.definitionImage {
+.imageStack {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 85vw;
+  width: 100%;
   height: 25vh;
+  max-width: 28rem;
+  padding: 0 1rem;
   box-sizing: border-box;
   border-radius: 1.2rem;
   flex-shrink: 0;
 }
 
 @media screen and (min-width: 768px) {
-  .definitionImage {
+  .imageStack {
     width: 22vw;
     height: 28vh;
+    max-width: none;
+    padding: 0;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .definitionImage {
+  .imageStack {
     width: 20vw;
     height: 32vh;
   }
-}
-
-.definitionImage::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  z-index: 0;
-  transition: all 0.75s ease-out;
-}
-
-.imageVisible {
-  opacity: 1;
 }
 
 
 /* ---------------------------------
    Image Styles
 ----------------------------------- */
-.imageFirst,
-.imageSecond {
+.primaryImage,
+.secondaryImage {
   position: absolute;
-  width: 100%;
+  top: 0;
+  left: 1rem;
+  width: calc(100% - 2rem);
   height: 100%;
   border-radius: 1.2rem;
   object-fit: cover;
   transform-origin: top left;
-  transition: top 0.75s ease-out, left 0.75s ease-out;
 }
 
-.imageFirst {
+@media screen and (min-width: 768px) {
+
+  .primaryImage,
+  .secondaryImage {
+    left: 0;
+    width: 100%;
+  }
+}
+
+.primaryImage {
   z-index: 3;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.imageSecond {
+.secondaryImage {
+  display: none;
   z-index: -1;
   opacity: 0.5;
+}
+
+@media screen and (min-width: 768px) {
+  .secondaryImage {
+    display: block;
+  }
 }
 
 
 /* ---------------------------------
    Image Animations
 ----------------------------------- */
-.definitionImage.animateinView .imageFirst {
-  animation: animateFirst 0.75s ease-out forwards;
+.imageStack.animateInView .primaryImage {
+  animation: animateSingleImage 0.75s ease-out forwards;
 }
 
-.definitionImage.animateinView .imageSecond {
+.imageStack.animateInView .secondaryImage {
   animation: animateSecond 0.75s ease-out forwards;
+}
+
+@keyframes animateSingleImage {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+  }
 }
 
 @keyframes animateFirst {
@@ -165,7 +166,11 @@
   }
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 768px) {
+  .imageStack.animateInView .primaryImage {
+    animation-name: animateFirst;
+  }
+
   @keyframes animateFirst {
     from {
       top: -35%;
@@ -208,8 +213,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(52, 78, 65, 0.85);
-  border: 1px solid rgba(146, 182, 161, 0.4);
+  background: rgba(51, 78, 38, 0.85);
+  border: 1px solid rgba(164, 207, 135, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
@@ -218,12 +223,22 @@
 
 .badgeLeft {
   top: -1rem;
-  left: -1rem;
+  left: 0.25rem;
 }
 
 .badgeRight {
   top: -1rem;
-  right: -1rem;
+  right: 0.25rem;
+}
+
+@media screen and (min-width: 768px) {
+  .badgeLeft {
+    left: -1rem;
+  }
+
+  .badgeRight {
+    right: -1rem;
+  }
 }
 
 [data-theme="light"] .iconBadge {
@@ -232,95 +247,44 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
-.iconRing {
-  position: absolute;
-  width: 5rem;
-  height: 5rem;
-  border-radius: 50%;
-  border: 1px dashed var(--pale-prim-900);
-  opacity: 0.4;
-  z-index: -1;
-}
-
-[data-theme="light"] .iconRing {
-  border: 1px dashed var(--lunar-green-600);
-}
-
-.iconRingLeft {
-  top: -2rem;
-  left: -2rem;
-}
-
-.iconRingRight {
-  top: -2rem;
-  right: -2rem;
-}
-
-.dotPattern {
-  position: absolute;
-  width: 5rem;
-  height: 4rem;
-  background-image: radial-gradient(circle, var(--pale-prim-900) 1.5px, transparent 1.5px);
-  background-size: 14px 14px;
-  z-index: -2;
-  opacity: 0.5;
-}
-
-[data-theme="light"] .dotPattern {
-  background-image: radial-gradient(circle, var(--lunar-green-600) 1.5px, transparent 1.5px);
-}
-
-.dotPatternLeft {
-  bottom: -1.5rem;
-  left: -2rem;
-}
-
-.dotPatternRight {
-  bottom: -1.5rem;
-  right: -2rem;
-}
-
-
 /* ---------------------------------
    Text Container
 ----------------------------------- */
-.textContainer {
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100%;
   gap: 0.75rem;
 }
 
 @media screen and (min-width: 768px) {
-  .textContainer {
+  .content {
     align-items: flex-start;
     width: 55%;
   }
 }
 
-.textContainer h2 {
+.content h2 {
   text-align: center;
 }
 
 @media screen and (min-width: 768px) {
-  .textContainer h2 {
+  .content h2 {
     text-align: left;
   }
 }
 
-.textContainer p {
+.content p {
   color: var(--text);
-  text-align: center;
+  text-align: justify;
   opacity: 0.7;
   line-height: 1.7;
   font-size: 0.9rem;
-  transition: opacity 1s ease-out;
 }
 
 @media screen and (min-width: 768px) {
-  .textContainer p {
+  .content p {
     text-align: left;
     font-size: 0.95rem;
     max-width: 90%;
@@ -328,7 +292,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .textContainer p {
+  .content p {
     font-size: 1rem;
   }
 }
@@ -345,23 +309,23 @@
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--lunar-green-500);
+  color: var(--apple-500);
 }
 
 [data-theme="light"] .sectionLabel {
-  color: var(--lunar-green-600);
+  color: var(--charm-600);
 }
 
 .labelLine {
   display: block;
   width: 2rem;
   height: 1px;
-  background: var(--lunar-green-500);
+  background: var(--apple-500);
   opacity: 0.5;
 }
 
 [data-theme="light"] .labelLine {
-  background: var(--lunar-green-600);
+  background: var(--charm-600);
 }
 
 
@@ -371,19 +335,22 @@
 .titleSeparator {
   width: 2.5rem;
   height: 3px;
-  background: var(--lunar-green-500);
+  background: var(--apple-500);
   border-radius: 2px;
   opacity: 0.6;
 }
 
 [data-theme="light"] .titleSeparator {
-  background: var(--lunar-green-600);
+  background: var(--charm-600);
 }
 
 
-/* ══════ GLASS BUBBLES SYSTEM ══════ */
-.bubblesContainer {
+/* ---------------------------------
+   Glass Bubbles
+----------------------------------- */
+.bubbles {
   position: absolute;
+  display: none;
   width: 100%;
   height: 100%;
   z-index: 2;
@@ -391,35 +358,39 @@
   animation: colorsBackground 0.75s ease-out forwards;
 }
 
-/* Base Bubble — Glassmorphism Foundation */
+@media screen and (min-width: 768px) {
+  .bubbles {
+    display: block;
+  }
+}
+
 .bubble {
   position: absolute;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%,
-      rgba(46, 65, 56, 0.5),
-      rgba(52, 78, 65, 0.4),
-      rgba(20, 31, 26, 0.3));
+      rgba(51, 78, 38, 0.5),
+      rgba(60, 97, 42, 0.4),
+      rgba(21, 36, 15, 0.3));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(146, 182, 161, 0.15);
+  border: 1px solid rgba(164, 207, 135, 0.15);
   box-shadow:
-    inset 0 0 20px rgba(146, 182, 161, 0.05),
-    0 8px 32px rgba(20, 31, 26, 0.15);
+    inset 0 0 20px rgba(164, 207, 135, 0.05),
+    0 8px 32px rgba(21, 36, 15, 0.15);
   animation: floatBubble 6s ease-in-out infinite alternate;
 }
 
 [data-theme="light"] .bubble {
   background: radial-gradient(circle at 30% 30%,
-      rgba(187, 212, 197, 0.4),
-      rgba(146, 182, 161, 0.3),
-      rgba(221, 234, 226, 0.2));
-  border: 1px solid rgba(107, 150, 126, 0.15);
+      rgba(199, 226, 180, 0.4),
+      rgba(164, 207, 135, 0.3),
+      rgba(226, 240, 215, 0.2));
+  border: 1px solid rgba(131, 186, 97, 0.15);
   box-shadow:
     inset 0 0 20px rgba(255, 255, 255, 0.1),
-    0 8px 32px rgba(52, 78, 65, 0.08);
+    0 8px 32px rgba(51, 78, 38, 0.08);
 }
 
-/* Each bubble gets unique size, position, and timing */
 .bubble1 {
   width: 55%;
   height: 70%;
@@ -438,7 +409,7 @@
   opacity: 0.5;
   animation-duration: 5s;
   animation-delay: -2s;
-  background: radial-gradient(circle at 40% 25%, rgba(52, 78, 65, 0.35), rgba(46, 65, 56, 0.2));
+  background: radial-gradient(circle at 40% 25%, rgba(60, 97, 42, 0.35), rgba(51, 78, 38, 0.2));
 }
 
 .bubble3 {
@@ -450,7 +421,7 @@
   opacity: 0.6;
   animation-duration: 8s;
   animation-delay: -4s;
-  background: radial-gradient(circle at 50% 30%, rgba(52, 78, 65, 0.45), rgba(20, 31, 26, 0.3));
+  background: radial-gradient(circle at 50% 30%, rgba(60, 97, 42, 0.45), rgba(21, 36, 15, 0.3));
 }
 
 .bubble4 {
@@ -472,7 +443,7 @@
   opacity: 0.4;
   animation-duration: 9s;
   animation-delay: -3s;
-  background: radial-gradient(circle at 35% 35%, rgba(46, 65, 56, 0.3), rgba(20, 31, 26, 0.1));
+  background: radial-gradient(circle at 35% 35%, rgba(51, 78, 38, 0.3), rgba(21, 36, 15, 0.1));
 }
 
 @keyframes floatBubble {

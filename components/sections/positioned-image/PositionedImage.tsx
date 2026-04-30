@@ -22,10 +22,10 @@ const homeFeatures: FeatureItem[] = [
 export default function PositionedImage({ isExperienceIntroVisible }: PositionedImageProps) {
   return (
     <>
-      <div className={styles.imgWrapper}>
+      <div className={styles.section}>
         <div className={`
-          ${isExperienceIntroVisible ? styles.fixedImage : styles.relativeImage} 
-          ${styles.defaultImage}`}
+          ${styles.imageFrame}
+          ${isExperienceIntroVisible ? styles.fixedFrame : styles.inlineFrame}`}
         >
           <Image
             src="https://9gdj1dewg7.ufs.sh/f/MzCIEEnlPGFDlLh8Vyqvj7qBtEJaeIm4Mu1klYRxAVTK8FdH"
@@ -36,7 +36,6 @@ export default function PositionedImage({ isExperienceIntroVisible }: Positioned
             sizes="100vw"
           />
 
-          {/* Floating White Card */}
           {!isExperienceIntroVisible && (
             <div className={styles.floatingCard}>
               <div className={styles.iconCircle}>
@@ -50,12 +49,10 @@ export default function PositionedImage({ isExperienceIntroVisible }: Positioned
           )}
         </div>
 
-        {/* Decorative Olive Branch */}
         {!isExperienceIntroVisible && (
           <OliveBranch />
         )}
 
-        {/* Focus Section */}
         {!isExperienceIntroVisible && (
           <AnimatedOnScroll
             className="highlight-text-wrapper"

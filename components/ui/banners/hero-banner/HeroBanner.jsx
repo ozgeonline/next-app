@@ -86,7 +86,7 @@ export default function HeroBanner({
 
   return (
     <div
-      className={`${styles.container}`}
+      className={styles.container}
       style={{ backgroundColor: loaded ? 'transparent' : 'var(--background)' }}
     >
       <div className={styles.backgroundWrapper}>
@@ -96,10 +96,7 @@ export default function HeroBanner({
           className={styles.mainBackground}
           style={{
             transform: `scale(${scale})`,
-            filter: `brightness(${brightness})`,
-            objectFit: 'cover',
-            width: '100%',
-            height: '100%'
+            filter: `brightness(${brightness})`
           }}
           width={0}
           height={0}
@@ -113,7 +110,7 @@ export default function HeroBanner({
 
       <AnimatedOnScroll
         animationClass={styles.animateInRight}
-        className={`${styles.introduction} ${isMenu ? styles.menuContent : ''}`}
+        className={`${styles.heroContent} ${isMenu ? styles.menuContent : ''}`}
       >
         {isMenu && label && (
           <div className={styles.labelWrapper}>
@@ -126,8 +123,14 @@ export default function HeroBanner({
           </div>
         )}
 
-        <h1 className={isMenu ? styles.menuTitle : ''}>{isMenu ? renderTitle() : introductionTitle} </h1>
-        <p className={isMenu ? styles.menuDescription : ''}> {introduction}</p>
+        {introductionTitle && (
+          <h1 className={isMenu ? styles.menuTitle : ''}>
+            {isMenu ? renderTitle() : introductionTitle}
+          </h1>
+        )}
+        {introduction && (
+          <p className={isMenu ? styles.menuDescription : ''}>{introduction}</p>
+        )}
 
         {isMenu ? (
           <Link href={actionLink} className={styles.exploreButton}>
@@ -147,7 +150,7 @@ export default function HeroBanner({
 
       {socialLocation && !isMenu && (
         <div className={styles.bottomSection}>
-          <div className={`${styles.content} ${styles['tracking-in-expand-fwd-top']}`}>
+          <div className={`${styles.bottomContent} ${styles.bottomEntrance}`}>
             <SocialMedia strokeColor='#3d4148' />
             <div className={styles.location}>
               <IoLocationSharp className={styles.iconLocation} />

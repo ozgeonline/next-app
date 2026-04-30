@@ -69,11 +69,11 @@
   height: 100%;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   transition: all 0.3s ease-in-out;
   color: #ddd6cb;
-  background: linear-gradient(45deg, var(--lunar-green-300), var(--lunar-green-100));
+  background: var(--neutral-100);
 }
 
 .card:nth-child(1):hover {
@@ -110,7 +110,7 @@
 /* ==========================================================================
    4. Interactive Overlays & Graphics
    ========================================================================== */
-.cardClick {
+.mobileHint {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,27 +123,26 @@
   color: var(--text);
 }
 
-.cardClick svg {
+.mobileHint svg {
   padding-left: 0.5rem;
 }
 
-.card:hover .cardClick {
+.card:hover .mobileHint {
   display: none;
 }
 
 @media screen and (min-width: 768px) {
-  .cardClick {
+  .mobileHint {
     display: none;
   }
 }
 
-/* Sun Graphic */
-.sunWrapper {
+.sunDecoration {
   display: none;
 }
 
 @media screen and (min-width: 768px) {
-  .sunWrapper {
+  .sunDecoration {
     display: block;
     position: absolute;
     bottom: 0;
@@ -161,6 +160,7 @@
   height: 40%;
   stroke-width: 1;
   filter: brightness(0.8);
+  stroke: #1a1a1a50;
   transform: scale(0.7);
   transition: bottom 0.5s ease-out, right 0.5s ease-out, filter 0.5s ease-out, transform 0.5s ease-out;
 }
@@ -170,8 +170,11 @@
   right: 10%;
   filter: brightness(1);
   transform: scale(1);
-  stroke: var(--lunar-green-500);
   stroke-width: 0.5;
+}
+
+[data-theme="dark"] .card:hover .sun {
+  stroke: #fee211;
 }
 
 @media screen and (min-width: 768px) {
@@ -182,48 +185,40 @@
 }
 
 /* ==========================================================================
-   5. Card Content: Left Text Card
+   5. Info Card Content
    ========================================================================== */
-.card .cardTextLeft {
+.infoContent {
   padding: 2rem;
   z-index: 10;
 }
 
-.cardTextLeft h2 {
+.infoContent h2 {
   font-size: 1.3rem;
-  color: var(--lunar-green-700);
-}
-
-[data-theme="dark"] .cardTextLeft h2 {
   color: var(--neutral-700);
 }
 
-.cardTextLeft p {
+.infoContent p {
   max-width: 90%;
   font-size: 0.85rem;
-  color: var(--lunar-green-600);
-}
-
-[data-theme="dark"] .cardTextLeft p {
   color: var(--neutral-600);
 }
 
 @media screen and (min-width: 1024px) {
-  .cardTextLeft h2 {
+  .infoContent h2 {
     font-size: 1.7rem;
     margin-bottom: 0.5rem;
     padding: 1rem 0;
   }
 
-  .cardTextLeft p {
+  .infoContent p {
     font-size: 1rem;
   }
 }
 
 /* ==========================================================================
-   6. Card Content: Right Text Card
+   6. Image Overlay Content
    ========================================================================== */
-.card .cardTextRight {
+.imageOverlayContent {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -236,20 +231,19 @@
   padding: 1rem;
 }
 
-.card:hover .cardTextRight {
+.card:hover .imageOverlayContent {
   opacity: 1;
   z-index: 10;
-  animation: animateInBottom 0.5s ease-out forwards;
   cursor: pointer;
 }
 
-.cardTextRight h2 {
+.imageOverlayContent h2 {
   padding-bottom: 1vh;
   font-size: 1.3rem;
   color: #92b6a1;
 }
 
-.cardTextRight p {
+.imageOverlayContent p {
   padding-bottom: 1rem;
   font-size: 0.85rem;
   color: #bbd4c5;
@@ -257,33 +251,33 @@
 }
 
 @media screen and (min-width: 768px) {
-  .card .cardTextRight {
+  .imageOverlayContent {
     bottom: 0;
     top: auto;
   }
 
-  .cardTextRight h2 {
+  .imageOverlayContent h2 {
     font-size: 1.3rem;
   }
 
-  .cardTextRight p {
+  .imageOverlayContent p {
     font-size: 1rem;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .card .cardTextRight {
+  .imageOverlayContent {
     padding: 2rem;
     top: 10%;
     bottom: 30%;
   }
 
-  .cardTextRight h2 {
+  .imageOverlayContent h2 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
   }
 
-  .cardTextRight p {
+  .imageOverlayContent p {
     font-size: 1rem;
   }
 }
@@ -291,62 +285,17 @@
 /* ==========================================================================
    7. Buttons / Links
    ========================================================================== */
-/* Left Card Link Button */
-.learnMoreLeft {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  width: 40%;
-  height: 25%;
-  background-color: var(--lunar-green-700);
-  margin-top: 1rem;
-  transition: transform 0.5s ease-out;
-}
-
-[data-theme="dark"] .learnMoreLeft {
-  background-color: var(--neutral-600);
-}
-
-.learnMoreLeft a {
-  padding: 0 0.5rem;
-  text-decoration: none;
-  color: var(--lunar-green-200);
-  font-size: 1rem;
-  text-wrap: nowrap;
-}
-
-[data-theme="dark"] .learnMoreLeft a {
-  color: var(--neutral-100);
-}
-
-.learnMoreLeft:hover a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: slideLeft 0.3s ease-out forwards;
-  filter: brightness(1.2);
-}
-
-/* Right Card Link Button */
-.cardTextRight .learnMore {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-  text-decoration: none;
-  padding: 0.9rem 1rem;
-  border-radius: 50px;
+.cardButton {
+  align-self: flex-start;
   width: 12rem;
+  min-width: 12rem;
   height: 2.5rem;
-  border: 1px solid #92b6a1;
-  color: #92b6a1;
-  transition: all 0.3s ease-in-out;
-  filter: brightness(0.8);
+  margin-top: 1rem;
+  padding-inline: 1.2rem;
 }
 
-.cardTextRight .learnMore:hover {
-  filter: brightness(1);
+.cardButton:hover {
+  animation: slideLeft 0.3s ease-out forwards;
 }
 
 /* Shared Arrow Animation */
@@ -354,26 +303,21 @@
   display: none;
 }
 
-.learnMoreLeft:hover .arrow,
-.learnMore:hover .arrow {
+.cardButton:hover .arrow {
   display: inline-flex;
   justify-content: center;
   align-items: center;
   animation: animateInRight 1s ease-out forwards;
 }
 
-.learnMore:hover .arrow {
-  filter: brightness(1.2);
-}
-
 /* ==========================================================================
    8. Custom Decorations
    ========================================================================== */
-.customOlive {
+.oliveDecoration {
   top: 40% !important;
   right: -35% !important;
   opacity: 0.2 !important;
   --rotate-from: 10deg;
   --rotate-to: -30deg;
-  --olive-color: var(--lunar-green-400);
+  --olive-color: var(--apple-400);
 }

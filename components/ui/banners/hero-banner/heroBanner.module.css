@@ -17,22 +17,22 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  transition: transform filter 0.1s ease-out;
+  transition: transform 0.1s ease-out, filter 0.1s ease-out;
   background: #1a1a1a;
 }
 
 .mainBackground {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   z-index: -1;
   object-fit: cover;
-  transition: transform filter 0.1s ease-out;
+  transition: transform 0.1s ease-out, filter 0.1s ease-out;
 }
 
 /* 2. Content Introduction (Common)
    ========================================================================== */
 
-.introduction {
+.heroContent {
   opacity: 0;
   position: absolute;
   top: 0;
@@ -50,13 +50,13 @@
 /* 3. Default Variant Styles (Centered)
    ========================================================================== */
 
-.introduction h1,
-.introduction p {
+.heroContent h1,
+.heroContent p {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-style: italic;
 }
 
-.introduction h1 {
+.heroContent h1 {
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.1rem;
@@ -67,7 +67,7 @@
   text-shadow: 2px 2px 5px #1a1a1a;
 }
 
-.introduction p {
+.heroContent p {
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.1rem;
@@ -77,11 +77,11 @@
 }
 
 @media (min-width: 1024px) {
-  .introduction h1 {
+  .heroContent h1 {
     font-size: 1.6rem;
   }
 
-  .introduction p {
+  .heroContent p {
     font-size: 1.1rem;
   }
 }
@@ -166,18 +166,18 @@
    ========================================================================== */
 
 .menuContent {
-  align-items: flex-start !important;
+  align-items: flex-start;
   justify-content: center;
-  padding: 0 5vw !important;
+  padding: 0 5vw;
   max-width: 1000px;
   margin-top: -10vh;
-  text-align: left !important;
+  text-align: left;
   z-index: 100;
 }
 
 @media (min-width: 1024px) {
   .menuContent {
-    padding: 0 10vw !important;
+    padding: 0 10vw;
   }
 }
 
@@ -221,26 +221,26 @@
 
 /* 5b. Menu Typography */
 .menuTitle {
-  font-size: 2rem !important;
-  line-height: 1.1 !important;
-  font-weight: 500 !important;
-  color: #d3d5d9 !important;
-  margin-bottom: 1.5rem !important;
-  text-align: left !important;
-  text-shadow: none !important;
-  font-family: 'Fraunces', serif !important;
-  font-style: normal !important;
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 500;
+  color: #d3d5d9;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  text-shadow: none;
+  font-family: 'Fraunces', serif;
+  font-style: normal;
 }
 
 @media (min-width: 768px) {
   .menuTitle {
-    font-size: 3rem !important;
+    font-size: 3rem;
   }
 }
 
 @media (min-width: 1024px) {
   .menuTitle {
-    font-size: 4rem !important;
+    font-size: 4rem;
   }
 }
 
@@ -251,19 +251,19 @@
 }
 
 .menuDescription {
-  font-size: 1rem !important;
-  line-height: 1.6 !important;
-  color: #a6b4ba !important;
-  margin-bottom: 2.5rem !important;
-  text-align: left !important;
-  text-shadow: none !important;
-  max-width: 90% !important;
-  font-style: normal !important;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #a6b4ba;
+  margin-bottom: 2.5rem;
+  text-align: left;
+  text-shadow: none;
+  max-width: 90%;
+  font-style: normal;
 }
 
 @media (min-width: 1024px) {
   .menuDescription {
-    font-size: 1.1rem !important;
+    font-size: 1.1rem;
   }
 }
 
@@ -300,7 +300,7 @@
   z-index: 10000;
 }
 
-.content {
+.bottomContent {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -309,7 +309,7 @@
 }
 
 @media (min-width: 1024px) {
-  .content {
+  .bottomContent {
     padding: 0 2rem;
   }
 }
@@ -385,24 +385,24 @@
   }
 }
 
-.tracking-in-expand-fwd-top {
-  animation: tracking-in-expand-fwd-top 1s cubic-bezier(.215, .61, .355, 1.000) both;
+.bottomEntrance {
+  animation: bottomEntrance 1s cubic-bezier(.215, .61, .355, 1.000) both;
 }
 
-.tracking-in-expand-fwd-top img {
+.bottomEntrance img {
   width: 5rem;
   height: 3rem;
   filter: brightness(0.8) opacity(0.5);
 }
 
 @media (min-width: 1024px) {
-  .tracking-in-expand-fwd-top img {
+  .bottomEntrance img {
     width: 10rem;
     height: 6rem;
   }
 }
 
-@keyframes tracking-in-expand-fwd-top {
+@keyframes bottomEntrance {
   0% {
     letter-spacing: -.5em;
     transform: translateZ(-700px) translateY(-700px);

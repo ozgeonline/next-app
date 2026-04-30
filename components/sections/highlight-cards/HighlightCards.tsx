@@ -1,10 +1,10 @@
 import AnimatedOnScroll from "@/components/ui/animation/animated-scroll/AnimatedOnScroll";
-import Link from "next/link";
 import Image from "next/image";
 import { Cards } from "@/types/cardTypes";
 import { ChevronsRight, MousePointerClick, Sun } from "lucide-react";
 import styles from "./highlight-cards.module.css";
 import OliveBranch from "@/components/ui/decorations/olive-branch/OliveBranch";
+import { Button } from "@/components/ui/button/Button";
 
 interface HighlightCardsProps {
   data: Cards
@@ -21,22 +21,26 @@ export default function HighlightCards({
     >
       <div className={styles.cards}>
         <div className={styles.card}>
-          <OliveBranch className={styles.customOlive} />
-          <div className={styles.cardTextLeft}>
+          <OliveBranch className={styles.oliveDecoration} />
+          <div className={styles.infoContent}>
             <h2>{data.infoCard.title}</h2>
             <p>{data.infoCard.description}</p>
-            <div className={styles.learnMoreLeft}>
-              {data.link && (
-                <Link href={data.link.href}>
-                  {data.link.text}
+            {data.link && (
+              <Button
+                href={data.link.href}
+                variant="primary"
+                className={styles.cardButton}
+                iconRight={(
                   <span className={styles.arrow}>
                     <ChevronsRight size={20} />
                   </span>
-                </Link>
-              )}
-            </div>
+                )}
+              >
+                {data.link.text}
+              </Button>
+            )}
           </div>
-          <div className={styles.sunWrapper}>
+          <div className={styles.sunDecoration}>
             <Sun className={styles.sun} />
           </div>
         </div>
@@ -49,20 +53,26 @@ export default function HighlightCards({
             width={0}
             height={0}
           />
-          <span className={styles.cardClick}>
+          <span className={styles.mobileHint}>
             click me
             <MousePointerClick />
           </span>
-          <div className={styles.cardTextRight}>
+          <div className={styles.imageOverlayContent}>
             <h2>{data.imgCard.title}</h2>
             <p>{data.imgCard.description}</p>
             {learnMore && (
-              <Link href="/meals" className={styles.learnMore}>
+              <Button
+                href="/meals"
+                variant="secondary"
+                className={styles.cardButton}
+                iconRight={(
+                  <span className={styles.arrow}>
+                    <ChevronsRight size={20} />
+                  </span>
+                )}
+              >
                 Learn More
-                <span className={styles.arrow}>
-                  <ChevronsRight size={20} />
-                </span>
-              </Link>
+              </Button>
             )}
           </div>
         </div>

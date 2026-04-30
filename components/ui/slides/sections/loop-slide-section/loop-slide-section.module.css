@@ -21,32 +21,30 @@
 /* ---------------------------------
    Main Wrappers and Layout
 ----------------------------------- */
-.sectionWrapper {
+.section {
   position: relative;
   z-index: 10;
   height: 30vh;
 }
 
-.contentContainer {
+.content {
   position: relative;
   z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  will-change: transform, opacity;
-  transition: all 0.5s ease-out;
   padding: 1rem 0;
 }
 
 @media screen and (min-width: 768px) {
-  .contentContainer {
+  .content {
     padding: 2rem 0;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .contentContainer {
+  .content {
     padding: 3rem 0 1rem;
   }
 }
@@ -56,7 +54,7 @@
    Section Title 
 ----------------------------------- */
 
-.sectionTitle {
+.title {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,12 +65,12 @@
   transition: margin-top 0.3s ease;
 }
 
-.sectionTitle .sectionTitleText {
-  color: #cbb9a6;
+.activeTitle {
+  color: var(--apple-500);
 }
 
 @media screen and (min-width: 640px) {
-  .sectionTitle {
+  .title {
     margin-top: 3rem;
   }
 }
@@ -81,8 +79,8 @@
 /* ---------------------------------
    Slider Card Containers 
 ----------------------------------- */
-.sliderCard {
-  color: var(--lunar-green-800);
+.slideItem {
+  color: var(--neutral-600);
   width: 1rem;
   height: 1rem;
   display: flex;
@@ -94,23 +92,23 @@
   flex-shrink: 0;
 }
 
-.sliderCard svg {
+.slideItem svg {
   width: 1rem;
   height: 1rem;
   stroke-width: 1;
 }
 
 /* Active State Modifier */
-.sliderCardActive {
+.activeSlideItem {
+  color: #fff;
   width: 4rem;
   height: 2rem;
   border-radius: 44% 56% 51% 49% / 0% 100% 0% 100%;
   padding: 0.5em;
   margin-top: 1rem;
-  color: #cbb9a6;
 }
 
-.sliderCardActive::before {
+.activeSlideItem::before {
   content: '';
   position: absolute;
   top: -5px;
@@ -118,14 +116,14 @@
   right: -5px;
   bottom: -5px;
   background: transparent;
-  border: 2px solid #cbb9a680;
+  border: 2px solid #f5f5f580;
   border-radius: 46% 58% 53% 51% / 0% 100% 0% 100%;
   filter: opacity(.8);
   z-index: -1;
 }
 
 @media screen and (min-width: 640px) {
-  .sliderCardActive {
+  .activeSlideItem {
     width: 5rem;
     height: 2.5rem;
     margin-top: 0;
@@ -150,14 +148,14 @@
 }
 
 /* Active State Modifier */
-.itemTitleActive {
-  color: #cbb9a6;
+.activeItemTitle {
+  color: #fff;
   border: none;
   padding: 0;
 }
 
 @media screen and (min-width: 640px) {
-  .itemTitleActive {
+  .activeItemTitle {
     margin-top: 0;
   }
 }
@@ -168,12 +166,12 @@
 ----------------------------------- */
 
 @media screen and (min-width: 480px) {
-  .itemsWrapperVisible {
+  .activeItems {
     padding: 1rem 2rem;
   }
 }
 
-.containerItems {
+.itemContent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -183,31 +181,28 @@
 }
 
 @media screen and (min-width: 768px) {
-  .containerItems {
+  .itemContent {
     padding: 0;
   }
 }
 
-.containerItemsClosed {
-  display: flex;
+.compactItemContent {
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
   gap: 0.75rem;
   padding: 1rem 0;
   border-radius: 50px;
   background-color: #344e4105;
-  transition: all 0.3s ease;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
   white-space: nowrap;
 }
 
-[data-theme="dark"] .containerItemsClosed {
+[data-theme="dark"] .compactItemContent {
   background-color: var(--neutral-100);
-  border-color: var(--neutral-600);
 }
 
-.containerItemsClosed:hover {
-  border-color: var(--neutral-500);
+.compactItemContent:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   transform: translateY(-1px);
 }

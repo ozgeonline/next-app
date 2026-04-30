@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Button } from "@/components/ui/button/Button";
 
 export default function NotFound() {
   return (
@@ -6,9 +6,9 @@ export default function NotFound() {
       <div className="containerTopNavbarColor" />
       <h1>Not Found</h1>
       <p>Could not find requested resource.</p>
-      <Link href="/meals/share" className="accent-link-button">
+      <Button href="/meals/share" variant="accent">
         Share a Meal
-      </Link>
+      </Button>
     </main>
   )
 }

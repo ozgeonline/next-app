@@ -1,7 +1,7 @@
 .oliveBranch {
   --rotate-from: 15deg;
   --rotate-to: 5deg;
-  --olive-color: var(--lunar-green-500);
+  --olive-color: var(--apple-500);
   position: absolute;
   top: 100%;
   right: -10%;

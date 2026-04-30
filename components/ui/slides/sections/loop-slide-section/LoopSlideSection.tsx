@@ -3,6 +3,9 @@ import InfiniteSlideLoop from "@/components/ui/slides/loop-slides/InfiniteSlideL
 import { infoImages } from "@/components/ui/slides/slideshow-items";
 import styles from "./loop-slide-section.module.css";
 
+const cx = (...classes: Array<string | false | null | undefined>) =>
+  classes.filter(Boolean).join(" ");
+
 interface LoopSlideSectionProps {
   setIsLoopSlideVisible: (visible: boolean) => void;
   isExperienceIntroVisible: boolean;
@@ -13,38 +16,35 @@ export default function LoopSlideSection({
   isExperienceIntroVisible,
 }: LoopSlideSectionProps) {
   return (
-    <section className={styles.sectionWrapper}>
+    <section className={styles.section}>
       <AnimatedOnScroll
-        className={styles.contentContainer}
+        className={styles.content}
         animationClass={styles.animateInRight}
         onVisibilityChange={setIsLoopSlideVisible}
       >
-        {/* Section Title Container */}
-        <div className={styles.sectionTitle}>
-          <h3 className={isExperienceIntroVisible ? styles.sectionTitleText : "highlight-text"}>
+        <div className={styles.title}>
+          <h3 className={isExperienceIntroVisible ? styles.activeTitle : "highlight-text"}>
             Brew Focus. Eat Clean. Change Everything.
           </h3>
         </div>
 
-        {/* Multi-Styled Infinite Slide Loop */}
         <InfiniteSlideLoop
           images={infoImages}
-          itemClassName={`
-            ${styles.sliderCard}
-            ${isExperienceIntroVisible ? styles.sliderCardActive : ''}
-          `}
-          itemsWrapperClassName={`
-            ${styles.itemsWrapper}
-            ${isExperienceIntroVisible ? styles.itemsWrapperVisible : ''}
-          `}
-          containerItemsWrapper={`
-            ${styles.containerItems}
-            ${isExperienceIntroVisible ? styles.containerItemsActive : styles.containerItemsClosed}
-          `}
-          slideTitleStyles={`
-            ${styles.itemTitle}
-            ${isExperienceIntroVisible ? styles.itemTitleActive : ''}
-          `}
+          itemClassName={cx(
+            styles.slideItem,
+            isExperienceIntroVisible && styles.activeSlideItem,
+          )}
+          itemsWrapperClassName={cx(
+            isExperienceIntroVisible ? styles.activeItems : "highlight-text",
+          )}
+          containerItemsWrapper={cx(
+            styles.itemContent,
+            !isExperienceIntroVisible && styles.compactItemContent,
+          )}
+          slideTitleStyles={cx(
+            styles.itemTitle,
+            isExperienceIntroVisible && styles.activeItemTitle,
+          )}
         />
       </AnimatedOnScroll>
     </section>

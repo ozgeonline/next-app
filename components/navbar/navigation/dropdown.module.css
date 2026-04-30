@@ -76,26 +76,26 @@
   transform: translateY(-50%);
   height: 60%;
   width: 3px;
-  background-color: var(--razzmatazz-500);
+  background-color: var(--charm-500);
   /* Pink border using theme variable */
   border-radius: 4px;
 }
 
 [data-theme="dark"] .activeItem::after {
-  background-color: var(--fuego-400);
+  background-color: var(--apple-500);
   /* Dark theme active color */
 }
 
 .activeDot {
   width: 6px;
   height: 6px;
-  background-color: var(--razzmatazz-500);
+  background-color: var(--charm-500);
   border-radius: 50%;
   margin-left: 0.5rem;
 }
 
 [data-theme="dark"] .activeDot {
-  background-color: var(--fuego-400);
+  background-color: var(--apple-500);
 }
 
 @keyframes moveToBottom {

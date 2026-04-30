@@ -14,7 +14,7 @@
   }
 }
 
-.imgWrapper {
+.section {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -26,40 +26,33 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .imgWrapper {
+  .section {
     flex-direction: row;
   }
 }
 
-.defaultImage {
-  will-change: position;
-  backface-visibility: hidden;
-}
-
-.defaultImage img {
+.imageFrame img {
   object-fit: cover;
 }
 
-.fixedImage,
-.relativeImage {
+.imageFrame {
   z-index: 1;
   transition: all 0.5s ease-in-out;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
-.fixedImage {
+.fixedFrame {
   display: flex;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  will-change: position;
   backface-visibility: hidden;
 }
 
-.relativeImage::before {
+.inlineFrame::before {
   content: "";
   position: absolute;
   top: -5px;
@@ -71,7 +64,7 @@
   z-index: -1;
 }
 
-.relativeImage {
+.inlineFrame {
   position: relative;
   width: 100%;
   height: 80vh;
@@ -92,22 +85,19 @@
   }
 }
 
-.fixedImage img {
+.fixedFrame img {
   filter: brightness(0.5);
 }
 
 @media screen and (min-width: 1024px) {
-  .relativeImage {
+  .inlineFrame {
     margin-left: 10%;
     width: 75%;
     height: 55vh;
     border-radius: 0% 70% 50% -10% / 50% 30% 70% 100%;
   }
 
-  .relativeImage img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .inlineFrame img {
     border-radius: inherit !important;
   }
 }

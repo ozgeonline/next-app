@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { ChevronRight, LucideIcon, MousePointerClick } from 'lucide-react';
+import { Button, ButtonGroup } from "@/components/ui/button/Button";
 import styles from "./cta.module.css";
 
 export interface CTAButton {
@@ -39,24 +39,26 @@ export default function CTA({
   const chevrons = Array.from({ length: secondaryButton.chevronCount ?? 3 });
 
   return (
-    <div className={`highlight-buttons ${className ? ` ${className}` : ''}`}>
-      <Link
+    <ButtonGroup className={className}>
+      <Button
         href={primaryButton.href}
-        className={`highlight-first-button ${styles.cta}`}
+        variant="primary"
+        className={styles.cta}
+        iconRight={<PrimaryIcon size={20} />}
       >
         {primaryButton.label}
-        <PrimaryIcon size={20} />
-      </Link>
+      </Button>
 
-      <Link
+      <Button
         href={secondaryButton.href}
-        className={`highlight-second-button ${styles.cta}`}
-      >
-        {secondaryButton.label}
-        {chevrons.map((_, i) => (
+        variant="secondary"
+        className={styles.cta}
+        iconRight={chevrons.map((_, i) => (
           <ChevronRight key={i} size={20} />
         ))}
-      </Link>
-    </div>
+      >
+        {secondaryButton.label}
+      </Button>
+    </ButtonGroup>
   );
 }

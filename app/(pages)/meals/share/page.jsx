@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { getUserFromCookies } from '@/lib/getUserFromCookies';
 import ShareMealForm from '@/components/meals/share-meal/ShareMealForm';
+import { Button } from '@/components/ui/button/Button';
 import styles from './page.module.css';
 
 export const metadata = {
@@ -19,9 +19,9 @@ export default async function ShareMealPage() {
         <p>
           You must be logged in to share a meal.
         </p>
-        <Link href="/login" className="accent-link-button">
+        <Button href="/login" variant="accent">
           Login
-        </Link>
+        </Button>
       </div>
     );
   }

@@ -5,10 +5,10 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import Carousel from "@/components/ui/slides/carousel/Carousel";
 import { MenuPreview } from "@/components/menu/MenuSection";
 import { useNavigation } from "@/context/navigation/NavigationProvider";
+import { Button } from "@/components/ui/button/Button";
 import { Leaf, Coffee, Utensils, ArrowRight } from 'lucide-react';
 import styles from "./menu.module.css";
 
@@ -67,14 +67,15 @@ export default function MenuCarousel({ menuLinks, textLabels }) {
         if (!category) return null;
         return (
           <div className={styles.footerContainer}>
-            <Link
+            <Button
               href={`menu/${category.href}`}
               onClick={(e) => handleViewAll(e, `menu/${category.href}`)}
-              className={`highlight-first-button ${styles.viewAllLink}`}
+              variant="primary"
+              className={styles.viewAllLink}
+              iconRight={<ArrowRight size={18} className={styles.btnArrow} />}
             >
               View All {category.title}
-              <ArrowRight size={18} className={styles.btnArrow} />
-            </Link>
+            </Button>
 
             <div className={styles.discoverMore}>
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className={styles.curvedArrow}>

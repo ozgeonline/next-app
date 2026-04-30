@@ -7,12 +7,13 @@
 .strip {
   display: flex;
   flex-direction: column;
-  background: var(--text-low-opacity);
+  opacity: .9;
+  background: transparent;
   border-radius: 2rem;
+  border: 2px solid var(--apple-500);
   padding: 2rem;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
   gap: 2rem;
-  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .item {
@@ -26,8 +27,9 @@
 .icon {
   width: 3.5rem;
   height: 3.5rem;
-  background-color: rgba(81, 123, 101, 0.25);
-  color: var(--shark-900, #1a1a1a);
+  background-color: var(--apple-500);
+  opacity: .6;
+  color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -44,7 +46,7 @@
 .text h4 {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--shark-900, #1a1a1a);
+  color: var(--neutral-900, #1c1e22);
   margin: 0;
 }
 
@@ -77,22 +79,21 @@
     transform: translateY(-50%);
     width: 1px;
     height: 3rem;
-    background-color: var(--lunar-green-500);
+    background-color: var(--apple-500);
   }
 }
 
 /* Dark Theme Overrides */
 [data-theme="dark"] .strip {
-  background: rgba(20, 31, 26, 0.6);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--apple-300);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .icon {
-  background-color: rgba(107, 150, 126, 0.1);
-  color: var(--lunar-green-400);
-  border: 1px solid rgba(107, 150, 126, 0.2);
+  background-color: transparent;
+  color: var(--apple-500);
+  border: 1px solid var(--apple-500);
 }
 
 [data-theme="dark"] .text h4 {
@@ -100,7 +101,7 @@
 }
 
 [data-theme="dark"] .text p {
-  color: #a6b4ba;
+  color: var(--text);
 }
 
 [data-theme="dark"] .divider {

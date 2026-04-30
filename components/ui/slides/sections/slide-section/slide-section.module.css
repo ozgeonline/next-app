@@ -25,7 +25,7 @@
   z-index: 2;
 }
 
-.animateContent {
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,12 +37,12 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .animateContent {
+  .content {
     flex-direction: row;
   }
 }
 
-.slideShowWrapper {
+.slideshow {
   width: 12rem;
   height: 12rem;
   margin-bottom: 1.5rem;
@@ -53,28 +53,36 @@
 }
 
 @media screen and (min-width: 768px) {
-  .slideShowWrapper {
+  .slideshow {
     width: 18rem;
     height: 18rem;
     margin-bottom: 0;
   }
 }
 
-.containerWrapper {
+.textContent {
   z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   justify-content: center;
-  will-change: transform, opacity;
-  transition: all 0.5s ease-out;
   width: 70%;
 }
 
+.description {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
 @media screen and (min-width: 1024px) {
-  .containerWrapper {
+  .textContent {
     padding-left: 2rem;
-    align-items: center;
+    align-items: flex-start;
+    text-align: left;
   }
 }
 

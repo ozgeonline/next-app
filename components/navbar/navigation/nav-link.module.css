@@ -11,7 +11,7 @@
   transform: translateX(-50%);
   width: 30px;
   height: 2px;
-  background: var(--razzmatazz-500);
+  background: var(--charm-500);
   border-radius: 2px;
 }
 
@@ -23,7 +23,7 @@
   transform: translateX(-50%);
   width: 30px;
   height: 2px;
-  background: var(--fuego-400);
+  background: var(--apple-500);
   border-radius: 2px;
 }
 
@@ -49,7 +49,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--razzmatazz-500);
+  background: var(--charm-500);
 }
 
 [data-theme="dark"] .active::after {
@@ -59,5 +59,5 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--fuego-400);
+  background: var(--apple-500);
 }
