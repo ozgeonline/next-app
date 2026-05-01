@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import ContactForm from "@/components/forms/contact/ContactForm";
+import { Button } from "@/components/ui/button/Button";
 import styles from "./footer.module.css";
 import { ArrowRight, Leaf } from "lucide-react";
 import { socialLinks, quickLinks, contactInfo, uspItems, legalLinksData } from "./link-items";
@@ -28,15 +29,15 @@ export default function Footer() {
               <p className={styles.newsletterSub}>Get the latest recipes, tips and updates.</p>
               <div className={styles.inputGroup}>
                 <input type="email" placeholder="Enter your email" />
-                <button className={styles.submitBtn}>
+                <Button type="button" variant="plain" className={styles.submitBtn} aria-label="Submit newsletter email">
                   <ArrowRight size={18} />
-                </button>
+                </Button>
               </div>
             </div>
 
             <div className={styles.socialRow}>
-              {socialLinks.map((social, idx) => (
-                <Link key={idx} href={social.href} className={styles.socialIcon} aria-label={social.label}>
+              {socialLinks.map((social) => (
+                <Link key={social.label} href={social.href} className={styles.socialIcon} aria-label={social.label}>
                   <social.icon size={18} />
                 </Link>
               ))}
@@ -49,8 +50,8 @@ export default function Footer() {
           <div className={styles.linksCol}>
             <h3 className={styles.colTitle}>Quick Links</h3>
             <ul className={styles.linkList}>
-              {quickLinks.map((link, idx) => (
-                <li key={idx}>
+              {quickLinks.map((link) => (
+                <li key={link.href}>
                   <Link href={link.href} className={styles.linkItem}>
                     <link.icon className={styles.linkIcon} size={16} /> {link.label}
                   </Link>
@@ -63,8 +64,8 @@ export default function Footer() {
           <div className={styles.contactCol}>
             <h3 className={styles.colTitle}>Contact Info</h3>
             <ul className={styles.linkList}>
-              {contactInfo.map((info, idx) => (
-                <li key={idx} className={styles.linkItem}>
+              {contactInfo.map((info) => (
+                <li key={info.text} className={styles.linkItem}>
                   <info.icon className={styles.linkIcon} size={16} /> {info.text}
                 </li>
               ))}
@@ -80,8 +81,8 @@ export default function Footer() {
 
         {/* MIDDLE SECTION: USP ROW */}
         <div className={styles.uspRow}>
-          {uspItems.map((usp, idx) => (
-            <div key={idx} className={styles.uspItem}>
+          {uspItems.map((usp) => (
+            <div key={usp.title} className={styles.uspItem}>
               <div className={styles.uspIconCircle}><usp.icon size={24} /></div>
               <div className={styles.uspContent}>
                 <h4>{usp.title}</h4>
@@ -104,8 +105,8 @@ export default function Footer() {
           </div>
 
           <div className={styles.legalLinks}>
-            {legalLinksData.map((link, idx) => (
-              <Link key={idx} href={link.href} className={styles.legalLink}>
+            {legalLinksData.map((link) => (
+              <Link key={link.label} href={link.href} className={styles.legalLink}>
                 {link.label}
               </Link>
             ))}
