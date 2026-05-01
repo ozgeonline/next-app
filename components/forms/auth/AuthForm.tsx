@@ -163,9 +163,6 @@ export default function AuthForm({
                   />
                   <span>Remember me</span>
                 </label>
-                <Link href="/forgot-password" className={styles.forgotLink}>
-                  Forgot password?
-                </Link>
               </div>
             )}
 
