@@ -2,6 +2,9 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ArrowLeft, ChefHat, Info } from "lucide-react";
 import { Button } from "@/components/ui/button/Button";
+import FavoriteButton from "@/components/favorites/favorite-button/FavoriteButton";
+import Favorite from "@/models/Favorite";
+import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import styles from "./page.module.css";
 import { getMeal } from "@/lib/meals";
 
@@ -20,9 +23,18 @@ export async function generateMetadata({ params }) {
 
 export default async function MealDetailsPage({ params }) {
   const { mealSlug } = await params;
-  const meal = await getMeal(mealSlug);
+  const [meal, user] = await Promise.all([
+    getMeal(mealSlug),
+    getUserFromCookies(),
+  ]);
 
   if (!meal) return notFound();
+
+  const mealId = meal._id.toString();
+  const userId = user?.userId || null;
+  const favorite = userId
+    ? await Favorite.findOne({ mealId, userId }).select("_id").lean()
+    : null;
 
   return (
     <div className={styles.container}>
@@ -43,7 +55,14 @@ export default async function MealDetailsPage({ params }) {
 
         <main className={styles.main}>
           <header className={styles.header}>
-            <h1 className={styles.title}>{meal.title}</h1>
+            <div className={styles.titleRow}>
+              <h1 className={styles.title}>{meal.title}</h1>
+              <FavoriteButton
+                mealId={mealId}
+                initialIsFavorite={Boolean(favorite)}
+                isAuthenticated={Boolean(userId)}
+              />
+            </div>
             <p className={styles.creator}>
               <ChefHat size={18} className={styles.creatorIcon}/> Recipe by <span>{meal.creator}</span>
             </p>

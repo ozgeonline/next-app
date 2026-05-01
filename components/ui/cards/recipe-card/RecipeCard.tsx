@@ -1,12 +1,15 @@
 import Image from "next/image";
 import { cache } from "react";
+import mongoose from "mongoose";
 import connect from "@/lib/db";
 import Meal from "@/models/Meal";
+import Favorite from "@/models/Favorite";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
+import FavoriteButton from "@/components/favorites/favorite-button/FavoriteButton";
 import RatingStars from "@/components/meals/rating-stars/RatingStars";
 import { Button } from "@/components/ui/button/Button";
 import styles from "./recipe-card.module.css";
-import { Star, Heart, ArrowRight, Utensils, User } from "lucide-react";
+import { Star, ArrowRight, Utensils, User } from "lucide-react";
 
 const RATING_STARS = 5;
 
@@ -27,11 +30,6 @@ type RecipeCardProps = {
   spotlight?: boolean;
 };
 
-function createStableLikeCount(id: string) {
-  const hash = [...id].reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  return 50 + (hash % 100);
-}
-
 function normalizeMeal(meal: MealCardData) {
   const id = meal.id || meal._id?.toString() || meal.slug || meal.title || "meal";
 
@@ -44,7 +42,6 @@ function normalizeMeal(meal: MealCardData) {
     creator: meal.creator || "Unknown",
     averageRating: meal.averageRating || 0,
     ratingCount: meal.ratingCount || 0,
-    likes: createStableLikeCount(id),
     category: "Recipe",
   };
 }
@@ -105,6 +102,17 @@ export default async function RecipeCard({ meals }: RecipeCardProps = {}) {
 
   const userId = user?.userId || null;
 
+  const validMealIds = transformedMeals
+    .map((meal) => meal.id)
+    .filter((id) => mongoose.Types.ObjectId.isValid(id));
+  const favoriteIds = new Set(
+    userId && validMealIds.length > 0
+      ? (await Favorite.find({ userId, mealId: { $in: validMealIds } })
+        .select("mealId")
+        .lean()).map((favorite) => favorite.mealId.toString())
+      : []
+  );
+
   return (
     <>
       {transformedMeals.map((meal) => (
@@ -130,9 +138,13 @@ export default async function RecipeCard({ meals }: RecipeCardProps = {}) {
                 </div>
                 <span className={styles.username}>{meal.creator}</span>
               </div>
-              <div className={styles.likes}>
-                <Heart size={16} className={styles.heartIcon} />
-                <span>{meal.likes}</span>
+              <div className={styles.favoriteAction}>
+                <FavoriteButton
+                  mealId={meal.id}
+                  initialIsFavorite={favoriteIds.has(meal.id)}
+                  isAuthenticated={Boolean(userId)}
+                  compact
+                />
               </div>
             </div>
 

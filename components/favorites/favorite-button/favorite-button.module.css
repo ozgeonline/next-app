@@ -1,0 +1,49 @@
+.favoriteButton {
+  width: 2.25rem;
+  height: 2.25rem;
+  min-width: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--merino-200);
+  background: var(--neutral-50);
+  color: var(--neutral-500);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.favoriteButton:hover:not(:disabled),
+.favoriteButton.active {
+  border-color: var(--charm-500);
+  background: var(--charm-50);
+  color: var(--charm-500);
+  transform: translateY(-1px);
+}
+
+.favoriteButton:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.favoriteButton svg {
+  display: block;
+}
+
+.compact {
+  width: 2rem;
+  height: 2rem;
+}
+
+[data-theme="dark"] .favoriteButton {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--neutral-500);
+}
+
+[data-theme="dark"] .favoriteButton:hover:not(:disabled),
+[data-theme="dark"] .favoriteButton.active {
+  border-color: var(--apple-500);
+  background: rgba(164, 207, 135, 0.1);
+  color: var(--apple-500);
+}

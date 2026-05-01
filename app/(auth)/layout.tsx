@@ -4,9 +4,10 @@ import { ReactNode, useEffect } from 'react';
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth/AuthProvider";
 import { Button } from "@/components/ui/button/Button";
+import FavoriteCountBadge from "@/components/favorites/favorite-count-badge/FavoriteCountBadge";
 import styles from "./auth.module.css";
 import TopScrollButton from '@/components/ui/topScrollButton/TopScrollButton';
-import { Leaf, LogOut, Calendar, User as UserIcon } from 'lucide-react';
+import { Leaf, LogOut, Calendar, Heart, User as UserIcon } from 'lucide-react';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   const { user, isAuthenticated, loading, logout } = useAuth();
@@ -73,6 +74,17 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
                   iconLeft={<Calendar size={18} />}
                 >
                   My Reservations
+                </Button>
+                <Button
+                  href="/favorites"
+                  variant="plain"
+                  className={`${styles.actionBtn} ${styles.secondaryAction}`}
+                >
+                  <span className={styles.actionLabel}>
+                    <Heart size={18} />
+                    <span>Favorite Meals</span>
+                  </span>
+                  <FavoriteCountBadge />
                 </Button>
                 <Button
                   onClick={handleSignout}

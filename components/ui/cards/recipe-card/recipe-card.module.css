@@ -89,21 +89,10 @@
   color: var(--neutral-600);
 }
 
-.likes {
+.favoriteAction {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  color: var(--neutral-500);
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.heartIcon {
-  color: var(--charm-500);
-}
-
-[data-theme="dark"] .heartIcon {
-  color: var(--apple-500);
+  justify-content: flex-end;
 }
 
 .recipeTitle {
@@ -185,7 +174,6 @@
 }
 
 [data-theme="dark"] .username,
-[data-theme="dark"] .likes,
 [data-theme="dark"] .ratingText {
   color: var(--neutral-400);
 }
