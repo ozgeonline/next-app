@@ -5,7 +5,7 @@
   flex-direction: column;
   position: relative;
   background: var(--merino-50);
-  overflow-x: hidden;
+  overflow-x: clip;
   padding-bottom: 2.5rem;
   z-index: 2;
   padding-top: 1rem;
@@ -85,8 +85,47 @@
 @media (min-width: 1024px) {
   .mainContent {
     flex-direction: row;
-    align-items: stretch;
+    align-items: flex-start;
+    display: grid;
+    grid-template-columns: minmax(280px, 32%) minmax(0, 1fr);
+    max-height: calc(100vh - 15rem);
   }
+
+  .identityColumn {
+    align-self: flex-start;
+  }
+
+  .identityCard {
+    height: fit-content;
+  }
+
+  .contentCard {
+    grid-column: 2;
+    max-height: calc(100vh - 15rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--charm-400) var(--merino-100);
+  }
+}
+
+.contentCard::-webkit-scrollbar {
+  width: 0.55rem;
+}
+
+.contentCard::-webkit-scrollbar-track {
+  background: var(--merino-100);
+  border-radius: 999px;
+}
+
+.contentCard::-webkit-scrollbar-thumb {
+  background: var(--charm-400);
+  border-radius: 999px;
+  border: 2px solid var(--merino-100);
+}
+
+.contentCard::-webkit-scrollbar-thumb:hover {
+  background: var(--charm-500);
 }
 
 .identityCard {
@@ -203,6 +242,7 @@
 
 .contentCard {
   flex: 1.2;
+  min-width: 0;
   background: white;
   border-radius: 40px;
   padding: 1.5rem 1.75rem;
@@ -236,6 +276,23 @@
 [data-theme="dark"] .contentCard {
   background: rgba(255, 255, 255, 0.03);
   border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .contentCard {
+  scrollbar-color: var(--apple-500) var(--neutral-200);
+}
+
+[data-theme="dark"] .contentCard::-webkit-scrollbar-track {
+  background: var(--neutral-200);
+}
+
+[data-theme="dark"] .contentCard::-webkit-scrollbar-thumb {
+  background: var(--apple-500);
+  border-color: var(--neutral-200);
+}
+
+[data-theme="dark"] .contentCard::-webkit-scrollbar-thumb:hover {
+  background: var(--apple-600);
 }
 
 [data-theme="dark"] .heroTitle,

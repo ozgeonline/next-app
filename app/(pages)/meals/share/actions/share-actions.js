@@ -67,6 +67,7 @@ export default async function shareMeal(prevState, formData) {
       title,
       summary,
       instructions,
+      creatorId: user.userId,
       creator: user.name,
       creator_email: user.email,
       image: imageUrl,
@@ -77,5 +78,6 @@ export default async function shareMeal(prevState, formData) {
   }
 
   revalidatePath("/meals");
+  revalidatePath("/sharedmeals");
   redirect("/meals");
 }

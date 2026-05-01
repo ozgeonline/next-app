@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button/Button";
 import FavoriteCountBadge from "@/components/favorites/favorite-count-badge/FavoriteCountBadge";
 import styles from "./auth.module.css";
 import TopScrollButton from '@/components/ui/topScrollButton/TopScrollButton';
-import { Leaf, LogOut, Calendar, Heart, User as UserIcon } from 'lucide-react';
+import { Leaf, LogOut, Calendar, Heart, BookOpen, User as UserIcon } from 'lucide-react';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   const { user, isAuthenticated, loading, logout } = useAuth();
@@ -54,59 +54,69 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       {/* MAIN CONTENT */}
       <main className={styles.mainContent}>
         {/* IDENTITY CARD (LEFT) */}
-        <div className={styles.identityCard}>
-          <div className={styles.avatarCircle}>
-            {user?.name ? user.name.slice(0, 2).toUpperCase() : <UserIcon size={40} />}
-          </div>
+        <aside className={styles.identityColumn}>
+          <div className={styles.identityCard}>
+            <div className={styles.avatarCircle}>
+              {user?.name ? user.name.slice(0, 2).toUpperCase() : <UserIcon size={40} />}
+            </div>
 
-          <div className={styles.userInfo}>
-            <h2 className={styles.userName}>{user?.name || "Guest"}</h2>
-            <p className={styles.userSub}>{user?.email || "Join our community"}</p>
-          </div>
+            <div className={styles.userInfo}>
+              <h2 className={styles.userName}>{user?.name || "Guest"}</h2>
+              <p className={styles.userSub}>{user?.email || "Join our community"}</p>
+            </div>
 
-          <div className={styles.actionStack}>
-            {isAuthenticated ? (
-              <>
-                <Button
-                  href="/reservations"
-                  variant="plain"
-                  className={`${styles.actionBtn} ${styles.primaryAction}`}
-                  iconLeft={<Calendar size={18} />}
-                >
-                  My Reservations
-                </Button>
-                <Button
-                  href="/favorites"
-                  variant="plain"
-                  className={`${styles.actionBtn} ${styles.secondaryAction}`}
-                >
-                  <span className={styles.actionLabel}>
-                    <Heart size={18} />
-                    <span>Favorite Meals</span>
-                  </span>
-                  <FavoriteCountBadge />
-                </Button>
-                <Button
-                  onClick={handleSignout}
-                  variant="plain"
-                  className={styles.logoutBtn}
-                  iconLeft={<LogOut size={16} />}
-                >
-                  Sign Out
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button href="/login" variant="plain" className={`${styles.actionBtn} ${styles.primaryAction}`}>
-                  Login
-                </Button>
-                <Button href="/signup" variant="plain" className={`${styles.actionBtn} ${styles.secondaryAction}`}>
-                  Create Account
-                </Button>
-              </>
-            )}
+            <div className={styles.actionStack}>
+              {isAuthenticated ? (
+                <>
+                  <Button
+                    href="/reservations"
+                    variant="plain"
+                    className={`${styles.actionBtn} ${styles.primaryAction}`}
+                    iconLeft={<Calendar size={18} />}
+                  >
+                    My Reservations
+                  </Button>
+                  <Button
+                    href="/favorites"
+                    variant="plain"
+                    className={`${styles.actionBtn} ${styles.secondaryAction}`}
+                  >
+                    <span className={styles.actionLabel}>
+                      <Heart size={18} />
+                      <span>Favorite Meals</span>
+                    </span>
+                    <FavoriteCountBadge />
+                  </Button>
+                  <Button
+                    href="/sharedmeals"
+                    variant="plain"
+                    className={`${styles.actionBtn} ${styles.secondaryAction}`}
+                    iconLeft={<BookOpen size={18} />}
+                  >
+                    My Shared Meals
+                  </Button>
+                  <Button
+                    onClick={handleSignout}
+                    variant="plain"
+                    className={styles.logoutBtn}
+                    iconLeft={<LogOut size={16} />}
+                  >
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button href="/login" variant="plain" className={`${styles.actionBtn} ${styles.primaryAction}`}>
+                    Login
+                  </Button>
+                  <Button href="/signup" variant="plain" className={`${styles.actionBtn} ${styles.secondaryAction}`}>
+                    Create Account
+                  </Button>
+                </>
+              )}
+            </div>
           </div>
-        </div>
+        </aside>
 
         {/* CONTENT CARD (RIGHT) */}
         <div className={styles.contentCard}>

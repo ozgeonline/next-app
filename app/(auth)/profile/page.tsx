@@ -16,7 +16,7 @@ const fetcher = async (url: string) => {
 };
 
 type MealSummary = {
-  creator_email?: string;
+  id: string;
 };
 
 export default function ProfilePage() {
@@ -27,11 +27,12 @@ export default function ProfilePage() {
   const [newName, setNewName] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { data: allMeals } = useSWR<MealSummary[]>(isAuthenticated ? '/api/meals/meal' : null, fetcher);
+  const { data: sharedMealsData } = useSWR<{ meals: MealSummary[] }>(
+    isAuthenticated ? "/api/meals/shared" : null,
+    fetcher
+  );
 
-  const recipesCount = allMeals?.filter(
-    (meal) => meal.creator_email === user?.email
-  ).length || 0;
+  const recipesCount = sharedMealsData?.meals.length || 0;
 
   const handleUpdate = async () => {
     if (!newName.trim()) return;

@@ -1,0 +1,322 @@
+.sharedSection {
+  background: white;
+  border: 1px solid var(--merino-100);
+  border-radius: 24px;
+  padding: 1.35rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sectionTitle {
+  font-family: "Fraunces", serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+}
+
+.sectionSub,
+.emptyText {
+  color: var(--neutral-500);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.backButton {
+  width: auto;
+  min-width: 0;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--merino-300);
+  border-radius: 999px;
+  color: var(--charm-700);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.backButton:hover {
+  border-color: var(--charm-500);
+  background: var(--charm-50);
+}
+
+.emptyState {
+  border: 1px dashed var(--merino-300);
+  border-radius: 18px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mealsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mealCard {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: stretch;
+  border: 1px solid var(--merino-200);
+  border-radius: 18px;
+  background: var(--merino-50);
+  padding: 0.85rem;
+  min-width: 0;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.mealImage {
+  object-fit: cover;
+}
+
+.cardContent {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.meta {
+  color: var(--neutral-500);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.mealTitle {
+  font-family: "Fraunces", serif;
+  color: var(--neutral-900);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.summary {
+  color: var(--neutral-600);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.viewButton,
+.editButton,
+.cancelButton,
+.saveButton,
+.deleteButton {
+  width: auto;
+  min-width: 0;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.viewButton,
+.editButton,
+.cancelButton {
+  border: 1px solid var(--merino-300);
+  color: var(--neutral-600);
+}
+
+.viewButton:hover,
+.editButton:hover,
+.cancelButton:hover {
+  border-color: var(--charm-400);
+  color: var(--charm-700);
+  background: var(--charm-50);
+}
+
+.saveButton {
+  border: 1px solid var(--charm-500);
+  background: var(--charm-500);
+  color: var(--charm-50);
+}
+
+.saveButton:hover {
+  background: var(--charm-600);
+}
+
+.deleteButton {
+  border: 1px solid var(--monza-200);
+  color: var(--monza-700);
+  background: var(--monza-50);
+}
+
+.deleteButton:hover {
+  border-color: var(--monza-400);
+  background: var(--monza-100);
+}
+
+.editForm {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.fieldLabel {
+  color: var(--neutral-500);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.textInput,
+.textArea {
+  width: 100%;
+  border: 1px solid var(--merino-200);
+  border-radius: 12px;
+  background: white;
+  color: var(--neutral-900);
+  font: inherit;
+  padding: 0.7rem 0.8rem;
+  outline: none;
+  resize: vertical;
+}
+
+.textInput:focus,
+.textArea:focus {
+  border-color: var(--charm-400);
+  box-shadow: 0 0 0 3px rgba(217, 108, 138, 0.12);
+}
+
+.errorText {
+  color: var(--monza-700);
+  background: var(--monza-50);
+  border: 1px solid var(--monza-200);
+  padding: 0.8rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .sharedSection,
+[data-theme="dark"] .mealCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .sectionTitle,
+[data-theme="dark"] .mealTitle,
+[data-theme="dark"] .textInput,
+[data-theme="dark"] .textArea {
+  color: var(--text);
+}
+
+[data-theme="dark"] .sectionSub,
+[data-theme="dark"] .emptyText,
+[data-theme="dark"] .summary,
+[data-theme="dark"] .meta,
+[data-theme="dark"] .fieldLabel {
+  color: var(--neutral-400);
+}
+
+[data-theme="dark"] .backButton,
+[data-theme="dark"] .viewButton,
+[data-theme="dark"] .editButton,
+[data-theme="dark"] .cancelButton {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .backButton:hover,
+[data-theme="dark"] .viewButton:hover,
+[data-theme="dark"] .editButton:hover,
+[data-theme="dark"] .cancelButton:hover {
+  border-color: var(--apple-500);
+  background: rgba(164, 207, 135, 0.1);
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .saveButton {
+  border-color: var(--apple-500);
+  background: var(--apple-500);
+  color: var(--apple-950);
+}
+
+[data-theme="dark"] .saveButton:hover {
+  background: var(--apple-600);
+}
+
+[data-theme="dark"] .textInput,
+[data-theme="dark"] .textArea {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .textInput:focus,
+[data-theme="dark"] .textArea:focus {
+  border-color: var(--apple-500);
+  box-shadow: 0 0 0 3px rgba(164, 207, 135, 0.12);
+}
+
+[data-theme="dark"] .emptyState {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 860px) {
+  .mealCard {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  .cardActions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .sharedSection {
+    padding: 1rem;
+  }
+
+  .sectionHeader,
+  .emptyState {
+    flex-direction: column;
+  }
+
+  .backButton,
+  .emptyState a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mealCard {
+    grid-template-columns: 1fr;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 16 / 10;
+  }
+}
