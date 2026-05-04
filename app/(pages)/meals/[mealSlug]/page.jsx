@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { ArrowLeft, ChefHat, Info } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button/Button";
-import FavoriteButton from "@/components/favorites/favorite-button/FavoriteButton";
+import MealDetailView from "@/components/meals/meal-detail-view/MealDetailView";
 import Favorite from "@/models/Favorite";
+import Comment from "@/models/Comment";
 import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import styles from "./page.module.css";
 import { getMeal } from "@/lib/meals";
@@ -32,9 +33,13 @@ export default async function MealDetailsPage({ params }) {
 
   const mealId = meal._id.toString();
   const userId = user?.userId || null;
+  const isMealCreator = meal.creatorId
+    ? meal.creatorId.toString() === userId
+    : Boolean(user?.email && meal.creator_email === user.email);
   const favorite = userId
     ? await Favorite.findOne({ mealId, userId }).select("_id").lean()
     : null;
+  const commentCount = await Comment.countDocuments({ mealId, status: "visible" });
 
   return (
     <div className={styles.container}>
@@ -54,35 +59,17 @@ export default async function MealDetailsPage({ params }) {
         </div>
 
         <main className={styles.main}>
-          <header className={styles.header}>
-            <div className={styles.titleRow}>
-              <h1 className={styles.title}>{meal.title}</h1>
-              <FavoriteButton
-                mealId={mealId}
-                initialIsFavorite={Boolean(favorite)}
-                isAuthenticated={Boolean(userId)}
-              />
-            </div>
-            <p className={styles.creator}>
-              <ChefHat size={18} className={styles.creatorIcon}/> Recipe by <span>{meal.creator}</span>
-            </p>
-            <p className={styles.summary}>{meal.summary}</p>
-          </header>
-
-          <section className={styles.instructionsSection}>
-            <div className={styles.sectionHeader}>
-              <div className={styles.iconCircle}><Info size={18} /></div>
-              <h2>Instructions</h2>
-            </div>
-            <ul className={styles.instructionsList}>
-              {meal.instructions.split("\n").filter((line) => line.trim()).map((line, index) => (
-                <li key={`${index}-${line}`}>
-                  <span className={styles.stepNumber}>{index + 1}</span>
-                  <p>{line.trim()}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
+          <MealDetailView
+            mealId={mealId}
+            title={meal.title}
+            creator={meal.creator}
+            summary={meal.summary}
+            instructions={meal.instructions}
+            initialIsFavorite={Boolean(favorite)}
+            isAuthenticated={Boolean(userId)}
+            isMealCreator={isMealCreator}
+            initialCommentCount={commentCount}
+          />
         </main>
 
       </div>

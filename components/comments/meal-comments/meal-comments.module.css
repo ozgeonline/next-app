@@ -1,0 +1,394 @@
+.commentsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: var(--neutral-50);
+  border: 1px solid var(--neutral-100);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-bottom: 1px solid var(--neutral-200);
+  padding-bottom: 1rem;
+}
+
+.iconCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--neutral-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--charm-600);
+  flex-shrink: 0;
+}
+
+.sectionHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.sectionHeader p,
+.emptyText {
+  color: var(--neutral-500);
+  font-size: 0.92rem;
+}
+
+.commentForm,
+.editBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.backToRecipeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: fit-content;
+  min-width: 0;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--merino-300);
+  color: var(--charm-700);
+  font-weight: 800;
+  background: transparent;
+}
+
+.backToRecipeButton:hover {
+  border-color: var(--charm-400);
+  background: var(--charm-50);
+}
+
+.commentInput {
+  width: 100%;
+  min-height: 7rem;
+  resize: vertical;
+  border: 1px solid var(--merino-200);
+  border-radius: 14px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+  line-height: 1.5;
+  padding: 0.9rem 1rem;
+  outline: none;
+}
+
+.commentInput:focus {
+  border-color: var(--charm-400);
+  box-shadow: 0 0 0 3px rgba(217, 108, 138, 0.12);
+}
+
+.formFooter,
+.editActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.formFooter span {
+  color: var(--neutral-500);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.submitButton,
+.saveButton,
+.cancelButton {
+  width: auto;
+  min-width: 0;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.submitButton,
+.saveButton {
+  background: var(--charm-500);
+  color: var(--charm-50);
+  border: 1px solid var(--charm-500);
+}
+
+.submitButton:hover:not(:disabled),
+.saveButton:hover:not(:disabled) {
+  background: var(--charm-600);
+}
+
+.submitButton:disabled,
+.saveButton:disabled,
+.cancelButton:disabled,
+.deleteButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  color: var(--neutral-600);
+  border: 1px solid var(--merino-300);
+}
+
+.loginPrompt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px dashed var(--merino-300);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.loginPrompt p,
+.ownerNotice p {
+  color: var(--neutral-600);
+  font-weight: 600;
+}
+
+.ownerNotice {
+  border: 1px dashed var(--merino-300);
+  border-radius: 16px;
+  padding: 1rem;
+  background: var(--merino-50);
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.commentCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: white;
+  border: 1px solid var(--merino-100);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.replyList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-left: 1.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--merino-200);
+}
+
+.replyCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: var(--merino-50);
+  border: 1px solid var(--merino-100);
+  border-radius: 14px;
+  padding: 0.9rem;
+}
+
+.commentMeta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.commentMeta h3 {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.commentMeta span {
+  color: var(--neutral-500);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.commentText {
+  color: var(--neutral-700);
+  line-height: 1.55;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.commentActions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.replyButton {
+  width: fit-content;
+  min-width: 0;
+  padding: 0.4rem 0.65rem;
+  border-radius: 999px;
+  color: var(--charm-600);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.replyButton:hover {
+  background: var(--charm-50);
+}
+
+.replyForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-left: 1.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--charm-200);
+}
+
+.iconButton,
+.deleteButton {
+  width: 2rem;
+  height: 2rem;
+  min-width: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--merino-200);
+  color: var(--neutral-500);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconButton:hover {
+  color: var(--charm-600);
+  border-color: var(--charm-300);
+  background: var(--charm-50);
+}
+
+.deleteButton {
+  color: var(--monza-600);
+}
+
+.deleteButton:hover {
+  border-color: var(--monza-300);
+  background: var(--monza-50);
+}
+
+.errorText {
+  color: var(--monza-700);
+  background: var(--monza-50);
+  border: 1px solid var(--monza-200);
+  padding: 0.8rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .commentsSection {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .iconCircle {
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .commentInput,
+[data-theme="dark"] .commentCard,
+[data-theme="dark"] .replyCard,
+[data-theme="dark"] .ownerNotice {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .commentInput:focus {
+  border-color: var(--apple-500);
+  box-shadow: 0 0 0 3px rgba(164, 207, 135, 0.12);
+}
+
+[data-theme="dark"] .submitButton,
+[data-theme="dark"] .saveButton {
+  background: var(--apple-500);
+  border-color: var(--apple-500);
+  color: var(--apple-950);
+}
+
+[data-theme="dark"] .submitButton:hover:not(:disabled),
+[data-theme="dark"] .saveButton:hover:not(:disabled) {
+  background: var(--apple-600);
+}
+
+[data-theme="dark"] .iconButton:hover {
+  color: var(--apple-500);
+  border-color: var(--apple-500);
+  background: rgba(164, 207, 135, 0.1);
+}
+
+[data-theme="dark"] .replyButton {
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .backToRecipeButton {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .backToRecipeButton:hover {
+  border-color: var(--apple-500);
+  background: rgba(164, 207, 135, 0.1);
+}
+
+[data-theme="dark"] .replyButton:hover {
+  background: rgba(164, 207, 135, 0.1);
+}
+
+[data-theme="dark"] .replyList {
+  border-left-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .replyForm {
+  border-left-color: var(--apple-500);
+}
+
+[data-theme="dark"] .commentText {
+  color: var(--neutral-600);
+}
+
+[data-theme="dark"] .loginPrompt,
+[data-theme="dark"] .cancelButton,
+[data-theme="dark"] .iconButton,
+[data-theme="dark"] .deleteButton {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 640px) {
+  .commentsSection {
+    padding: 1.25rem;
+  }
+
+  .formFooter,
+  .editActions,
+  .loginPrompt {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .replyList,
+  .replyForm {
+    margin-left: 0;
+  }
+
+  .submitButton,
+  .saveButton,
+  .cancelButton,
+  .backToRecipeButton,
+  .loginPrompt a {
+    width: 100%;
+    justify-content: center;
+  }
+}

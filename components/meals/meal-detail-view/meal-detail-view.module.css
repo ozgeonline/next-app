@@ -1,0 +1,213 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.title {
+  font-family: 'Fraunces', serif;
+  font-size: 3rem;
+  line-height: 1.1;
+  font-weight: 600;
+  color: var(--charm-800);
+  margin: 0;
+}
+
+.actionGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-shrink: 0;
+}
+
+.commentToggle {
+  min-width: 0;
+  height: 2.25rem;
+  padding: 0 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--merino-200);
+  background: var(--neutral-50);
+  color: var(--neutral-500);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  transition: all 0.25s ease;
+}
+
+.commentToggle:hover,
+.activeCommentToggle {
+  border-color: var(--charm-500);
+  background: var(--charm-50);
+  color: var(--charm-500);
+  transform: translateY(-1px);
+}
+
+.creator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--neutral-500);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.creatorIcon {
+  color: var(--charm-600);
+}
+
+.creator span {
+  color: var(--charm-600);
+  font-weight: 700;
+}
+
+.summary {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--neutral-600);
+  font-style: italic;
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--charm-700);
+}
+
+.instructionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: var(--neutral-50);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--neutral-100);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-bottom: 1px solid var(--neutral-200);
+  padding-bottom: 1rem;
+}
+
+.iconCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--neutral-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--charm-600);
+}
+
+.sectionHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.instructionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.instructionsList li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  background: var(--charm-200);
+  color: var(--charm-900);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.instructionsList p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text);
+  padding-top: 0.15rem;
+}
+
+[data-theme="dark"] .title {
+  color: var(--text);
+}
+
+[data-theme="dark"] .creatorIcon,
+[data-theme="dark"] .creator span,
+[data-theme="dark"] .iconCircle {
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .summary {
+  color: var(--neutral-400);
+  border-left-color: var(--apple-700);
+}
+
+[data-theme="dark"] .instructionsSection {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .commentToggle {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--neutral-500);
+}
+
+[data-theme="dark"] .commentToggle:hover,
+[data-theme="dark"] .activeCommentToggle {
+  border-color: var(--apple-500);
+  background: rgba(164, 207, 135, 0.1);
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .stepNumber {
+  border: 1px solid var(--apple-700);
+  background: transparent;
+  color: var(--apple-500);
+}
+
+@media (max-width: 1024px) {
+  .summary {
+    font-size: 1.1rem;
+    padding-left: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .titleRow {
+    align-items: center;
+  }
+}
