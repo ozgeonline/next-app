@@ -12,6 +12,11 @@ type ReservationResponseItem = {
   time: string;
   guests: number;
   notes?: string | null;
+  status?: SavedReservation["status"];
+  editCount?: number;
+  cancelledAt?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 interface ReservationState {
@@ -41,6 +46,11 @@ const fetcher = async (url: string) => {
     time: reservation.time,
     guests: reservation.guests,
     notes: reservation.notes || null,
+    status: reservation.status || "active",
+    editCount: reservation.editCount || 0,
+    cancelledAt: reservation.cancelledAt || null,
+    createdAt: reservation.createdAt,
+    updatedAt: reservation.updatedAt,
   })) as SavedReservation[];
 };
 

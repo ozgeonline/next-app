@@ -8,6 +8,13 @@ import { SavedReservation } from "@/types/reservationTypes";
 import type { ClientUser } from "@/types/userTypes";
 import { Button } from "@/components/ui/button/Button";
 import WavesBackground from "@/components/ui/backgrounds/wavesBackground/WavesBackground";
+import {
+  canEditReservation,
+  getReservationDateTime,
+  isPastReservation,
+  MAX_RESERVATION_EDITS,
+  RESERVATION_EDIT_CUTOFF_HOURS,
+} from "@/lib/reservations";
 import styles from "./reservation.module.css";
 import {
   ArrowRight,
@@ -17,7 +24,7 @@ import {
   FileText,
   Leaf,
   Mail,
-  Trash2,
+  XCircle,
   User,
   Users,
 } from "lucide-react";
@@ -46,6 +53,26 @@ function getInfoItems(reservation: SavedReservation, user: ClientUser | null) {
   ];
 }
 
+function getReservationStatusLabel(reservation: SavedReservation) {
+  if (reservation.status === "cancelled") return "Cancelled";
+  if (isPastReservation(reservation.date, reservation.time)) return "Past";
+  return "Active";
+}
+
+function getReservationStatusClass(reservation: SavedReservation) {
+  if (reservation.status === "cancelled") return styles.cancelledStatus;
+  if (isPastReservation(reservation.date, reservation.time)) return styles.pastStatus;
+  return styles.activeStatus;
+}
+
+function sortReservationsByDate(direction: "asc" | "desc") {
+  return (first: SavedReservation, second: SavedReservation) => {
+    const firstTime = getReservationDateTime(first.date, first.time).getTime();
+    const secondTime = getReservationDateTime(second.date, second.time).getTime();
+    return direction === "asc" ? firstTime - secondTime : secondTime - firstTime;
+  };
+}
+
 export default function ReservationPage() {
   const { user, loading: authLoading } = useAuth();
   const {
@@ -61,12 +88,32 @@ export default function ReservationPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const upcomingReservations = reservations.filter((savedReservation) => (
+    savedReservation.status !== "cancelled" &&
+    !isPastReservation(savedReservation.date, savedReservation.time)
+  )).sort(sortReservationsByDate("asc"));
+  const pastReservations = reservations.filter((savedReservation) => (
+    savedReservation.status !== "cancelled" &&
+    isPastReservation(savedReservation.date, savedReservation.time)
+  )).sort(sortReservationsByDate("desc"));
+  const cancelledReservations = reservations.filter((savedReservation) => (
+    savedReservation.status === "cancelled"
+  )).sort(sortReservationsByDate("desc"));
+
   const showMessage = (type: "error" | "success", text: string) => {
     setMessage({ type, text });
     setTimeout(() => setMessage(null), 4000);
   };
 
   const handleEdit = (savedReservation: SavedReservation) => {
+    if (!canEditReservation(savedReservation)) {
+      showMessage(
+        "error",
+        `Reservations can be edited up to ${MAX_RESERVATION_EDITS} times and not within ${RESERVATION_EDIT_CUTOFF_HOURS} hours of the reservation time.`
+      );
+      return;
+    }
+
     setReservation({
       _id: savedReservation._id || "",
       date: new Date(savedReservation.date).toISOString().split("T")[0],
@@ -130,8 +177,8 @@ export default function ReservationPage() {
   };
 
   const checkReservationLimit = () => {
-    if (!editReservationId && reservations.length > 0) {
-      showMessage("error", "You can only have one active reservation.");
+    if (!editReservationId && upcomingReservations.length > 0) {
+      showMessage("error", "You can only have one upcoming active reservation.");
       return false;
     }
     return true;
@@ -180,8 +227,8 @@ export default function ReservationPage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this reservation?")) return;
+  const handleCancel = async (id: string) => {
+    if (!confirm("Are you sure you want to cancel this reservation?")) return;
 
     setIsDeleting(true);
     try {
@@ -194,13 +241,87 @@ export default function ReservationPage() {
 
       resetForm();
       await refetchReservations();
-      showMessage("success", "Reservation deleted successfully.");
+      showMessage("success", "Reservation cancelled successfully.");
     } catch (error: unknown) {
       showMessage("error", getErrorMessage(error));
     } finally {
       setIsDeleting(false);
     }
   };
+
+  const renderReservationList = (
+    title: string,
+    list: SavedReservation[],
+    emptyText: string
+  ) => (
+    <section className={styles.reservationGroup}>
+      <div className={styles.groupHeader}>
+        <h3>{title}</h3>
+        <span>{list.length}</span>
+      </div>
+
+      {list.length > 0 ? (
+        list.map((savedReservation) => {
+          const editable = canEditReservation(savedReservation);
+
+          return (
+            <div key={savedReservation._id} className={styles.detailsContainer}>
+              <div className={styles.statusRow}>
+                <span className={`${styles.statusBadge} ${getReservationStatusClass(savedReservation)}`}>
+                  {getReservationStatusLabel(savedReservation)}
+                </span>
+                <span className={styles.editMeta}>
+                  Edits used: {savedReservation.editCount || 0}/{MAX_RESERVATION_EDITS}
+                </span>
+              </div>
+
+              {getInfoItems(savedReservation, user).map((item) => (
+                <div key={item.label} className={styles.detailItem}>
+                  <div className={styles.detailLabel}>
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </div>
+                  <div className={styles.detailValue}>{item.value}</div>
+                </div>
+              ))}
+
+              {savedReservation.status === "active" && !isPastReservation(savedReservation.date, savedReservation.time) && (
+                <div className={styles.actionButtons}>
+                  <Button
+                    type="button"
+                    variant="plain"
+                    className={styles.editBtn}
+                    onClick={() => handleEdit(savedReservation)}
+                    disabled={!editable || editReservationId === savedReservation._id}
+                    iconLeft={<Edit3 size={22} />}
+                  >
+                    Update Reservation
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="plain"
+                    className={styles.deleteBtn}
+                    onClick={() => handleCancel(savedReservation._id || "")}
+                    disabled={isDeleting}
+                    iconLeft={<XCircle size={22} />}
+                  >
+                    {isDeleting ? "Cancelling..." : "Cancel Reservation"}
+                  </Button>
+                </div>
+              )}
+            </div>
+          );
+        })
+      ) : (
+        <div className={styles.emptyState}>
+          <p>{emptyText}</p>
+          {expiredMessage && title === "Past Reservations" && (
+            <p className={styles.expiredInfo}>{expiredMessage}</p>
+          )}
+        </div>
+      )}
+    </section>
+  );
 
   useEffect(() => {
     cleanupExpiredReservations(refetchReservations, setExpiredMessage);
@@ -342,49 +463,9 @@ export default function ReservationPage() {
                 </div>
 
                 <div className={styles.detailsList}>
-                  {reservations.length > 0 ? (
-                    reservations.map((savedReservation) => (
-                      <div key={savedReservation._id} className={styles.detailsContainer}>
-                        {getInfoItems(savedReservation, user).map((item) => (
-                          <div key={item.label} className={styles.detailItem}>
-                            <div className={styles.detailLabel}>
-                              {item.icon}
-                              <span>{item.label}</span>
-                            </div>
-                            <div className={styles.detailValue}>{item.value}</div>
-                          </div>
-                        ))}
-
-                        <div className={styles.actionButtons}>
-                          <Button
-                            type="button"
-                            variant="plain"
-                            className={styles.editBtn}
-                            onClick={() => handleEdit(savedReservation)}
-                            disabled={editReservationId === savedReservation._id}
-                            iconLeft={<Edit3 size={22} />}
-                          >
-                            Update Reservation
-                          </Button>
-                          <Button
-                            type="button"
-                            variant="plain"
-                            className={styles.deleteBtn}
-                            onClick={() => handleDelete(savedReservation._id || "")}
-                            disabled={isDeleting}
-                            iconLeft={<Trash2 size={22} />}
-                          >
-                            {isDeleting ? "Deleting..." : "Delete Reservation"}
-                          </Button>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className={styles.emptyState}>
-                      <p>No active reservations found.</p>
-                      {expiredMessage && <p className={styles.expiredInfo}>{expiredMessage}</p>}
-                    </div>
-                  )}
+                  {renderReservationList("Upcoming Reservations", upcomingReservations, "No upcoming reservations found.")}
+                  {renderReservationList("Past Reservations", pastReservations, "No past reservations yet.")}
+                  {renderReservationList("Cancelled Reservations", cancelledReservations, "No cancelled reservations.")}
                 </div>
               </div>
             </div>

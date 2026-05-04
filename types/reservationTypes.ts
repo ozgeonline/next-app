@@ -7,4 +7,9 @@ export interface SavedReservation {
   time: string;
   guests: number;
   notes: string | null;
+  status?: "active" | "cancelled";
+  editCount?: number;
+  cancelledAt?: string | Date | null;
+  createdAt?: string;
+  updatedAt?: string;
 }

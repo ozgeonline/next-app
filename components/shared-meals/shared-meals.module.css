@@ -134,7 +134,7 @@
 .deleteButton {
   width: auto;
   min-width: 0;
-  padding: 0.55rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 700;
@@ -146,6 +146,7 @@
 .viewButton,
 .editButton,
 .cancelButton {
+  background: transparent;
   border: 1px solid var(--merino-300);
   color: var(--neutral-600);
 }

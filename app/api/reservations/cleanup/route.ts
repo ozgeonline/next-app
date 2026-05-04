@@ -2,6 +2,8 @@ import { NextResponse, NextRequest } from "next/server";
 import Reservation from "@/models/Reservation";
 import connect from "@/lib/db";
 import { rateLimit } from "@/lib/rateLimit";
+import { getUserFromCookies } from "@/lib/getUserFromCookies";
+import { isPastReservation } from "@/lib/reservations";
 
 export async function DELETE(req: NextRequest) {
   try {
@@ -14,38 +16,26 @@ export async function DELETE(req: NextRequest) {
     }
     await connect();
 
-    const now = new Date();
-
-    // Check all reservations
-    const reservations = await Reservation.find({}, "_id date time");
-
-    const idsToDelete = [];
-
-    for (const res of reservations) {
-      if (!res.date || !res.time) continue;
-
-      const dateString = new Date(res.date).toISOString().split("T")[0];
-
-      const resFullDate = new Date(`${dateString}T${res.time}:00`);
-
-      if (resFullDate < now) {
-        idsToDelete.push(res._id);
-      }
+    const decoded = await getUserFromCookies();
+    if (!decoded) {
+      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
     }
 
-    let deletedCount = 0;
-    if (idsToDelete.length > 0) {
-      const result = await Reservation.deleteMany({ _id: { $in: idsToDelete } });
-      deletedCount = result.deletedCount;
-    }
+    const reservations = await Reservation.find({
+      userId: decoded.userId,
+      status: "active",
+    }).select("_id date time");
+
+    const pastCount = reservations.filter((reservation) => (
+      isPastReservation(reservation.date, reservation.time)
+    )).length;
 
     return NextResponse.json({
       success: true,
-      deletedCount: deletedCount, // ui
-      message: `${deletedCount} expired reservations removed.`,
+      pastCount,
+      message: `${pastCount} reservations are in history.`,
     });
   } catch (error) {
-    console.error("Cleanup error:", error);
     return NextResponse.json(
       { error: "Internal server error during cleanup" },
       { status: 500 }
