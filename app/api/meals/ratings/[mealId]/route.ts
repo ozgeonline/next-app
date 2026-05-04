@@ -30,12 +30,12 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ meal
 
     const decoded = await getUserFromCookies();
     if (!decoded) {
-      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
+      return NextResponse.json({ error: "Please log in to rate meals." }, { status: 401 });
     }
 
     const { mealId } = await params;
     if (!mongoose.Types.ObjectId.isValid(mealId)) {
-      return NextResponse.json({ error: "Invalid Meal ID format" }, { status: 400 });
+      return NextResponse.json({ error: "Rating could not be loaded." }, { status: 400 });
     }
 
     const mealObjectId = new mongoose.Types.ObjectId(mealId);
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ meal
     });
   } catch (error) {
     console.error('Error fetching rating:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ error: 'Rating could not be loaded.' }, { status: 500 });
   }
 }
 

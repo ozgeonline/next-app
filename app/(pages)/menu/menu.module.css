@@ -332,6 +332,7 @@
   border: 1px solid var(--merino-300);
   color: var(--charm-700);
   font-weight: 800;
+  background: transparent;
 }
 
 .clearFiltersButton:hover {

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { ArrowLeft, Edit3, MessageCircle, Reply, Save, Trash2, X } from "lucide-react";
+import { useToast } from "@/context/toast/ToastProvider";
 import { Button } from "@/components/ui/button/Button";
 import styles from "./meal-comments.module.css";
 
@@ -53,6 +54,7 @@ export default function MealComments({
   onBackToRecipe,
   onCommentCountChange,
 }: MealCommentsProps) {
+  const { toast } = useToast();
   const { data, error, isLoading, mutate } = useSWR<CommentsResponse>(
     `/api/meals/comments?mealId=${mealId}`,
     fetcher
@@ -64,7 +66,6 @@ export default function MealComments({
   const [replyContent, setReplyContent] = useState("");
   const [pendingCommentId, setPendingCommentId] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
 
   const comments = data?.comments || [];
   const parentComments = comments.filter((comment) => !comment.parentCommentId);
@@ -87,7 +88,6 @@ export default function MealComments({
     if (!nextContent.trim() || isSubmitting) return;
 
     setIsSubmitting(true);
-    setMessage(null);
 
     try {
       const response = await fetch("/api/meals/comments", {
@@ -98,7 +98,7 @@ export default function MealComments({
       const result = await response.json();
 
       if (!response.ok) {
-        setMessage(result.error || "Comment could not be added.");
+        toast.error(result.error || "Comment could not be added.");
         return;
       }
 
@@ -111,15 +111,15 @@ export default function MealComments({
       setContent("");
       setReplyContent("");
       setReplyingToCommentId(null);
+      toast.success(parentCommentId ? "Reply posted successfully." : "Comment posted successfully.");
     } catch {
-      setMessage("Comment could not be added.");
+      toast.error("Comment could not be added.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const startEditing = (comment: MealComment) => {
-    setMessage(null);
     setEditingCommentId(comment.id);
     setEditingContent(comment.content);
   };
@@ -129,14 +129,12 @@ export default function MealComments({
     setEditingContent("");
     setReplyingToCommentId(null);
     setReplyContent("");
-    setMessage(null);
   };
 
   const saveComment = async (commentId: string) => {
     if (!editingContent.trim()) return;
 
     setPendingCommentId(commentId);
-    setMessage(null);
 
     try {
       const response = await fetch(`/api/meals/comments/${commentId}`, {
@@ -147,7 +145,7 @@ export default function MealComments({
       const result = await response.json();
 
       if (!response.ok) {
-        setMessage(result.error || "Comment could not be updated.");
+        toast.error(result.error || "Comment could not be updated.");
         return;
       }
 
@@ -160,8 +158,9 @@ export default function MealComments({
         { revalidate: false }
       );
       cancelEditing();
+      toast.success("Comment updated successfully.");
     } catch {
-      setMessage("Comment could not be updated.");
+      toast.error("Comment could not be updated.");
     } finally {
       setPendingCommentId(null);
     }
@@ -172,7 +171,6 @@ export default function MealComments({
     if (!shouldDelete) return;
 
     setPendingCommentId(commentId);
-    setMessage(null);
 
     try {
       const response = await fetch(`/api/meals/comments/${commentId}`, {
@@ -181,7 +179,7 @@ export default function MealComments({
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        setMessage(result.error || "Comment could not be deleted.");
+        toast.error(result.error || "Comment could not be deleted.");
         return;
       }
 
@@ -191,8 +189,9 @@ export default function MealComments({
         }),
         { revalidate: false }
       );
+      toast.success("Comment deleted successfully.");
     } catch {
-      setMessage("Comment could not be deleted.");
+      toast.error("Comment could not be deleted.");
     } finally {
       setPendingCommentId(null);
     }
@@ -257,7 +256,6 @@ export default function MealComments({
         </div>
       )}
 
-      {message && <p className={styles.errorText}>{message}</p>}
       {isLoading && <p className={styles.emptyText}>Loading comments...</p>}
       {error && <p className={styles.errorText}>Comments could not be loaded.</p>}
 
@@ -346,7 +344,6 @@ export default function MealComments({
                     variant="plain"
                     className={styles.replyButton}
                     onClick={() => {
-                      setMessage(null);
                       setEditingCommentId(null);
                       setEditingContent("");
                       setReplyingToCommentId(comment.id);

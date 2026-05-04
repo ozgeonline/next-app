@@ -26,7 +26,7 @@ export async function PUT(
     await connect();
     const decoded = await getUserFromCookies();
     if (!decoded) {
-      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
+      return NextResponse.json({ error: "Please log in to update reservations." }, { status: 401 });
     }
 
     const { id } = await context.params;//reservation ID
@@ -79,8 +79,8 @@ export async function PUT(
       message: "Reservation updated successfully",
       reservation: populated,
     });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Reservation could not be updated. Please try again." }, { status: 500 });
   }
 }
 
@@ -99,7 +99,7 @@ export async function DELETE(
     await connect();
     const decoded = await getUserFromCookies();
     if (!decoded) {
-      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
+      return NextResponse.json({ error: "Please log in to cancel reservations." }, { status: 401 });
     }
 
     const { id } = await context.params;//reservation ID
@@ -125,7 +125,7 @@ export async function DELETE(
     await reservation.save();
 
     return NextResponse.json({ message: "Reservation cancelled successfully" });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Reservation could not be cancelled. Please try again." }, { status: 500 });
   }
 }

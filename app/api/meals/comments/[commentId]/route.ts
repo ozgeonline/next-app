@@ -68,7 +68,7 @@ export async function PATCH(
       },
     });
   } catch {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Comment could not be updated. Please try again." }, { status: 500 });
   }
 }
 
@@ -111,6 +111,6 @@ export async function DELETE(
 
     return NextResponse.json({ message: "Comment deleted successfully" });
   } catch {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Comment could not be deleted. Please try again." }, { status: 500 });
   }
 }

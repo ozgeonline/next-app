@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 
 const userSchema = new Schema<User>(
   {
-    name: { type: String, maxlength: 50 },
+    name: { type: String, maxlength: 20 },
     email: {
       type: String,
       required: true,

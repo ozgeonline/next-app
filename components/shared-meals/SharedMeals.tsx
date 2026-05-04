@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import useSWR from "swr";
 import { ArrowLeft, ArrowRight, Edit3, Save, Trash2, X } from "lucide-react";
+import { useToast } from "@/context/toast/ToastProvider";
 import { Button } from "@/components/ui/button/Button";
 import styles from "./shared-meals.module.css";
 
@@ -44,16 +45,15 @@ function getInitialFormState(meal: SharedMeal): EditableMealFields {
 }
 
 export default function SharedMeals() {
+  const { toast } = useToast();
   const { data, error, isLoading, mutate } = useSWR<SharedMealsResponse>("/api/meals/shared", fetcher);
   const [editingMealId, setEditingMealId] = useState<string | null>(null);
   const [formState, setFormState] = useState<EditableMealFields | null>(null);
   const [pendingMealId, setPendingMealId] = useState<string | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
 
   const meals = data?.meals || [];
 
   const startEditing = (meal: SharedMeal) => {
-    setMessage(null);
     setEditingMealId(meal.id);
     setFormState(getInitialFormState(meal));
   };
@@ -61,7 +61,6 @@ export default function SharedMeals() {
   const cancelEditing = () => {
     setEditingMealId(null);
     setFormState(null);
-    setMessage(null);
   };
 
   const updateField = (field: keyof EditableMealFields, value: string) => {
@@ -72,7 +71,6 @@ export default function SharedMeals() {
     if (!formState) return;
 
     setPendingMealId(mealId);
-    setMessage(null);
 
     try {
       const response = await fetch(`/api/meals/shared/${mealId}`, {
@@ -83,7 +81,7 @@ export default function SharedMeals() {
       const result = await response.json();
 
       if (!response.ok) {
-        setMessage(result.error || "Meal could not be updated.");
+        toast.error(result.error || "Meal could not be updated.");
         return;
       }
 
@@ -94,8 +92,9 @@ export default function SharedMeals() {
         { revalidate: false }
       );
       cancelEditing();
+      toast.success("Meal updated successfully.");
     } catch {
-      setMessage("Meal could not be updated.");
+      toast.error("Meal could not be updated.");
     } finally {
       setPendingMealId(null);
     }
@@ -106,7 +105,6 @@ export default function SharedMeals() {
     if (!shouldDelete) return;
 
     setPendingMealId(mealId);
-    setMessage(null);
 
     try {
       const response = await fetch(`/api/meals/shared/${mealId}`, {
@@ -115,7 +113,7 @@ export default function SharedMeals() {
 
       if (!response.ok) {
         const result = await response.json();
-        setMessage(result.error || "Meal could not be deleted.");
+        toast.error(result.error || "Meal could not be deleted.");
         return;
       }
 
@@ -125,8 +123,9 @@ export default function SharedMeals() {
         }),
         { revalidate: false }
       );
+      toast.success("Meal deleted successfully.");
     } catch {
-      setMessage("Meal could not be deleted.");
+      toast.error("Meal could not be deleted.");
     } finally {
       setPendingMealId(null);
     }
@@ -149,7 +148,6 @@ export default function SharedMeals() {
         </Button>
       </div>
 
-      {message && <p className={styles.errorText}>{message}</p>}
       {isLoading && <p className={styles.emptyText}>Loading shared meals...</p>}
       {error && <p className={styles.errorText}>Shared meals could not be loaded.</p>}
 

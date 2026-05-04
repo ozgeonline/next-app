@@ -13,12 +13,24 @@ interface AuthResult {
   redirectTo?: string;
 }
 
+const ACCOUNT_NAME_MIN_LENGTH = 2;
+const ACCOUNT_NAME_MAX_LENGTH = 20;
+
 function getJwtMaxAge(rememberMe: boolean) {
   return rememberMe ? "30d" : "7d";
 }
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isMongooseValidationError(error: unknown) {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "name" in error &&
+    error.name === "ValidationError"
+  );
 }
 
 export async function loginAction(
@@ -62,7 +74,7 @@ export async function loginAction(
 
     return { success: true };
   } catch {
-    return { success: false, error: "Internal server error" };
+    return { success: false, error: "Login could not be completed. Please try again." };
   }
 }
 
@@ -82,8 +94,8 @@ export async function signupAction(
       return { success: false, error: "Name, email, and password are required" };
     }
 
-    if (name.trim().length < 2 || name.trim().length > 50) {
-      return { success: false, error: "Name must be between 2 and 50 characters" };
+    if (name.trim().length < ACCOUNT_NAME_MIN_LENGTH || name.trim().length > ACCOUNT_NAME_MAX_LENGTH) {
+      return { success: false, error: `Name must be between ${ACCOUNT_NAME_MIN_LENGTH} and ${ACCOUNT_NAME_MAX_LENGTH} characters` };
     }
 
     if (!isValidEmail(email)) {
@@ -117,8 +129,12 @@ export async function signupAction(
     cookieStore.set("token", token, getAuthCookieOptions());
 
     return { success: true };
-  } catch {
-    return { success: false, error: "Internal server error" };
+  } catch (error: unknown) {
+    if (isMongooseValidationError(error)) {
+      return { success: false, error: "Please check your details and try again." };
+    }
+
+    return { success: false, error: "Signup could not be completed. Please try again." };
   }
 }
 
@@ -137,9 +153,15 @@ export async function updateUserNameAction(
       return { success: false, error: "Name is required" };
     }
 
+    const trimmedName = newName.trim();
+
+    if (trimmedName.length < ACCOUNT_NAME_MIN_LENGTH || trimmedName.length > ACCOUNT_NAME_MAX_LENGTH) {
+      return { success: false, error: `Name must be between ${ACCOUNT_NAME_MIN_LENGTH} and ${ACCOUNT_NAME_MAX_LENGTH} characters` };
+    }
+
     const updatedUser = await User.findByIdAndUpdate(
       decoded.userId,
-      { name: newName.trim() },
+      { name: trimmedName },
       { new: true, runValidators: true }
     );
 
@@ -162,7 +184,11 @@ export async function updateUserNameAction(
     cookieStore.set("token", token, getAuthCookieOptions());
 
     return { success: true };
-  } catch {
-    return { success: false, error: "Internal server error" };
+  } catch (error: unknown) {
+    if (isMongooseValidationError(error)) {
+      return { success: false, error: `Name must be between ${ACCOUNT_NAME_MIN_LENGTH} and ${ACCOUNT_NAME_MAX_LENGTH} characters` };
+    }
+
+    return { success: false, error: "Account name could not be updated. Please try again." };
   }
 }

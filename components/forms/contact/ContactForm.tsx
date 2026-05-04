@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAuth } from '@/context/auth/AuthProvider';
+import { useToast } from '@/context/toast/ToastProvider';
 import { sendContactEmail } from '@/lib/actions/contact';
 import { Button } from '@/components/ui/button/Button';
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
@@ -11,11 +12,10 @@ import { User as UserIcon, Mail, MessageSquare, ArrowRight } from 'lucide-react'
 
 function ContactFormInner() {
   const { user } = useAuth();
+  const { toast } = useToast();
   const { executeRecaptcha } = useGoogleReCaptcha();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [formStatus, setFormStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     if (user) {
@@ -35,10 +35,9 @@ function ContactFormInner() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError('');
 
     if (!executeRecaptcha) {
-      setError('reCAPTCHA is not loaded yet');
+      toast.warning('reCAPTCHA is not loaded yet');
       setIsSubmitting(false);
       return;
     }
@@ -54,14 +53,13 @@ function ContactFormInner() {
       );
 
       if (result.success) {
-        setFormStatus('Thank you! We will get back to you soon...');
+        toast.success('Thank you! We will get back to you soon.');
         setFormData({ name: user?.name || '', email: user?.email || '', message: '' });
-        setTimeout(() => setFormStatus(''), 5000);
       } else {
-        setError(result.error || 'Failed to send message');
+        toast.error(result.error || 'Message could not be sent. Please try again.');
       }
     } catch {
-      setError('An unexpected error occurred');
+      toast.error('Message could not be sent. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -84,7 +82,6 @@ function ContactFormInner() {
   return (
     <div className={styles.formWrapper}>
       <h3 className={styles.formTitle}>Reach Out</h3>
-      {error && <div className={styles.error}>{error}</div>}
 
       <form onSubmit={handleSubmit} className={styles.contactForm}>
         {formFields.map((field) => (
@@ -127,8 +124,6 @@ function ContactFormInner() {
         >
           {isSubmitting ? 'Sending...' : 'Send Message'}
         </Button>
-
-        {formStatus && <div className={styles.formStatus}>{formStatus}</div>}
       </form>
     </div>
   );

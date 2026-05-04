@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ meals }, { status: 200 });
   } catch {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Favorite meals could not be loaded." }, { status: 500 });
   }
 }
 
@@ -112,6 +112,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ isFavorite: true }, { status: 200 });
     }
 
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Favorite status could not be updated. Please try again." }, { status: 500 });
   }
 }

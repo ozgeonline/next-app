@@ -5,6 +5,18 @@ import { getUserFromCookies } from "@/lib/getUserFromCookies";
 import Rating from "@/models/Rating";
 import { rateLimit } from "@/lib/rateLimit";
 
+const ACCOUNT_NAME_MIN_LENGTH = 2;
+const ACCOUNT_NAME_MAX_LENGTH = 20;
+
+function isMongooseValidationError(error: unknown) {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "name" in error &&
+    error.name === "ValidationError"
+  );
+}
+
 export async function GET(req: Request) {
 
   const formatRatings = (ratings: any[]) => {
@@ -36,7 +48,7 @@ export async function GET(req: Request) {
 
     const decoded = await getUserFromCookies();
     if (!decoded) {
-      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
+      return NextResponse.json({ error: "Please log in again." }, { status: 401 });
     }
 
     const user = await User.findById(decoded.userId).select("name email");
@@ -88,7 +100,7 @@ export async function GET(req: Request) {
     if (process.env.NODE_ENV !== "production") {
       console.error("Error fetching user data:", error);
     }
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Account information could not be loaded." }, { status: 500 });
   }
 }
 
@@ -108,7 +120,7 @@ export async function PUT(req: Request) {
 
     const decoded = await getUserFromCookies();
     if (!decoded) {
-      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
+      return NextResponse.json({ error: "Please log in again." }, { status: 401 });
     }
 
     const body = await req.json();
@@ -118,9 +130,18 @@ export async function PUT(req: Request) {
       return NextResponse.json({ error: "Name is required and must be text" }, { status: 400 });
     }
 
+    const trimmedName = name.trim();
+
+    if (trimmedName.length < ACCOUNT_NAME_MIN_LENGTH || trimmedName.length > ACCOUNT_NAME_MAX_LENGTH) {
+      return NextResponse.json(
+        { error: `Name must be between ${ACCOUNT_NAME_MIN_LENGTH} and ${ACCOUNT_NAME_MAX_LENGTH} characters` },
+        { status: 400 }
+      );
+    }
+
     const updatedUser = await User.findByIdAndUpdate(
       decoded?.userId,
-      { name: name.trim() },
+      { name: trimmedName },
       { new: true, runValidators: true }
     ).select("name email");
 
@@ -140,8 +161,16 @@ export async function PUT(req: Request) {
     if (process.env.NODE_ENV !== "production") {
       console.error("Error updating user:", error);
     }
+
+    if (isMongooseValidationError(error)) {
+      return NextResponse.json(
+        { error: `Name must be between ${ACCOUNT_NAME_MIN_LENGTH} and ${ACCOUNT_NAME_MAX_LENGTH} characters` },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Account name could not be updated. Please try again." },
       { status: 500 }
     );
   }

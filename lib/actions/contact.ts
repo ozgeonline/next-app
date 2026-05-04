@@ -48,11 +48,11 @@ export async function sendContactEmail(
     const verifyData = await verifyRes.json();
 
     if (!verifyData.success || verifyData.score < 0.5) {
-      return { success: false, error: "CAPTCHA verification failed. Are you a bot?" };
+      return { success: false, error: "Verification failed. Please try again." };
     }
   } catch (error) {
     console.error("Captcha verification error:", error);
-    return { success: false, error: "Failed to verify CAPTCHA" };
+    return { success: false, error: "Verification could not be completed. Please try again." };
   }
 
   // Send the Email if everything is safe
@@ -67,12 +67,12 @@ export async function sendContactEmail(
 
     if (error) {
       console.error("Resend error:", error);
-      return { success: false, error: "Failed to send message" };
+      return { success: false, error: "Message could not be sent. Please try again." };
     }
 
     return { success: true };
   } catch (err) {
     console.error("Contact form error:", err);
-    return { success: false, error: "An unexpected error occurred" };
+    return { success: false, error: "Message could not be sent. Please try again." };
   }
 }

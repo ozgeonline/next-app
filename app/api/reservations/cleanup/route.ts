@@ -18,7 +18,7 @@ export async function DELETE(req: NextRequest) {
 
     const decoded = await getUserFromCookies();
     if (!decoded) {
-      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
+      return NextResponse.json({ error: "Please log in again." }, { status: 401 });
     }
 
     const reservations = await Reservation.find({
@@ -37,7 +37,7 @@ export async function DELETE(req: NextRequest) {
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "Internal server error during cleanup" },
+      { error: "Reservation history could not be refreshed." },
       { status: 500 }
     );
   }

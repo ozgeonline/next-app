@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
     const decoded = await getUserFromCookies();
     if (!decoded) {
-      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
+      return NextResponse.json({ error: "Please log in to rate meals." }, { status: 401 });
     }
 
     const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       !mongoose.Types.ObjectId.isValid(mealId)
     ) {
       return NextResponse.json(
-        { error: 'Invalid input or meal ID format' },
+        { error: 'Please choose a rating between 1 and 5.' },
         { status: 400 }
       );
     }
@@ -88,6 +88,6 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     console.error('Error submitting rating:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ error: 'Rating could not be saved. Please try again.' }, { status: 500 });
   }
 }

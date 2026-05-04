@@ -4,10 +4,14 @@ import { useState } from "react";
 import useSWR from "swr";
 import { useAuth } from "@/context/auth/AuthProvider";
 import { useTheme } from "@/context/theme/ThemeProvider";
+import { useToast } from "@/context/toast/ToastProvider";
 import { Button } from "@/components/ui/button/Button";
 import { updateUserNameAction } from "@/lib/actions/auth";
 import styles from "./profile.module.css";
 import { Mail, User as UserIcon, Settings, Moon, Sun, Utensils, Edit3, X, Check } from "lucide-react";
+
+const ACCOUNT_NAME_MIN_LENGTH = 2;
+const ACCOUNT_NAME_MAX_LENGTH = 20;
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
@@ -22,11 +26,11 @@ type MealSummary = {
 export default function ProfilePage() {
   const { user, isAuthenticated, mutateUser } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { toast } = useToast();
 
   const [showInput, setShowInput] = useState(false);
   const [newName, setNewName] = useState("");
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const { data: sharedMealsData } = useSWR<{ meals: MealSummary[] }>(
     isAuthenticated ? "/api/meals/shared" : null,
     fetcher
@@ -35,8 +39,18 @@ export default function ProfilePage() {
   const recipesCount = sharedMealsData?.meals.length || 0;
 
   const handleUpdate = async () => {
-    if (!newName.trim()) return;
-    setError(null);
+    const trimmedName = newName.trim();
+
+    if (!trimmedName) {
+      toast.warning("Account name is required.");
+      return;
+    }
+
+    if (trimmedName.length < ACCOUNT_NAME_MIN_LENGTH || trimmedName.length > ACCOUNT_NAME_MAX_LENGTH) {
+      toast.warning(`Account name must be between ${ACCOUNT_NAME_MIN_LENGTH} and ${ACCOUNT_NAME_MAX_LENGTH} characters.`);
+      return;
+    }
+
     setSaving(true);
 
     try {
@@ -46,11 +60,12 @@ export default function ProfilePage() {
         mutateUser();
         setShowInput(false);
         setNewName("");
+        toast.success("Account name updated successfully.");
       } else {
-        setError(result.error || "Update failed.");
+        toast.error(result.error || "Account name could not be updated.");
       }
     } catch (err: unknown) {
-      setError("Network error. Please try again.");
+      toast.error("Account name could not be updated. Please try again.");
     } finally {
       setSaving(false);
     }
@@ -135,8 +150,6 @@ export default function ProfilePage() {
       <div className={styles.updateSection}>
         <h3 className={styles.updateTitle}>Account Settings</h3>
 
-        {error && <div className={styles.errorMessage}>{error}</div>}
-
         {!showInput ? (
           <Button
             onClick={handleShowInput}
@@ -156,9 +169,14 @@ export default function ProfilePage() {
                 onChange={(e) => setNewName(e.target.value)}
                 placeholder="Enter new name"
                 className={styles.ghostInput}
+                minLength={ACCOUNT_NAME_MIN_LENGTH}
+                maxLength={ACCOUNT_NAME_MAX_LENGTH}
                 autoFocus
               />
             </div>
+            <p className={styles.inputHint}>
+              {newName.trim().length}/{ACCOUNT_NAME_MAX_LENGTH} characters
+            </p>
             <div className={styles.actionRow}>
               <Button
                 onClick={() => setShowInput(false)}

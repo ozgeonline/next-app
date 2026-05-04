@@ -55,6 +55,6 @@ export async function GET(req: NextRequest) {
       })),
     });
   } catch {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Shared meals could not be loaded." }, { status: 500 });
   }
 }

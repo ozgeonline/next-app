@@ -159,6 +159,14 @@
   box-shadow: 0 0 0 4px rgba(217, 108, 138, 0.1);
 }
 
+.inputHint {
+  margin: -0.35rem 0 0.75rem;
+  color: var(--neutral-500);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: right;
+}
+
 .actionRow {
   display: flex;
   gap: 0.75rem;
@@ -230,16 +238,6 @@
 }
 
 /* ERROR MESSAGE */
-.errorMessage {
-  color: var(--monza-700);
-  font-size: 0.9rem;
-  font-weight: 600;
-  background: var(--monza-50);
-  padding: 0.8rem;
-  border-radius: 12px;
-  border: 1px solid var(--monza-200);
-}
-
 /* NON AUTH */
 .nonAuthProfile {
   text-align: center;
@@ -334,6 +332,10 @@
 [data-theme="dark"] .ghostInput:focus {
   border-color: var(--apple-500);
   box-shadow: 0 0 0 4px rgba(164, 207, 135, 0.1);
+}
+
+[data-theme="dark"] .inputHint {
+  color: var(--neutral-500);
 }
 
 [data-theme="dark"] .toggleBtn:hover,

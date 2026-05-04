@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/auth/AuthProvider";
+import { useToast } from "@/context/toast/ToastProvider";
 import { useReservations } from "@/hooks/useReservation";
 import { cleanupExpiredReservations } from "@/utils/reservations/cleanupExpiredReservations";
 import { SavedReservation } from "@/types/reservationTypes";
@@ -39,7 +40,7 @@ const INITIAL_RESERVATION: SavedReservation = {
 const GUEST_OPTIONS = [1, 2, 3, 4, 5, 6, 8, 10, 12];
 
 function getErrorMessage(error: unknown) {
-  return error instanceof Error ? error.message : "Something went wrong.";
+  return error instanceof Error ? error.message : "Request could not be completed. Please try again.";
 }
 
 function getInfoItems(reservation: SavedReservation, user: ClientUser | null) {
@@ -75,6 +76,7 @@ function sortReservationsByDate(direction: "asc" | "desc") {
 
 export default function ReservationPage() {
   const { user, loading: authLoading } = useAuth();
+  const { toast } = useToast();
   const {
     reservations,
     error: reservationsError,
@@ -83,8 +85,6 @@ export default function ReservationPage() {
 
   const [reservation, setReservation] = useState<SavedReservation>(INITIAL_RESERVATION);
   const [editReservationId, setEditReservationId] = useState<string | null>(null);
-  const [message, setMessage] = useState<{ type: "error" | "success"; text: string } | null>(null);
-  const [expiredMessage, setExpiredMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -100,15 +100,9 @@ export default function ReservationPage() {
     savedReservation.status === "cancelled"
   )).sort(sortReservationsByDate("desc"));
 
-  const showMessage = (type: "error" | "success", text: string) => {
-    setMessage({ type, text });
-    setTimeout(() => setMessage(null), 4000);
-  };
-
   const handleEdit = (savedReservation: SavedReservation) => {
     if (!canEditReservation(savedReservation)) {
-      showMessage(
-        "error",
+      toast.warning(
         `Reservations can be edited up to ${MAX_RESERVATION_EDITS} times and not within ${RESERVATION_EDIT_CUTOFF_HOURS} hours of the reservation time.`
       );
       return;
@@ -141,7 +135,7 @@ export default function ReservationPage() {
   const validateInputs = () => {
     const parsedDate = new Date(reservation.date);
     if (isNaN(parsedDate.getTime()) || !reservation.time || reservation.guests < 1) {
-      showMessage("error", "Please provide a valid date, time, and number of guests.");
+      toast.error("Please provide a valid date, time, and number of guests.");
       return false;
     }
     return true;
@@ -155,7 +149,7 @@ export default function ReservationPage() {
     const isToday = parsedDay.toDateString() === todayDay.toDateString();
 
     if (parsedDay < todayDay && !isToday) {
-      showMessage("error", "You cannot make a reservation for a past date.");
+      toast.error("You cannot make a reservation for a past date.");
       return false;
     }
 
@@ -168,7 +162,7 @@ export default function ReservationPage() {
       selected.setHours(hours, minutes, 0, 0);
 
       if (selected <= now) {
-        showMessage("error", "You cannot select a past time for today.");
+        toast.error("You cannot select a past time for today.");
         return false;
       }
     }
@@ -178,7 +172,7 @@ export default function ReservationPage() {
 
   const checkReservationLimit = () => {
     if (!editReservationId && upcomingReservations.length > 0) {
-      showMessage("error", "You can only have one upcoming active reservation.");
+      toast.warning("You can only have one upcoming active reservation.");
       return false;
     }
     return true;
@@ -218,10 +212,10 @@ export default function ReservationPage() {
       if (!response.ok) throw new Error(data.error || "Failed to save reservation");
 
       await refetchReservations();
-      showMessage("success", `Reservation ${editReservationId ? "updated" : "created"} successfully.`);
+      toast.success(`Reservation ${editReservationId ? "updated" : "created"} successfully.`);
       resetForm();
     } catch (error: unknown) {
-      showMessage("error", getErrorMessage(error));
+      toast.error(getErrorMessage(error));
     } finally {
       setIsSubmitting(false);
     }
@@ -237,13 +231,13 @@ export default function ReservationPage() {
         credentials: "include",
       });
 
-      if (!response.ok) throw new Error("Failed to delete reservation");
+      if (!response.ok) throw new Error("Reservation could not be cancelled. Please try again.");
 
       resetForm();
       await refetchReservations();
-      showMessage("success", "Reservation cancelled successfully.");
+      toast.success("Reservation cancelled successfully.");
     } catch (error: unknown) {
-      showMessage("error", getErrorMessage(error));
+      toast.error(getErrorMessage(error));
     } finally {
       setIsDeleting(false);
     }
@@ -315,17 +309,20 @@ export default function ReservationPage() {
       ) : (
         <div className={styles.emptyState}>
           <p>{emptyText}</p>
-          {expiredMessage && title === "Past Reservations" && (
-            <p className={styles.expiredInfo}>{expiredMessage}</p>
-          )}
         </div>
       )}
     </section>
   );
 
   useEffect(() => {
-    cleanupExpiredReservations(refetchReservations, setExpiredMessage);
-  }, [refetchReservations]);
+    cleanupExpiredReservations(refetchReservations, (message) => toast.info(message));
+  }, [refetchReservations, toast]);
+
+  useEffect(() => {
+    if (reservationsError) {
+      toast.error(reservationsError);
+    }
+  }, [reservationsError, toast]);
 
   if (authLoading) return null;
 
@@ -426,18 +423,6 @@ export default function ReservationPage() {
                     />
                   </div>
                 </div>
-
-                {message && (
-                  <div className={`${styles.statusMessage} ${styles[message.type]}`}>
-                    {message.text}
-                  </div>
-                )}
-
-                {reservationsError && (
-                  <div className={`${styles.statusMessage} ${styles.error}`}>
-                    {reservationsError}
-                  </div>
-                )}
 
                 <Button
                   type="submit"

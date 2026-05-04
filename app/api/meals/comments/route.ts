@@ -76,7 +76,7 @@ export async function GET(req: NextRequest) {
       })),
     });
   } catch {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Comments could not be loaded." }, { status: 500 });
   }
 }
 
@@ -173,6 +173,6 @@ export async function POST(req: NextRequest) {
       { status: 201 }
     );
   } catch {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Comment could not be added. Please try again." }, { status: 500 });
   }
 }

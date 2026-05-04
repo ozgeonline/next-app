@@ -11,7 +11,7 @@ export async function GET() {
 
     const decoded = await getUserFromCookies();
     if (!decoded) {
-      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
+      return NextResponse.json({ error: "Please log in to view reservations." }, { status: 401 });
     }
 
     const reservations = await Reservation.find({ userId: decoded.userId })
@@ -23,8 +23,8 @@ export async function GET() {
       message: "Reservations successfully",
       reservations,
     });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Reservations could not be loaded." }, { status: 500 });
   }
 }
 
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 
     const decoded = await getUserFromCookies();
     if (!decoded) {
-      return NextResponse.json({ error: "Invalid token-user" }, { status: 401 });
+      return NextResponse.json({ error: "Please log in to make a reservation." }, { status: 401 });
     }
 
     const body = await req.json();
@@ -97,7 +97,7 @@ export async function POST(req: Request) {
         cancelledAt: saved.cancelledAt,
       },
     });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Reservation could not be created. Please try again." }, { status: 500 });
   }
 }

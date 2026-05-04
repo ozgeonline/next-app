@@ -452,25 +452,6 @@
   color: var(--neutral-600);
 }
 
-.statusMessage {
-  padding: 1rem;
-  border-radius: 12px;
-  text-align: center;
-  font-weight: 600;
-}
-
-.success {
-  background: var(--apple-50);
-  color: var(--apple-700);
-  border: 1px solid var(--apple-200);
-}
-
-.error {
-  background: var(--monza-50);
-  color: var(--monza-700);
-  border: 1px solid var(--monza-200);
-}
-
 /* DARK MODE ADJUSTMENTS */
 [data-theme="dark"] .formCard,
 [data-theme="dark"] .summaryCard {

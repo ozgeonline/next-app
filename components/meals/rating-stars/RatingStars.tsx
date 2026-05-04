@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button/Button";
+import { useToast } from "@/context/toast/ToastProvider";
 import styles from "./rating-stars.module.css";
 
 const STAR_COUNT = 5;
@@ -13,6 +14,7 @@ interface RatingStarsProps {
 }
 
 export default function RatingStars({ mealId, initialRating }: RatingStarsProps) {
+  const { toast } = useToast();
   const [rating, setRating] = useState<number>(initialRating);
   const [averageRating, setAverageRating] = useState<number>(initialRating);
   const [hoverRating, setHoverRating] = useState(0);
@@ -35,14 +37,19 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
           credentials: "include",
         });
 
+        if (response.status === 401) {
+          setRating(initialRating);
+          return;
+        }
+
         if (!response.ok) {
-          throw new Error(`HTTP error ${response.status}: ${await response.text()}`);
+          throw new Error("Rating could not be loaded.");
         }
 
         const data = await response.json();
         setRating(data.rating !== undefined ? data.rating : initialRating);
-      } catch (err: unknown) {
-        setError(`Failed to load rating: ${err instanceof Error ? err.message : String(err)}`);
+      } catch {
+        setError("Rating could not be loaded.");
         setRating(initialRating);
       } finally {
         setIsLoading(false);
@@ -65,14 +72,17 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}: ${await response.text()}`);
+        const result = await response.json().catch(() => null);
+        throw new Error(result?.error || "Rating could not be saved.");
       }
 
       const data = await response.json();
       setRating(newRating);
       setAverageRating(data.averageRating);
+      toast.success("Rating saved successfully.");
     } catch (err: unknown) {
-      setError(`Failed to submit rating: ${err instanceof Error ? err.message : String(err)}`);
+      toast.error(err instanceof Error ? err.message : "Rating could not be saved.");
+      setError("Rating could not be saved.");
       setRating(initialRating);
     } finally {
       setIsLoading(false);
@@ -116,7 +126,7 @@ export default function RatingStars({ mealId, initialRating }: RatingStarsProps)
           ({averageRating.toFixed(1)} / 5)
         </span>
       </div>
-      {error && <span className={styles.error}>something went wrong, try again</span>}
+      {error && <span className={styles.error}>{error}</span>}
     </div>
   );
 }

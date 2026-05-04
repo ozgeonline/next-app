@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/context/auth/AuthProvider";
+import { useToast } from "@/context/toast/ToastProvider";
 import { loginAction, signupAction } from "@/lib/actions/auth";
 import Link from 'next/link';
 import { Button } from '@/components/ui/button/Button';
@@ -25,14 +26,13 @@ export default function AuthForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState("");
   const { loading, mutateUser } = useAuth();
+  const { toast } = useToast();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError("");
 
     try {
       const result = formType === "login"
@@ -42,17 +42,18 @@ export default function AuthForm({
       if (result.success) {
         window.dispatchEvent(new CustomEvent("authChange", { detail: { isLogout: false } }));
         mutateUser();
+        toast.success(formType === "signup" ? "Account created successfully." : "Logged in successfully.");
         router.push(redirectTo);
       } else {
         if (result.redirectTo) {
+          toast.info(result.error || "Please log in with your existing account.");
           router.push(result.redirectTo);
         } else {
-          setError(result.error || `${formType === "signup" ? "Signup" : "Login"} failed`);
+          toast.error(result.error || `${formType === "signup" ? "Signup" : "Login"} could not be completed.`);
         }
       }
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "An error occurred";
-      setError(message);
+    } catch {
+      toast.error(`${formType === "signup" ? "Signup" : "Login"} could not be completed. Please try again.`);
     } finally {
       setIsSubmitting(false);
       setTouchedFields({});
@@ -115,8 +116,6 @@ export default function AuthForm({
             <h2 className={styles.title}>{formType === "login" ? "Login" : "Sign Up"}</h2>
             <div className={styles.titleUnderline}></div>
           </div>
-
-          {error && <p className={styles.errorMessage}>{error}</p>}
 
           <form onSubmit={handleSubmit} className={styles.form}>
             {formFields.map((field) => (
