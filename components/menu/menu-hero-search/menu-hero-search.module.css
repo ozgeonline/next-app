@@ -1,0 +1,225 @@
+.heroSearchOverlay {
+  position: relative;
+  width: min(90%, 920px);
+  z-index: 140;
+  margin-top: 2rem;
+}
+
+.searchShell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 24px;
+  border: 1px solid var(--charm-200);
+  background: transparent;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 50px rgba(217, 108, 138, 0.12);
+}
+
+.searchInputWrapper,
+.filterSelectWrapper,
+.newOnlyToggle {
+  min-height: 3rem;
+  border: 1px solid var(--charm-200);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--neutral-800);
+  display: flex;
+  align-items: center;
+}
+
+.searchInputWrapper {
+  gap: 0.65rem;
+  padding: 0 0.45rem 0 1rem;
+}
+
+.searchIcon,
+.filterSelectWrapper svg,
+.newOnlyToggle svg {
+  color: var(--charm-500);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--neutral-800);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.searchInput::placeholder {
+  color: var(--neutral-500);
+}
+
+.clearSearchButton {
+  width: 2rem;
+  height: 2rem;
+  min-width: 0;
+  padding: 0;
+  border-radius: 50%;
+  color: var(--neutral-600);
+  background: transparent;
+}
+
+.clearSearchButton:hover {
+  background: var(--charm-50);
+  color: var(--charm-600);
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filterSelectWrapper {
+  gap: 0.45rem;
+  padding: 0 0.75rem;
+}
+
+.categorySelect {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--neutral-800);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.categorySelect option {
+  background: var(--charm-50);
+  color: var(--charm-700);
+}
+
+.newOnlyToggle {
+  gap: 0.45rem;
+  padding: 0 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.newOnlyToggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.newOnlyToggle:has(input:checked) {
+  border-color: var(--charm-500);
+  background: var(--charm-50);
+  color: var(--charm-600);
+}
+
+.searchMeta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  color: var(--neutral-500);
+  font-size: 0.85rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.resetFiltersButton {
+  width: auto;
+  min-width: 0;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  color: var(--charm-700);
+  border: 1px solid var(--charm-200);
+  background: transparent;
+}
+
+.resetFiltersButton:hover {
+  background: var(--charm-50);
+}
+
+[data-theme="dark"] .searchShell {
+  border-color: rgba(164, 207, 135, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+}
+
+[data-theme="dark"] .searchInputWrapper,
+[data-theme="dark"] .filterSelectWrapper,
+[data-theme="dark"] .newOnlyToggle {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .searchIcon,
+[data-theme="dark"] .filterSelectWrapper svg,
+[data-theme="dark"] .newOnlyToggle svg {
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .clearSearchButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .categorySelect option {
+  background: var(--neutral-100);
+  color: var(--apple-700);
+}
+
+[data-theme="dark"] .newOnlyToggle:has(input:checked) {
+  border-color: var(--apple-500);
+  background: rgba(164, 207, 135, 0.12);
+  color: var(--apple-500);
+}
+
+[data-theme="dark"] .resetFiltersButton {
+  color: var(--apple-500);
+  border-color: rgba(164, 207, 135, 0.28);
+}
+
+[data-theme="dark"] .resetFiltersButton:hover {
+  background: rgba(164, 207, 135, 0.1);
+}
+
+@media (max-width: 900px) {
+  .heroSearchOverlay {
+    margin: -1.5rem auto 2rem;
+  }
+
+  .searchShell {
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+  }
+
+  .filterGroup,
+  .searchMeta {
+    width: 100%;
+  }
+
+  .filterGroup {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+
+  .searchMeta {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 520px) {
+  .heroSearchOverlay {
+    width: calc(100% - 2rem);
+  }
+
+  .filterGroup {
+    grid-template-columns: 1fr;
+  }
+
+  .filterSelectWrapper,
+  .newOnlyToggle {
+    width: 100%;
+  }
+}

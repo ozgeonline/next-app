@@ -6,7 +6,7 @@ import Carousel from "@/components/ui/slides/carousel/Carousel";
 import { MenuPreview } from "@/components/menu/MenuSection";
 import { useNavigation } from "@/context/navigation/NavigationProvider";
 import { Button } from "@/components/ui/button/Button";
-import { ArrowRight, Coffee, Leaf, Utensils } from "lucide-react";
+import { ArrowRight, Coffee, Leaf, SearchX, Utensils } from "lucide-react";
 import styles from "./menu.module.css";
 
 const CATEGORY_ICONS = {
@@ -18,7 +18,13 @@ const CATEGORY_ICONS = {
 
 const cx = (...classes) => classes.filter(Boolean).join(" ");
 
-export default function MenuCarousel({ menuLinks, textLabels }) {
+export default function MenuCarousel({
+  menuLinks,
+  textLabels,
+  filteredItems = [],
+  hasActiveFilters = false,
+  onResetFilters,
+}) {
   const router = useRouter();
   const { triggerNavigation, setIsLoading } = useNavigation();
   const [, startTransition] = useTransition();
@@ -39,6 +45,48 @@ export default function MenuCarousel({ menuLinks, textLabels }) {
         setIsLoading(false);
       });
     });
+  }
+
+  if (hasActiveFilters) {
+    return (
+      <section className={styles.filteredMenuSection}>
+        <div className={styles.filteredHeader}>
+          <div>
+            <h2>Filtered Menu</h2>
+            <p>{filteredItems.length} item{filteredItems.length === 1 ? "" : "s"} found</p>
+          </div>
+          <Button
+            type="button"
+            variant="plain"
+            className={styles.clearFiltersButton}
+            onClick={onResetFilters}
+          >
+            Clear filters
+          </Button>
+        </div>
+
+        {filteredItems.length > 0 ? (
+          <div className={styles.filteredGrid}>
+            {filteredItems.map((menuItem) => (
+              <MenuPreview
+                key={`${menuItem.categoryKey}-${menuItem.name}`}
+                src={menuItem.image}
+                description={menuItem.description}
+                price={menuItem.price}
+                title={menuItem.name}
+                isNew={menuItem.isNew}
+                variant="vertical"
+              />
+            ))}
+          </div>
+        ) : (
+          <div className={styles.emptyFilterState}>
+            <SearchX size={34} />
+            <p>No menu items match your filters.</p>
+          </div>
+        )}
+      </section>
+    );
   }
 
   return (
